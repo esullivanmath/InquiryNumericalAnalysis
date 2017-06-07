@@ -1,0 +1,645 @@
+\chapter{Introductory Topics}
+The field of Numerical Analysis is really the study of how to take
+mathematical problems and perform them efficiently and accurately on a computer.  There
+are some problems where numerical analysis doesn't make much sense (e.g. finding an
+algebraic derivative of a function) but for many problems a numerical method that gives an
+approximate answer is both more efficient and more versatile than any analytic technique.
+For example, if we needed to solve the differential equation $\frac{dy}{dt} = \sin(y^2) +
+t$ the nonlinear nature of the problem makes it hard to work with analytically but
+computational methods that result in a plot of an approximate solution can be made very
+quickly and likely give enough of a solution to be usable.  
+
+In this chapter we will discuss some of the basic underlying ideas behind the scenes in
+Numerical Analysis.  Particularly, we need to know how a computer stores numbers and when that
+storage can get us into trouble.  On a more mathematical side, we offer a brief review of
+the Taylor Series in this chapter. The Taylor Series underpins many of our approximation
+methods in this class; so much so that we could easily rename the course: {\it Applied Taylor
+Series}.  Finally, at the end of this chapter we provide several coding exercises that
+will help you to develop your programming skills.  It is expected that you know some of
+the basics of MATLAB programming before beginning this class.  Trust me, you'll have more
+than just the basics by the end.
+
+\begin{center}
+    Let's begin.
+\end{center}
+\section{Base 2 and Binary Arithmetic}
+\begin{problem}\label{prob:base_10_faila}
+    By hand (no computers!) compute the first 50 terms of this sequence with the initial condition $x_0 = 1/10$.
+    \[ x_{n+1} = \left\{ \begin{array}{ll} 2x_n, & x_n \in [0,\frac{1}{2}] \\ 2x_n - 1, & x_n \in (\frac{1}{2},1] \end{array} \right. \]
+    \end{problem}
+\solution{
+\[ x_n = \{1/10, 2/10, 4/10, 8/10, 6/10, 2/10, 4/10, 8/10, 6/10, \ldots \} \]
+}
+
+\begin{problem}\label{prob:base_10_failb}
+Now use Excel and MATLAB to do the computations.  Do you get the same answers?  
+\end{problem}
+\solution{
+In both Excel and MATLAB you lose accuracy at about the 40th iteration. 
+}
+
+\begin{problem}\label{prob:base_10_failc}
+Why have the computer gods failed you?   More importantly, what happened on the computer and why did it give you a different answer?  Most importantly, what is the cautionary tale hiding behind the scenes with this problem?
+\end{problem}
+\solution{
+The simplest answer is that $1/10$ is not computer representable.
+}
+
+A computer stores numbers using base 2, called a binary number system.  Let's first
+discuss our more familiar base 10 system.  What do the digits in the number $135$ really
+mean?  A moment's reflection likely reveals that 
+\[ 135 = 100 + 30 + 5 =  1 \times 10^2 + 3 \times 10^1 + 5 \times 10^0. \]
+In other words, the location of the digit (as read from the right-hand side of the number
+starting at 0) is the power on the base, 10.  Similarly
+\[ 48329 = 40000 + 8000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 0
+\times 10^0. \]
+
+Now let's switch to binary.  In a binary number system the base is 2 so the only allowable
+digits are 0 and 1.  Similar to the base-10 system, the number $101101$ can be interpreted
+as
+\[ 101101_2 = 1 \times 2^5 + 0 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1
+\times 2^0 \]
+(where the subscript ``2'' indicates the based to the reader).
+If we put this back into base 10 (so that we can read it more comfortably) we get
+\[ 101101_2 = 32 + 0 + 8 + 4 + 0 + 1 = 45. \] 
+
+\begin{problem}
+Convert to following numbers from base 10 to base 2 or visa versa.
+    \begin{itemize}
+        \item Write $12_{10}$ in binary \solution{
+                \[ 12_{10} = 8+4 = 1\cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 = 1100_2\]
+            }
+
+        \item What is $100101_2$ in base $10$? \solution{
+                \[ 100101_2 = 1 \cdot 2^0 + 0 \cdot 2^1 + 1 \cdot 2^2 + 0 \cdot 2^3 + 0 \cdot 2^4 + 1 \cdot 2^5 = 1 + 4 + 32 = 37 \]
+            }
+    \end{itemize}
+\end{problem}
+
+Next we'll work with fractions and decimals.  For example, let's take the base 10 number
+$5.341_{10}$ and expand it out to get
+\[ 5.341_{10} = 5 + \frac{3}{10} + \frac{4}{100} + \frac{1}{1000} = 5 \times 10^0 + 3 \times
+10^{-1} + 4 \times 10^{-2} + 1 \times 10^{-3}. \] 
+We can do a similar thing with binary decimals.
+\begin{example}
+    Convert $11.01011_2$ to base 10. \\ {\bf Solution:}
+    \begin{flalign*}
+        11.01011_2 &= 2 + 1 + \frac{0}{2} + \frac{1}{4} + \frac{0}{8} + \frac{1}{16} +
+        \frac{1}{32} \\ &= 1 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2} + 0
+        \times 2^{-3} + 1 \times 2^{-4} + 1 \times 2^{-5}\\ &= 3.34375_{10}.
+    \end{flalign*}
+\end{example}
+
+
+\begin{problem}
+    Convert the following numbers from base 10 to binary.
+    \begin{enumerate}
+        \item[(a)] What is $1/2$ in binary? \solution{$0.1$}
+        \item[(b)] What is $1/8$ in binary? \solution{$0.001$}
+        \item[(c)] What is $4.125$ in binary? \solution{$100.001$}
+        \item[(d)] What is $0.15625$ in binary? \solution{$0.00101$}
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Convert the base 10 decimal $0.635$ to binary using the following steps.  Explain why
+    each step gives the binary digit that it does.
+    \begin{enumerate}
+        \item[(a)] Multiply $0.635$ by 2.  The whole number part of the result is the
+            first binary digit to the right of the decimal point. \solution{$0.635 \times
+            2 = 1.27$ so the binary number is $0.1?????$.}
+        \item[(b)] Take the result of the previous multiplication and ignore the digit to the
+            left of the decimal point.  Multiply the remaining decimal by 2.  The whole
+            number part is the second binary decimal digit. \solution{In this case, $0.27
+                \times 2$ gives a 0 in the whole numbers spot so the binary number is
+            $0.10?????$.}
+        \item[(c)] Repeat the previous step until you have nothing left, until a
+            repeating pattern has revealed itself, or until your precision is {\it close
+            enough}.  \solution{$0.635_{10} \approx
+        0.10100010100011110101110000\dots_2$}
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Use \texttt{=if( )} in Excel to create a spreadsheet that uses the process from the
+    previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
+\end{problem}
+
+\begin{problem}
+    Use a \texttt{for loop} and \texttt{if-else} statements in MATLAB to write a script
+    that converts a base 10 decimal (less than 1) into a binary decimal.
+\end{problem}
+\solution{
+x = 0.635\\
+b = []\\
+for n=1:20 \\ % first 20 binary digits
+    if $x \ge 1$ \\
+        x = (x-1)*2; \\
+    else \\
+        $x = 2*x$;\\
+    end \\
+    if $x \ge 1$ \\
+        b = [b,1]; \\
+    else \\
+        b = [b,0];\\
+    end \\
+end \\
+b
+}
+
+\begin{problem}
+    Convert the base 10 fraction $1/10$ into binary.  How does your solution relate to
+    problems \ref{prob:base_10_faila} - \ref{prob:base_10_failc}?
+\end{problem}
+\solution{
+    \[ \frac{1}{10} = 0.0001100110011001100110011\dots \]
+    The fraction $\frac{1}{10}$ is a repeating decimal in binary and hence is not machine
+    representable!
+}
+
+
+
+\section{Floating Point Arithmetic}
+Everything stored in the memory of a computer is a number, but how does a computer
+actually store a number.  More specifically, since computers only have finite memory we
+would really like to know the full range of numbers that are possible to store in a
+computer.  
+
+\begin{problem}
+    Consider the number $x = -129.15625$ (in base 10).  As we've seen this number can be
+    converted into binary.  Indeed
+    \[ x = -123.15625_{10} = -1111011.00101_2 \]
+    (you should check this).  
+    \begin{enumerate}
+        \item[(a)] If a computer needs to store this number then first they put in the
+            binary version of scientific notation.  In this case we write 
+            \[ x = -1. \underline{\hspace{1in}} \times 2^{\underline{\hspace{0.25in}}} \]
+            \solution{
+                \[ -1.11101100101 \times 2^{6} \]
+                }
+        \item[(b)] Based on the fact that every binary number (other than 0) can be
+            written in this way, what three things do you suppose a computer needs to
+            store for any given number? \solution{The sign, the digits after the decimal
+            place, and the exponent}
+    \end{enumerate}
+\end{problem}
+
+For any number $x$ we can write
+\[ x = (-1)^{s} \times (1+ m) \times 2^E \]
+where $s \in \{0,1\}$ is called the {\it sign bit} and $m$ is a binary number such that $0
+\le m < 1$
+For example: 
+\begin{itemize}
+\item For the number $7_{10}=111_2 = 1.11 \times 2^2$ we have $s=0$, $m=0.11$ and $E=2$.
+\item For the number $-7_{10}=111_2 = -1.11 \times 2^2$ we have $s=1$, $m=0.11$ and $E=2$.
+\item For the number $\frac{1}{10} = 0.000110011001100\cdots = 1.100110011 \times 2^{-4}$
+    we have $s=0$, $m=0.100110011\cdots$, and $E = -4$.
+\end{itemize}
+
+
+\begin{definition}
+    For a number $x = (-1)^{s} \times m \times 2^E$ stored in a computer, the number $m$
+    is called the {\bf mantissa} or the {\bf significand}, $s$ is known as the sign bit,
+    and $E$ is known as the exponent.
+\end{definition}
+
+\begin{definition}[Computer Precision Standards]
+    There are three standard precisions for storing numbers in a computer.
+    \begin{itemize}
+        \item A {\bf single-precision} number consists of 32 bits, with 1 bit for the
+            sign, 8 for the exponent, and 23 for the significand.
+        \item A {\bf double-precision} number consists of 64 bits with 1 bit for the sign,
+            11 for the exponent, and 52 for the significand.
+        \item An {\bf extended-precision} number consists of 80 bits, with 1 bit for the
+            sign, 15 for the exponent, and 64 for the significand.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    {\bf Machine precision} is the gap between the number 1 and the next larger floating
+    point number. Often it is represented by $\epsilon$. To clarify, the number 1 can
+    always be stored in a computer system exactly and if $\epsilon$ is machine
+    precision for that computer then $1+\epsilon$ is the next largest number that can
+    be stored with that machine. 
+\end{definition}
+For all practical purposes
+the computer cannot tell the difference between two numbers if the difference is smaller
+than machine precision. This is of the utmost important when you want to check that
+something is ``zero'' since a computer
+just cannot know the difference between $0$ and $\epsilon$.
+
+As a side note: You can determine the working precision in MATLAB by typing ``eps'' in the
+command line.
+
+
+
+\begin{problem}
+Let's play with a small computer system where each number is stored in the following
+    format:
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            $s$ & E & $b_1b_2b_3$ \\ \hline
+        \end{tabular}
+    \end{center}
+    The first entry is a bit for the sign (0$=+$ and $1=-$). The second entry, $b_e$ is for the
+    exponent, and we'll assume in this example that the exponent can be 0, 1, or $-1$.  The
+    three bits on the right represent the significand of the number.  Hence, every number in
+    this number system takes the form
+    \[ (-1)^s \times (1+ 0.b_1b_2b_3) \times 2^{E} \]
+    \begin{itemize}
+        \item What is the smallest positive number that can be represented in this
+            form?\\\solution{$1.000\times 2^{-1}= 0.1_2 = 1/2$}
+        \item What is the largest positive number that can be represented in this
+            form?\\\solution{$1.111\times 2^1 = 11.11_2 = 2+1+(1/2) + (1/4) = 3.75$}
+        \item What is the machine precision in this number system? \\\solution{Machine
+            precision is the gap between 1 and the next largest number.  In this number
+        system, the next largest number is $1.001 \times 2^0$ so the gap is $0.001_2$
+        which means that $\epsilon = 2^{-3} = 1/8$}
+        \item What would change if we allowed $b_e \in \{-2,-1,0,1,2\}$?\\\solution{The
+                smallest number would be $1.000\times 2^{-2} = 0.01_2 = 1/4$ and the largest
+                would be $1.111 \times 2^2 = 111.1_2 = 4+2+1+(1/2) = 7.5$.  Machine precision
+            would remain the same.}
+    \end{itemize}
+\end{problem}
+
+
+\begin{problem}
+    What are the largest and smallest numbers that can be stored in single and double
+    precicision?
+\end{problem}
+
+\begin{problem}
+    What is machine epsilon for single and and double precision?
+\end{problem}
+
+
+
+\begin{problem}
+A typical computer number:
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            0 & E=4 & 10011001100000000000000 \\ \hline
+        \end{tabular}
+    \end{center}
+    What is this number?  Is it stored in single or double precision? 
+\end{problem}
+\solution{
+Remember that the ``$1.$'' is actually in front of the binary {\it significand}.  Hence,
+this number is 
+\[ x = +1.100110011 \times 2^4 = + 11001.10011 = 1+8+16+(1/2)+(1/16)+(1/32) = 25.59375\]
+}
+
+
+\begin{problem}
+    Explain the behavior of the sequence from the first problem in these notes using what
+    you know about how computers store numbers in double precision.
+    \[ x_{n+1} = \left\{ \begin{array}{ll} 2x_n, & x_n \in [0,\frac{1}{2}] \\ 2x_n - 1, & x_n \in
+        (\frac{1}{2},1] \end{array} \right. \quad \text{with} \quad x_0 = \frac{1}{10} \]
+    In particular, now that you know about how numbers are stored in a computer, how long
+    do you expect it to take until the truncation error creeps into the computation?
+\end{problem}
+
+More can be said about floating point numbers such as how we store infinity, how we store
+NaN, and how we store 0.  The
+\href{https://en.wikipedia.org/wiki/Floating-point_arithmetic}{Wikipedia page for floating
+point arithmetic} might be an intersting read for the curious student.
+
+
+
+
+\section{The Taylor Series}
+
+Consider the function $f(x) = e^x$.  Euler's number, $e$, is irrational and
+potentially difficult for a computer to work with directly.  How, do you suppose, does
+a computer actually {\it understand} a function like $e^x$ (or any other
+transcendental function for that matter)? \\
+Answer: Polynomials! \\
+Polynomials are some of the simplest types of functions since they involve very basic
+mathematical operations: really just addition and multiplication (since subtraction
+and division are just {\it special} addition and multiplication).  
+
+Let's get a feel for how we approximate functions like $f(x) = e^x$ with a simple
+exercise. In the following exercise we will build a polynomial function with certain
+properties to {\it match} the exponential function.
+\begin{problem}\label{prob:taylor_intro}
+    \begin{enumerate}
+        \item[(a)] Find a linear function of the form $g(x) = a_0 + a_1 x$ such that $g(0)
+            = f(0)$ and $g'(0) = f'(0)$. \solution{
+                We know that $f(x) = e^x = f'(x)$ so $f(0) = f'(0) = 1$.  Hence $a_0 = 1$
+                and $a_1 = 1$. Therefore the function $g(x) = 1+x$ matches the function
+                $f(x) = e^x$ in both funtion value and in first derivative at $x=0$.
+            }
+        \item[(b)] Find a quadratic function of the form $g(x) = a_0 + a_1 x + a_2 x^2$
+            such that $g(0) = f(0)$, $g'(0) = f'(0)$, and $g''(0) = f''(0)$. \solution{
+                Again we see that $a_0 = a_1 = 1$ from the previous part.  For the second
+                derivative we see that $g''(0) = 2a_2$ and $f''(0) = 1$ so $a_2 = 1/2$.
+                Therefore, $g(x) = 1 + x + \frac{1}{2} x^2$.
+            }
+        \item[(c)] Find a polynomial of order $n$ that matches the function $f(x) = e^x$
+            such that $g^{(k)}(0) = f^{(k)}(0)$ for all $k \le n$. \solution{
+                \[ g(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots
+                    + \frac{x^n}{n!}. \]
+            }
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Repeat Problem \ref{prob:taylor_intro} with the function $f(x) = \sin(x)$.
+\end{problem}
+\solution{
+    \[ g(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots . \]
+}
+
+\begin{problem}
+    Repeat Problem \ref{prob:taylor_intro} with the function $f(x) = \cos(x)$.
+\end{problem}
+\solution{
+    \[ g(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots . \]
+}
+
+
+Now let's formally state the definition of a Taylor Series.  
+\begin{definition}[Taylor Series]
+If $f$ is
+infinitely smooth (has infinitely many derivatives) then $f$ can be expressed as an
+infinite sum of power functions
+\[ f(x) = \sum_{k=0}^\infty \frac{f^{(k)}(a)}{k!}(x-a)^k \]
+in some neighborhood of $x=a$. 
+\end{definition}
+
+\begin{problem}
+    Write MATLAB code to show successive approximations of the function $f(x) = e^x$ on
+    the domain $-1 < x < 1$ using a Taylor series centered at $a=0$.  Write your code so
+    that it animates through the approximations.  Once your code is working, modify it to
+    do the same for $f(x) = \sin(x)$ centered at $a=0$ and for $f(x) = \cos(x)$ centered
+    at $a=0$.
+\end{problem}
+
+
+The great thing about the Taylor Series is that it allow for the
+approximation of smooth functions as polynomials and polynomials are easily dealt with on
+a computer. The down side is that the sum is infinite.  Hence, every time we use a Taylor
+series on a computer we are actually going to be using a truncated Taylor series where we
+only take a certain number of terms.  
+
+% \begin{problem}
+%     Write a Taylor Series expansion for $f(x) = \cos(x)$ centered at $x=0$.
+% \end{problem}
+
+
+\begin{thm}[Taylor's Theorem]
+    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous on {\it near} $a$ and let $f^{(n+1)}(x)$
+    exist for all $x$ {\it near} $x=a$.  Then there is a number $\xi$ between $x$ and $a$
+    such that 
+    \begin{flalign}
+        f(x) = f(a) + f'(a) (x-a) + \frac{f''(a)}{2}(x-a)^2 +
+        \frac{f'''(a)}{3!}(x-a)^3 + \cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n + R_n(x)
+        \label{eqn:taylor}
+    \end{flalign}
+    where the remainder function $R_n(x)$ is given as
+    \begin{flalign}
+        R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} (x-a)^{n+1}
+        \label{eqn:taylor_remainder}
+    \end{flalign}
+    \label{thm:taylor}
+\end{thm}
+
+Often times we are using Taylor series that are centered at $a=0$ so for simplicity we
+restate Taylor's theorem here with $a=0$.
+\begin{cor}[Taylor's Theorem at $a=0$]
+    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous on {\it near} $a$ and let $f^{(n+1)}(x)$
+    exist for all $x$ {\it near} $x=0$.  Then there is a number $\xi$ between $x$ and $0$
+    such that 
+    \begin{flalign}
+        f(x) = f(0) + f'(0) x + \frac{f''(0)}{2!}x^2 +
+        \frac{f'''(0)}{3!}x^3 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + R_n(x)
+    \end{flalign}
+    where the remainder function $R_n(x)$ is given as
+    \begin{flalign}
+        R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} x^{n+1}
+        \label{cor:taylor_remainder}
+    \end{flalign}
+    \label{cor:taylor}
+\end{cor}
+
+
+\begin{example}
+    The first three terms of the Taylor series for $f(x) = e^x$ centered at $x=0$ are
+    \[ f(x) = e^x \approx 1 + x + \frac{x^2}{2}. \]
+    Use Taylor's theorem to approximate the error in this approximation when $x
+    \approx 1$. \\{\bf Solution:} 
+    The remainder function gives us that there exists a number $\xi$ such that $0 < \xi <
+    1$ and the remainder in the Taylor series is
+    \[ R_3(x) = \frac{f^{(3)}(\xi)}{4!}(x-0)^3 = \frac{e^\xi}{3!}x^3. \]
+    Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6} \approx 0.45$. In Figure
+    \ref{fig:taylor_thm_exp} we see that the error is indeed less than this.
+    Indeed, $f(1) = 2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
+    $0.218 < 0.45$.  
+\end{example}
+Taylor's theorem gives a bound on the amount of error that you can make when using a
+truncated Taylor series.  
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, domain=-1:1.2, xmin=-1, xmax=1.2, ymin=-1, ymax=3,
+                grid, legend pos=outer north east]
+                \addplot[smooth, black, very thick] {exp(x)};
+%                 \addlegendentry{$f(x) = e^x$};
+                \addplot[smooth, red, dashed, very thick] {1+x+x^2/2};
+%                 \addlegendentry{$g(x) = 1+x+x^2/2$};
+                \draw[fill=black] (axis cs:1,2.718282) circle(0.05cm);
+                \draw[color=red, fill=red] (axis cs:1,2.5) circle(0.05cm);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, domain=0.8:1.2, xmin=0.8, xmax=1.2, ymin=2.2, ymax=3,
+                grid]
+                \addplot[smooth, black, very thick] {exp(x)};
+%                 \addlegendentry{$f(x) = e^x$};
+                \addplot[smooth, red, dashed, very thick] {1+x+x^2/2};
+%                 \addlegendentry{$g(x) = 1+x+x^2/2$};
+                \draw[fill=black] (axis cs:1,2.718282) circle(0.05cm);
+                \draw[color=red, fill=red] (axis cs:1,2.5) circle(0.05cm);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The function $f(x) = e^x$ and a second order Taylor approximation. The solid
+    black curve is $f(x) = e^x$ and the dashed red curve is the Taylor approximation.  The
+right-hand plot shows a zoomed in view near the point $x=1$.}
+    \label{fig:taylor_thm_exp}
+\end{figure}
+
+\begin{problem}
+    The {\it engineer's approximation} to the sine function is:
+    \begin{center}
+        For $x$ close to $0$, $\sin(x) \approx x$. 
+    \end{center}
+    Obviously the word {\it close} is relative.  Use Taylor's theorem to determine how
+    much error is being made with the {\it engineer's approximation} if you want to calculate $\sin(0.5)$?
+    See Figure \ref{fig:taylor_thm_sine}.
+\end{problem}
+\solution{
+    This is simply the first term in the Taylor series, but since the quadratic term is
+    zero for the Taylor series for sine we can also think of this as a second order Taylor
+    polynomial ($\sin(x) \approx 0 + x + 0x^2$).  Hence, the remainder function is 
+    \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}x^3 \]
+    where $\xi$ is some number such that $0 < \xi < 0.5$.  Therefore, $R_3(0.5) =
+    \frac{-\cos(\xi)}{6} \cdot (0.125) \approx -0.028 \cos(\xi)$ and since $|\cos(x)|\le
+    1$ we know that hte error will be less than $0.028$ (approximately) when using the
+    engineer's approximation of sine at $0.5$.
+}
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, domain=-2:2, xmin=-2, xmax=2, ymin=-1, ymax=1,
+                grid, legend pos=outer north east]
+                \addplot[smooth, black, very thick] {sin(deg(x))};
+%                 \addlegendentry{$f(x) = e^x$};
+                \addplot[smooth, red, dashed, very thick] {x};
+%                 \addlegendentry{$g(x) = 1+x+x^2/2$};
+                \draw[fill=black] (axis cs:0.5,0.4794) circle(0.05cm);
+                \draw[color=red, fill=red] (axis cs:0.5,0.5) circle(0.05cm);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, domain=0.25:0.75, xmin=0.25, xmax=0.75,
+                ymin=0.25, ymax=0.75, grid]
+                \addplot[smooth, black, very thick] {sin(deg(x))};
+%                 \addlegendentry{$f(x) = e^x$};
+                \addplot[smooth, red, dashed, very thick] {x};
+%                 \addlegendentry{$g(x) = 1+x+x^2/2$};
+                \draw[fill=black] (axis cs:0.5,0.4794) circle(0.05cm);
+                \draw[color=red, fill=red] (axis cs:0.5,0.5) circle(0.05cm);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The function $f(x) = \sin(x)$ and a second order Taylor approximation. The solid
+    black curve is $f(x) = \sin(x)$ and the dashed red curve is the Taylor approximation.  The
+right-hand plot shows a zoomed in view near the point $x=0.5$.}
+    \label{fig:taylor_thm_sine}
+\end{figure}
+
+
+\begin{problem}
+    No computational software actually {\it knows} functions like the exponential function
+    or the sine function.  Instead, they have a way to calculate values for these
+    functions based on Taylor series.  
+    If we want to calculate a value for $e^{0.5}$ on a computer, how many terms in the
+    Taylor series do we need so that the truncation error is less than machine precision?
+\end{problem}
+\solution{
+    The truncation error for the exponential function is 
+    \[ R_n(x) = \frac{e^\xi}{n!} x^n \]
+    where $\xi \in (0,0.5)$.  Knowing that the exponential function is
+    monotonically increasing we know that $R_n(x) \le \frac{\sqrt{e}}{n!}
+    (0.5)^n.$  Hence we can approximate the number of terms by finding $n$
+    such that the $\frac{\sqrt{e} 0.5^n}{n!} < 1 \times 10^{-16}$.  Making a table of
+    values fo the sequence on the right it is reasonably quick to see that we
+    need about 14 or 15 terms in the Taylor series in order for the precision
+    of this computation to be less than any observable error on a computer.
+}
+
+
+
+\section{Exercises}
+
+\begin{problem}
+    If we list all of the numbers below 10 that are multiples of 3 or 5 we get 3, 5, 6,
+    and 9.  The sum of these multiples is 23.  Write code to find the sum of all the
+    multiples of 3 or 5 below 1000.  Your code needs to run error free and output only the
+    sum.  Consult Chapter 2 of the text if you are stuck.
+\end{problem}
+% \solution{
+% %     Source: Project Euler Problem \#1: 
+% %     Answer: 233,168
+% }
+
+
+\begin{homework}
+    Each new term in the Fibonacci sequence is generated by adding the previous two terms.
+    By starting with 1 and 2, the first 10 terms will be:
+    \[ 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \dots \]
+    By considering the terms in the Fibonacci sequence whose values do not exceed four
+    million, write code to find the sum of the even-valued terms. Your code needs to run
+    error free and output only the sum.  Consult Chapter 2 of the text if you are stuck.
+\end{homework}
+% \solution{
+% %     Source: Project Euler Problem \#2: 
+% %     Answer: 4,613,732
+% }
+
+\begin{problem}
+    In the 1999 movie {\it Office Space}, a character creates a program that takes
+    fractions of cents that are truncated in a bank's transactions and deposits them to
+    his own account.  This is idea has been attempted in the past and not well that banks
+    look for this sort of thing.  In this problem you will build a simulation of the
+    program to see how long it takes to become a millionaire.  
+
+    {\bf Assumptions:}
+    \begin{itemize}
+        \item Assume that you have access to 50,000 bank accounts.
+        \item Assume that the account balances are uniformly distributed between
+            \$100 and \$100,000.
+        \item Assume that the annual interest rate on the accounts is 5\% and the interest
+            is compounded daily and added to the accounts, except that fractions of cents
+            are truncated.
+        \item Assume that your \texttt{illegal} account initially has a \$0 balance.
+    \end{itemize}
+
+    {\bf Your Tasks:}
+    \begin{enumerate}
+        \item[(a)] Explain what the following two lines of MATLAB code do.
+\begin{verbatim}
+accounts = 100 + (100000-100) * rand(50000,1);
+accounts = floor(100*accounts)/100;
+\end{verbatim}
+        \item[(b)] By hand (no computer) write the mathematical steps necessary to
+            increase the accounts by (5/365)\% per day, truncate the accounts to the
+            nearest penny, and add the truncated amount into an account titled
+            ``\texttt{illegal}''.
+        \item[(c)] Write code to complete your plan from part (b).
+        \item[(d)] Using a \texttt{while} loop, iterate over your code until the illegal
+            account has accumulated \$1,000,000.
+    \end{enumerate}
+\end{problem}
+% Modified from Chartier and Greenbaum, Chapter 5 Problem 14
+
+
+\begin{problem}
+    In the 1991 Gulf War, the Patriot missle defense system failed due to roundoff error.
+    The troubles stemmed from a computer that performed the tracking calculations with an
+    internal clock whose integer values in tenths of a second were converted to seconds by
+    multiplying by a 24-bit binary approximation to $\frac{1}{10}$:
+    \[ 0.1_{10} \approx 0.00011001100110011001100_2. \]
+    \begin{enumerate}
+        \item[(a)] Convert the binary number above to a fraction by hand (common
+            denominators would be helpful).
+        \item[(b)] The approximation of $\frac{1}{10}$ given above is clearly not equal to
+            $\frac{1}{10}$.  What is the absolute error in this value?
+        \item[(c)] What is the time error, in seconds, after 100 hours of operation?
+        \item[(d)] During the 1991 war, a Scud missile traveled at approximately Mach 5
+            (3750 mph).  Find the distance that the Scud missle would travel during the
+            time error computed in (c).
+    \end{enumerate}
+\end{problem}
+% Modified from Chartier and Greenbaum, Chapter 5 Problem 15
+
+
+\begin{problem}
+    \begin{enumerate}
+        \item[(a)] Write the Taylor series centered at $a=0$ for the function $f(x) =
+            \frac{1}{1+x}$.
+        \item[(b)] Substitute $t^2$ for $x$ to get a Taylor series for $g(t) =
+            \frac{1}{1+t^2}$.
+        \item[(c)] Integrate both sides from $t=0$ to $t=y$ to get a Taylor series for
+            $h(y) = \arctan(y)$.
+        \item[(d)] Use the fact that $\arctan(1) = \pi/4$ along with your answer
+            to part (c) to approximate $\pi$ to 10 decimal digits of accuracy.  Use
+            Taylor's theorem to prove that you have the correct accuracy.
+    \end{enumerate}
+\end{problem}
+
+

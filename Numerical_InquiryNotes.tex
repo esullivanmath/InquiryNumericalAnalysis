@@ -1,0 +1,254 @@
+\documentclass[12pt,oneside]{book}
+
+\def\ShowSoln{1}
+
+
+\usepackage[toc,page]{appendix}
+\usepackage{marginnote}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bx}{{\bf x}}
+\newcommand{\bw}{{\bf w}}
+\newcommand{\bo}{{\bf 0}}
+\newcommand{\bv}{{\bf v}}
+\newcommand{\bu}{{\bf u}}
+\newcommand{\bq}{{\bf q}}
+\newcommand{\by}{{\bf y}}
+\newcommand{\bb}{{\bf b}}
+\newcommand{\ba}{{\bf a}}
+\newcommand{\grad}{\boldsymbol{\nabla}}
+% \newcommand{\bn}{\boldsymbol{n}}
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\ddd}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lb}{\left[}
+\newcommand{\rb}{\right]}
+\newcommand{\andd}[1]{\quad\text{and}\quad}
+\newcommand{\orr}[1]{\quad\text{or}\quad}
+\newcommand{\forr}[1]{\quad\text{for}\quad}
+\newcommand{\st}[1]{\quad\text{such that}\quad}
+\newcommand{\conj}[1]{\quad\text{#1}\quad}
+\newcommand{\ra}{\quad\Rightarrow\quad}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pddm}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\deriv}[2]{\frac{d #1}{d #2}}
+\renewcommand{\Re}{\mathbb{R}}
+\newcommand{\lap}[1]{\mathcal{L}\left\{ #1 \right\}}
+\newcommand{\lapinv}[1]{\mathcal{L}^{-1}\left\{ #1 \right\}}
+
+\usepackage[scale=2]{ccicons}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[labelsep=period]{caption}
+\usepackage{tabu}
+% \usepackage{pdiag}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+\usetikzlibrary{patterns,snakes}
+\usepackage{pgfplots}
+\usepackage{rotating}
+\usepackage[notextcomp]{kpfonts} 
+\usepackage{graphicx}
+\usepackage{eurosym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{wasysym}
+\usepackage{amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hang,flushmargin,symbol*]{footmisc}
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0, 0, .6}
+\definecolor{grey}{rgb}{.7, .7, .7}
+\usepackage[breaklinks]{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=darkblue,
+	anchorcolor=darkblue,
+	citecolor=darkblue,
+	pagecolor=darkblue,
+	urlcolor=darkblue,
+	pdftitle={},
+	pdfauthor={}
+}
+
+\tikzset{declare function={y(\x)=4-\x^2;},
+plot fill/.style={fill=purple!75},
+plot/.style={draw=black!80, thick},
+bar/.style={fill=cyan, draw=white, thick},
+marking/.style={fill=cyan!50!black, draw=cyan!50!black},
+axis/.style={thick, draw=black!65, stealth-stealth}
+      }
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\leftmark}
+\chead{}
+\rhead{\thepage \ifnum\ShowSoln=1 {\color{red} {\bf Solutions}} \fi}
+\lfoot{\includegraphics[width=1.5cm]{CreativeCommons.png}}
+\cfoot{}
+\rfoot{}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+% \newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{journal}[theorem]{Journal}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{prob}[theorem]{Problem}
+\newtheorem{chal}[theorem]{Challenge}
+% \newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{summary}[theorem]{Summary}
+\newtheorem{skeleton}[theorem]{Skeleton Proof}
+\newtheorem{activity}[theorem]{Activity}
+\newtheorem{intuitivedef}[theorem]{Intuitive Definition}
+
+\newenvironment{problem}{\begin{prob}}{\hfill$\blacktriangle$\end{prob}}
+\newenvironment{challenge}{\begin{chal}}{\hfill$\blacktriangle$\end{chal}}
+
+\usepackage{mdframed}
+\newtheorem{defn}[theorem]{Definition}
+\newenvironment{definition}
+{\begin{mdframed}[backgroundcolor=blue!15]\begin{defn}}
+        {\end{defn}\end{mdframed}}
+
+\newenvironment{thm}
+{\begin{mdframed}[backgroundcolor=red!15]\begin{theorem}}
+        {\end{theorem}\end{mdframed}}
+\newenvironment{cor}
+{\begin{mdframed}[backgroundcolor=red!15]\begin{corollary}}
+        {\end{corollary}\end{mdframed}}
+
+\newtheorem{tchnq}[theorem]{Technique}
+\newenvironment{technique}
+{\begin{mdframed}[backgroundcolor=green!10]\begin{tchnq}}
+        {\end{tchnq}\end{mdframed}}
+
+\newtheorem{alg}[theorem]{Algorithm}
+\newenvironment{algorithm}
+{\begin{mdframed}[backgroundcolor=green!10]\begin{alg}}
+        {\end{alg}\end{mdframed}}
+
+\newtheorem{ex}[theorem]{Example}
+\newenvironment{example}
+{\begin{mdframed}[backgroundcolor=black!10]\begin{ex}}
+        {\end{ex}\end{mdframed}}
+
+
+\newtheorem{homework}[theorem]{Homework Exercise}
+
+
+\newsavebox{\savepar}
+\newenvironment{textbox}{\noindent\begin{lrbox}{\savepar}\begin{minipage}[c]{.98\textwidth}}{\end{minipage}\end{lrbox}\fcolorbox{black}{white}{\usebox{\savepar}}}
+
+
+\newcommand{\solution}[1]{\ifnum\ShowSoln=1 {\color{red} {\bf Solution:} #1}\fi}
+\newcommand{\teacher}[1]{\ifnum\ShowSoln=1 {\color{blue} {\bf Teacher Note:} #1}\fi}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{boxy} = [rectangle, rounded corners, minimum width=3cm, minimum
+height=1cm,text centered, draw=black, fill=green!30]
+\tikzstyle{boxysoln} = [rectangle, rounded corners, minimum width=3cm, minimum
+height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{arrowdashed} = [thick,dashed,->,>=stealth]
+\title{Numerical Analysis \\ An Inquiry and Problem Based Approach
+    \ifnum\ShowSoln=1 {\color{red} \\ {\bf Solutions}} \fi}
+\date{Content Last Updated: \today}
+\author{Dr. Eric R. Sullivan \\ \texttt{esullivan@carroll.edu}\\ Department of
+Mathematics \\
+Carroll College, Helena, MT \\
+%     This work is licensed under
+%     \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{Creative Commons:
+%     NonCommercial-ShareAlike}\\
+\includegraphics{CreativeCommons.png} \\\vspace{3in}
+}
+
+\begin{document}
+\maketitle
+% \html{<a rel=``license'' href=``http://creativecommons.org/licenses/by-nc-sa/4.0/''><img
+%     alt=``Creative Commons License'' style=``border-width:0''
+%     src=``https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'' /></a><br /><span
+%     xmlns:dct=``http://purl.org/dc/terms/'' href=``http://purl.org/dc/dcmitype/Text''
+%     property=``dct:title'' rel=``dct:type''>Differential Equations and Linear
+%     Algebra</span> by <span xmlns:cc=``http://creativecommons.org/ns#''
+%     property=``cc:attributionName''>Eric R. Sullivan</span> is licensed under a <a
+%     rel=``license'' href=``http://creativecommons.org/licenses/by-nc-sa/4.0/''>Creative
+% Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.}
+% \vspace{0.2in}
+\newpage
+\noindent \copyright Eric Sullivan. Some Rights Reserved.
+
+\vspace{0.2in}
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International License.
+You may copy, distribute, display, remix, rework, and perform this copyrighted work, but only if
+you give credit to Eric Sullivan, and all derivative works based upon it must be published
+under the Creative Commons Attribution-NonCommercial-Share Alike 4.0 United States License. Please
+attribute this work to Eric Sullivan, Mathematics Faculty at Carroll College,
+esullivan@carroll.edu. To view a copy of this license, visit\\
+\href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{https://creativecommons.org/licenses/by-nc-sa/4.0/}\\
+or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco,
+California, 94105, USA.
+\tableofcontents
+
+
+\input{Ch00_Preface.tex}
+\input{Ch01_Introduction.tex}
+\input{Ch02_Algebra.tex}
+\input{Ch03_Calculus.tex}
+\input{Ch04_LinearAlgebra.tex}
+\input{Ch05_ODEs.tex}
+\input{Ch06_PDEs.tex}
+
+\begin{appendix}
+\input{App01_Projects.tex}
+\input{App02_Coding.tex}
+\input{App03_LaTeX.tex}
+
+
+\end{appendix}
+
+\begin{thebibliography}{99}
+        \bibitem{Charier} A. Greenbaum and T. Charier. {\it Numerical Methods: Design,
+            Analysis, and Computer Implementation of Algorithms} Princeton University
+            Press. 2012.
+        \bibitem{Burden} R. Burden, D, Faires, and A. Burden. {\it Numerical Analysis,
+            10ed} Cengage Learning. 2016.
+        \bibitem{Kincaid} D. Kindaid and W. Cheney. {\it Numerical Analysis, 2ed.}
+            Brooks/Cole Publishing, 1996.
+        \bibitem{Haberman} R. Haberman. {\it Applied Partial Differential Equations,
+        4ed}.  Pearson Education Inc. Upper Saddle River, New Jersey, 2004
+        \bibitem{Lay} D. Lay. {\it Linear Algebra 4ed.} Pearson Education Inc. Upper
+        Saddle River, New Jersey, 2012.
+\end{thebibliography}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+

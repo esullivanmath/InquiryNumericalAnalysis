@@ -1,0 +1,439 @@
+\chapter{Numerical Ordinary Differential Equations}\label{ch:odes}
+
+In this chapter we will solve first order ordinary differential equations of the form
+\[ y'(t) = f(t,y(t)) \]
+with initial condition $y(t_0)=y_0$ for $t\ge t_0$.  These are known as ``ordinary''
+differenatial equations since they contain only ``ordinary'' derivatives; not partial
+derivatives.  Given that we are solving the problem with given intial information these
+are also called intial value problems.  
+
+\section{Euler, Runge-Kutta, and Friends}
+The notion of approximating solutions to differential equations is simple: make a discrete
+approximation to the derivative and step forward through time as a difference equation.
+The fun part is making the approximation to the derivative(s).  There are many methods for
+approximating derivatives, and that is exactly where we'll start.
+
+\begin{technique}[Euler's Method]
+    You're probably already familiar with Euler's method for approximating the solution to
+    a differential equation. We want to approximate a solution to $y'(t) = f(t,y(t))$.
+    Recall from Problem \ref{prob:num_diff_first_order} that 
+    \[ y'(t) = \frac{y(t+h) - y(t)}{h} + \mathcal{O}(h) \]
+    so the differential equation $y'(t) = f(t,y(t))$ becomes
+    \[ \frac{y(t+h) - y(t)}{h} \approx f(t,y(t)). \]
+    Rewriting as a difference equation, letting $y_{n+1} = y(t_n+h)$ and $y_n = y(t_n)$,
+    we get
+    \begin{flalign}
+        y_{n+1} = y_n + h f(t_n , y_n)
+        \label{eqn:Eulers_method}
+    \end{flalign}
+%     \begin{enumerate}
+%         \item Recall that a taylor series for a continuously differentiable function
+%             $f(x)$ centered at $x=a$ is
+%             \[ f(x) = f(c) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^2 +
+%                 \frac{f^{(3)}(a)}{3!}(x-a)^3 + \frac{f^{(4)}(a)}{4!}(x-a)^4 + \cdots \]
+%         \item Write a Taylor series for $y(t)$ by replacing $f$ with $y$, $x$ with $t+h$
+%             and $a$ with $t$
+%             \[ y(t+h) = \dots\]
+% %             \teacher{
+% %                 \[ y(t+h) = y(t) + y'(t)h + \frac{y''(t)}{2!} h^2 + \cdots \]
+% %             }
+%         \item Since we know that $y'(t) = f(t,y(t))$ we can rewrite the Taylor series as
+%             \[ y(t+h) = \dots \]
+% %             \teacher{
+% %                 \[ y(t+h) = y(t) + hf(t,y(t)) + \frac{y''(t)}{2!} h^2 + \cdots \]
+% %             }
+%         \item Now we can look at this as a difference equation that is ready made for
+%             numerical implementation with a loop:
+%             \[ y_{n+1} = y_n + h f(t_n,y_n) + \mathcal{O}(h^2)\]
+%         \item The {\it approximation error} for Euler's method is actually not second
+%             order as the previous equation would suggest.  Instead, if we rearrange to
+%             write Euler's formula as an approximation of the derivative we get
+%             \[ \frac{y_{n+1}-y_n}{h} = f(t_n,y_n) + \mathcal{O}(h). \]
+%             What does this formula tell you about the accuracy of Euler's method?
+%     \end{enumerate}
+\end{technique}
+
+A way to think about Euler's method is that at a given point, the slope is approximated by
+the value of the right-hand side of the differential equation and then we step forward $h$
+units in time following that slope.  Figure \ref{fig:Euler} shows a depiction of the idea.
+Notice in the figure that in regions of high curvature Euler's method will overshoot the
+exact solution to the differential equation.  However, taking $h \to 0$ theoretically
+gives the exact solution at the tradeoff of needing infinite computational resources.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=0, xmax=5, ymin=0, ymax=5,
+                domain=0:5, xlabel={$t$}, ylabel={$y$}, legend pos=outer north east]
+                \addplot[very thick, smooth, black] {0.25*(x-2)^2+2};
+                \addlegendentry{Exact solution};
+                \addplot[red, dashed, very thick]
+                coordinates{(0,3)(1,2)(2,1.5)(3,1.5)(4,2)(5,3)};
+                \addlegendentry{Euler with $h=1$};
+                \addplot[blue, dotted, very thick]
+                coordinates{(0,3)(0.5,2.5)(1,2.125)(1.5,1.875)(2,1.75)(2.5,1.75)(3,1.875)(3.5,2.125)(4,2.5)(4.5,3)(5,3.625)};
+                \addlegendentry{Euler with $h=0.5$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A depiction of Euler's method with step size $h=1$ (red) and $h=0.5$ (blue).}
+    \label{fig:Euler}
+\end{figure}
+
+
+\begin{problem}
+    Write code to implement Euler's method for initial value problems.  Your MATLAB
+    function should accept as input: $f(t,y)$, \texttt{tmin}, \texttt{tmax}, the number of
+    grid points (the value of $h = \Delta t$ should be calculated within your code), and
+    an intial condition.  The output should be vectors for $t$ and $y$.\\
+    \verb|function [t,y] = MyEuler1D(f,tmin,tmax,num_pts,IC)| \\
+    Test your code on a first order differential equation where you know the answer and
+    then test your code on the differential equation
+    \[ y' = -\frac{1}{3}y+\sin(t) \quad \text{where} \quad y(0) = 1. \]
+\end{problem}
+
+\begin{problem}\label{prob:2dPredPrey}
+    Write code that implements a 2D version of Euler's method that will solve a system of
+    two differential equations in two dependent variables.  Test your code on the
+    following problem by showing a time evolution plot (time on $x$ and populations on
+    $y$) as well as a phase plot ($x$ on the $x$ and $y$ on the $y$ with time understood
+    implicitly):\\
+    {\bf The Lotka-Volterra Predator-Prey Model:}\\
+    Let $x(t)$ denote the number of rabbits (prey) and $y(t)$ denote the number of foxes
+    (prey) at time $t$.  The relationship between the species can be modeled by the
+    classic 1920's Lotka-Volterra Model:
+    \[ \left\{ \begin{array}{ll} x' &= \alpha x - \beta xy \\ y' &= -\delta y + \gamma xy
+        \end{array} \right. \]
+    where $\alpha, \beta, \gamma,$ and $\delta$ are positive constants.  For this
+    problems take $\alpha \approx 1$, $\beta \approx 0.05$, $\gamma \approx 0.01$, and
+    $\delta \approx 1$.  Be sure to explain the meaning of each of the parameters and each
+    of the components of the model.
+\end{problem}
+
+\begin{technique}[The Midpoint Method]
+    Now we begin the journey of creating better solvers than Euler's method.  The midpoint method
+    is defined by first taking a half step with Euler's method to approximate a solution
+    at time $t_{n+1/2} \equiv (t_n + t_{n+1})/2$ and then taking a full step using the
+    value of $f$ at $t_{n+1/2}$ and the approximate $y_{n+1/2}$.
+    \begin{flalign*}
+        y_{n+1/2} &= y_n + \frac{h}{2} f(t_n, y_n) \\
+        y_{n+1} &= y_n + h f(t_{n+1/2}, y_{n+1/2})
+    \end{flalign*}
+    Note: Indexing by $1/2$ in a computer is nonsense.  Instead, we implement the midpoint
+    method with:
+    \begin{flalign*}
+        y_{temp} &= y_n + \frac{h}{2} f(t_n, y_n) \\
+        y_{n+1} &= y_n + h f\left( \frac{t_n+t_{n+1}}{2}, y_{temp}\right)
+    \end{flalign*}
+
+\end{technique}
+
+\begin{problem}
+    Write MATLAB code to implement the midpoint method\\
+    \verb|function [t,y]=MyMidpointMethod(f,tmin,tmax,num_pts,IC)| \\
+\end{problem}
+
+\begin{problem}
+    Test your midpoint method code against your Euler1D code on the same single variable
+    ODE as before.  You will likely see very little difference on a very small step size
+    (equivalently, a large number of points), but for a smaller number of points there
+    will be a remarkable difference.  
+\end{problem}
+
+
+\begin{problem}
+    {\bf The Runge-Kutta Method:}\\
+    Another method for approximating the solution to a first order initial value problem
+    is to take several approximations and average them in a smart way.  The Runge-Kutta 4
+    method is one (of many) such methods.  In this method, each $k_j$ is an approximation
+    of the slope and we combine them in as a weighted average in the end.
+    \begin{flalign*}
+        k_1 &= f(t_n, y_n) \\
+        k_2 &= f(t_n + \frac{h}{2} , y_n + \frac{h}{2} k_1) \\
+        k_3 &= f(t_n + \frac{h}{2} , y_n + \frac{h}{2} k_2) \\
+        k_4 &= f(t_n + h , y_n + h k_3) \\
+        y_{n+1} &= y_n + \frac{h}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4 \right)
+    \end{flalign*}
+
+    Write a MATLAB function that implements the Runge-Kutta 4 method in one dimension.\\
+    \texttt{function [t,y]=MyRk4(f,tmin,tmax,num\_pts,IC)} \\
+    Test the problem on a known differential equation.
+\end{problem}
+
+
+\begin{problem}
+    Modify your Runge-Kutta 4 code to work for two dependent variables.  I'll get you
+    started:\\We want to solve
+    \[ \left\{ \begin{array}{ll} x' &= f(t,x,y) \\ y' &= g(t,x,y) \end{array} \right. \]
+    and to do so we extend the Runge Kutta method as
+    \begin{flalign*}
+        k_1 &= f(t_n,x_n, y_n) \\
+        q_1 &= g(t_n,x_n, y_n) \\
+        k_2 &= f(t_n + \frac{h}{2} ,x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1) \\
+        q_2 &= g(t_n + \frac{h}{2} ,x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1) \\
+        k_3 &= \dots \\
+        q_3 &= \dots \\
+        k_4 &= \dots \\
+        q_4 &= \dots \\
+        x_{n+1} &= x_n + \frac{h}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4 \right)\\
+        y_{n+1} &= y_n + \frac{h}{6} \left( q_1 + 2 q_2 + 2 q_3 + q_4 \right)
+    \end{flalign*}
+    
+    Test your code on
+    the predator prey model in problem \ref{prob:2dPredPrey}.
+\end{problem}
+
+
+\begin{problem}
+    Solving systems of ordinary differential equations would become challenging if we were
+    to continue coding in the same way as in the previous problem. Write a MATLAB function
+    that accepts any number of right-hand sides from a system of differential equations
+    and then leverages the fact that MATLAB works very well with vectors to create Euler
+    and Runge-Kutta solutions to these systems. Devise several systems to test your code
+    (including 1D and 2D).
+\end{problem}
+
+
+\section{Implicit Methods and Shooting Methods}
+\begin{problem}
+    The major trouble with the RK (and midpoint) methods is that they take many more
+    function evaluations than Euler's method.  We can improve upon Euler's method in the
+    following way:\\
+    We want to solve $y' = f(t,y)$ so:
+    \begin{enumerate}
+        \item Approximate the derivative by looking forward in time(!)
+            \[ \frac{y_{n+1} - y_n}{h} \approx f(t_{n+1} , y_{n+1}) \]
+        \item Rearrange to get the difference equation
+            \[ y_{n+1} = y_n + h f(t_{n+1},y_{n+1}). \]
+        \item Notice that we \underline{will} have $t_{n+1}$ but we \underline{do not
+            have} $y_{n+1}$.  The major trouble is that $y_{n+1}$ shows up on both sides
+            of the equation.  Can you think of a way to solve for it? \dots you have code
+            that does this step!!!
+        \item This method is called the {\bf backward Euler} method and is known as an
+            {\bf implicit method} since you need to solve a nonlinear equation at each
+            step.  The advantage (usually) is that you can take far fewer steps with
+            reasonably little loss of accuracy.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Write MATLAB code to implement the backward Euler's method for a 1D initial value
+    problem. \\
+    \verb|function [t,y] = MyBackwardEuler(f, tmin, tmax, num_pts, IC)|
+\end{problem}
+
+
+\begin{problem}
+    Write a MATLAB script that outputs a log-log plot with the step size on the horizontal
+    axis and the error in the numerical method on the vertical axis.  Plot the errors for
+    Euler, Midpoint, Runge Kutta, and Backward Euler measured against a differential
+    equation with a known analytic solution.  Use this plot to conjecture the convergence
+    rates of the four methods.
+\end{problem}
+
+\begin{problem}
+    In this model there are two characters, Romeo and Juliet, whose affection is
+    quantified on the scale from $-5$ to $5$ described below:
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            $-5$ & Hysterical Hatred \\
+            $-2.5$ & Disgust \\
+            $0$ & Indifference \\
+            $2.5$ & Sweet Affection \\
+            $5$ & Ecstatic Love\\
+            \hline
+        \end{tabular}
+    \end{center}
+    The characters struggle with frustrated love due to the lack of reciprocity of their
+    feelings.  Mathematically,
+    \begin{itemize}
+        \item Romeo: ``My feelinfs for Juliet decrease in proportion to her love for me.''
+        \item Juliet: ``My love for Romeo grows in proportion to his love for me.''
+        \item Juliet's emotional swings lead to many sleepless nights, which consequently
+            dampens her emotions.
+    \end{itemize}
+    This give rise to
+    \[ \left\{ \begin{array}{ll} \frac{dx}{dt} &= -\alpha y \\ \frac{dy}{dt} &= \beta x -
+            \gamma y^2 \end{array} \right. \]
+    where $x(t)$ is Romeo's love for Juliet and $y(t)$ is Juliet's love for Romeo at time
+    $t$.
+
+    Your tasks:
+    \begin{enumerate}
+        \item First implement this 2D system with $x(0) = 2$, $y(0)=0$, $\alpha=0.2$,
+            $\beta=0.8$, and $\gamma=0.1$ for $t \in [0,60]$.  What is the fate of this
+            pair's love under these assumptions?
+        \item Write MATLAB code that approximates the parameter $\gamma$ that will result
+            in Juliet having a feeling of indifference at $t=30$.  Your code should not
+            need human supervision: you should be able to tell it that you're looking for
+            {\it indifference} at $t=30$ and turn it loose to find an approximation for
+            $\gamma$.  Assume throughout this problem that $\alpha=0.2$, $\beta=0.8$,
+            $x(0)=2$, and $y(0)=0$. Write a description for how your code works in your
+            homework document and also submit your MATLAB file (along with any support
+            files) demonstrating how it works.
+            \\
+            Hint: One way to do this problem is very similar to a bisection method for
+            root finding. 
+            \begin{itemize}
+                \item Shoot two solutions with two different parameters.
+                \item Compare their results at the desired time against the result of
+                    shooting with the average value of the parameter.
+                \item Use the logic of the bisection method to make a new estimate of the
+                    parameter.
+            \end{itemize}
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
+    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
+    initial position and initial velocity as you normally would with a second order
+    differential equation.  Devise a method for finding a numerical solution to this
+    problem. \\
+    Hint: First write the problem as a system of first order differential equations.  Then
+    think about how your bisection method code might help you.
+\end{problem}
+
+\section{Exercises}
+
+\begin{problem}
+    In this problem we'll look at the orbit of a celestial body around the sun.  The body
+    could be a satellite, comet, plant, or any other object whose mass is negligible
+    compared to the mass of the sun.  We assume that the motion takes place in a two
+    dimensional plane so we can describe the path of the orbit with two coordinates, $x$
+    and $y$ with the point $(0,0)$ being used as the reference point for the sun.
+    According to Newton's law of universal gravitation the system of differential
+    equations that describes the motion is 
+    \[ x''(t) = \frac{-x}{\left( \sqrt{x^2 + y^2} \right)^3} \quad \text{and} \quad y''(t)
+    = \frac{-y}{\left( \sqrt{x^2 + y^2} \right)^3}. \]
+    \begin{enumerate}
+        \item[(a)] Make a change of variables to turn the system of second order
+            differential equations into a system of first order differential equations.
+            Explain the meaning of all four of the resulting variables.
+        \item[(b)] Solve the system of equations from part (a) using an appropriate
+            solver.  Start with $x(0) = 4$, $y(0) = 0$, the initial $x$ velocity as $0$,
+            and the initial $y$ velocity as $0.5$.  Create several plots showing how the
+            dynamics of the system change for various values of the initial $y$ velocity
+        in the interval $(0,0.5]$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    In this problem we consider the pursuit and evasion problem where $E(t)$ is the vector
+    for
+    an evader (e.g. a rabbit or a bank robber) and $P(t)$ is the vector for a pursuer
+    (e.g. a fox chasing the rabbit or the police chasing the bank robber)
+    \begin{flalign*}
+        E(t) = \begin{pmatrix} x_e(t) \\ y_e(t) \end{pmatrix} \quad \text{and} \quad P(t)
+        = \begin{pmatrix} x_p(t) \\ y_p(t) \end{pmatrix}.
+    \end{flalign*}
+    Let's presume
+    the following:
+    \begin{description}
+        \item[Assumption 1:] the evader has a predetermined path (known only to him/her),
+        \item[Assumption 2:] the pursuer heads directly toward the evader at all times, and
+        \item[Assumption 3:] the pursuer's speed is directly proportional to the evader's speed.
+    \end{description}
+    From the third assumption we have 
+    \begin{flalign} 
+        \| P'(t) \| = k \| E'(t) \| 
+        \label{eqn:pursuit_evasion_assumption3}
+    \end{flalign}
+    and from the second assumption we have 
+    \begin{flalign}
+        \frac{P'(t)}{\|P'(t)\|} = \frac{E(t) - P(t)}{\| E(t) - P(t)\|}.
+    \end{flalign}
+    Solving for $P'(t)$ and using \ref{eqn:pursuit_evasion_assumption3} the differential equation
+    \begin{flalign}
+        P'(t) = k \| E'(t) \| \frac{E(t) - P(t)}{\| E(t) - P(t)\|}.
+    \end{flalign}
+    Your Tasks:
+    \begin{enumerate}
+        \item[(a)] Explain assumption \#2 mathematically.  
+        \item[(b)] Explain assumption \#3 physically. Why is this assumption necessary
+            mathematically?
+        \item[(c)] Write code to find the path of the pursuer if the evader has the
+            parameterized path
+            \[ E(t) = \begin{pmatrix} 0 \\ 5t \end{pmatrix} \]
+            and the pursuer initially starts at the point $P(0) = \begin{pmatrix}
+                2\\3\end{pmatrix}$.  Write your code so that it stops when the pursuer is
+            within 0.1 units of the evader.  Run your code for several values of $k$.
+        \item[(d)] Modify your code from part (c) to find the path of the pursuer if the
+            evader has the parameterized path 
+            \[ E(t) = \begin{pmatrix} 5 + \cos(2\pi t) + 2\sin(4\pi t) \\ 4 + 3\cos(3 \pi
+                t) \end{pmatrix} \]
+            and the pursuer initially starts at the point $P(0) = \begin{pmatrix} 0 \\ 50
+            \end{pmatrix}$.  Write your code so that it stops when the pursuer is
+            within 0.1 units of the evader.  Run your code for several values of $k$.
+        \item[(e)] Create your own smooth path for the evader that is {\it challenging}
+            for the pursuer to catch.  Write your code so that it stops when the pursuer
+            is within 0.1 units of the evader.  Run your code for several values of $k$.
+    \end{enumerate}
+    Note: It may be easiest to build this code from scratch instead of using one of our
+    pre-written codes.
+\end{problem}
+
+
+
+\begin{problem}
+    One of the favorite foods of the blue whale is krill. Blue whales are baleen whales
+    and feed almost exclusively on krill. These tiny shrimp-like creatures are devoured in
+    massive amounts to provide the principal food source for the huge whales. In the
+    absence of predators, in uncrowded conditions, the krill population density grows at a
+    rate of 25\% per year. The presence of 500 tons/acre of krill increases the blue whale
+    population growth rate by 2\% per year, and the presence of 150,000 blue whales
+    decreases krill growth rate by 10\% per year. The population of blue whales decreases
+    at a rate of 5\% per year in the absence of krill.
+
+    These assumptions yield a pair of differential equations (a Lotka-Volterra model) that
+    describe the population of the blue whales ($B$) and the krill population density ($K$)
+    over time given by
+    \begin{flalign*}
+        \frac{dB}{dt} &= -0.05B + \left( \frac{0.02}{500} \right) BK \\
+        \frac{dK}{dt} &= 0.25K - \left( \frac{0.10}{150000} \right) BK.
+    \end{flalign*}
+    \begin{enumerate}
+        \item[(a)] What are the units of $\frac{dB}{dt}$ and $\frac{dK}{dt}$?
+        \item[(b)] Explain what each of the four terms on the right-hand sides of the
+            differential equations mean in the context of the problem.  Include a reason
+            for why each term is positive or negative.
+        \item[(c)] Find a numerical solution to the differential equation model using
+            $B(0) = 75,000$ whales and $K(0) = 150$ tons per acre.
+        \item[(d)] Whaling is a huge concern in the oceans world wide.  Implement a {\it
+            harvesting} term into the whale differential equation, defend your
+            mathematical choices and provide a thorough exploration of any parameters that
+            are introduced.
+    \end{enumerate}
+\end{problem}
+% \solution{ Modified from https://www.simiode.org/resources/1502}
+
+\begin{problem}
+     You just received a new long-range helicopter drone for your birthday! After a little
+     practice, you try a long-range test of it by having it carry a small package to your
+     home. A friend volunteers to take it 5 miles east of your home with the goal of
+     flying directly back to your home. So you program and guide the drone to always head
+     directly toward home at a speed of 6 miles per hour.  However, a wind is blowing from
+     the south at a steady 4 miles per hour. The drone, though, always attempts to head
+     directly home. We will assume the drone always flies at the same height. What is the
+     drones flight path? Does it get the package to your home? What happens if the speeds
+     are different? What if the initial distance is different? How much time does the
+     drone's battery have to last to get home? \\
+     Hint: You should model this with a system of first order nonlinear differential
+     equations in the spatial positions $x$ and $y$.
+\end{problem}
+% \solution{ modified from https://www.simiode.org/resources/3482}
+
+% \begin{problem}
+%     All sorts of animals exhibit flocking behavior.  We can model this with an {\it agent
+%     based} model.  In agent based models, each agent (e.g. bird, bat, insect, etc) is
+%     governed by a differential equation resulting in a system of differential equations
+%     with the number of equations governed by the number of individuals.  It is not
+%     uncommon for agent-based models to have tens of thousands of individuals!
+% 
+%     For a flock of birds we propose the following agent based model.
+%     \begin{flalign*}
+%         \frac{ds_i}{dt} &= v_i \text{ (position of agent $i$)} \\
+%         \frac{dv_i}{dt} &= a_i \text{ (velocity of agent $i$)}\\
+%     \end{flalign*}
+% \end{problem}
