@@ -437,3 +437,123 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 %         \frac{dv_i}{dt} &= a_i \text{ (velocity of agent $i$)}\\
 %     \end{flalign*}
 % \end{problem}
+
+
+
+\begin{problem}[The Combustion Problem]
+    Let $T$ be the temperature of a combustible material (e.g. oily rags, dry hay, etc.).
+    The conservation of energy equation states that 
+    \[ \rho c_p \frac{dT}{dt} = A_1 e^{-B/(T-T_0)} - h\left( T - T_a \right) \]
+    where 
+    \begin{itemize}
+        \item $T$ is temperature in Kelvin,
+        \item $T_0$ is a reference temperature above which the fuel starts oxidizing,
+        \item $T_a$ is the ambient temperature of the surrounding air,
+        \item $\rho$ is the density of the fuel,
+        \item $c_p$ is the specific heat of the fuel source, 
+        \item $h$ is a measure of the power per volume per degree Kelvin,
+        \item $A_1$ is a measure of the power per unit volume, and
+        \item $B$ is a rate constant measured in degrees Kelvin.
+    \end{itemize}
+    If we divide both sides of the differential equation by $\rho c_p$ we arrive at the
+    first order non-homogeneous differential equation
+    \[ \frac{dT}{dt} = A e^{-B/(T-T_0)} - C \left( T - T_a \right). \]  
+    Assume that $A, B,$ and $C$ are all positive coefficients.
+    \\{\bf Your Tasks:}
+    \begin{enumerate}
+        \item[(a)] Why must $T > T_0$ in order for the equation to make sense physically?
+        \item[(b)] Let's suppose that $T_a = 300^\circ K$ and that $T_0$ is also at the
+            ambient temperature.  Let $A = 20$, $B = 600$, and $C = 0.01$.  Analyze the
+            differential equation graphically plotting the phase portrait, identifying
+            equilibrium points, and discussing stability of each point.
+        \item[(c)] Discuss the physical interpretation of each equilibrium point.
+        \item[(d)] Suppose we don't know what $A$, $B$, and $C$a re, but we do know from
+            experiments that the three fixed points are $T_1 = T_a = 300^\circ K$, $T_2 =
+            670^\circ K$, and $T_3 = 1200^\circ K$.  What can you say about the
+            coefficients $A$, $B$, and $C$?
+        \item[(e)] Write a script that solves the problem numerically for several
+            different initial conditions.
+    \end{enumerate}
+\end{problem}
+% \solution{
+%     \begin{center}
+%         \begin{tikzpicture}
+%             \begin{axis}[axis lines=center, grid, xmin=0, xmax=2000, ymin=-3, ymax=3,
+%                 domain=300:2000]
+%                 \addplot[smooth, very thick, blue, samples=100] {20*exp(-600/(x-300)) - 0.01*(x-300)};
+%             \end{axis}
+%         \end{tikzpicture}
+%     \end{center}
+%     The fixed points are $T_1 = 300^\circ K$, $T_2 \approx 636.8^\circ K$, and $T_3
+%     \approx 1526^\circ K$.  $T_1$ is stable from the right, $T_2$ is unstable (above which
+%     a combustion occurs), and $T_3$ is stable (stable combustion).
+% }
+% 
+
+\begin{problem}[HIV Problem]
+    In a normal, HIV-free body, uninfected T-cells are introduced into the system at a
+    constant rate $\lambda$. The T-cells in the system have a finite life span, and hence a
+    proportion $\mu$ of the T-cells die. In an HIV infected body, there is a rate $k$ at which
+    the T-cells become infected. This rate depends both on the presence of T-cells and
+    free HIV-1 particles to infect the T-cells. Putting this together, we get the
+    following equation for the healthy T-cells:
+    \[ \frac{dT}{dt} = \lambda - \mu T - k TV \]
+    where
+    \begin{itemize}
+        \item $T(t)$ is the number of uninfected and activated T-cells at time $t$
+        \item $L(t)$ is the number of latently infected T-cells at time $t$
+        \item $I(t)$ is the number of actively infected T-cells at time $t$
+        \item $V(t)$ is the number of free HIV-1 particles at time $t$.
+    \end{itemize}
+    Once a T-cell becomes infected, a proportion $p$ of them will become latently infected,
+    while the remainder immediately be actively infected. A latently infected T-cell can
+    later become actively infected, and this happens at a rate $\alpha$. Latently infected cells
+    die at the same rate $\mu$ as uninfected T-cells. Actively infected T-cells will be
+    assumed to die at a different rate $a$. We can now write the equations for the infected
+    T-cells:
+    \begin{flalign*}
+        \frac{dL}{dt} &= kp TV - \mu L - \alpha L \\
+        \frac{dI}{dt} &= k(1-p) TV + \alpha L - a I
+    \end{flalign*}
+    Finally, free HIV-1 particles are manufactured inside actively infected T-cells at a
+    rate $c$. The particles die at a rate $\gamma$. The particles are also used in the process of
+    infecting healthy T-cells at the rate $k$. This gives us the following equation for
+    HIV-1 particles:
+    \[ \frac{dV}{dt} = cI - \gamma V - kTV. \]
+    Numerically solve system of differential equations and plot the time evolution of all
+    four components.  Write a thorough mathematical and biological description of the
+    evolution of the system.  The table below gives values for the initial conditions and
+    parameters.
+    \begin{center}
+        \begin{tabular}{|c|l|}
+            \hline
+            Parameters & Value \\ \hline \hline
+            $T(0)$ & 200 T-cells / mm$^3$ \\ \hline
+            $L(0)$ & 0 T-cells / mm$^3$ \\ \hline
+            $I(0)$ & 0 T-cells / mm$^3$ \\ \hline
+            $V(0)$ & $4 \times 10^{-7}$ HIV-1 cells / mm$^3$ \\ \hline
+            $\lambda$ & 0.272 / mm$^3$ day \\\hline
+            $\mu$ & $1.36 \times 10^{-3}$ / day \\\hline
+            $k$ & $2.7 \times 10^{-4}$ mm$^3$/day \\\hline
+            $p$ & 0.1 \\\hline
+            $\alpha$ & $3.6 \times 10^{-2}$ / day \\\hline
+            $a$ & 0.33 / day \\\hline
+            $c$ & 100 / day \\\hline
+            $\gamma$ & 2 / day \\\hline
+        \end{tabular}
+    \end{center}
+\end{problem}
+
+
+\begin{problem}
+    Test the Euler, Midpoint, and Runge Kutta methods on the differential
+    equation
+    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} y(0) = 1.5. \]
+    Find the exact solution by hand using the method of undetermined coefficients and note
+    that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
+    for the error between your numerical solution and the exact solution for $\lambda =
+    -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
+    create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
+    that value of $\lambda$ at different values for $\Delta t$.
+\end{problem}
+
