@@ -476,9 +476,9 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
     boundary valued equation:
     \[ \text{Solve: } u_{xx} = - f(x) \quad \text{on} \quad x \in (x_0,x_n) \quad \text{with} \quad
     u(x_0) = \alpha \quad \text{and} \quad u(x_n) = \beta. \]
-\begin{verbatim}
+\begin{lstlisting}
 function [x,u] = Poisson1D(f , xmin , xmax , num_interior_pts , BCleft , BCright)
-\end{verbatim}
+\end{lstlisting}
     Test your code with a known function $f(x)$.
 
     Note: when we are using fixed values for the boundary conditions these are called
@@ -495,9 +495,9 @@ statement of the problem is as follows:
     \[ \text{Solve: } u_{xx} = - f(x) \quad \text{on} \quad x \in (x_0,x_n) \quad \text{with} \quad
     \frac{du}{dx}\Big|_{x_0} = \alpha \quad \text{and} \quad u(x_n) = \beta. \]
     Write a function to solve this problem:
-\begin{verbatim}
+\begin{lstlisting}
 function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DBC)
-\end{verbatim}
+\end{lstlisting}
 
     Write a MATLAB script to solve the Neumann problem with $f(x) = 2e^{-0.1x}$, $u'(0)=0$,
     and $u(1)=0$.

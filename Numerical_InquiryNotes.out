@@ -55,9 +55,9 @@
 \BOOKMARK [1][-]{section.A.5}{Sensitivity Analysis}{appendix.A}% 55
 \BOOKMARK [1][-]{section.A.6}{Example of Sensitivity Analysis:}{appendix.A}% 56
 \BOOKMARK [0][-]{appendix.B}{MATLAB Basics}{}% 57
-\BOOKMARK [1][-]{section.B.1}{Vectors}{appendix.B}% 58
+\BOOKMARK [1][-]{section.B.1}{Vectors and Matrices}{appendix.B}% 58
 \BOOKMARK [1][-]{section.B.2}{Looping}{appendix.B}% 59
-\BOOKMARK [2][-]{subsection.B.2.1}{The For Loop}{section.B.2}% 60
+\BOOKMARK [2][-]{subsection.B.2.1}{For Loops}{section.B.2}% 60
 \BOOKMARK [2][-]{subsection.B.2.2}{The While Loop}{section.B.2}% 61
 \BOOKMARK [1][-]{section.B.3}{Conditional Statements}{appendix.B}% 62
 \BOOKMARK [2][-]{subsection.B.3.1}{If Statements}{section.B.3}% 63
@@ -65,16 +65,15 @@
 \BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 65
 \BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 66
 \BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 67
-\BOOKMARK [1][-]{section.B.7}{Additional Resources}{appendix.B}% 68
-\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 69
-\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 70
-\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 71
-\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 72
-\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 73
-\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 74
-\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 75
-\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 76
-\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 77
-\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 78
-\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 79
-\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 80
+\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 68
+\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 69
+\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 70
+\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 71
+\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 72
+\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 73
+\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 74
+\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 75
+\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 76
+\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 77
+\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 78
+\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 79

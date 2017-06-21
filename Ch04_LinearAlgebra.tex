@@ -17,14 +17,15 @@ why don't we start easy.
     Recall that the dot product of two vectors $\bu, \bv \in \mathbb{R}^n$ is 
     \[ \bu \cdot \bv = \sum_{j=1}^n u_j v_j. \]
     Write a MATLAB function that accepts two vectors and returns the dot product. \\
-    \verb|function DotProduct = MyDotProduct(u, v)| \\
+    \mcode{function DotProduct = MyDotProduct(u, v)} \\
     It would be wise to put an error check in your code to make sure that the vectors are
     the same size.  You should be able to write this code without any loops.
 \end{problem}
 
 \begin{problem}
     Write a test script for the dot product of two random $n \times 1$ vectors.  Your
-    script should output the absolute error between your dot product code and MATLAB's \texttt{dot}
+    script should output the absolute error between your dot product code and MATLAB's
+    \mcode{dot}
     command.
 \end{problem}
 
@@ -37,7 +38,7 @@ why don't we start easy.
     \[ \left( AB \right)_{ij} = \left( \text{Row $i$ of matrix $A$} \right) \cdot \left(
     \text{Column $j$ of matirx $B$} \right). \]
     Write a MATLAB function that accepts two matrices and returns the matrix product. \\
-    \verb|function MatrixProduct = MatrixMultiply(A, B)| \\
+    \mcode{function MatrixProduct = MatrixMultiply(A, B)} \\
     You
     should be able to write this code with only two loops; one for $i$ and one for $j$.
     The rest of the work should be done using dot products.
@@ -85,17 +86,17 @@ following two problems you will devise algorithms for triangular matrices.
     The following code solves the problem $L {\bf y} = \bb$ using forward
     substitution.  The matrix $L$ is assumed the be lower triangular with ones on the main
     diagonal.
-    \begin{verbatim}
-    function y = LSolve(L , b)
-    n = length(b);
-    y = zeros(n,1);
-    for i = 1:n
-        y(i) = b(i);
-        for j = 1 : (i-1)
-            y(i) = y(i) - L(i,j) * y(j);
-        end
+\begin{lstlisting}
+function y = LSolve(L , b)
+n = length(b);
+y = zeros(n,1);
+for i = 1:n
+    y(i) = b(i);
+    for j = 1 : (i-1)
+        y(i) = y(i) - L(i,j) * y(j);
     end
-    \end{verbatim}
+end
+\end{lstlisting}
 \end{technique}
 
 \begin{problem}
@@ -126,17 +127,17 @@ following two problems you will devise algorithms for triangular matrices.
     The following code solves the problem $U {\bf x} = {\bf y}$ using backward
     substitution.  The matrix $U$ is assumed the be upper triangular.  You'll notice that
     most of this code is incomplete.  It is your job to complete this code.
-    \begin{verbatim}
-    function x = USolve(U , y)
-    n = length(y);
-    x = zeros(n,1);
-    for i = ? : ? : ?        % what should you be looping over?
-        x(i) = y(i) / ???;   % what should you be dividing by?
-        for j = ? : ? : ?    % what should you be looping over? 
-            x(i) = x(i) - U(i,j) * x(j) / ???;  % what should you be dividing by?
-        end
+\begin{lstlisting}
+function x = USolve(U , y)
+n = length(y);
+x = zeros(n,1);
+for i = ? : ? : ?        % what should you be looping over?
+    x(i) = y(i) / ???;   % what should you be dividing by?
+    for j = ? : ? : ?    % what should you be looping over? 
+        x(i) = x(i) - U(i,j) * x(j) / ???;  % what should you be dividing by?
     end
-    \end{verbatim}
+end
+\end{lstlisting}
 \end{technique}
 
 \begin{problem}
@@ -225,25 +226,25 @@ following two problems you will devise algorithms for triangular matrices.
     The following MATLAB function takes a square matrix $A$ and
     outputs the matrices $L$ and $U$ such that $A = LU$.  Partial code is given below.
     Complete the code.
-    \begin{verbatim}
-    function [L,U] = MyLU(A)
-    n = size(A,1);      % finds the size of the matrix
-    if size(A,1) ~= size(A,2)   % what does this do?
-        fprintf('Error: The matrix A is not square\n')
-        break
+\begin{lstlisting}
+function [L,U] = MyLU(A)
+n = size(A,1);      % finds the size of the matrix
+if size(A,1) ~= size(A,2)   % what does this do?
+    fprintf('Error: The matrix A is not square\n')
+    break
+end
+L = eye(n,n);       % initialize L as an identity matrix (why?)
+U = A;              % initialize U as A (why?)
+for j = 1 : (n-1)   % loop over the columns
+    for i = (j+1) : n   % loop over the rows
+        mult = A(i,j) / A(j,j); % what does this line do?
+        A(i, j+1:n) = A(i, j+1:n) - mult*A(j, j+1:n);
+        U(i, j+1:n) = ???   % what part of A should you be putting in U here?
+        L(i,j) = ???        % what should go in the lower triangular matrix?
+        U(i,j) = 0;         % zero out the bottom portion of U (why?)
     end
-    L = eye(n,n);       % initialize L as an identity matrix (why?)
-    U = A;              % initialize U as A (why?)
-    for j = 1 : (n-1)   % loop over the columns
-        for i = (j+1) : n   % loop over the rows
-            mult = A(i,j) / A(j,j); % what does this line do?
-            A(i, j+1:n) = A(i, j+1:n) - mult*A(j, j+1:n);
-            U(i, j+1:n) = ???   % what part of A should you be putting in U here?
-            L(i,j) = ???        % what should go in the lower triangular matrix?
-            U(i,j) = 0;         % zero out the bottom portion of U (why?)
-        end
-    end
-    \end{verbatim}
+end
+\end{lstlisting}
 \end{technique}
 
 \begin{thm}[LU Factorization Algorithm]
@@ -251,21 +252,21 @@ following two problems you will devise algorithms for triangular matrices.
     \mathbb{R}^n$.  To solve the problem $A \bx =\bb$,
     \begin{enumerate}
         \item Factor $A$ into lower and upper triangular matrices $A = LU$.\\
-            \verb|[L, U] = MyLU(A);|
+            \mcode{[L, U] = MyLU(A);}
         \item The system can now be written as $LU \bx = \bb$.  Substitute $U \bx = {\bf
             y}$ and solve the system $L {\bf y} = \bb$ with forward substitution. \\
-            \verb|y = LSolve(L, b);|
+            \mcode{y = LSolve(L, b);}
         \item Finally, solve the system $U \bx = {\bf y}$ with backward substitution. \\
-            \verb|x = USolve(U, y);|
+            \mcode{x = USolve(U, y);}
     \end{enumerate}
 \end{thm}
 
 \begin{problem}
-    Test your \texttt{MyLU}, \texttt{LSolve}, and \texttt{USolve} functions on a linear
+    Test your \mcode{MyLU}, \mcode{LSolve}, and \mcode{USolve} functions on a linear
     system for which you know the answer.  Then test your problem on a system
     that you don't know the solution to.  Discuss where your code will fail. Use the
     following partial code to test your functions.
-\begin{verbatim}
+\begin{lstlisting}
 A = [...; ...; ... ];
 b=  [...; ...; ... ];
 [L,U] = MyLU(A);
@@ -273,7 +274,7 @@ y = Lsolve(L,b);
 x = Usolve(U,y)
 MATLABExactAnswer = A\b
 MyError = norm(x-MATLABExactAnswer)
-\end{verbatim}
+\end{lstlisting}
 \end{problem}
 
 
@@ -319,15 +320,15 @@ MyError = norm(x-MATLABExactAnswer)
     \begin{itemize}
         \item Build a random matrix of size $n \times n$. You can do this with the code:
             \\
-            \verb|A=rand(n,n)|
+            \mcode{A=rand(n,n)}
         \item Build a random vector in $\mathbb{R}^{n}$. You can do this with the code: \\
-            \verb|b = rand(n,1)|
+            \mcode{b = rand(n,1)}
         \item Find MATLAB's exact answer to the problem $A\bx=\bb$ using the backslash: \\
-            \verb|Xexact = A\b|
-        \item Write code that uses your three $LU$ functions (\texttt{MyLU, Lsolve,
+            \mcode{Xexact = A\b}
+        \item Write code that uses your three $LU$ functions (\mcode{MyLU, Lsolve,
             Usolve}) to find a solution to the equation $A\bx=\bb$.
         \item Find the error between your answer and the exact answer using the code: \\
-            \verb|error = norm(x - Xexact)|
+            \mcode{error = norm(x - Xexact)}
         \item Make a plot that shows how the error behaves as the size of the problem
             changes. You should run this for matrices of larger and larger size but be
             warned that the loop will run for quite a long time if you go above
@@ -512,7 +513,7 @@ triangular matrix.
                 \item If we want to solve $A\bx = \bb$ and we can write $A = QR$ then 
                     \[ A \bx = \bb \quad \implies \quad QR \bx = \bb \quad \implies \quad
                         R \bx = Q^T \bb \]
-                \item Since $R$ is upper triangular we can use the \texttt{Usolve} code we
+                \item Since $R$ is upper triangular we can use the \mcode{Usolve} code we
                     have from our work with the LU-factorization to solve for $\bx$.  THIS
                     IS REALLY FAST!!
                 \item Compare this to the number of computer operations needed so solve
@@ -525,30 +526,30 @@ triangular matrix.
     Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs the
     both the $Q$ matrix and the $R$ matrix. Pseducode for this function is as follows:
     \begin{itemize}
-        \item Set up the function call:\\ \texttt{function [Q,R] = MyQR(A)}
-        \item Set up \texttt{zeros} matrices for both $Q$ and $R$.  Remember that $A$ may
+        \item Set up the function call:\\ \mcode{function [Q,R] = MyQR(A)}
+        \item Set up \mcode{zeros} matrices for both $Q$ and $R$.  Remember that $A$ may
             not be square so assume that the columns are in $\mathbb{R}^m$ and the rows
             are in $\mathbb{R}^n$.  Hence $Q$ will be $m \times n$ and $R$ will be $n
             \times n$.
-        \item Start a loop that counts across the columns:\\ \texttt{for j=1:n}
+        \item Start a loop that counts across the columns:\\ \mcode{for j=1:n}
             \begin{itemize}
                 \item define a temporary variable: $\hat{\bq} = \ba_j$
                 \item start a loop that will do all of the subtractions and build some of
-                    the $R's$:\\ \texttt{for i=1:j-1}
+                    the $R's$:\\ \mcode{for i=1:j-1}
                     \begin{itemize}
                         \item build one of the $R's$: $R_{ij} = \ba_j \cdot \bq_i$
                         \item Do one of the subtractions: $\hat{\bq} = \hat{\bq} - R_{ij} \bq_i$
                     \end{itemize}
-                \item end the loop for \texttt{i}
+                \item end the loop for \mcode{i}
                 \item normalize the $j^{th}$ column in $Q$: $\bq_j = \hat{\bq} / \| \hat{\bq} \|$
                 \item build the $R's$ on the diagonal: $R_{jj} = \ba_j \cdot \bq_j$
             \end{itemize}
-        \item end the loop for \texttt{j}
+        \item end the loop for \mcode{j}
     \end{itemize}
 \end{problem}
 
 \begin{problem}
-    Write a script that tests your \texttt{MyQR} function on randomly generated $m×n$ matrices
+    Write a script that tests your \mcode{MyQR} function on randomly generated $m×n$ matrices
     with randomly generated right-hand sides. Compare the time that it takes to solve the
     least squares problems using QR to the time necessary to solve with LU via the normal
     equations. When is LU more efficient? When is QR more efficient?
@@ -561,7 +562,7 @@ triangular matrix.
     \cos(4t) + 0.1 \varepsilon(t)$ at 50 equally spaced points $t$ between $0$ and $1$.  Here
     we are using $\varepsilon(t)$ as a function that outputs normally distrubuted random
     white noise.  In \texttt{MATLAB} you will build $y$ as \\
-    \texttt{y = cos(4*t) + 0.1*randn(size(t));}
+    \mcode{y = cos(4*t) + 0.1*randn(size(t));}
     
     Build the $t$ vector
     and the $y$ vector (these are your data).  We need to set up the least squares
@@ -767,30 +768,32 @@ They are typically denoted as $\sigma_1, \sigma_2, \dots, \sigma_n$ where $\sigm
     Some practical MATLAB tips follow:
     \begin{enumerate}
         \item Define $A$
-        \item Define the sizes: \texttt{m=size(A,1); n=size(A,2)}
-        \item Find the rank of $A$: \texttt{r = rank(A);}
-        \item Define the matrices \texttt{Sigma} and \texttt{U} to be zero matrices with
+        \item Define the sizes: \mcode{m=size(A,1); n=size(A,2)}
+        \item Find the rank of $A$: \mcode{r = rank(A);}
+        \item Define the matrices \mcode{Sigma} and \mcode{U} to be zero matrices with
             the right size.
         \item Have MATLAB calculate the eigenvectors and eigenvalues of $A^T A$:\\
-            \texttt{[vectors,values]=eig(A'A,'vector');}\\
-            The \texttt{'vector'} command spits out the eigenvalues as a vector instead of
+            \mcode{[vectors,values]=eig(A'A,'vector');}\\
+            The \mcode{'vector'} command spits out the eigenvalues as a vector instead of
             a diagonal matrix.  This will be helpful in the next step.
         \item Have MATLAB sort the eigenvalues and strip any negative {\it approximate
             zero} eigenvalues that arise from numerical approximation of zero. \\
-            \texttt{values = abs(values);}\\
-            \texttt{[values,indices] = sort(values,'descend')}
+            \mcode{values = abs(values);}\\
+            \mcode{[values,indices] = sort(values,'descend')}
         \item Sort the columns of $V$ using the indices coming out of the sort command: \\
-            \texttt{V = vectors(:,indices);}
+            \mcode{V = vectors(:,indices);}
         \item Build the singular values from the eigenvalues of $A^TA$ (remember the
-            square root!):\\ \texttt{singularvalues=...}
+            square root!):\\ \mcode{singularvalues=...}
         \item Build non-zero diagonal entries of the $\Sigma$ matrix with a loop.  Also build a
             temporary matrix $B$ the same size as $\Sigma$ but with the diagonal entries
-            $1/\sigma_j$.  We'll need $B$ in the next step. \\
-            \texttt{B=zeros(size(Sigma));}\\
-            \texttt{for j=1:r}\\
-            \texttt{Sigma(j,j) = ...}\\
-            \texttt{B(j,j) = ...}\\
-            \texttt{end}
+            $1/\sigma_j$.  We'll need $B$ in the next step. 
+\begin{lstlisting}
+B=zeros(size(Sigma));
+for j=1:r}
+Sigma(j,j) = ...
+B(j,j) = ...
+end
+\end{lstlisting}
         \item Observe that since $V$ has orthonormal columns we can write $AV = U \Sigma$.
             Now, $\Sigma$ is not square, but we know that it has diagonal entries only so
             we have a {\it pseudo-inverse} $B^T$ already built.  Hence, $U = A V B^T$.
@@ -803,11 +806,11 @@ They are typically denoted as $\sigma_1, \sigma_2, \dots, \sigma_n$ where $\sigm
     Create a MATLAB function that accepts a matrix $A$ and outputs the three matrices for
     the singular value decomposition.  Test your function on a large random rectangular
     matrix.
-\begin{verbatim}
+\begin{lstlisting}
 A = rand(500,300);
 [U,S,V] = MySVD(A);
 error = norm(A - U*S*V')
-\end{verbatim}
+\end{lstlisting}
 \end{problem}
 
 
@@ -821,24 +824,24 @@ error = norm(A - U*S*V')
     One particular use of the SVD is for data reduction.  The word ``reduction'' here
     really means that we are going to make approximations of data using lower dimensions,
     and a very visually stunning way to do this is to do data reduction on images.  The following code will read
-    the file \texttt{TestImage.jpg} into MATLAB and convert it to a rectangular matrix of
+    the file \mcode{TestImage.jpg} into MATLAB and convert it to a rectangular matrix of
     values.  It is up to the reader to supply the necessary image.
-\begin{verbatim}
+\begin{lstlisting}
 A = imread('TestImage.jpg');
 A = A(:,:,1);
 A = im2double(A);
 imshow(A)
-\end{verbatim}
+\end{lstlisting}
     Once the matrix is in MATLAB do the following.  In this we assume that $A$ is an $m
     \times n$ matrix.
     \begin{enumerate}
         \item Find the SVD of the image (remember the semicolons!!!!!!).  This will take
             over a minute with our code so be patient.  Once it is done check that your
             SVD code does a decent approximation of the original image.
-\begin{verbatim}
+\begin{lstlisting}
 [U,S,V] = MySVD(A);
 error = norm(A - U*S*V')
-\end{verbatim}
+\end{lstlisting}
         \item Get the singular values out of $\Sigma$ and find the largest $P$\% of the
             singular values. Let's say that this is $N$ values.  Create four new matrices
             $U_{new}$, $\Sigma_{new}$, $V_{new}$, and $A_{new}$ in the following way.
@@ -852,7 +855,7 @@ error = norm(A - U*S*V')
                     V_{new}^T$.  
             \end{enumerate}
         \item Show the newly data-reduced image with \\
-            \texttt{imshow(Anew)}
+            \mcode{imshow(Anew)}
         \item The rank of the new image is equal to the number of singular values that you
             kept in step 2.  
         \item Experiment with several low rank approximations of an image starting with
@@ -1124,36 +1127,65 @@ answer.
 
 \begin{problem}
     In this exercise we will use numerical linear algebra to do some handwriting
-    recognition on the classical data set \texttt{mnist}.  The \texttt{mnist} data set
+    recognition on the classical data set \mcode{mnist}.  The \mcode{mnist} data set
     contains a training set of 60,000 numbers and a test set of 10,000 numbers.  Each
-    digit in the database was placed in a 28 by 29 grayscale image such taht the center of
-    mass of its pixels is at the center of the picture.  
+    digit in the database was placed in a 28 by 29 grayscale image such that the center of
+    mass of its pixels is at the center of the picture.  While our primary goal for this
+    problem is to use numerical linear algebra, our secondary goal is to get some
+    experience with the logic of machine learning.  In machine learning problems we often
+    follow the following logic:
+    \begin{itemize}
+        \item First use a set of data for which we know the {\it answer} (in this case the
+            {\it answer} is the numerical value of the digit that was written).  We call
+            this the training data set in the sense that we train the numerical method
+            with the correct answers in mind.
+        \item Next we compare data with hidden answers to our training set and build a
+            method for using the training set to make a prediction for the answer.  This
+            is called the testing phase of a machine learning algorithm.  In the testing
+            phase we know the {\it answer} but keep it hidden from the algorithm.  We let
+            our algorithm predict the {\it answer} and then compare to the hidden truth.
+            At the end of this step we can give a percent effectiveness for our algorithm.
+        \item In the final step of a machine learning process we give the numerical
+            algorithm data where we don't know the {\it answer} and use the algorithm to
+            predict for us.  
+    \end{itemize}
+
+    Let's be more specific.  Let's say that we want to determine if a handwritten digit is
+    the number ``0''.  From the training set we average all of the zeros together to get a
+    best estimate of what a ``0'' looks like.  Then we build a mathematical technique for
+    doing the comparison between our new digit and the averaged training 0.  If the
+    comparison technique tells us that our new digit is {\it close enough} then we call
+    that new digit a zero. We can do this for all of the \mcode{test} 0's and determine
+    the percent effectiveness for our comparison technique. 
+
+    {\bf Your Tasks:}
     \begin{enumerate}
         \item[(a)] Start by going to
             \href{http://www.cs.nyu.edu/~roweis/data.html}{www.cs.nyu.edu/~roweis/data.html}
-            to download the data set.  Download the file titled \verb|mnist_all.mat|.
+            to download the data set.  Download the file titled \mcode{mnist_all.mat}.
             This file is a MATLAB file that needs to be read into your working session of
             MATLAB.  
-        \item[(b)] To read the \verb|mnist_all.mat| data into MATLAB \\
-            \verb|load mnist_all.mat|\\
-            Then type \verb|whos| to see the variables containing training digits
-            (\texttt{train0, \ldots train9}) and test digits (\texttt{test0, \ldots,
+        \item[(b)] To read the \mcode{mnist_all.mat} data into MATLAB \\
+            \mcode{load mnist_all.mat}\\
+            Then type \mcode{whos} to see the variables containing training digits
+            (\texttt{train0, ..., train9}) and test digits (\texttt{test0, ...,
             test9}).
         \item[(c)] To visualize the first image in the matrix \texttt{train0} use 
-       \begin{verbatim}
-       digit = train0(1,:); % read the first row all columns out of train0
-       digitImage = reshape(digit,28,28); % turn into a 28x28 matrix
-       image(rot90(flipup(digitImage),-1))
-       colormap(gray(256))
-       axis square tight off
-       \end{verbatim}
+\begin{lstlisting}
+digit = train0(1,:); % read the first row all columns out of train0
+digitImage = reshape(digit,28,28); % turn into a 28x28 matrix
+image(rot90(flipup(digitImage),-1))
+colormap(gray(256))
+axis square tight off
+\end{lstlisting}
         \item[(d)] Create a 10 by 784 matrix $T$ whose $i^{th}$ row contains the average
             pixel values over all of the training images of the number $i-1$.  For
             instance, the first row of $T$ can be formed by typing \\
-            \verb|T(1,:) = mean(train0);| \\
-            Visualize these average digits using the \texttt{subplot} command creating a
+            \mcode{T(1,:) = mean(train0);} \\
+            Visualize these average digits using the \mcode{subplot} command creating a
             $2 \times 5$ matrix of plots with the average 0 in the upper left and the
-            average 9 in the lower right.
+            average 9 in the lower right.  Check yourself by making sure that your image
+            is identical to Figure \ref{fig:mnist_average}.
         \item[(e)] We are going to try two methods for handwriting recognition.  There are
             10,000 test numbers that are not in the training set and we want to try two
             different ways of determining which digit is in the test image.  Your job is
@@ -1167,14 +1199,17 @@ answer.
                     test digit.  Pseudo code for this method is:
                     \begin{itemize}
                         \item Let $D$ be the first test digit in \texttt{test0} using \\
-                            \verb|D = double(test0(1,:));|
+                            \mcode{D = double(test0(1,:));}
                         \item For each row $i=1, 2, \cdots, 10$ compute \\
-                            \verb|norm(T(i,:) - D)| \\
+                            \mcode{norm(T(i,:) - D)} \\
                             and determine which value of $i$ this is smallest
                         \item $D$ is probably the digit $i-1$.
+                        \item repeat for all of the test digits in \texttt{test0},
+                            \texttt{test1}, \ldots.
                     \end{itemize}
-                    Be sure to write code to test all of the 10,000 test digits (this will
-                    likely take a bunch of copy and paste)
+                    Be sure to write code to test all of the 10,000 test digits.  There
+                    are elegant ways to code this but you can also complete this task with
+                    a bunch of copy and paste.
                 \item[Method \#2 (Min Projections):] Project the test image vector $D$
                     onto the mean training image $T(i,:)$ and find the error in the
                     projection.  In this method we seek to minimize the size of the error.
@@ -1187,6 +1222,16 @@ answer.
     \end{enumerate}
 \end{problem}
 
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=0.9\columnwidth]{mnist_average_training_image.eps}
+    \end{center}
+    \caption{The 10 images are the averages of all of the training images for each digit.
+        They represent what a {\it typical} digit should look like for each of the 10
+    digits.}
+    \label{fig:mnist_average}
+\end{figure}
+
 
 
 \begin{problem}
@@ -1198,7 +1243,7 @@ answer.
 
 \begin{problem}
     Find the largest eigenvalue of the matrix $A$ WITHOUT using the built in
-    ``\texttt{eig}'' or ``\texttt{eigs}'' commands in MATLAB.
+    ``\mcode{eig}'' or ``\mcode{eigs}'' commands in MATLAB.
     \[ A = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 9 & 0 & 1 & 2 \\ 3 & 4 & 5 &
         6 \end{pmatrix} \]
 \end{problem}
@@ -1283,17 +1328,17 @@ answer.
     to only change a few lines from your Power method.
 
     Write a
-    MATLAB function \texttt{MyPower2} to find the second largest eigenvalue and
+    MATLAB function \mcode{MyPower2} to find the second largest eigenvalue and
     eigenvector pair by putting the deflation method into practice. Test your code on a
-    \underline{symmetric} matrix $A$ and compare against MATLAB's \texttt{eig} command.
+    \underline{symmetric} matrix $A$ and compare against MATLAB's \mcode{eig} command.
     Your code needs to work on symmetric matrices of arbitrary size and you need to write
     test code that clearly shows the error between your calculated eigenvalue and MATLAB's
     eigenvalue as well as your calculated eigenvector and MATLAB's eigenvector.\\ Hint: To
     guarantee that you start with a symmetric matrix you can use the following code.
-\begin{verbatim}
+\begin{lstlisting}
 N = 40; % size of the matrix ... make this large-ish
 A = rand(N,N);
 A = A'*A; % this will be symmetric.
-\end{verbatim}
+\end{lstlisting}
 \end{problem}
 

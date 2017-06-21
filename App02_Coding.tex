@@ -1,7 +1,7 @@
 \chapter{MATLAB Basics}
 In this appendix we'll go through a few of the basics in MATLAB.  This is by no means
 meant to be an all-encompassing resource for MATLAB programming.  A few more thorough
-resources are listed here.
+resources for MATLAB are listed here.
 \begin{itemize}
     \item \href{https://www.mathworks.com/help/pdf_doc/matlab/matlab_prog.pdf}{https://www.mathworks.com/help/pdf\_doc/matlab/matlab\_prog.pdf}
     \item
@@ -16,28 +16,359 @@ resources are listed here.
 In this appendix we'll give examples of some of the more common coding practices that the
 reader will run into while working through the exercises and problems in these notes.  
 
-\section{Vectors}
+\section{Vectors and Matrices}
+\begin{example}
+    Write the vectors $\bv = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \text{ and } \bw =
+        \begin{pmatrix} 4 & 5 & 6 & 7 \end{pmatrix}$ using MATLAB.\\
+    {\bf Solution:}
+    \begin{lstlisting}
+    v = [1 ; 2 ; 3]
+    w = [4 , 5 , 6 , 7]
+    w = 4:7  % this is shorthand for writing a sequence as a row vector
+    \end{lstlisting}
+\end{example}
+
+\begin{example}
+    Consider the matrices and vectors
+    \[ A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \quad B =
+            \begin{pmatrix} 3 & 5 & 7 \\ 9 & 1 & 3 \\ 5 & 7 & 11 \end{pmatrix} \quad
+                \text{and} \quad \bb = \begin{pmatrix} 4 & 3 & -1 \end{pmatrix} \]
+    \begin{itemize}
+        \item Calculate the product $AB$ using regular matrix multiplication
+\begin{lstlisting}
+A = [1 , 2 , 3; 
+    4 , 5 , 6;
+    7 , 8 , 0]
+B = [3 , 5 , 7;
+    9 , 1 , 3;
+    5 , 7 , 11]
+Product = A*B
+\end{lstlisting}
+        \item Calculate the element-by-element multiplication of $A$ and $B$
+\begin{lstlisting}
+ElementWiseProduct = A .* B
+\end{lstlisting}
+        \item Calculate the inverse of $A$
+\begin{lstlisting}            
+Ainv = A^(-1)
+Ainv = inverse(A) % alternative
+\end{lstlisting}            
+        \item Calculate the transpose of $B$
+\begin{lstlisting}
+Atranspose = transpose(A)
+% or as an alternative: 
+Atranspose = A'  % actually the conjugate transpose but if A is real then ok
+\end{lstlisting}
+        \item Solve the system of equations $A\bx = \bb$
+\begin{lstlisting}
+b = [4 ; 3 ; -1]
+x = A \ b
+\end{lstlisting}
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    Code for a matrix of zeros
+\begin{lstlisting}
+Z = zeros(5,5) % 5 x 5 matrix of all zeros
+\end{lstlisting}
+\end{example}
+
+\begin{example}
+    Code for an identity matrix
+\begin{lstlisting}
+Ident = eye(5,5) % 5 x 5 identity matrix
+\end{lstlisting}
+\end{example}
+
+\begin{example}
+    Code for random matrices.
+    \begin{itemize}
+        \item random matrix from a uniform distribution on $[0,1]$
+\begin{lstlisting}
+R = rand(5,5) % random 5 x 5 matrix
+\end{lstlisting}
+        \item random matrix from the standard normal distribution
+\begin{lstlisting}
+R = randn(5,5) % random 5 x 5 matrix
+\end{lstlisting}
+    \end{itemize}
+\end{example}
+
+\begin{example}
+    A linearly spaced sequence
+\begin{lstlisting}
+List = linspace(0,10,100)
+% a list of 100 equally spaced numbers from 0 to 10
+\end{lstlisting}
+\end{example}
 
 \section{Looping}
-\subsection{The For Loop}
+A loop is used when a process needs to be repeated several times.  
+
+\subsection{For Loops}
+A \texttt{for loop} is code that repeats across a pre-defined sequence.
+\begin{example}
+    Write a loop that produces the squares of the first 10 integers.
+\begin{lstlisting}
+for j = 1:10
+    j^2
+end
+\end{lstlisting}
+The output of this code will be
+\begin{verbatim}
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+\end{verbatim}
+\end{example}
+
+\begin{example}
+    Plot the functions $f(x) = \sin(kx)$ for $k=1, 1.5, 2, 2.5, \ldots, 5$ on the domain $x \in
+    [0,2\pi]$.
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+for k = 1:0.5:5
+    plot(x , sin(k*x) )
+    hold on
+end
+\end{lstlisting}
+\end{example}
+
+
+
 
 \subsection{The While Loop}
+A \texttt{while loop} is a process that only repeats while a conditional statement is
+true.  Be careful with \texttt{while loops} since it is possible to create a loop that
+runs forever.
 
+\begin{example}
+    Build the Fibonnaci sequence up until the last term is greater than 1000.
+\begin{lstlisting}
+F(1) = 1; % first term
+F(2) = 1; % second term
+n = 3;
+while F(end)<1000
+    F(n) = F(n-1) + F(n-2);
+    n=n+1;
+end
+\end{lstlisting}
+\end{example}
+
+\begin{example}
+    An example of a while loop that runs forever.
+\begin{lstlisting}
+a = 1;
+while a>0
+    a=a+1;
+end
+\end{lstlisting}
+\end{example}
+
+
+\begin{example}
+    An example of a while loop that runs forever but with a failsafe step that stops the
+    loop after 1000 steps.
+\begin{lstlisting}
+a = 1;
+counter=1;
+while a>0
+    a=a+1;
+    if counter >= 1000
+        break
+    end
+    counter = counter+1;
+end
+\end{lstlisting}
+\end{example}
 
 \section{Conditional Statements}
+Conditional statements are used to check if something is true or false.  The output of a
+conditional statement is a boolean value; true (1) or false (0).  
+
 \subsection{If Statements}
+\begin{example}
+    Loop over the integers up to 100 and output only the multiples of three.
+\begin{lstlisting}
+for j = 1:100
+    if mod(j,3) == 0
+        j
+    end
+end
+\end{lstlisting}
+\end{example}
+
+\begin{example}
+    Check the signs of two function values and determine if they are opposite.
+\begin{lstlisting}
+f = @(x) x^3*(x-3);
+a = 2;
+b = 4;
+if f(a)*f(b) < 0
+    fprintf('The function values are opposite sign\n')
+elseif f(a)*f(b) >0
+    fprintf('The function values are the same sign\n')
+else
+    fprintf('The function values are both zero\n')
+end
+\end{lstlisting}
+\end{example}
+
+
 
 \subsection{Case-Switch Statements}
+\begin{example}
+    Evaluate over several cases.
+\begin{lstlisting}
+n = 3
+switch n
+    case 1 % if n == 1
+        fprintf('n is 1\n')
+    case 2 % if n == 2
+        fprintf('n is 2\n')
+    case 3 % if n == 3
+        fprintf('n is 3\n')
+end
+\end{lstlisting}
+\end{example}
 
 \section{Functions}
+A mathematical function has a single output for every input, and in
+some sense a computer function is the same: one single executed process for each
+collection of inputs.  
+
+\begin{example}
+    Define the function $f(x) = \sin(x^2)$ so that it can accept any type of input
+    (symbol, number, or list of numbers).
+\begin{lstlisting}
+f = @(x) sin(x.^2) % defines the function
+f(3) % evaluates the function at x=3
+x=linspace(0,pi,100);
+f(x) % evaluates f at 100 points equally spaced from 0 to pi
+\end{lstlisting}
+\end{example}
+
+\begin{example}
+    Write a computer function that accepts two numbers as inputs and outputs the sum plus
+    the product of the two numbers. \\
+    First write a file with the following contents.
+\begin{lstlisting}
+function MyOutput = MyFunctionName(a,b)
+    MyOutput = a + b + a*b;
+end
+\end{lstlisting}
+Be sure that the file name is the same as the function name.\\
+Then you can call the function by name in a script or another function.
+\begin{lstlisting}
+SumPlusProduct = MyFunctionName(3,4)
+\end{lstlisting}
+which will output the number $19$.
+\end{example}
+
+
+\begin{example}
+    Write a function with three inputs that outputs the sum of the three.  The third input
+    should be optional and the default should be set to 5.
+\begin{lstlisting}
+function AwesomeOutput = SumOfThree(a,b,c)
+    if nargin < 3
+        c = 5;
+    end
+    AwesomeOutput = a+b+c;
+end
+\end{lstlisting}
+You can call this function with
+\begin{lstlisting}
+SumOfThree(17,23)
+\end{lstlisting}
+which will output $17+25+5 = 47$.  Notice that the third input was left off and a 5 was
+used in its place.
+\end{example}
 
 
 \section{Plotting}
+In numerical analysis we are typically plotting numerically computed lists of numbers so
+as such we will give a few examples of this type of plotting here.  We will not, however,
+give examples of symbolic plotting.
 
+The \mcode{plot} command in MATLAB accepts a list of $x$ values followed by a list of $y$
+values then followed by color and symbol options.\\
+\mcode{plot(xlist , ylist , color options)}
+
+\begin{example}
+    Plot the function $f(x) = \sin(x^2)$ on the interval $[0,2\pi]$ with 1000 equally
+    spaced points.  Make the plot color blue.
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+f = @(x) sin(x.^2);
+plot(x , f(x) , 'b')
+\end{lstlisting}
+Alternatively
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+y = sin(x.^2);
+plot(x, y, 'b')
+\end{lstlisting}
+\end{example}
+
+
+\begin{example}
+    Make a $2\times 2$ array of 4 plots of $f(x) = \sin(k x^2)$ for $k=1, 2, 3, 4$.
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+for k=1:4
+    subplot(2,2,k)
+    plot(x , sin(k*x.^2) , 'b')
+end
+\end{lstlisting}
+\end{example}
+
+
+\begin{example}
+    Plot $f(x) = \sin(kx^2)$ for $k=1, 2, \ldots, 10$ all on the same plot.
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+for k=1:10
+    plot(x, sin(k*x.^2))
+    hold on % this holds the figure window open so you can write on top of it
+end
+\end{lstlisting}
+\end{example}
+
+
+\begin{example}
+    Plot the function $f(x) = e^{-x} \sin(x)$ and put a mark at the local max at $x =
+    \pi/4$.
+\begin{lstlisting}
+x = linspace(0,2*pi,1000); % set up the domain
+f = @(x) exp(-x) .* sin(x);
+plot(x,f(x),'b',pi/4,f(pi/4),'ro')
+\end{lstlisting}
+\end{example}
 
 \section{Animations}
 
+\begin{example}
+    Plot $f(x) = \sin(kx^2)$ for $k=1$ to $k= 10$ by small increments with a short pause
+    in between each step. 
+\begin{lstlisting}
+x = linspace(0,2*pi,1000);
+for k=1:0.01:10 % 1 to 10 by 0.01
+    plot(x, sin(k*x.^2))
+    hold on % this holds the figure window open so you can write on top of it
+    drawnow % draws the plot
+    % the last line gives the illusion of animation
+end
+\end{lstlisting}
+\end{example}
 
-\section{Additional Resources}
 
 

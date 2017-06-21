@@ -83,10 +83,10 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 
 \begin{problem}
     Write code to implement Euler's method for initial value problems.  Your MATLAB
-    function should accept as input: $f(t,y)$, \texttt{tmin}, \texttt{tmax}, the number of
+    function should accept as input: $f(t,y)$, \mcode{tmin}, \mcode{tmax}, the number of
     grid points (the value of $h = \Delta t$ should be calculated within your code), and
     an intial condition.  The output should be vectors for $t$ and $y$.\\
-    \verb|function [t,y] = MyEuler1D(f,tmin,tmax,num_pts,IC)| \\
+    \mcode{function [t,y] = MyEuler1D(f,tmin,tmax,num_pts,IC)} \\
     Test your code on a first order differential equation where you know the answer and
     then test your code on the differential equation
     \[ y' = -\frac{1}{3}y+\sin(t) \quad \text{where} \quad y(0) = 1. \]
@@ -130,7 +130,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 
 \begin{problem}
     Write MATLAB code to implement the midpoint method\\
-    \verb|function [t,y]=MyMidpointMethod(f,tmin,tmax,num_pts,IC)| \\
+    \mcode{function [t,y]=MyMidpointMethod(f,tmin,tmax,num_pts,IC)} \\
 \end{problem}
 
 \begin{problem}
@@ -156,7 +156,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     \end{flalign*}
 
     Write a MATLAB function that implements the Runge-Kutta 4 method in one dimension.\\
-    \texttt{function [t,y]=MyRk4(f,tmin,tmax,num\_pts,IC)} \\
+    \mcode{function [t,y]=MyRk4(f,tmin,tmax,num\_pts,IC)} \\
     Test the problem on a known differential equation.
 \end{problem}
 
@@ -219,7 +219,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 \begin{problem}
     Write MATLAB code to implement the backward Euler's method for a 1D initial value
     problem. \\
-    \verb|function [t,y] = MyBackwardEuler(f, tmin, tmax, num_pts, IC)|
+    \mcode{function [t,y] = MyBackwardEuler(f, tmin, tmax, num_pts, IC)}
 \end{problem}
 
 
@@ -344,7 +344,8 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     \begin{flalign}
         \frac{P'(t)}{\|P'(t)\|} = \frac{E(t) - P(t)}{\| E(t) - P(t)\|}.
     \end{flalign}
-    Solving for $P'(t)$ and using \ref{eqn:pursuit_evasion_assumption3} the differential equation
+    Solving for $P'(t)$ and using \ref{eqn:pursuit_evasion_assumption3} the differential
+    equation that we need to solve becomes
     \begin{flalign}
         P'(t) = k \| E'(t) \| \frac{E(t) - P(t)}{\| E(t) - P(t)\|}.
     \end{flalign}
@@ -355,14 +356,14 @@ gives the exact solution at the tradeoff of needing infinite computational resou
             mathematically?
         \item[(c)] Write code to find the path of the pursuer if the evader has the
             parameterized path
-            \[ E(t) = \begin{pmatrix} 0 \\ 5t \end{pmatrix} \]
+            \[ E(t) = \begin{pmatrix} 0 \\ 5t \end{pmatrix} \quad \text{for} \quad t \ge 0 \]
             and the pursuer initially starts at the point $P(0) = \begin{pmatrix}
                 2\\3\end{pmatrix}$.  Write your code so that it stops when the pursuer is
             within 0.1 units of the evader.  Run your code for several values of $k$.
         \item[(d)] Modify your code from part (c) to find the path of the pursuer if the
             evader has the parameterized path 
             \[ E(t) = \begin{pmatrix} 5 + \cos(2\pi t) + 2\sin(4\pi t) \\ 4 + 3\cos(3 \pi
-                t) \end{pmatrix} \]
+                t) \end{pmatrix}  \quad \text{for} \quad t \ge 0 \]
             and the pursuer initially starts at the point $P(0) = \begin{pmatrix} 0 \\ 50
             \end{pmatrix}$.  Write your code so that it stops when the pursuer is
             within 0.1 units of the evader.  Run your code for several values of $k$.

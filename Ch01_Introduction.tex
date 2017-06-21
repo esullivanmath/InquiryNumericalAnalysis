@@ -121,7 +121,7 @@ We can do a similar thing with binary decimals.
 \end{problem}
 
 \begin{problem}
-    Use \texttt{=if( )} in Excel to create a spreadsheet that uses the process from the
+    Use \mcode{=if( )} in Excel to create a spreadsheet that uses the process from the
     previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
 \end{problem}
 
@@ -130,6 +130,7 @@ We can do a similar thing with binary decimals.
     that converts a base 10 decimal (less than 1) into a binary decimal.
 \end{problem}
 \solution{
+% \begin{lstlisting}
 x = 0.635\\
 b = []\\
 for n=1:20 \\ % first 20 binary digits
@@ -145,6 +146,7 @@ for n=1:20 \\ % first 20 binary digits
     end \\
 end \\
 b
+% \end{lstlisting}
 }
 
 \begin{problem}
@@ -592,10 +594,12 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
     {\bf Your Tasks:}
     \begin{enumerate}
         \item[(a)] Explain what the following two lines of MATLAB code do.
-\begin{verbatim}
+% \begin{verbatim}
+\begin{lstlisting}
 accounts = 100 + (100000-100) * rand(50000,1);
 accounts = floor(100*accounts)/100;
-\end{verbatim}
+\end{lstlisting}
+% \end{verbatim}
         \item[(b)] By hand (no computer) write the mathematical steps necessary to
             increase the accounts by (5/365)\% per day, truncate the accounts to the
             nearest penny, and add the truncated amount into an account titled

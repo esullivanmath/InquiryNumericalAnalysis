@@ -101,7 +101,7 @@ Value Theorem to systematically approximate solutions to the algebraic equation 
     anonymous function handle as an input along with an initial lower bound, an initial
     upper bound, and an optional error tolerance. The output should be only 1 single number: the
     root.\\
-    \texttt{function root=Bisection(f , a , b , tol)}
+    \mcode{function root=Bisection(f , a , b , tol)}
 \end{problem}
 
 \begin{problem}
@@ -229,7 +229,7 @@ function.  The next algorithm takes a slightly different approach.
     anonymous function handle as an input along with an initial lower bound, an initial
     upper bound, and an optional error tolerance. The output should be only 1 single number: the
     root.\\
-    \texttt{function root=RegulaFalsi(f , a , b , tol)}
+    \mcode{function root=RegulaFalsi(f , a , b , tol)}
 \end{problem}
 
 
@@ -295,7 +295,7 @@ and locating where those tangent lines intersect the horizontal axis.
     tolerance. The only output should be the solution to the equation that you are
     solving.  Write a test script to verify that your Newton's method code indeed works.
     \\
-    \texttt{function soln = Newton(f , df , x0 , tol)}
+    \mcode{function soln = Newton(f , df , x0 , tol)}
 \end{problem}
 
 
@@ -314,7 +314,7 @@ and locating where those tangent lines intersect the horizontal axis.
     simplicity let's solve the equation $x^2-2=0$.  Plot the sequence of error
     approximations with the iterate $e_k$ on the $x$-axis and the iterate $e_{k+1}$ on the
     $y$-axis of a log-log plot.  \\ Your plot command will look something like: \\
-    \texttt{loglog(error(1:end-1),error(2:end),'b*')} \\where \texttt{error} is a vector
+    \mcode{loglog(error(1:end-1),error(2:end),'b*')} \\where \mcode{error} is a vector
     containing all of the errors.  Quadratic convergence means that at every iteration the
     error should decrease by roughly 2 orders of magnitude.  How can you see this in your
     plot?

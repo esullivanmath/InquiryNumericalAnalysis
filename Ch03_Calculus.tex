@@ -126,7 +126,7 @@ have the following definition.
     bounds on the domain, and the number of interior points used for approximation within
     the domain.  Your function should output the $x$ values and $y$ values associated with
     the derivative.\\
-    \verb|function [new_x,dfdx] = FirstDerivFirstOrder(f, xmin, xmax, num_interior_pts)| 
+    \mcode{function [new_x,dfdx]=FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)} 
 \end{problem}
 
 The only two ways to really check a numerical derivative is to plot the numerical
@@ -134,8 +134,8 @@ approximation and to do the derivative by hand and to plot the error. Be warned,
 that the numerical derivative that we have built from Theorem
 \ref{thm:first_order_first_deriv} should have one less value than the
 original list of $x$ and $y$ values.  Think about why this must be true. Also double check
-your code from the previous problem and make sure that you can plot \verb|new_x| vs
-\verb|dfdx| without having to change their size.  
+your code from the previous problem and make sure that you can plot \mcode{new_x} vs
+\mcode{dfdx} without having to change their size.  
 
 \begin{problem}
     Write a MATLAB script that find a first order approximation for the first derivative
@@ -144,7 +144,7 @@ your code from the previous problem and make sure that you can plot \verb|new_x|
     \begin{enumerate}
         \item The left-hand plot should show the function in blue and the first derivative
             as a red dashed curve. Sample code for this problem is
-     \begin{verbatim}
+    \begin{lstlisting}
      f = @(x) sin(x) - x*sin(x);
      a=0; b=15;
      num_interior_pts = 1000; % this should be LARGE
@@ -152,14 +152,14 @@ your code from the previous problem and make sure that you can plot \verb|new_x|
      [new_x,dfdx] = FirstDerivFirstOrder(f,a,b,num_interior_pts);
      subplot(1,2,1)
      plot(x, f(x) , 'b' , new_x , dfdx , 'r--')
-            \end{verbatim}
+    \end{lstlisting}
         \item The right-hand plot should show the absolute error between the exact derivative and
             the numerical derivative.
-    \begin{verbatim}
-    df = @(x) ... % code for the exact derivative
+    \begin{lstlisting}
+    df = @(x) ... % write code for the exact derivative
     subplot(1,2,2)
     plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
-    \end{verbatim}
+    \end{lstlisting}
     \end{enumerate}
     Discuss how you can see the fact that this is a first order method.
 \end{problem}
@@ -233,7 +233,7 @@ your code from the previous problem and make sure that you can plot \verb|new_x|
     accept an anonymous function handle, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
-    \verb|function [new_x,dfdx] = FirstDerivSecondOrder(f, xmin, xmax, num_interior_pts)|
+    \mcode{function [new_x,dfdx]=FirstDerivSecondOrder(f,xmin,xmax,num_interior_pts)}
 \end{problem}
 
 
@@ -248,7 +248,7 @@ your code from the previous problem and make sure that you can plot \verb|new_x|
     accept an anonymous function handle, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
-    \verb|function [new_x,ddfdxx] = SecondDerivSecondOrder(f, xmin, xmax, num_interior_pts)|
+    \mcode{function [new_x,ddfdxx]=SecondDerivSecondOrder(f,xmin,xmax,num_interior_pts)}
 \end{problem}
 
 \begin{problem}
@@ -339,7 +339,7 @@ Clearly, the more rectangles we choose the closer the sum of the areas of the re
     should accept an anonymous function handle, a lower bound, an upper bound, the number
     of subintervals, and an optional input that allows the user to designate whether they
     want left, right, or midpoint rectangles. \\
-    \verb|function Area=MyRiemannSum(f, a, b, num_subintervals, type)| \\
+    \mcode{function Area=MyRiemannSum(f, a, b, num_subintervals, type)} \\
     Test your code on several functions for which you know the integral.
 \end{problem}
 
@@ -515,9 +515,9 @@ approximations for integrals and we leave the further research to the curious re
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a first order
     approximation of the first derivative of the
     underlying function. \\
-    \verb|function [new_x,dydx] = FirstDeriveFromData(ExcelFileName,Xrange,Yrange)| \\
+    \mcode{function [new_x,dydx] = FirstDeriveFromData(ExcelFileName,Xrange,Yrange)} \\
     In the function all of the inputs are strings.  For example \\
-    \verb|FirstDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')|\\
+    \mcode{FirstDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
     your MATLAB function is finding the correct derivative.
 \end{problem}
@@ -530,9 +530,9 @@ approximations for integrals and we leave the further research to the curious re
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a second order
     approximation of the second derivative of the
     underlying function. \\
-    \verb|function [new_x,dydx] = SecondDeriveFromData(ExcelFileName,Xrange,Yrange)| \\
+    \mcode{function [new_x,dydx] = SecondDeriveFromData(ExcelFileName,Xrange,Yrange)} \\
     In the function all of the inputs are strings.  For example \\
-    \verb|SecondDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')|\\
+    \mcode{SecondDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
     your MATLAB function is finding the correct derivative.
 \end{problem}
@@ -542,9 +542,9 @@ approximations for integrals and we leave the further research to the curious re
     Write a MATLAB function that implements the trapezoidal rule on a list of $(x,y)$
     order pairs representing the integrand function.  The list of ordered pairs should be
     read from an Excel file. \\
-    \verb|function Area = TrapezoidFromData(ExcelFilename, Xlist, Ylist)|\\
+    \mcode{function Area = TrapezoidFromData(ExcelFilename, Xlist, Ylist)}\\
     In the function all of the inputs are strings.  For example \\
-    \verb|Area = TrapezoidFromData('MyFunctionData.xlsx','A2:A101','B2:B101')|\\
+    \mcode{Area = TrapezoidFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script showing that your MATLAB function is
     finding the correct integral.
 \end{problem}
@@ -556,7 +556,7 @@ approximations for integrals and we leave the further research to the curious re
     necessary.  Create a loglog plot that shows the errors for the integrals with different values of $h$ (log
     of $h$ on the $x$-axis and log of the error on the $y$-axis).
     Write a complete interpretation of the loglog plot.  
-    To get the {\it exact} answer for these plots use the MATLAB \verb|quad| command.
+    To get the {\it exact} answer for these plots use the MATLAB \mcode{quad} command.
     (What we're really doing here is comparing our algorithms to MATLAB's algorithm).
 \end{problem}
 
