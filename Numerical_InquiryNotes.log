@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 JUN 2017 14:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  21 JUN 2017 07:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1900,7 +1900,7 @@ LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 20
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
 File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
 )
-<CreativeCommons.png, id=324, 88.33pt x 31.11626pt>
+<CreativeCommons.png, id=328, 88.33pt x 31.11626pt>
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 203.
@@ -1934,6 +1934,11 @@ l.217 \tableofcontents
                        [1] (./Numerical_InquiryNotes.toc [2
 
 ]
+Overfull \hbox (1.01994pt too wide) detected at line 71
+ []\OT1/jkp/m/n/12 100
+ []
+
+
 Overfull \hbox (1.01994pt too wide) detected at line 72
  []\OT1/jkp/m/n/12 100
  []
@@ -1944,27 +1949,27 @@ Package pdftex.def Info: CreativeCommons.png used on input line 73.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [3]
 Overfull \hbox (1.01994pt too wide) detected at line 73
- []\OT1/jkp/m/n/12 100
+ []\OT1/jkp/m/n/12 101
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 74
- []\OT1/jkp/m/n/12 100
+ []\OT1/jkp/m/n/12 101
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 75
- []\OT1/jkp/m/n/12 103
+ []\OT1/jkp/m/n/12 101
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 76
- []\OT1/jkp/m/n/12 103
+ []\OT1/jkp/m/n/12 104
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 77
- []\OT1/jkp/m/n/12 106
+ []\OT1/jkp/m/n/12 104
  []
 
 
@@ -1974,7 +1979,12 @@ Overfull \hbox (1.01994pt too wide) detected at line 78
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 79
- []\OT1/jkp/m/n/12 107
+ []\OT1/jkp/m/n/12 108
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 80
+ []\OT1/jkp/m/n/12 108
  []
 
 )
@@ -2837,6 +2847,11 @@ Appendix B.
 ) (./App03_LaTeX.tex [95
 
 ]
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 1.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [96]
 Appendix C.
 
 Overfull \hbox (2.8885pt too wide) in paragraph at lines 7--9
@@ -2847,7 +2862,7 @@ nd nec-es-sary to cross-reference
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 9.
-[96
+[97
 
 ]
 Overfull \hbox (17.53862pt too wide) in paragraph at lines 97--97
@@ -2859,7 +2874,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 104.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [97]
+ [98]
 Overfull \hbox (55.05554pt too wide) in paragraph at lines 104--116
 []\OT1/jkptt/m/n/12 (\ref{eqn:sample_equation}) \OT1/jkp/m/n/12 or, more sim-pl
 y, [] us-ing []\OT1/jkptt/m/n/12 \eqref{eqn:sample_equation}\OT1/jkp/m/n/12 .
@@ -2895,7 +2910,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 176.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [98]
+ [99]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 189.
@@ -2909,7 +2924,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 232.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [99]
+ [100]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 262.
@@ -2924,7 +2939,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=1321, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=1334, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -2935,7 +2950,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 295.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [100]
+ [101]
 Underfull \hbox (badness 10000) in paragraph at lines 303--304
 
  []
@@ -2955,7 +2970,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 319.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [101 <./SampleFigure-eps-converted-to.pdf>]
+ [102 <./SampleFigure-eps-converted-to.pdf>]
 Overfull \hbox (11.17863pt too wide) in paragraph at lines 332--332
  []\OT1/jkptt/m/n/12 \cc \hspace{1cm} \nn \hspace{1cm} \qq \hspace{1cm} \rr \hs
 pace{1cm} \zz[] 
@@ -2965,7 +2980,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 366.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [102]
+ [103]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 401.
@@ -2976,7 +2991,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 418.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [103]
+ [104]
 Overfull \hbox (19.14767pt too wide) in paragraph at lines 433--436
 []\OT1/jkp/m/n/12 For more ex-am-ples about the Tikz pack-age, see [][]http://w
 ww.texample.net/tikz/examples/[][]
@@ -2999,7 +3014,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 460.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [104]
+ [105]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -3013,27 +3028,27 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 520.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [105]
+ [106]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 558.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [106]
+ [107]
 Overfull \hbox (17.15642pt too wide) in paragraph at lines 564--567
 \OT1/jkp/m/n/12 If you're us-ing an em-bed-ded bib for a stand-alone pa-per the
 n just be-fore the []\OT1/jkptt/m/n/12 \end{document}
  []
 
 
-LaTeX Warning: Citation `lamport94' on page 107 undefined on input line 583.
+LaTeX Warning: Citation `lamport94' on page 108 undefined on input line 583.
 
 )
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 236.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [107] [108
+ [108] [109
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
@@ -3043,7 +3058,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
 Package rerunfilecheck Info: File `Numerical_InquiryNotes.out' has not changed.
 
-(rerunfilecheck)             Checksum: 399DAB611F605189AAEEA1B47085251C;5556.
+(rerunfilecheck)             Checksum: 49AEE5DFA9A6FE4A185F2D301FE03DA5;5592.
 
 
 LaTeX Warning: There were undefined references.
@@ -3051,10 +3066,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
  ) 
 Here is how much of TeX's memory you used:
- 39989 strings out of 493089
- 894675 string characters out of 6134842
- 1069924 words of memory out of 5000000
- 42202 multiletter control sequences out of 15000+600000
+ 39992 strings out of 493089
+ 894707 string characters out of 6134842
+ 1069925 words of memory out of 5000000
+ 42203 multiletter control sequences out of 15000+600000
  72202 words of font info for 179 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,20n,100p,10445b,2404s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3079,10 +3094,10 @@ pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msa
 m10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols
 /msbm10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/was
 y10.pfb>
-Output written on Numerical_InquiryNotes.pdf (109 pages, 476034 bytes).
+Output written on Numerical_InquiryNotes.pdf (110 pages, 477707 bytes).
 PDF statistics:
- 1584 PDF objects out of 1728 (max. 8388607)
- 1435 compressed objects within 15 object streams
- 600 named destinations out of 1000 (max. 500000)
- 659 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1598 PDF objects out of 1728 (max. 8388607)
+ 1448 compressed objects within 15 object streams
+ 602 named destinations out of 1000 (max. 500000)
+ 667 words of extra memory for PDF output out of 10000 (max. 10000000)
 

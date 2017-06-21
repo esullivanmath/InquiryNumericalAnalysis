@@ -54,26 +54,27 @@
 \contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{90}{subsection.A.4.4}
 \contentsline {section}{\numberline {A.5}Sensitivity Analysis}{92}{section.A.5}
 \contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{93}{section.A.6}
-\contentsline {chapter}{\numberline {B}Scientific Computing with MATLAB}{95}{appendix.B}
-\contentsline {section}{\numberline {B.1}Looping}{95}{section.B.1}
-\contentsline {subsection}{\numberline {B.1.1}The For Loop}{95}{subsection.B.1.1}
-\contentsline {subsection}{\numberline {B.1.2}The While Loop}{95}{subsection.B.1.2}
-\contentsline {section}{\numberline {B.2}Conditional Statements}{95}{section.B.2}
-\contentsline {subsection}{\numberline {B.2.1}If Statements}{95}{subsection.B.2.1}
-\contentsline {subsection}{\numberline {B.2.2}Case-Switch Statements}{95}{subsection.B.2.2}
-\contentsline {section}{\numberline {B.3}Functions}{95}{section.B.3}
-\contentsline {section}{\numberline {B.4}Plotting}{95}{section.B.4}
-\contentsline {section}{\numberline {B.5}Animations}{95}{section.B.5}
-\contentsline {section}{\numberline {B.6}Additional Resources}{95}{section.B.6}
-\contentsline {chapter}{\numberline {C}\LaTeX }{96}{appendix.C}
-\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{96}{section.C.1}
-\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{99}{section.C.2}
-\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{99}{subsection.C.2.1}
-\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{100}{subsection.C.2.2}
-\contentsline {subsection}{\numberline {C.2.3}Figures}{100}{subsection.C.2.3}
-\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{100}{subsection.C.2.4}
-\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{103}{section.C.3}
-\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{103}{subsection.C.3.1}
-\contentsline {section}{\numberline {C.4}Bibliography Management}{106}{section.C.4}
-\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{107}{subsection.C.4.1}
-\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{107}{subsection.C.4.2}
+\contentsline {chapter}{\numberline {B}MATLAB Basics}{95}{appendix.B}
+\contentsline {section}{\numberline {B.1}Vectors}{96}{section.B.1}
+\contentsline {section}{\numberline {B.2}Looping}{96}{section.B.2}
+\contentsline {subsection}{\numberline {B.2.1}The For Loop}{96}{subsection.B.2.1}
+\contentsline {subsection}{\numberline {B.2.2}The While Loop}{96}{subsection.B.2.2}
+\contentsline {section}{\numberline {B.3}Conditional Statements}{96}{section.B.3}
+\contentsline {subsection}{\numberline {B.3.1}If Statements}{96}{subsection.B.3.1}
+\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{96}{subsection.B.3.2}
+\contentsline {section}{\numberline {B.4}Functions}{96}{section.B.4}
+\contentsline {section}{\numberline {B.5}Plotting}{96}{section.B.5}
+\contentsline {section}{\numberline {B.6}Animations}{96}{section.B.6}
+\contentsline {section}{\numberline {B.7}Additional Resources}{96}{section.B.7}
+\contentsline {chapter}{\numberline {C}\LaTeX }{97}{appendix.C}
+\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{97}{section.C.1}
+\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{100}{section.C.2}
+\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{100}{subsection.C.2.1}
+\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{101}{subsection.C.2.2}
+\contentsline {subsection}{\numberline {C.2.3}Figures}{101}{subsection.C.2.3}
+\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{101}{subsection.C.2.4}
+\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{104}{section.C.3}
+\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{104}{subsection.C.3.1}
+\contentsline {section}{\numberline {C.4}Bibliography Management}{107}{section.C.4}
+\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{108}{subsection.C.4.1}
+\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{108}{subsection.C.4.2}
