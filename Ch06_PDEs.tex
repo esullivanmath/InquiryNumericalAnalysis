@@ -611,3 +611,24 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     Write code to solve this boundary valued problem and provide plots of your numerical
     solution for various values of $\varepsilon$. 
 \end{problem}
+
+
+\begin{problem}
+    Suppose that we have a concrete clab that is 10 meters in length, with the left
+    boundary held at a temperature of $75^\circ$ and the right boundary held at a
+    temperature of $90^\circ$.  Assume that the thermal diffusivity of concrete is about
+    $k = 10^{-5}$ m$^2$/s.  Assume that the initial temperature of the slab is given by
+    the function $T(x) = 75 + 1.5x - 20 \sin( \pi x / 10)$.  In this case, the temperature
+    can be analytically sollved by the function $T(x,t) = 75 + 1.5x - 20 \sin(\pi x / 10)
+    e^{-ct}$ for some value of $c$.  
+    \begin{enumerate}
+        \item[(a)] Working by hand (no computers!) test this function by substituting it
+            into the 1D heat equation and verifying that it is indeed a solution.  In
+            doing so you will be able to find the correct value of $c$.
+        \item[(b)] Write numerical code to solve this 1D heat equation.  The output of
+            your code should be an animation showing how the error between the numerical
+            solution and the analytic solution evolve in time.
+    \end{enumerate}
+\end{problem}
+
+

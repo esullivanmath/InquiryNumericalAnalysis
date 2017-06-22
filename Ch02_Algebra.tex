@@ -492,6 +492,18 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 
 \begin{problem}
+    In Single Variable Calculus you studied methods for finding local and global extrema
+    of functions. You likely recall that part of the process is to set the first
+    derivative to zero and to solve for the independent variable (remind yourself why
+    you're doing this).  The trouble with this process is that it may be very very
+    challenging to do the algebraic solve by hand.  This is a perfect place for Newton's
+    method! \\
+    Find the local extrema for the function $f(x) = x^3(x-3)(x-6)^4$ and explicitly
+    demonstrate, without the use of a plot, that you have found all of the local extrema.
+\end{problem}
+
+
+\begin{problem}
     The Newton's method that we derived in this chapter is only applicable to functions
     $f: \mathbb{R} \to \mathbb{R}$ (functions mapping a real number to a real number).
     What about vector-valued functions?  In particular, we would like to have an analogous
@@ -522,5 +534,12 @@ approximation is called a {\bf Quasi-Newton Method}.
             \end{flalign*}
             Note here that $f_1(x,y) = 1+x^2 - y^2 + e^x\cos(y)$ and $f_2(x,y) = 2xy + e^x
             \sin(y)$.
+        \item[(c)] Use Newton's method to find an approximate solution to the system of
+            equations
+            \begin{flalign*}
+                x^2 + y^2 + z^2 &= 100 \\
+                xyz &= 1 \\
+                x - y - \sin(z) &= 0
+            \end{flalign*}
     \end{enumerate}
 \end{problem}

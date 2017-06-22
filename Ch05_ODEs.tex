@@ -549,12 +549,23 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 \begin{problem}
     Test the Euler, Midpoint, and Runge Kutta methods on the differential
     equation
-    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} y(0) = 1.5. \]
+    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} \quad y(0) = 1.5. \]
     Find the exact solution by hand using the method of undetermined coefficients and note
     that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
     for the error between your numerical solution and the exact solution for $\lambda =
     -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
     create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
     that value of $\lambda$ at different values for $\Delta t$.
+\end{problem}
+
+
+\begin{problem}
+    A trebuchet catapult throws a cow vertically into the air.  The differential equation
+    describing its acceleration is
+    \[ \frac{d^2y}{dt^2} = -g - c \frac{dy}{dt} \left| \frac{dy}{dt} \right| \]
+    where $g \approx 9.8$ m/s$^2$ and $c \approx 0.02$ m$^{-1}$ for a typical cow.  If the
+    cow is launced at an initial upward velocity of 30 m/s, how high will it go, and when
+    will it crach back into the ground? Hint: Change this second order differential
+    equation into a system of first order differential equations.
 \end{problem}
 

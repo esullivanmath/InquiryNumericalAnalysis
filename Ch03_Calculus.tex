@@ -550,6 +550,29 @@ approximations for integrals and we leave the further research to the curious re
 \end{problem}
 
 \begin{problem}
+    Use numerical integration to answre the question in each of the following scenarios
+    \begin{enumerate}
+        \item[(a)] We measure the rate at which water is flowing out of a reservoir (in
+            gallons per second) several times over the course of one hour.  Estimate the
+            total amount of water which left the reservoir during that hour.
+            \begin{center}
+                \begin{tabular}{|l||c|c|c|c|c|c|c|}
+                    \hline
+                    time (min) & 0 & 7 & 19 & 25 & 38 & 47 & 55 \\ \hline
+                    flow rate (gal/sec) & 316 & 309 & 296 & 298 & 305 & 314 & 322 \\ \hline
+                \end{tabular}
+            \end{center}
+        \item[(b)] The department of transportation finds that the rate at which cars
+            cross a bridge can be approximated by the fucntion
+            \[ f(t) = \frac{22.8 \text{cars/min}}{3.5 + 7(t-1.25)^4}, \]
+            where $t=0$ at 4pm, and is measured in hours.  Estimate the total number of
+            cars that cross the bridge betwee 4 and 6pm.  Make sure that your estimate has
+            an error less than 5\%.
+    \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
     Consider the integrals 
     \[ \int_{-2}^2 e^{-x^2/2} dx \quad \text{and} \quad \int_0^1 \cos(x^2) dx. \]
     Neither of these integrals have closed-form solutions so a numerical method is
@@ -594,6 +617,8 @@ approximations for integrals and we leave the further research to the curious re
 %     find a data set that shows a trend in time.
 % \end{problem}
 
+
+
 \begin{problem}
     Go to the USGS water data repository: \\
     \href{https://maps.waterdata.usgs.gov/mapper/index.html}{https://maps.waterdata.usgs.gov/mapper/index.html}.\\
@@ -615,4 +640,22 @@ approximations for integrals and we leave the further research to the curious re
     has been discharged from the dam during the past calendar year, and (3) report any
     margin of error in your calculation based on the numerical method that you used in
     part (2).
+\end{problem}
+
+
+\begin{problem}
+    Integrate each of the functions over the interval $[-1,2]$ and verify mathematically
+    that your numerical integral is correct to 10 decimal places.  Then provide a plot of
+    the function along with its numerical first derivative.
+    \begin{enumerate}
+        \item[(a)] $\ds f(x) = \frac{x}{1+x^4}$
+        \item[(b)] $\ds g(x) = (x_1)^3 (x-2)^2$
+        \item[(c)] $\ds h(x) = \sin\left(x^2\right)$
+    \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+    Although Simpson’s rule was derived from parabolas, prove that it integrates all cubic
+    polynomials exactly.
 \end{problem}

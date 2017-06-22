@@ -337,7 +337,7 @@ MyError = norm(x-MATLABExactAnswer)
 \end{problem}
 
 \section{The Least Squares Problems}
-\begin{problem}
+\begin{problem}\label{prob:least_squares_1}
     Download the Excel data set from Moodle.  We're going to develop a way to match the
     data sets using linear algebra.  Before doing the linear algebra versions of this
     problem though we'll use Excel to match the data sets.  Our goal is to make a guess at
@@ -362,6 +362,68 @@ MyError = norm(x-MATLABExactAnswer)
 \end{problem}
 
 
+
+
+At this point we need to discuss the quality of the fits that we are building.  You are
+likely familiar with the $R$ and $R^2$ values from statistics, but let's just recap here.  
+\begin{definition}[Correlation Coefficient, $R$]
+    The {\bf correlation coefficient}, $R$, is a measure of the quality of a linear fit.
+    \begin{itemize}
+        \item If $R = +1$ then the data represent a perfect linear fit with a positive slope. 
+        \item If $R = -1$ then the data represent a perfect linear fit with a negative
+            slope.  
+        \item If $R = 0$ then there is no linear relationship between the two variables.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Coefficient of Determination, $R^2$]
+    The {\bf coefficient of determination}, $R^2$, is the proportion of variance in the
+    dependent ($y$) variable that is explained by the independent ($x$) variable.  
+    \begin{itemize}
+        \item If $R^2 = 1$ then 100\% of the variance in $y$ is explained by $x$ and the
+            fit is perfect. 
+        \item If $R^2 = 0$ then 0\% of the variance in $y$ is explain by $x$ and there is
+            no correlation between the two variables.
+    \end{itemize}
+\end{definition}
+
+In the problems that we've studied thus far we have calculated the sum of the squares of
+the residuals as a measure of how well our function fits the data.  The trouble with the
+sum of the squares of the residuals is that it is context dependent.  Hence, there is no
+way to tell at the outset what a {\it good} sum of squares of residuals is.  
+
+\begin{thm}
+    To calculate the $R^2$ value we can use the following equations where $y_j$ is the
+    $j^{th}$ data point, $\bar{y}$ is the mean $y$-value in the data, and $f_j$ is the
+    $j^{th}$ predicted output from our model.
+    \begin{flalign}
+        \text{Total Sum of Squares: } & TSS = \sum_j \left( y_j - \bar{y} \right)^2
+        \label{eqn:TSS} \\
+        \text{Residual Sum of Squares: } & RSS = \sum_j \left( y_j - f_j \right)^2 
+        \label{eqn:RSS} \\
+        \text{Coeff. of Determination: } & R^2 = 1 - \frac{RSS}{TSS} \label{eqn:Rsquared}
+    \end{flalign}
+\end{thm}
+
+\begin{problem}
+    Compute the $R^2$ value for each of the data sets from Problem
+    \ref{prob:least_squares_1}.
+\end{problem}
+
+\begin{problem}
+    Use equation \eqref{eqn:Rsquared} to explain why $R^2=1$ implies a perfect fit.
+\end{problem}
+\solution{
+    If $R^2 = 1$ then $RSS = 0$ and this implies that there are no residuals.  Hence we
+    have made no errors with our model.
+}
+
+There are MANY statistics packages out there that will do least squares regression for us.
+MATLAB has the \texttt{polyfit} command, R has the \texttt{lm} command, and Excel has the
+data analysis toolpack.  Behind the scenes in all of these is actually linear algebra.  It
+is informative pedagogically to do the least squares problems using Excel a few times (as
+we did in Problem \ref{prob:least_squares_1}), but in reality there is some beautifully
+simple linear algebra behind the scenes.
 
 \begin{problem}
     Now we'll use Linear Algebra to complete the same types of problems.  Set up a
@@ -1119,10 +1181,26 @@ answer.
 
 
 
-\section{Principal Component Analysis (Incomplete)}
+% \section{Principal Component Analysis (Incomplete)}
 
 
 \section{Exercises}
+
+\begin{problem}
+    Write code to solve the following systems of equations via both LU and QR
+    decompositions.
+    \begin{enumerate}
+        \item[(a)] 
+            \[ \begin{array}{rl} x + 2y + 3z &= 4 \\ 2x + 4y + 3z &= 5 \\ x + y &= 4
+                \end{array} \]
+        \item[(b)] 
+            \[ \begin{array}{rl} 2y + 3z &= 4 \\ 2x + 3z &= 5 \\ y &= 4
+                \end{array} \]
+        \item[(b)] 
+            \[ \begin{array}{rl} 2y + 3z &= 4 \\ 2x + 4y + 3z &= 5 \\ x+y &= 4
+                \end{array} \]
+    \end{enumerate}
+\end{problem}
 
 
 \begin{problem}
