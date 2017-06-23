@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 JUN 2017 16:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  23 JUN 2017 08:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3365,7 +3365,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=1691, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=1692, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3492,8 +3492,8 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 251.
  ) 
 Here is how much of TeX's memory you used:
- 42330 strings out of 493089
- 928803 string characters out of 6134842
+ 42331 strings out of 493089
+ 928815 string characters out of 6134842
  1125000 words of memory out of 5000000
  44193 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
@@ -3523,10 +3523,10 @@ sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (123 pages, 575090 bytes).
+Output written on Numerical_InquiryNotes.pdf (123 pages, 575297 bytes).
 PDF statistics:
- 2026 PDF objects out of 2073 (max. 8388607)
- 1844 compressed objects within 19 object streams
- 898 named destinations out of 1000 (max. 500000)
+ 2027 PDF objects out of 2073 (max. 8388607)
+ 1845 compressed objects within 19 object streams
+ 899 named destinations out of 1000 (max. 500000)
  656 words of extra memory for PDF output out of 10000 (max. 10000000)
 
