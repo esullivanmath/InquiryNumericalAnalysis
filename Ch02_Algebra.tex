@@ -1,5 +1,5 @@
 \chapter{Numerical Algebra -- Approximating Roots}
-In this chapter we want to solve equations using a computer.  Consider the equation
+In this chapter we want to solve algebraic equations using a computer.  Consider the equation
 $\ell(x) = r(x)$ (where $\ell$ and $r$ stand for left and right respectively).  To solve
 this equation we can first rewrite it by subtracting the right-hand side from the left to
 get
@@ -27,7 +27,7 @@ and observe that every algebraic equation can be written as
             \begin{axis}[axis lines=center, grid, xmin=0, xmax=2, ymin=-5, ymax=15, legend
                 pos=north west]
                 \addplot[blue!50!black, dotted, smooth, very thick] {sin(deg(x)) + 9 - x^2 + tan(deg(x))};
-                \addlegendentry{$f(x) = \sin(x) + 9 - x^2+\tan(x)$};
+                \addlegendentry{$f(x) = \left(\sin(x) + 9\right) - \left( x^2-\tan(x)\right)$};
                 \draw[thick, blue] (axis cs:1.55,0) circle(0.1cm);
                 \draw[thick, blue] (axis cs:1.885,0) circle(0.1cm);
             \end{axis}
@@ -40,7 +40,7 @@ and observe that every algebraic equation can be written as
 \end{figure}
 
 We now have one way to view every algebraic equation-solving problem.  As we'll see in
-this chapter, if $f(x)$ has certain properties then different numberical techniques for
+this chapter, if $f(x)$ has certain properties then different numerical techniques for
 solving the equation will apply.
 
 \section{The Bisection Method}
@@ -416,7 +416,7 @@ approximation is called a {\bf Quasi-Newton Method}.
 \end{problem}
 \hint{
 % Source: Project Euler Prolem \#6:
-    (big hint) the answer is 25164150.  
+    (big hint) the answer is 25164150. Of course you'll have to write code to get this. 
 }
 
 \begin{problem}
@@ -426,7 +426,7 @@ approximation is called a {\bf Quasi-Newton Method}.
 \end{problem}
 \hint{
 % Source: Project Euler Problem \#3: 
-(big hint) the answer is 6857. }
+(big hint) the answer is 6857.  Of course you'll have to write code to get this.}
 
 \begin{problem}
     Compare the number of iterations necessary for convergence to within $10^{-8}$ for
@@ -506,6 +506,11 @@ approximation is called a {\bf Quasi-Newton Method}.
     Find the local extrema for the function $f(x) = x^3(x-3)(x-6)^4$ and explicitly
     demonstrate, without the use of a plot, that you have found all of the local extrema.
 \end{problem}
+\hint{
+    Recall that if the derivative of a single variable function is zero then the function
+    has a possible local extrema.  In this problem it is likely best to find the first and
+    second derivatives on paper before writing any code.
+}
 
 
 \begin{problem}
@@ -527,8 +532,9 @@ approximation is called a {\bf Quasi-Newton Method}.
          \partial f_n / \partial x_1(\bx) & \partial f_n / \partial x_2(\bx) & \cdots & \partial f_n /
      \partial x_n(\bx) \end{pmatrix} \]
     By analogy, the multi-dimensional Newton's method is
-    \[ \bx_{n+1} = \bx_n - F(\bx_n) J^{-1}(\bx_n) \]
-    where $J^{-1}$ is the inverse of the Jacobian matrix.
+    \[ \bx_{n+1} = \bx_n -  J^{-1}(\bx_n)F(\bx_n) \]
+    where $J^{-1}(\bx_n)$ is the inverse of the Jacobian matrix evaluated at the point
+    $\bx_n$.
     \begin{enumerate}
         \item[(a)] Write MATLAB code that accepts any number of functions and an initial
             vector guess and returns an approximation to the root for the problem $F(\bx) = \bo$.
@@ -548,3 +554,10 @@ approximation is called a {\bf Quasi-Newton Method}.
             \end{flalign*}
     \end{enumerate}
 \end{problem}
+\hint{
+    If you want to evaluate the matrix-vector multiplication $J^{-1}(\bx_n) F(\bx_n)$ then
+    you are really looking for the solution $\bu$ to the system of equations $J(\bx_n) \bu =
+    F(\bx_n)$ and you can use MATLAB's backslash command to get it quickly. 
+
+    For part (c) be sure to first make the right-hand side zero.
+}

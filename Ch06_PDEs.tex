@@ -560,6 +560,10 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     \end{enumerate}
 
 \end{problem}
+\hint{
+    Since you are solving the head equation you should be using centered finite
+    differences.
+}
 
 
 \begin{problem}
@@ -570,7 +574,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     but there is more to the story.  
     
     Hunters harvest $h$\% of the population per year so we can append the differential
-    equation with the harvesting term $-h u$ to arrive at the ordinary differential
+    equation with the harvesting term ``$-h u$'' to arrive at the ordinary differential
     equation 
     \[ \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right) - hu. \]
 
@@ -602,6 +606,10 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
             term.
     \end{enumerate}
 \end{problem}
+\hint{
+    Maybe the simplest initial condition for the PDE in part (b) is to use a Gaussian {\it
+    bump} that puts the majority of the initial population near the center of the domain.
+}
 
 
 \begin{problem}
@@ -614,7 +622,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 
 
 \begin{problem}
-    Suppose that we have a concrete clab that is 10 meters in length, with the left
+    Suppose that we have a concrete slab that is 10 meters in length, with the left
     boundary held at a temperature of $75^\circ$ and the right boundary held at a
     temperature of $90^\circ$.  Assume that the thermal diffusivity of concrete is about
     $k = 10^{-5}$ m$^2$/s.  Assume that the initial temperature of the slab is given by

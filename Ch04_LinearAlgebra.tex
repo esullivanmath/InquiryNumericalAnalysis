@@ -1179,6 +1179,24 @@ answer.
 \end{figure}
 
 
+\begin{problem}
+    One thing that we didn't consider in this version of the Google Page Rank algorithm is
+    the random behavior of humans.  One, admittedly slightly naive, modification that we
+    can make to the present algorithm is to assume that the person surfing the web will
+    randomly jump to any other page in the web at any time.  For example, if someone is on
+    page 1 in Figure \ref{fig:graph2} then they could randomly jump to any page 2 - 8.
+    They also have links to pages 2, 3, and 7.  That is a total of 10 possible next steps
+    for the web surfer.  There is a $2/10$ chance of heading to page 2.  One of those is
+    following the link from page 1 to page 2 and the other is a random jump to page 2
+    without following the link.  Similarly, there is a $2/10$ chance of
+    heading to page 3, $2/10$ chance of heading to page 7, and a $1/10$ chance of randomly
+    heading to any other page.
+
+    Implement this new algorithm, called the {\it random surfer algorithm}, on the web in
+    Figure \ref{fig:graph2}.  Compare your ranking to the non-random surfer results from
+    the previous problem.
+\end{problem}
+
 
 
 % \section{Principal Component Analysis (Incomplete)}
@@ -1201,6 +1219,16 @@ answer.
                 \end{array} \]
     \end{enumerate}
 \end{problem}
+\hint{
+    Remember that if $A \bx = \bb$ and $A$ is square then we first factor $A = LU$ and the
+    system becomes $LU \bx = \bb$.  Defining $\by = U \bx$ we solve $L \by = \bb$ with a
+    lower triangular solve and then
+    solve $U \bx = \by$ with an upper triangular solve.
+
+    If we use the QR factorization then $A = QR$ and the system becomes $QR\bx = \bb$.
+    Recalling that $Q$ is an orthonormal matrix we only need to solve $R \bx = Q^T \bb$
+    with an upper triangular solve.
+}
 
 
 \begin{problem}
@@ -1239,7 +1267,7 @@ answer.
     {\bf Your Tasks:}
     \begin{enumerate}
         \item[(a)] Start by going to
-            \href{http://www.cs.nyu.edu/~roweis/data.html}{www.cs.nyu.edu/~roweis/data.html}
+            \href{http://www.cs.nyu.edu/~roweis/data.html}{www.cs.nyu.edu/$\sim$roweis/data.html}
             to download the data set.  Download the file titled \mcode{mnist_all.mat}.
             This file is a MATLAB file that needs to be read into your working session of
             MATLAB.  
@@ -1318,6 +1346,10 @@ axis square tight off
         \end{pmatrix} \quad \text{and} \quad \bb = \begin{pmatrix} 5 \\ 2 \\ -2 \\
         8\end{pmatrix}. \]
 \end{problem}
+\hint{
+    This is a rectangular system so be careful with your implementation of algorithms.
+    You can't do an LU factorization directly on $A$.
+}
 
 \begin{problem}
     Find the largest eigenvalue of the matrix $A$ WITHOUT using the built in
@@ -1325,6 +1357,9 @@ axis square tight off
     \[ A = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 9 & 0 & 1 & 2 \\ 3 & 4 & 5 &
         6 \end{pmatrix} \]
 \end{problem}
+\hint{
+    You should be using the power method.
+}
 
 
 \begin{problem}
@@ -1411,12 +1446,17 @@ axis square tight off
     \underline{symmetric} matrix $A$ and compare against MATLAB's \mcode{eig} command.
     Your code needs to work on symmetric matrices of arbitrary size and you need to write
     test code that clearly shows the error between your calculated eigenvalue and MATLAB's
-    eigenvalue as well as your calculated eigenvector and MATLAB's eigenvector.\\ Hint: To
+    eigenvalue as well as your calculated eigenvector and MATLAB's eigenvector.\\ To
     guarantee that you start with a symmetric matrix you can use the following code.
 \begin{lstlisting}
 N = 40; % size of the matrix ... make this large-ish
 A = rand(N,N);
-A = A'*A; % this will be symmetric.
+A = A'*A; % this will be a random symmetric NxN matrix.
 \end{lstlisting}
 \end{problem}
-
+\hint{
+    Technically speaking you don't have to orthogonalize at every step so if you want to
+    make your code more efficient you can orthogonalize every $k^{th}$ step (for your
+    choice of $k$).  It would be cool to check what this does to the efficiency of your
+    algorithm.
+}
