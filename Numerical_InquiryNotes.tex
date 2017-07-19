@@ -1,6 +1,6 @@
 \documentclass[12pt,oneside]{book}
 
-\def\ShowSoln{0}
+\def\ShowSoln{1}
 
 
 \usepackage[toc,page]{appendix}
@@ -167,6 +167,7 @@ axis/.style={thick, draw=black!65, stealth-stealth}
 
 
 \newcommand{\solution}[1]{\ifnum\ShowSoln=1 {\color{red} {\bf Solution:} #1}\fi}
+\newcommand{\hint}[1]{\ifnum\ShowSoln=1 {\color{blue} {\bf Hint:} #1}\fi}
 \newcommand{\teacher}[1]{\ifnum\ShowSoln=1 {\color{blue} {\bf Teacher Note:} #1}\fi}
 
 \usetikzlibrary{shapes.geometric, arrows}

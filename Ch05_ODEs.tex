@@ -370,6 +370,11 @@ gives the exact solution at the tradeoff of needing infinite computational resou
         \item[(e)] Create your own smooth path for the evader that is {\it challenging}
             for the pursuer to catch.  Write your code so that it stops when the pursuer
             is within 0.1 units of the evader.  Run your code for several values of $k$.
+        \item[(f)] (Challenge) If you extend this problem to three spatial dimensions you
+            can have the pursuer and the evader moving on a multivariable surface (i.e.
+            hilly terrain).  Implement a path along an appropriate surface but be sure
+            that the velocities of both parties are appropriately related to the gradient
+            of the surface.
     \end{enumerate}
     Note: It may be easiest to build this code from scratch instead of using one of our
     pre-written codes.
@@ -407,6 +412,10 @@ gives the exact solution at the tradeoff of needing infinite computational resou
             are introduced.
     \end{enumerate}
 \end{problem}
+\hint{
+    A simple harvesting term could remove whales at a rate proportional to the number of
+    whales present.
+}
 % \solution{ Modified from https://www.simiode.org/resources/1502}
 
 \begin{problem}
@@ -420,24 +429,13 @@ gives the exact solution at the tradeoff of needing infinite computational resou
      drones flight path? Does it get the package to your home? What happens if the speeds
      are different? What if the initial distance is different? How much time does the
      drone's battery have to last to get home? \\
-     Hint: You should model this with a system of first order nonlinear differential
-     equations in the spatial positions $x$ and $y$.
 \end{problem}
+\hint{
+    You should model this with a system of first order nonlinear differential
+    equations in the spatial positions $x$ and $y$.
+}
 % \solution{ modified from https://www.simiode.org/resources/3482}
 
-% \begin{problem}
-%     All sorts of animals exhibit flocking behavior.  We can model this with an {\it agent
-%     based} model.  In agent based models, each agent (e.g. bird, bat, insect, etc) is
-%     governed by a differential equation resulting in a system of differential equations
-%     with the number of equations governed by the number of individuals.  It is not
-%     uncommon for agent-based models to have tens of thousands of individuals!
-% 
-%     For a flock of birds we propose the following agent based model.
-%     \begin{flalign*}
-%         \frac{ds_i}{dt} &= v_i \text{ (position of agent $i$)} \\
-%         \frac{dv_i}{dt} &= a_i \text{ (velocity of agent $i$)}\\
-%     \end{flalign*}
-% \end{problem}
 
 
 
@@ -476,19 +474,19 @@ gives the exact solution at the tradeoff of needing infinite computational resou
             different initial conditions.
     \end{enumerate}
 \end{problem}
-% \solution{
-%     \begin{center}
-%         \begin{tikzpicture}
-%             \begin{axis}[axis lines=center, grid, xmin=0, xmax=2000, ymin=-3, ymax=3,
-%                 domain=300:2000]
-%                 \addplot[smooth, very thick, blue, samples=100] {20*exp(-600/(x-300)) - 0.01*(x-300)};
-%             \end{axis}
-%         \end{tikzpicture}
-%     \end{center}
+\hint{
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=0, xmax=2000, ymin=-3, ymax=3,
+                domain=300:2000, xlabel={$T$}, ylabel={$T'$}]
+                \addplot[smooth, very thick, blue, samples=100] {20*exp(-600/(x-300)) - 0.01*(x-300)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
 %     The fixed points are $T_1 = 300^\circ K$, $T_2 \approx 636.8^\circ K$, and $T_3
 %     \approx 1526^\circ K$.  $T_1$ is stable from the right, $T_2$ is unstable (above which
 %     a combustion occurs), and $T_3$ is stable (stable combustion).
-% }
+}
 % 
 
 \begin{problem}[HIV Problem]
@@ -544,6 +542,9 @@ gives the exact solution at the tradeoff of needing infinite computational resou
         \end{tabular}
     \end{center}
 \end{problem}
+\hint{
+    This is a nonlinear system so use a robust solver.
+}
 
 
 \begin{problem}
@@ -557,6 +558,9 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
     that value of $\lambda$ at different values for $\Delta t$.
 \end{problem}
+\hint{
+    Let the maximum time be small and take a large number of time steps.
+}
 
 
 \begin{problem}
@@ -564,10 +568,15 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     describing its acceleration is
     \[ \frac{d^2y}{dt^2} = -g - c \frac{dy}{dt} \left| \frac{dy}{dt} \right| \]
     where $g \approx 9.8$ m/s$^2$ and $c \approx 0.02$ m$^{-1}$ for a typical cow.  If the
-    cow is launced at an initial upward velocity of 30 m/s, how high will it go, and when
-    will it crach back into the ground? Hint: Change this second order differential
+    cow is launched at an initial upward velocity of 30 m/s, how high will it go, and when
+    will it crash back into the ground? Hint: Change this second order differential
     equation into a system of first order differential equations.
 \end{problem}
+\hint{
+    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
+    equations.  You will need a robust solver to deal with the nonlinearity in a
+    reasonably accurate way (Euler is a bad choice).
+}
 
 
 \begin{problem}
@@ -575,3 +584,83 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     \[ y'' = \cos(t) y' + \sin(t) y \quad \text{with} \quad y(0) = 0 \quad \text{and}
         \quad y(1) = 1. \]
 \end{problem}
+\hint{
+    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
+    equations.
+}
+
+
+\begin{problem}[Classical SIR Model]
+    When a virus is introduced into a small homogeneously mixed population the people in
+    the population can be split into three categories: susceptible to the virus ($S$),
+    infected with the virus ($I$), and recovered from the virus ($R$).  Assume the
+    following:
+    \begin{itemize}
+        \item a susceptible person becomes infected at a rate proportional to the product
+            of the number of susceptible people and the number of infected people,
+        \item the recovery rate is constant,
+        \item the recovered people are immune to re-infection,
+        \item the virus is not fatal so the total population stays fixed.
+    \end{itemize}
+    For this problem we will assume that there are $N=1000$ people in the population with
+    $I(0) = 1$ person initially infected.
+    Your Tasks:
+    \begin{enumerate}
+        \item[(a)] Write a differential equation for the susceptible population assuming
+            that the infection rate is proportional to the product of the sizes of the
+            susceptible and infected populations
+            \[ \frac{dS}{dt} = \underline{\hspace{1in}}. \]
+            (let the proportionality constant be $\alpha$)
+        \item[(b)] Write a differential equation for the infected population knowing that
+            susceptible people are becoming infected and that infected people are
+            recovering at a constant rate
+            \[ \frac{dI}{dt} = \underline{\hspace{1in}}. \]
+            (let the proportionality constant be $\beta$)
+        \item[(c)] Since the total population is fixed in size and only contains the three
+            categories we know that $S+I+R = N$ and $\frac{dN}{dt} = 0$.  Hence, the
+            differential equations that you wrote in parts (a) and (b) are sufficient for
+            modeling the three populations.  Write numerical code that generates a plot of
+            the three populations over time.  Fully explore the parameters $\alpha$ and
+            $\beta$ and provide several plots that show the different dynamics of the
+            problem.
+    \end{enumerate}
+\end{problem}
+\hint{
+    \begin{flalign*}
+        \frac{dS}{dt} &= -\alpha SI \\
+        \frac{dI}{dt} &= \alpha SI - \beta I
+    \end{flalign*}
+    You can then use the fact that $S+I+R=N$ to get $R = N-S-I$.
+}
+
+\begin{problem}[H1N1 Problem]
+    The H1N1 virus, also known as the ``bird flu'', is a particularly virulent bug but
+    thankfully is also very predicable.  Once a person is infected they are infectious for
+    9 days.  Assume that a closed population of $N = 1500$ people (like a small college
+    campus) starts with exactly 1 infected person and hence the remainder of the
+    population is considered susceptible to the virus.  Furthermore, once a person is
+    recovered they have an immunity that typically lasts longer than the outbreak.
+    Mathematically we can model an H1N1 outbreak of this kind using 11 compartments:
+    susceptible people ($S$), 9 groups of infected people ($I_j$ for $j=1, 2, \cdots, 9$),
+    and recovered people ($R$). Write and numerically solve a system of 11 differential equations modeling the
+    H1N1 outbreak assuming that susceptible people become infected at a rate proportional
+    to the product of the number of susceptible people and the total number of infected
+    people. You may assume that the initial infected person is on the first day of their
+    infection and determine and unknown parameters using the fact that 1 week after the
+    infection starts there are 10 total people infected. 
+\end{problem}
+\hint{
+    The system of equations is
+    \begin{flalign*}
+        \frac{dS}{dt} &= -\alpha S \left( I_1 + I_2 + I_3 + I_4 + I_5 + I_6 + I_7 + I_8 + I_9
+        \right) \\
+        \frac{dI_1}{dt} &= \alpha S \left( I_1 + I_2 + I_3 + I_4 + I_5 + I_6 + I_7 + I_8 + I_9
+        \right) \\
+        \frac{dI_2}{dt} &= I_1 \\
+        \frac{dI_3}{dt} &= I_2 \\
+        \frac{dI_4}{dt} &= I_3 \\
+        \vdots & \\
+        \frac{dR}{dt} &= I_9.
+    \end{flalign*}
+}
+

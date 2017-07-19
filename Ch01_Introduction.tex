@@ -559,6 +559,10 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
 % %     Source: Project Euler Problem \#1: 
 % %     Answer: 233,168
 % }
+\hint{
+    Be sure to treat numbers like $15$ carefully.  To find the sum you should have a
+    variable in your code that accumulates the running total. 
+}
 
 
 \begin{problem}
@@ -574,6 +578,11 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
 % %     Source: Project Euler Problem \#2: 
 % %     Answer: 4,613,732
 % }
+\hint{
+    You probably don't need to store all of the Fibonacci numbers as you go, just the
+    current one and the two previous.  To find the sum you should have a
+    variable in your code that accumulates the running total.
+}
 
 \begin{problem}
     In the 1999 movie {\it Office Space}, a character creates a program that takes
@@ -612,6 +621,9 @@ accounts = floor(100*accounts)/100;
     \end{enumerate}
 \end{problem}
 % Modified from Chartier and Greenbaum, Chapter 5 Problem 14
+\hint{
+    Be sure that the illegal account is earning interest.
+}
 
 
 \begin{problem}
@@ -657,14 +669,19 @@ accounts = floor(100*accounts)/100;
         \item[(a)] Write the Taylor series for the functions $e^x$, $\sin(x)$, and
             $\cos(x)$.
         \item[(b)] Replace $x$ with $i\theta$ in the Taylor expansion of $e^x$.  Recall
-            that $i = \sqrt{-1}$ so $i^2 = -1$, $i^3 = -i$, and $i^4 = 1$.  Simpplify all
+            that $i = \sqrt{-1}$ so $i^2 = -1$, $i^3 = -i$, and $i^4 = 1$.  Simplify all
             of the powers of $i\theta$ that arise in the Taylor expansion.
         \item[(c)] Gather all of the real terms and all of the imaginary terms together.
             Factor the $i$ out of the imaginary terms.  What do you notice?
-        \item[(d)] (Extension) Use your result from part (c) to prove that $e^{i\pi} + 1 =
+        \item[(d)] Use your result from part (c) to prove that $e^{i\pi} + 1 =
             0$.
     \end{enumerate}
 \end{problem}
+\hint{
+    \[ e^{i\theta} = 1 + (i\theta) + \frac{(i\theta)^2}{2} + \frac{(i\theta)^3}{3!} +
+        \frac{(i\theta)^4}{4!} + \frac{(i\theta)^5}{5!} + \frac{(i\theta)^6}{6!} + \cdots
+    \]
+}
 
 \begin{problem}
     Create a MATLAB function that accepts an anonymous function handle $f(x)$ and an
@@ -680,3 +697,29 @@ N = 50;
 TaylorAnimation(f,N)
 \end{lstlisting}
 \end{problem}
+
+\begin{problem}[Jenny's Phone Number]
+    My favorite prime number is 8675309.  Yep.  Jenny's phone number is prime!  Write a
+    MATLAB script that verifies this fact.  You cannot use the built-in MATLAB function
+    \mcode{isprime( )}.
+    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    the coding.
+\end{problem}
+\hint{
+    Remember that a prime number has exactly two divisors: 1 and itself.  
+    You only need to check divisors as large as the square root of 8675309 (why). 
+}
+
+\begin{problem}
+    Write a function called \mcode{MyPrimeChecker} that accepts an integer and returns a
+    binary variable: 0 = not prime, 1 = prime.\\
+    \mcode{function Primality = MyPrimeChecker(n)} \\
+    Next write a MATLAB script to find the sum of all of the prime numbers less than 1000.
+    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    the coding.
+\end{problem}
+\hint{
+    Remember that a prime number has exactly two divisors: 1 and itself.  
+    You only need to check divisors as large as the square root of $n$. Your script should
+    probably be smart enough to avoid all of the non-prime even numbers.
+}
