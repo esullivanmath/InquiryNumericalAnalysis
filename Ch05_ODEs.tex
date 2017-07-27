@@ -295,9 +295,13 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     think about how your bisection method code might help you.
 \end{problem}
 
-\section{Exercises}
 
-\begin{problem}
+\section{ODE Modeling Exercises}
+In this section we give several problems which model real-world scenarios with ordinary
+differential equations.  For every one of these problems you will need to use a numerical
+method to solve the differential equation(s).
+
+\begin{problem}[Orbiting Bodies Problem]
     In this problem we'll look at the orbit of a celestial body around the sun.  The body
     could be a satellite, comet, plant, or any other object whose mass is negligible
     compared to the mass of the sun.  We assume that the motion takes place in a two
@@ -319,7 +323,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     \end{enumerate}
 \end{problem}
 
-\begin{problem}
+\begin{problem}[Pursuit and Evasion Problem]
     In this problem we consider the pursuit and evasion problem where $E(t)$ is the vector
     for
     an evader (e.g. a rabbit or a bank robber) and $P(t)$ is the vector for a pursuer
@@ -382,7 +386,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 
 
 
-\begin{problem}
+\begin{problem}[Whales and Krill Problem]
     One of the favorite foods of the blue whale is krill. Blue whales are baleen whales
     and feed almost exclusively on krill. These tiny shrimp-like creatures are devoured in
     massive amounts to provide the principal food source for the huge whales. In the
@@ -418,7 +422,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 }
 % \solution{ Modified from https://www.simiode.org/resources/1502}
 
-\begin{problem}
+\begin{problem}[Drone Path Problem]
      You just received a new long-range helicopter drone for your birthday! After a little
      practice, you try a long-range test of it by having it carry a small package to your
      home. A friend volunteers to take it 5 miles east of your home with the goal of
@@ -547,23 +551,8 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 }
 
 
-\begin{problem}
-    Test the Euler, Midpoint, and Runge Kutta methods on the differential
-    equation
-    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} \quad y(0) = 1.5. \]
-    Find the exact solution by hand using the method of undetermined coefficients and note
-    that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
-    for the error between your numerical solution and the exact solution for $\lambda =
-    -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
-    create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
-    that value of $\lambda$ at different values for $\Delta t$.
-\end{problem}
-\hint{
-    Let the maximum time be small and take a large number of time steps.
-}
 
-
-\begin{problem}
+\begin{problem}[Trebuchet Problem]
     A trebuchet catapult throws a cow vertically into the air.  The differential equation
     describing its acceleration is
     \[ \frac{d^2y}{dt^2} = -g - c \frac{dy}{dt} \left| \frac{dy}{dt} \right| \]
@@ -578,16 +567,6 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     reasonably accurate way (Euler is a bad choice).
 }
 
-
-\begin{problem}
-    Write code to solve the boundary valued differential equation
-    \[ y'' = \cos(t) y' + \sin(t) y \quad \text{with} \quad y(0) = 0 \quad \text{and}
-        \quad y(1) = 1. \]
-\end{problem}
-\hint{
-    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
-    equations.
-}
 
 
 \begin{problem}[Classical SIR Model]
@@ -729,3 +708,31 @@ gives the exact solution at the tradeoff of needing infinite computational resou
             narcotics are ceased?
     \end{itemize}
 \end{problem}
+
+
+\section{Additional ODE Exercises}
+\begin{problem}
+    Test the Euler, Midpoint, and Runge Kutta methods on the differential
+    equation
+    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} \quad y(0) = 1.5. \]
+    Find the exact solution by hand using the method of undetermined coefficients and note
+    that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
+    for the error between your numerical solution and the exact solution for $\lambda =
+    -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
+    create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
+    that value of $\lambda$ at different values for $\Delta t$.
+\end{problem}
+\hint{
+    Let the maximum time be small and take a large number of time steps.
+}
+
+\begin{problem}
+    Write code to solve the boundary valued differential equation
+    \[ y'' = \cos(t) y' + \sin(t) y \quad \text{with} \quad y(0) = 0 \quad \text{and}
+        \quad y(1) = 1. \]
+\end{problem}
+\hint{
+    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
+    equations.
+}
+

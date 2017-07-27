@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 JUL 2017 16:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 JUL 2017 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2023,7 +2023,7 @@ LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 20
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
 File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
 )
-<CreativeCommons.png, id=320, 88.33pt x 31.11626pt>
+<CreativeCommons.png, id=324, 88.33pt x 31.11626pt>
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 205.
@@ -2063,23 +2063,18 @@ l.219 \tableofcontents
                        [1] (./Numerical_InquiryNotes.toc [2
 
 ]
-Overfull \hbox (1.01994pt too wide) detected at line 54
+Overfull \hbox (1.01994pt too wide) detected at line 55
  []\OT1/jkp/m/n/12 100
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 55
+Overfull \hbox (1.01994pt too wide) detected at line 56
  []\OT1/jkp/m/n/12 101
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 57
- []\OT1/jkp/m/n/12 103
- []
-
-
 Overfull \hbox (1.01994pt too wide) detected at line 58
- []\OT1/jkp/m/n/12 105
+ []\OT1/jkp/m/n/12 103
  []
 
 
@@ -2089,12 +2084,12 @@ Overfull \hbox (1.01994pt too wide) detected at line 59
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 60
- []\OT1/jkp/m/n/12 106
+ []\OT1/jkp/m/n/12 105
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 61
- []\OT1/jkp/m/n/12 107
+ []\OT1/jkp/m/n/12 106
  []
 
 
@@ -2104,7 +2099,7 @@ Overfull \hbox (1.01994pt too wide) detected at line 62
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 63
- []\OT1/jkp/m/n/12 108
+ []\OT1/jkp/m/n/12 107
  []
 
 
@@ -2114,22 +2109,22 @@ Overfull \hbox (1.01994pt too wide) detected at line 64
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 65
- []\OT1/jkp/m/n/12 109
+ []\OT1/jkp/m/n/12 108
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 66
+ []\OT1/jkp/m/n/12 109
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 67
  []\OT1/jkp/m/n/12 110
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 68
- []\OT1/jkp/m/n/12 112
- []
-
-
 Overfull \hbox (1.01994pt too wide) detected at line 69
- []\OT1/jkp/m/n/12 115
+ []\OT1/jkp/m/n/12 112
  []
 
 
@@ -2139,7 +2134,7 @@ Overfull \hbox (1.01994pt too wide) detected at line 70
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 71
- []\OT1/jkp/m/n/12 116
+ []\OT1/jkp/m/n/12 115
  []
 
 
@@ -2158,7 +2153,7 @@ Package pdftex.def Info: CreativeCommons.png used on input line 74.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [3]
 Overfull \hbox (1.01994pt too wide) detected at line 74
- []\OT1/jkp/m/n/12 119
+ []\OT1/jkp/m/n/12 116
  []
 
 
@@ -2168,16 +2163,21 @@ Overfull \hbox (1.01994pt too wide) detected at line 75
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 76
- []\OT1/jkp/m/n/12 122
+ []\OT1/jkp/m/n/12 119
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 77
- []\OT1/jkp/m/n/12 123
+ []\OT1/jkp/m/n/12 122
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 78
+ []\OT1/jkp/m/n/12 123
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 79
  []\OT1/jkp/m/n/12 123
  []
 
@@ -2413,9 +2413,6 @@ File: CreativeCommons.png Graphic file (type png)
 Package pdftex.def Info: CreativeCommons.png used on input line 390.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [24]
-Missing character: There is no â in font jkpmn7t!
-Missing character: There is no ˆ in font jkpmn7t!
-Missing character: There is no ’ in font jkpmn7t!
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 451.
@@ -2506,12 +2503,7 @@ File: CreativeCommons.png Graphic file (type png)
 Package pdftex.def Info: CreativeCommons.png used on input line 516.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [35]
-Overfull \hbox (0.6564pt too wide) in paragraph at lines 542--551
-[][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (7.2264pt too wide) in paragraph at lines 560--569
+Overfull \hbox (0.6564pt too wide) in paragraph at lines 560--569
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -2832,7 +2824,7 @@ ge-eps-converted-to.pdf mnist_average_training_image.eps>
 (epstopdf)             \includegraphics on input line 1333.
 Package epstopdf Info: Output file is already uptodate.
 
-<mnist_average_training_image-eps-converted-to.pdf, id=1129, 421.575pt x 316.18
+<mnist_average_training_image-eps-converted-to.pdf, id=1134, 421.575pt x 316.18
 124pt>
 File: mnist_average_training_image-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -2908,45 +2900,45 @@ Package pdftex.def Info: CreativeCommons.png used on input line 258.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 309.
+Package pdftex.def Info: CreativeCommons.png used on input line 312.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [71]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 363.
+Package pdftex.def Info: CreativeCommons.png used on input line 361.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [72]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 401.
+Package pdftex.def Info: CreativeCommons.png used on input line 405.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [73]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 455.
+Package pdftex.def Info: CreativeCommons.png used on input line 458.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [74]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 513.
+Package pdftex.def Info: CreativeCommons.png used on input line 517.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [75]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 569.
+Package pdftex.def Info: CreativeCommons.png used on input line 563.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [76]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 626.
+Package pdftex.def Info: CreativeCommons.png used on input line 630.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [77]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 695.
+Package pdftex.def Info: CreativeCommons.png used on input line 682.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [78]) (./Ch06_PDEs.tex
 File: CreativeCommons.png Graphic file (type png)
@@ -3380,7 +3372,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=1713, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=1718, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3499,7 +3491,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 252.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 252.
 Package rerunfilecheck Info: File `Numerical_InquiryNotes.out' has not changed.
 
-(rerunfilecheck)             Checksum: 13560CB43BCD64E55AEEBB4A485BD979;5443.
+(rerunfilecheck)             Checksum: 796E8034A2FCA22EF133C82BF7C5DEE9;5527.
 
 
 LaTeX Warning: There were undefined references.
@@ -3507,10 +3499,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 252.
  ) 
 Here is how much of TeX's memory you used:
- 42345 strings out of 493089
- 928969 string characters out of 6134842
- 1125029 words of memory out of 5000000
- 44199 multiletter control sequences out of 15000+600000
+ 42347 strings out of 493089
+ 928991 string characters out of 6134842
+ 1124056 words of memory out of 5000000
+ 44200 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,20n,100p,10445b,2404s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3538,10 +3530,10 @@ sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (125 pages, 583944 bytes).
+Output written on Numerical_InquiryNotes.pdf (125 pages, 584694 bytes).
 PDF statistics:
- 2050 PDF objects out of 2073 (max. 8388607)
- 1866 compressed objects within 19 object streams
- 907 named destinations out of 1000 (max. 500000)
- 656 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2055 PDF objects out of 2073 (max. 8388607)
+ 1871 compressed objects within 19 object streams
+ 908 named destinations out of 1000 (max. 500000)
+ 664 words of extra memory for PDF output out of 10000 (max. 10000000)
 

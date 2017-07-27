@@ -32,7 +32,8 @@
 \contentsline {chapter}{\numberline {5}Numerical Ordinary Differential Equations}{66}{chapter.5}
 \contentsline {section}{\numberline {5.1}Euler, Runge-Kutta, and Friends}{66}{section.5.1}
 \contentsline {section}{\numberline {5.2}Implicit Methods and Shooting Methods}{70}{section.5.2}
-\contentsline {section}{\numberline {5.3}Exercises}{71}{section.5.3}
+\contentsline {section}{\numberline {5.3}ODE Modeling Exercises}{71}{section.5.3}
+\contentsline {section}{\numberline {5.4}Additional ODE Exercises}{79}{section.5.4}
 \contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{80}{chapter.6}
 \contentsline {section}{\numberline {6.1}Review of Multivariable Calculus}{80}{section.6.1}
 \contentsline {section}{\numberline {6.2}Introduction to PDEs}{81}{section.6.2}

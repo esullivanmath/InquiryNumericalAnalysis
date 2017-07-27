@@ -32,47 +32,48 @@
 \BOOKMARK [0][-]{chapter.5}{Numerical Ordinary Differential Equations}{}% 32
 \BOOKMARK [1][-]{section.5.1}{Euler, Runge-Kutta, and Friends}{chapter.5}% 33
 \BOOKMARK [1][-]{section.5.2}{Implicit Methods and Shooting Methods}{chapter.5}% 34
-\BOOKMARK [1][-]{section.5.3}{Exercises}{chapter.5}% 35
-\BOOKMARK [0][-]{chapter.6}{Numerical Partial Differential Equations}{}% 36
-\BOOKMARK [1][-]{section.6.1}{Review of Multivariable Calculus}{chapter.6}% 37
-\BOOKMARK [1][-]{section.6.2}{Introduction to PDEs}{chapter.6}% 38
-\BOOKMARK [1][-]{section.6.3}{Boundary Conditions}{chapter.6}% 39
-\BOOKMARK [1][-]{section.6.4}{1D and 2D Heat Equation}{chapter.6}% 40
-\BOOKMARK [1][-]{section.6.5}{1D and 2D Wave Equation}{chapter.6}% 41
-\BOOKMARK [1][-]{section.6.6}{Traveling Waves}{chapter.6}% 42
-\BOOKMARK [1][-]{section.6.7}{1D and 2D Steady State PDEs}{chapter.6}% 43
-\BOOKMARK [1][-]{section.6.8}{Exercises}{chapter.6}% 44
-\BOOKMARK [0][-]{appendix.A}{Writing and Projects}{}% 45
-\BOOKMARK [1][-]{section.A.1}{The Paper}{appendix.A}% 46
-\BOOKMARK [1][-]{section.A.2}{Figures and Tables}{appendix.A}% 47
-\BOOKMARK [1][-]{section.A.3}{Writing Style}{appendix.A}% 48
-\BOOKMARK [1][-]{section.A.4}{Tips For Writing Clear Mathematics}{appendix.A}% 49
-\BOOKMARK [2][-]{subsection.A.4.1}{Audience}{section.A.4}% 50
-\BOOKMARK [2][-]{subsection.A.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.A.4}% 51
-\BOOKMARK [2][-]{subsection.A.4.3}{Some Writing Tips}{section.A.4}% 52
-\BOOKMARK [2][-]{subsection.A.4.4}{Mathematical Vocabulary}{section.A.4}% 53
-\BOOKMARK [1][-]{section.A.5}{Sensitivity Analysis}{appendix.A}% 54
-\BOOKMARK [1][-]{section.A.6}{Example of Sensitivity Analysis:}{appendix.A}% 55
-\BOOKMARK [0][-]{appendix.B}{MATLAB Basics}{}% 56
-\BOOKMARK [1][-]{section.B.1}{Vectors and Matrices}{appendix.B}% 57
-\BOOKMARK [1][-]{section.B.2}{Looping}{appendix.B}% 58
-\BOOKMARK [2][-]{subsection.B.2.1}{For Loops}{section.B.2}% 59
-\BOOKMARK [2][-]{subsection.B.2.2}{The While Loop}{section.B.2}% 60
-\BOOKMARK [1][-]{section.B.3}{Conditional Statements}{appendix.B}% 61
-\BOOKMARK [2][-]{subsection.B.3.1}{If Statements}{section.B.3}% 62
-\BOOKMARK [2][-]{subsection.B.3.2}{Case-Switch Statements}{section.B.3}% 63
-\BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 64
-\BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 65
-\BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 66
-\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 67
-\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 68
-\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 69
-\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 70
-\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 71
-\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 72
-\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 73
-\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 74
-\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 75
-\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 76
-\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 77
-\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 78
+\BOOKMARK [1][-]{section.5.3}{ODE Modeling Exercises}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.4}{Additional ODE Exercises}{chapter.5}% 36
+\BOOKMARK [0][-]{chapter.6}{Numerical Partial Differential Equations}{}% 37
+\BOOKMARK [1][-]{section.6.1}{Review of Multivariable Calculus}{chapter.6}% 38
+\BOOKMARK [1][-]{section.6.2}{Introduction to PDEs}{chapter.6}% 39
+\BOOKMARK [1][-]{section.6.3}{Boundary Conditions}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.4}{1D and 2D Heat Equation}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.5}{1D and 2D Wave Equation}{chapter.6}% 42
+\BOOKMARK [1][-]{section.6.6}{Traveling Waves}{chapter.6}% 43
+\BOOKMARK [1][-]{section.6.7}{1D and 2D Steady State PDEs}{chapter.6}% 44
+\BOOKMARK [1][-]{section.6.8}{Exercises}{chapter.6}% 45
+\BOOKMARK [0][-]{appendix.A}{Writing and Projects}{}% 46
+\BOOKMARK [1][-]{section.A.1}{The Paper}{appendix.A}% 47
+\BOOKMARK [1][-]{section.A.2}{Figures and Tables}{appendix.A}% 48
+\BOOKMARK [1][-]{section.A.3}{Writing Style}{appendix.A}% 49
+\BOOKMARK [1][-]{section.A.4}{Tips For Writing Clear Mathematics}{appendix.A}% 50
+\BOOKMARK [2][-]{subsection.A.4.1}{Audience}{section.A.4}% 51
+\BOOKMARK [2][-]{subsection.A.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.A.4}% 52
+\BOOKMARK [2][-]{subsection.A.4.3}{Some Writing Tips}{section.A.4}% 53
+\BOOKMARK [2][-]{subsection.A.4.4}{Mathematical Vocabulary}{section.A.4}% 54
+\BOOKMARK [1][-]{section.A.5}{Sensitivity Analysis}{appendix.A}% 55
+\BOOKMARK [1][-]{section.A.6}{Example of Sensitivity Analysis:}{appendix.A}% 56
+\BOOKMARK [0][-]{appendix.B}{MATLAB Basics}{}% 57
+\BOOKMARK [1][-]{section.B.1}{Vectors and Matrices}{appendix.B}% 58
+\BOOKMARK [1][-]{section.B.2}{Looping}{appendix.B}% 59
+\BOOKMARK [2][-]{subsection.B.2.1}{For Loops}{section.B.2}% 60
+\BOOKMARK [2][-]{subsection.B.2.2}{The While Loop}{section.B.2}% 61
+\BOOKMARK [1][-]{section.B.3}{Conditional Statements}{appendix.B}% 62
+\BOOKMARK [2][-]{subsection.B.3.1}{If Statements}{section.B.3}% 63
+\BOOKMARK [2][-]{subsection.B.3.2}{Case-Switch Statements}{section.B.3}% 64
+\BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 65
+\BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 66
+\BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 67
+\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 68
+\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 69
+\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 70
+\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 71
+\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 72
+\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 73
+\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 74
+\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 75
+\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 76
+\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 77
+\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 78
+\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 79

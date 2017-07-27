@@ -144,22 +144,22 @@ your code from the previous problem and make sure that you can plot \mcode{new_x
     \begin{enumerate}
         \item The left-hand plot should show the function in blue and the first derivative
             as a red dashed curve. Sample code for this problem is
-    \begin{lstlisting}
-     f = @(x) sin(x) - x*sin(x);
-     a=0; b=15;
-     num_interior_pts = 1000; % this should be LARGE
-     x = linspace(a,b,num_interior_pts);
-     [new_x,dfdx] = FirstDerivFirstOrder(f,a,b,num_interior_pts);
-     subplot(1,2,1)
-     plot(x, f(x) , 'b' , new_x , dfdx , 'r--')
-    \end{lstlisting}
+\begin{lstlisting}
+ f = @(x) sin(x) - x*sin(x);
+ a=0; b=15;
+ num_interior_pts = 1000; % this should be LARGE
+ x = linspace(a,b,num_interior_pts);
+ [new_x,dfdx] = FirstDerivFirstOrder(f,a,b,num_interior_pts);
+ subplot(1,2,1)
+ plot(x, f(x) , 'b' , new_x , dfdx , 'r--')
+\end{lstlisting}
         \item The right-hand plot should show the absolute error between the exact derivative and
             the numerical derivative.
-    \begin{lstlisting}
-    df = @(x) ... % write code for the exact derivative
-    subplot(1,2,2)
-    plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
-    \end{lstlisting}
+\begin{lstlisting}
+df = @(x) ... % write code for the exact derivative
+subplot(1,2,2)
+plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
+\end{lstlisting}
     \end{enumerate}
     Discuss how you can see the fact that this is a first order method.
 \end{problem}
@@ -485,7 +485,7 @@ approximations for integrals and we leave the further research to the curious re
 
 
 \begin{problem}
-    {\bf Coding Challenge:} 2520 is the smallest number that can be divided by each of the
+    The number 2520 is the smallest number that can be divided by each of the
     numbers from 1 to 10 without any remainder.  Write code to find the smallest positive
     number that is evenly divisible by all of the numbers from 1 to 20?
 \end{problem}
@@ -543,7 +543,7 @@ In this problem you should not be doing an exhaustive search.
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a first order
     approximation of the first derivative of the
     underlying function. \\
-    \mcode{function [new_x,dydx] = FirstDeriveFromData(ExcelFileName,Xrange,Yrange)} \\
+    \mcode{function [new_x,dydx] = FirstDerivFromData(ExcelFileName,Xrange,Yrange)} \\
     In the function all of the inputs are strings.  For example \\
     \mcode{FirstDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
@@ -561,7 +561,7 @@ In this problem you should not be doing an exhaustive search.
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a second order
     approximation of the second derivative of the
     underlying function. \\
-    \mcode{function [new_x,dydx] = SecondDeriveFromData(ExcelFileName,Xrange,Yrange)} \\
+    \mcode{function [new_x,dydx] = SecondDerivFromData(ExcelFileName,Xrange,Yrange)} \\
     In the function all of the inputs are strings.  For example \\
     \mcode{SecondDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
