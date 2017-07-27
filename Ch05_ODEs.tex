@@ -664,3 +664,68 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     \end{flalign*}
 }
 
+
+\begin{problem}[Pain Management]
+    
+    When a patient undergoing surgery is asked about their pain the doctors often ask
+    patients to rate their pain on a
+    subjective 0 to 10 scale with 0 meaning no pain and 10 meaning excruciating pain.
+    After surgery the unmitigated pain level in a typical patient will be quite high and
+    as such doctors typically treat with narcotics.  
+    A mathematical model (inspired by
+    \href{https://sinews.siam.org/Details-Page/data-driven-chronic-pain-management-using-hybrid-mathematical-methods}{THIS
+    article}
+    and \href{https://arxiv.org/pdf/1706.02366.pdf}{THIS paper}) 
+    of a patient's subjective pain level as treated pharmaceutically
+    by three drugs is given as:
+    \begin{flalign*}
+        \frac{dP}{dt} &= - \left( k_0 + k_1 D_1 + k_2 D_2 +k_3 D_3\right)P + k_0 u \\
+        \frac{dD_1}{dt} &= -k_{D_1} D_1 + \sum_{j=1}^{N_1} \delta (t-\tau_{1,j}) \\ 
+        \frac{dD_2}{dt} &= -k_{D_2} D_2 + \sum_{j=1}^{N_2} \delta (t-\tau_{2,j}) \\ 
+        \frac{dD_3}{dt} &= -k_{D_3} D_3 + \sum_{j=1}^{N_3} \delta (t-\tau_{3,j})  
+    \end{flalign*}
+    where
+    \begin{itemize}
+        \item $P$ is a patient's subjective pain level on a 0 to 10 scale, 
+        \item $D_i$ is the amount of the $i^{th}$ drug in the
+            patient's bloodstream,
+            \begin{itemize}
+                \item $D_1$ is a long-acting opioid
+                \item $D_2$ is a short-acting opioid
+                \item $D_3$ is a non-opioid
+            \end{itemize}
+        \item $k_0$ is the relaxation rate to baseline pain without drugs, 
+        \item $k_i$ is the impact of the $i^{th}$ drug on the relaxation rate, 
+        \item $u$ is the patient's baseline (unmitigated) pain, 
+        \item $k_{D_i}$ is the elimination rate of the $i^{th}$ drug from the bloodstream, 
+        \item $N_i$ is the total number of the $i^{th}$ drug doses taken, and 
+        \item $\tau_{i,j}$ are the time times the patient takes the $i^{th}$ drug.
+    \end{itemize}
+    Implement this model with parameters
+    $u=8.01$, $k_0 = \ln(2)/2$, $k_1 = 0.319$, $k_2 = 0.184$, $k_3 = 0.201$, $k_{D_1} =
+    \ln(0.5)/(-10)$, $k_{D_2} = \ln(0.5)/(-4)$, and $k_{D_3} = \ln(0.5)/(-4)$.  Take the
+    initial pain level to be $P(0) = 3$ with no drugs on board.  Assume that the patient
+    begins dosing the long-acting opioid at hour 2 and takes 1 dose periodically every 24 hours.
+    Assume that the patient begins dosing the short-acting opioid at hour 0 and takes 1 dose
+    periodically every 12 hours.  Finally assume that the patient takes 1 dose of the non-opioid
+    drug every 48 hours starts at hour 24.  Of particular interest are how the pain level
+    evolves over the first week out of surgery and how the drug concentrations evolve
+    over this time.  
+    
+    \noindent Other questions:
+    \begin{itemize}
+        \item What does this medication schedule do the patient's pain level?
+        \item What happens to the patient's pain level if he/she forgets the non-opioid
+            drug?
+        \item What happens to the patient's pain level if he/she has a bad reaction to
+            opioids and only takes the non-opioid drug?
+        \item What happens to the dynamics of the system if the patient's pain starts at
+            9/10?
+        \item In reality, the unmitigated pain $u$ will decrease in time.  Propose a
+            differential equation model for the unmitigated pain that will have a stable
+            equilibrium at 3 and has a value of 5 on day 5. Add this fifth differential
+            equation to the pain model and examine what happens to the patient's pain
+            over the first week. In this model, what happens after the first week if the
+            narcotics are ceased?
+    \end{itemize}
+\end{problem}
