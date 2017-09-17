@@ -449,6 +449,111 @@ approximations for integrals and we leave the further research to the curious re
 \end{thm}
 
 
+
+\section{Numerical Optimization}
+Recall the optimization process from single variable calculus:
+\begin{itemize}
+    \item Write a function that models a scenario in one variable,
+    \item take the first derivative (presuming that the function is differentiable),
+    \item set the first derivative to zero and solve for the critical point(s), and
+    \item interpret your answer in the context of the problem.
+\end{itemize}
+The part of this whole process that might be impossible, and might therefore require
+numerical analysis, is the ``set the first derivative to zero and solve'' part.  That is,
+there is an algebraic step required to get the critical points(s) that might not be
+possible by hand or even with a computer algebra system.    
+
+\begin{problem}\label{prob:pig_numerical}
+    (This problem is modified from \cite{Meerschaert}) \\
+    A pig weighs 200 pounds and gains weight at a rate proportional to its current weight.
+    Today the growth rate if 5 pounds per day.  The pig costs 45 cents per day to keep due
+    mostly to the price of food.  The market price for pigs if 65 cents per pound but is
+    falling at a rate of 1 cent per day.  When should the pig be sold and how much profit
+    do you make on the pig when you sell it?  Write this situation as a single variable
+    mathematical model, use a computer algebra system (or by-hand computation) to find the
+    first derivative, and then use a numerical root finding to find the critical points.
+\end{problem}
+
+\begin{problem}
+    (This problem is modified from \cite{Meerschaert}) \\
+    Reconsider the pig problem \ref{prob:pig_numerical} but now suppose that the weight of
+    the pig after $t$ days is 
+    \[ w = \frac{800}{1+3e^{-t/30}} \text{ pounds}. \]
+    When should the pig be sold and how much profit do you make on the pig when you sell
+    it?  Write this situation as a single variable mathematical model, use a computer
+    algebra system (or by-hand computation) to find the first derivative, and then use a
+    numerical root finding to find the critical points.
+\end{problem}
+
+In unconstrained multivariable optimization the process for finding optimal solutions is
+essentially the same as for single variable.
+\begin{itemize}
+    \item Write a function that models a scenario in multiple variables,
+    \item find the gradient vector (presuming that the function is differentiable),
+    \item set the gradient vector equal to the zero vector and solve for the critical point(s), and
+    \item interpret your answer in the context of the problem.
+\end{itemize}
+The trouble with unconstrained multivariable optimization is that finding the critical
+points is now equivalent to solving a system of nonlinear equations; a task that is likely
+impossible even with a computer algebra system.  In Problem \ref{prob:mv_newton} we built
+a multivariable version of Newton's method.  
+
+
+\begin{problem}\label{prob:lawn_chair}
+    (This problem is modified from \cite{Meerschaert}) \\
+    A manufacturer of lawn furniture makes two types of lawn chairs, one with a wood
+    frame and one with a tubular aluminum frame.  The wood-frame model costs \
+    418 per unit to manufacture, and the aluminum-frame model costs \$10 per unit.  The
+    company operates in a market where the number of units that can be sold depends on the
+    price.  It is estimated that in order to sell $x$ units per day of the wood-frame
+    model and $y$ units per day of the aluminum-frame model, the selling price cannot
+    exceed 
+    \[ 10 + \frac{31}{\sqrt{x}} + \frac{1.3}{y^{0.2}} \text{ dollars per unit} \]
+    for wood-frame chairs, and 
+    \[ 5 + \frac{15}{y^{0.4}} + \frac{0.8}{x^{0.08}} \text{ dollars per unit} \]
+    for the aluminum chairs.  We want to find the optimal production levels.  Write this
+    situation as a multi-variable mathematical model, use a computer
+    algebra system (or by-hand computation) to find the gradient vector, and then use the
+    multi-variable Newton's method outlined in Problem \ref{prob:mv_newton} to find the critical points.
+\end{problem}
+
+Sometimes Newton's method is still a cumbersome method for solving the system of equations
+resulting from multivariable optimization.  Another method stems from the fact that the
+gradient vector will always point in the direction of greatest increase.  If we follow the
+gradient in this direction from a wisely chosen starting point we should find a local
+maximum for a function.  Alternatively, if we follow the negative gradient we should find
+a local minimum for a function.  This technique is called Gradient Descent.  
+
+\begin{algorithm}[Gradient Descent]
+    We want to solve the problem 
+    \[ \text{minimize } f(x_1, x_2, \ldots, x_n) \text{ subject to }(x_1, x_2, \ldots, x_n) \in S. \]
+    \begin{enumerate}
+        \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
+        \item We are going to define a difference equation that gives successive guesses
+            for the optimal value:
+            \[ \bx_{n+1} = \bx_n - \gamma \nabla f(\bx_n). \]
+            The difference equation says to follow the negative gradient a certain
+            distance from your present point (why are we doing this).  Note that the value
+            of $\gamma$ is up to you so experiment with a few values (you should probably
+            take $\gamma \le 1$ \ldots why?).
+        \item Repeat the iterative process in step 2 until two successive points are {\it
+            close enough} to each other.
+    \end{enumerate}
+\end{algorithm}
+Note: If you are looking to maximize your objective function then in the Monte-Carlo
+search you should examine if $z$ is greater than your current largest value.  For gradient
+descent you should actually do a gradient {\it
+ascent} and follow the positive gradient instead of the negative gradient.
+
+\begin{problem}
+    Write code to implement the Gradient Descent method and test your code on a
+    multivariable function where you know the location and value of a local minimum.
+\end{problem}
+
+\begin{problem}
+    Solve Problem \ref{prob:lawn_chair} with the Gradient Descent algorithm.
+\end{problem}
+
 \section{Exercises}
 % \begin{problem}
 %     {\bf Coding Challenge:} The four adjacent digits in the 1000-digit number that have
