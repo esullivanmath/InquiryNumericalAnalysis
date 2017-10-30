@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  24 OCT 2017 09:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 OCT 2017 20:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2349,18 +2349,18 @@ File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 606.
+Package pdftex.def Info: CreativeCommons.png used on input line 610.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [16]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 656.
+Package pdftex.def Info: CreativeCommons.png used on input line 659.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [17]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 723.
+Package pdftex.def Info: CreativeCommons.png used on input line 722.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [18]) (./Ch02_Algebra.tex
 File: CreativeCommons.png Graphic file (type png)
@@ -2851,7 +2851,7 @@ ge-eps-converted-to.pdf mnist_average_training_image.eps>
 (epstopdf)             \includegraphics on input line 1333.
 Package epstopdf Info: Output file is already uptodate.
 
-<mnist_average_training_image-eps-converted-to.pdf, id=1173, 421.575pt x 316.18
+<mnist_average_training_image-eps-converted-to.pdf, id=1174, 421.575pt x 316.18
 124pt>
 File: mnist_average_training_image-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -3400,7 +3400,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=1756, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=1757, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3527,8 +3527,8 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 254.
  ) 
 Here is how much of TeX's memory you used:
- 43873 strings out of 493014
- 966377 string characters out of 6133351
+ 43874 strings out of 493014
+ 966389 string characters out of 6133351
  1160904 words of memory out of 5000000
  45765 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
@@ -3558,10 +3558,10 @@ sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (128 pages, 594350 bytes).
+Output written on Numerical_InquiryNotes.pdf (128 pages, 594405 bytes).
 PDF statistics:
- 2098 PDF objects out of 2487 (max. 8388607)
- 1910 compressed objects within 20 object streams
- 925 named destinations out of 1000 (max. 500000)
+ 2099 PDF objects out of 2487 (max. 8388607)
+ 1911 compressed objects within 20 object streams
+ 926 named destinations out of 1000 (max. 500000)
  672 words of extra memory for PDF output out of 10000 (max. 10000000)
 

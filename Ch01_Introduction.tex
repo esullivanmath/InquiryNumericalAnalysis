@@ -597,6 +597,19 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
 }
 
 \begin{problem}
+    Write computer code that will draw random numbers from the unit interval $[0,1]$,
+    distributed uniformly, until
+    the sum of the numbers that you draw is greater than 1.  Keep track of how many
+    numbers you draw.  Then write a loop that does this process many many times.  On
+    average, how many numbers do you have draw until your sum is larger than 1? \\ Hint
+    \#1:
+    In \texttt{MATLAB} you should use the \mcode{rand(1,1)} command to draw a single
+    number from a uniform distribution with bounds $[0,1]$. \\ Hint \#2: You should do
+    this more than 1,000,000 times to get a good average \ldots and the number that you
+    get should be familiar!
+\end{problem}
+
+\begin{problem}
     In the 1999 movie {\it Office Space}, a character creates a program that takes
     fractions of cents that are truncated in a bank's transactions and deposits them to
     his own account.  This is idea has been attempted in the past and not well that banks
