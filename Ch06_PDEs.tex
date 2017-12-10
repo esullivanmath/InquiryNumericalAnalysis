@@ -5,11 +5,12 @@ ultimately solving PDEs in terms of our usual three spatial dimensions along wit
 dimension for time.  Since PDEs require a strong background in the notions of vector
 calculus we'll start there.
 
-\section{Review of Multivariable Calculus}
+\section{Quick Review -- Main Ideas from Vector Calculus}
 Let's start with some basic review of multivariable calculus.
 \begin{problem}
-    With your partner answer each of the following questions without the aid of the
-    internet.
+    With your partner answer each of the following questions. The main ideas in this
+    problem {\it should} be review from multivariable calculus.  If you and your partner
+    are stuck then ask another group. 
     \begin{enumerate}
         \item[(a)] What is a partial derivative (explain geometrically)
         \item[(b)] What is the gradient of a function? What does it tell us physically or geometrically? If
@@ -30,6 +31,10 @@ simply recap.
     The following are a few of the primary definitions and theorems from multivariable
     calculus.
     \begin{itemize}
+        \item The {\bf del} or {\bf grad} operator, $\nabla$, is a vector operator 
+            \[ \nabla = \left< \frac{\partial}{\partial x} \, , \,
+                \frac{\partial}{\partial y} \, , \, \frac{\partial}{\partial z} \right>.
+            \]
         \item The {\bf gradient} of a multivariable function $u(x,y,z)$ is the vector
             \[ \nabla u = \left< \frac{\partial u}{\partial x} \, , \,
                 \frac{\partial u}{\partial y} \, , \, \frac{\partial u}{\partial z}
@@ -37,6 +42,12 @@ simply recap.
         \item The {\bf divergence} of a vector valued function $F = \left< F_1, F_2,
             F_3\right>$ is the scalar
             \[ \nabla \cdot F = \pd{F_1}{x} + \pd{F_2}{y} + \pd{F_3}{z}. \]
+        \item The {\bf curl} of a vector valued function $F = \left< F_1, F_2,
+            F_3\right>$ is the vector
+            \[ \nabla \times F = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ \pd{ }{x}
+                & \pd{ }{y} & \pd{ }{z} \\ F_1 & F_2 & F_3 \end{vmatrix} = \left<
+        \pd{F_3}{y} - \pd{F_2}{z} \, , \, -\left( \pd{F_3}{x} - \pd{F_1}{z} \right) \, ,
+    \, \pd{F_2}{x} - \pd{F_1}{y} \right>.\] 
         \item The {\bf Laplacian} of a multivariable function $u(x,y,z)$ is the scalar
             \[ \nabla \cdot \nabla u = \pdd{u}{x} + \pdd{u}{y} + \pdd{u}{z}. \]
         \item The {\bf divergence theorem} states that the flux of a vector field out of closed body is the
@@ -45,12 +56,233 @@ simply recap.
     \end{itemize}
 \end{definition}
 
-\section{Introduction to PDEs}
-This section is meant to be an introduction to most of the primary differential equations
-of interest in basic mathematical physics.
-    
-We start with a brief derivation of a {\it general conservation law}.  The result being a
-partial differential equation that can be used for conservation of mass, momentum, or
+\newpage\section{An Intuitive Introduction to some Common PDEs}
+To build intuition for partial differential equations we'll first start with your
+intuition with ordinary differential equations.  Let's consider the really simple ODE $y'
+= y$.  We can verbalize this problems with the phrase {\it the rate of change of $y$ is
+equal to the current value of $y$}, and we can use this phrase, along with our
+understanding of linear approximation from Calculus, to build intuition about
+how the value of $y$ propogates in time.  
+If we start with a value of $y(0) = 0.5$ then after 1 unit of time passes we have a reasonable
+guess for the value of $y$ based on our understanding of slope:
+\[ y(1) \approx 0.5 + (1)(0.5) = 1. \]
+Similarly we can propogate forward 1 unit of time again to get 
+\[ y(2) \approx 1 + 1(1) = 2, \]
+and we can continue this to get 
+\begin{center}
+    \begin{tabular}{|c||c|c|c|c|c|c|}
+        \hline
+        Time & 0 & 1 & 2 & 3 & 4 & $\cdots$ \\\hline
+        $y$ & 0.5 & 1 & 2 & 4 & 8 & $\cdots$ \\ \hline
+    \end{tabular}
+\end{center}
+We also know that this isn't quite correct since the solution to the differntial equation
+is $y(t) = 0.5 e^t$.  In Figure \ref{fig:intuition_odes} we can see, however, that our intuitive guesses get
+us somewhat close to the basic behavior of the differential equation but clearly miss the
+finer details associated with the exact curvature. 
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, domain=0:4, xlabel={$t$}, ymax=15]
+                \addplot[smooth, very thick, red] {0.5*exp(x)};
+                \addlegendentry{Exact};
+                \addplot[mark=*, color=black] coordinates{(0,0.5)(1,1)(2,2)(3,4)(4,8)};
+                \addlegendentry{Intuitive Guess};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The analytic solution to $y'=y$ and the points given by calculus intuition.}
+    \label{fig:intuition_odes}
+\end{figure}
+
+We're going to use this same idea to build intuition for some of the most basic partial
+differential equations.  In these partial differential equations we have two variables:
+$t=$ time and $x=$ a single spatial dimension.  
+
+\begin{problem}\label{prob:heat_intuition_1}
+    Let $u(t,x)$ be the concentration of a quantity at time $t$ and spatial location $x$.
+    The quantity might be something like heat or chemical concentration.
+    We will let $x \in [0,1]$ and we assume that at time $t=0$ we have $u(0,x) = \sin(2\pi
+    x)$ as shown in the plot below.  Use the phrase 
+    \begin{quote}
+        {\it the time rate of change of concentration is equal to the concavity of the
+        concentration function}
+    \end{quote}
+    to give several plots showing how the concentration evolves in time. The initial
+    condition function $u(0,x)$ is shown in each plot for reference.  Think of this as
+    creating four frames in an animation.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 0}]
+                \addplot[smooth, very thick, blue] {sin(2*pi*deg(x))};
+            \end{axis}
+        \end{tikzpicture}\\
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 1}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 2}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 3}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 4}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+
+\begin{problem}\label{prob:heat_intuition_2}
+    Which of the following differential equations corresponds to the phrase 
+        {\it ``the time rate of change of concentration is equal to the concavity of the
+        concentration function''}?
+        \[ \pd{u}{t} = -\pd{u}{x}, \qquad \pd{u}{t} = \pdd{u}{x}, \quad \text{or} \quad \pdd{u}{t} =
+        \pdd{u}{x} \]
+        Explain your reasoning clearly.
+\end{problem}
+
+\begin{problem}
+    Based on your answer to Problem \ref{prob:heat_intuition_1} you should now have an intuitive
+    sense for the behavior of the solution to the partial differential equation that you
+    identified in Problem \ref{prob:heat_intuition_2}.  This equation is called the {\bf Heat
+    Equation} or the {\bf Diffusion Equation}.  Give context to the physical process that is being
+    described by this equation.
+\end{problem}
+
+\begin{problem}
+    How would your answer to Problem \ref{prob:heat_intuition_1} change if we were to
+    modify the heat equation to 
+    \[ \pd{u}{t} = 0.5 \pdd{u}{x}? \]
+    What about 
+    \[ \pd{u}{t} = 2 \pdd{u}{x}? \]
+\end{problem}
+
+\begin{problem}
+    The 1D Heat Equation is given as 
+    \[ \pd{u}{t} = D \pdd{u}{x}. \]
+    What does the parameter $D$ control in terms of the physics of the problem?
+\end{problem}
+
+
+
+\begin{problem}\label{prob:wave_intuition_1}
+    Let $u(t,x)$ be the position of a string or cable at time $t$ and spatial location $x$.
+    We will let $x \in [0,1]$ and we assume that at time $t=0$ we have $u(0,x) = \sin(2\pi
+    x)$ as shown in the plot below.  Use the phrase 
+    \begin{quote}
+        {\it the acceleration of each point on the string is equal to the concavity
+        of the string}
+    \end{quote}
+    to give several plots showing how the concentration evolves in time. The initial
+    condition function $u(0,x)$ is shown in each plot for reference.  Think of this as
+    creating four frames in an animation.
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 0}]
+                \addplot[smooth, very thick, blue] {sin(2*pi*deg(x))};
+            \end{axis}
+        \end{tikzpicture}\\
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 1}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 2}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 3}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, domain=0:1, xlabel={$x$},
+                ylabel={$u(x)$}, title={Time = 4}]
+                \addplot[smooth, blue, dashed] {sin(2*pi*deg(x))};
+                \addlegendentry{Time = 0};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+
+\begin{problem}\label{prob:wave_intuition_2}
+    Which of the following differential equations corresponds to the phrase 
+        {\it ``the acceleration of each point on the string is equal to the concavity
+        of the string''}?
+        \[ \pd{u}{t} = -\pd{u}{x}, \qquad \pd{u}{t} = \pdd{u}{x}, \quad \text{or} \quad \pdd{u}{t} =
+        \pdd{u}{x} \]
+        Explain your reasoning clearly.
+\end{problem}
+
+\begin{problem}
+    Based on your answer to Problem \ref{prob:wave_intuition_1} you should now have an
+    intuitive sense for the behavior of the solution to the partial differential equation
+    that you identified in Problem \ref{prob:wave_intuition_2}.  This equation is called
+    the {\bf Wave Equation}.  Give context to the physical process that is being described
+    by this equation.
+\end{problem}
+
+
+\begin{problem}
+    How would your answer to Problem \ref{prob:wave_intuition_1} change if we were to
+    modify the wave equation to 
+    \[ \pdd{u}{t} = 0.5 \pdd{u}{x}? \]
+    What about 
+    \[ \pdd{u}{t} = 2 \pdd{u}{x}? \]
+\end{problem}
+
+\begin{problem}
+    The 1D Wave Equation is given as 
+    \[ \pdd{u}{t} = k \pdd{u}{x}. \]
+    What does the parameter $k$ control in terms of the physics of the problem?
+\end{problem}
+
+
+
+\newpage\section{An Analytic Introduction to Conservation Law PDEs}
+In the previous section
+we just gave you the PDEs without any proof of where they came from.  In this section
+we'll give a more analytic introduction to most of the primary partial
+differential equations of interest in basic mathematical physics.  We will make reference
+to Fick's Law for mass transport and Fourier's Law for thermal transport, so interested
+readers should dig deeper by examining the relevant Wikipedia pages.
+  
+Conservation laws pervade all of physics -- conservation of energy, conservation of
+momentum, and conservation of mass.  These laws are sometimes stated colloquially as
+{\it energy (or momentum or mass) can neither be created nor destroyed}, but this phrase
+is not super helpful mathematically.  We start this section with a brief mathematical
+derivation of a {\it general conservation law} to further clarify what we mean
+mathematically.  The resulting general conservation law will be a
+partial differential equation that can be used to mathematically express the physical laws
+of conservation of mass, momentum, or
 energy.
 
 Let $u$ be the quantity you are trying to conserve, $\bq$ be the flux of that quantity,
@@ -69,9 +301,11 @@ Mathematically, this means that
     \label{eqn:global_balance}
 \end{flalign}
 This is a global balance law in the sense that it holds for all volumes $\Omega$.  The
+mathematical 
 troubles here are two fold: (1) there are many integrals, and (2) there are really two variables
 ($u$ and $q$ since $f=f(u,x,t)$) so the equation is not closed.  In order to mitigate
-that fact we apply the divergence theorem to get
+that fact we apply the divergence theorem to the first term on the right-hand side of
+\eqref{eqn:global_balance} to get
 \begin{flalign}
     \pd{ }{t} \iiint_{\Omega} u dV = -\iiint_{\Omega} \nabla \cdot \bq dV +
     \iiint_\Omega f dV.
@@ -91,8 +325,13 @@ be equal and we get the local balance law
     \label{eqn:local_balance}
 \end{flalign}
 
+Equation \eqref{eqn:local_balance} is an expression of the balances of changes in time to
+changes in space of a conserved quantity such as mass, momentum, or energy.  What remains
+is to make clear the meaning and functional form of the flux $\bq$ and the source function
+$f$.
+
 \subsection*{Simplification of the Local Balance Law}
-If equation \eqref{eqn:local_balance} it is often assumed that the system is free of
+In equation \eqref{eqn:local_balance} it is often assumed that the system is free of
 external sources.  In this case we set $f$ to zero and obtain the source-free balance law
 \begin{flalign}
     \pd{u}{t} + \nabla \cdot \bq = 0.
@@ -116,26 +355,33 @@ independent of space, time, and concentration) gives
     \pd{C}{t} = k \nabla \cdot \nabla C. 
     \label{eqn:fick2_simp}
 \end{flalign}
-In the presenence of external sources of mass, \eqref{eqn:fick2_simp} is
+In the presence of external sources of mass, \eqref{eqn:fick2_simp} is
 \begin{flalign}
     \pd{C}{t} = k \nabla \cdot \nabla C + f(x).
     \label{eqn:fick3}
 \end{flalign}
-\begin{problem}
-    What does \eqref{eqn:fick3} equation look like in terms of spatial derivatives on the
-    right-hand side?
-    \begin{flalign*}
-        \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-        \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
-        \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
-    \end{flalign*}
-\end{problem}
+Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fick3} we get
+\begin{flalign}
+    \pd{C}{t} = k\left( \pdd{C}{x} + \pdd{C}{y} + \pdd{C}{z} \right) + f(x)
+    \label{eqn:fick3_expanded}
+\end{flalign}
+where the reader should note that this can be easily simplified in 1 or 2 spatial
+dimensions.
+% \begin{problem}
+%     What does \eqref{eqn:fick3} equation look like in terms of spatial derivatives on the
+%     right-hand side?
+%     \begin{flalign*}
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
+%     \end{flalign*}
+% \end{problem}
 
 \subsection*{Energy Balance}
 The energy balance equation is essentially the same as the mass balance equation.  If $u$
 is temperature then the flux of temperature is given by Fourier's Law for heat conduction
 \begin{flalign}
-    q = -k\nabla T.
+    \bq = -k\nabla T.
     \label{eqn:fourier}
 \end{flalign}
 Making the same simplifications as in the mass balance equation we arrive at
@@ -148,15 +394,23 @@ In the presence of external sources of heat, \eqref{eqn:fourier2} becomes
     \pd{T}{t} = k \nabla \cdot \nabla T + f(x).
     \label{eqn:fourier3}
 \end{flalign}
-\begin{problem}
-    What does \eqref{eqn:fourier3} equation look like in terms of spatial derivatives on the
-    right-hand side?
-    \begin{flalign*}
-        \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-        \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)}\\
-        \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
-    \end{flalign*}
-\end{problem}
+Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fourier3} we get
+\begin{flalign}
+    \pd{T}{t} = k\left( \pdd{T}{x} + \pdd{T}{y} + \pdd{T}{z} \right) + f(x)
+    \label{eqn:fourier3_expanded}
+\end{flalign}
+where the reader should note that this can be easily simplified in 1 or 2 spatial
+dimensions.
+% \begin{problem}
+%     What does \eqref{eqn:fourier3} equation look like in terms of spatial derivatives on the
+%     right-hand side?
+%     \begin{flalign*}
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)}\\
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
+%     \end{flalign*}
+% \end{problem}
+
 
 
 \subsection*{Laplace's Equation and Poisson's Equation}
@@ -177,9 +431,10 @@ of minimal energy.
 Equation \eqref{eqn:laplace} is sometimes denoted as $\nabla \cdot \nabla u = \nabla^2 u =
 \Delta u$, and in terms of the partial derivatives it is written as
 \begin{flalign*}
-    0 &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-    0 &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
-    0 &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)} 
+    \pdd{u}{x} + \pdd{u}{y} + \pdd{u}{z} = 0.
+% V    0 &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%     0 &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
+%     0 &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)} 
 \end{flalign*}
 
 If there is a time-independent external source the right-hand side of
@@ -190,7 +445,7 @@ If there is a time-independent external source the right-hand side of
 \end{flalign}
 Note that the negative on the right-hand side comes from the fact that
 $\pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ and $\pd{u}{t} \to 0$.  Technically we are
-taking absorbing the constant $k$ into $f$ (that is ``$f$'' is really ``$f/k$'').  Also
+absorbing the constant $k$ into $f$ (that is ``$f$'' is really ``$f/k$'').  Also
 note that in many instances the value of $k$ is not constant and cannot therefore be pulled
 out of the derivative without a use of the product rule.
 
@@ -202,14 +457,17 @@ Let's summarize:
         The Heat Equation & $\ds \pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Diffusion \\
         Laplace's Equation & $\ds k \nabla \cdot \nabla u =-f(x)$ & Minimal Energy
         Surfaces \\
-        The Wave Equation & $\ds \pdd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Wave
-        phenomena \\
+%         The Wave Equation & $\ds \pdd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Wave
+%         phenomena \\
         \hline
     \end{tabular}
 \end{center}
 
+Further discussion of the origins of the wave equation and other interesting PDE's is left
+to the reader.
 
-\section{Boundary Conditions}
+
+\newpage\section{Boundary Conditions}
 When we were solving ODEs we typically needed initial conditions to tell us where the
 solutions starts at time 0.  Since PDEs require both spatial and temporal information we
 need to tell the differential equation how to behave both at time zero and on the
@@ -241,7 +499,8 @@ boundaries of the domain.
 \end{definition}
 
 
-\section{1D and 2D Heat Equation}
+
+\newpage\section{1D and 2D Heat Equation}
 In this section we'll use a technique called {\it the finite difference method} to find
 numerical approximations to the heat equation
 \[ u_t = k \nabla \cdot \nabla u + f(x). \]
@@ -262,12 +521,12 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
     and we can approximate the derivatives with an Euler-type approximation of the time
     and a central difference in space:
     \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = \kappa \left( \frac{U_{i+1}^n - 2U_i^n +
-    U_{i+1}^n}{\Delta x^2} \right). \]
+    U_{i-1}^n}{\Delta x^2} \right). \]
     Here we are taking $U_i^n \approx u(t_n,x_i)$ (superscripts represent time step and
     subscripts represent spatial steps).  Rearranging we see that 
     \begin{flalign}
         U_i^{n+1} = U_i^n + \frac{\kappa \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2U_i^n +
-        U_{i+1}^n \right). \label{eqn:heat_euler}
+        U_{i-1}^n \right). \label{eqn:heat_euler}
     \end{flalign}
 
     Implement \eqref{eqn:heat_euler} in MATLAB to approximate the solution to the
@@ -287,7 +546,41 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
     t}{\Delta x^2}$.
 \end{problem}
 
+\begin{thm}[Stability of Finite Differences for the Heat Equation]
+    Consider the 1D Heat Equation $u_t = \kappa u_{xx}$.  In the finite difference scheme for the 1D heat equation
+    \[ U_i^{n+1} = U_i^n + \frac{\kappa \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2 U_i^n +
+    U_{i-1}^n\right) \]
+    the solution will be stable for
+    \[ \frac{\kappa \Delta t}{\Delta x^2} < \underline{\hspace{1in}} \]
+\end{thm}
+\begin{proof}
+    For a detailed proof of this fact we need to use a method called {\it Von Neumann
+    Analysis}.  See a detailed proof
+    \href{https://en.wikipedia.org/wiki/Von_Neumann_stability_analysis}{HERE}.
+\end{proof}
 
+
+\begin{problem}
+    Modify your 1D heat equation code to solve the following problems.  For each be sure
+    to classify the type of boundary conditions given.
+    \begin{enumerate}
+        \item[(a)] Solve $u_t = 0.5 u_{xx}$ with $x \in (0,1)$, $u(0,x) = x^2$, $u(t,0) =
+            0$ and $u(t,1) = 1$.
+        \item[(b)] Solve $u_t = 0.5 u_{xx}$ with $x \in (0,1)$, $u(0,x) = x^2$, $u_x(t,0) =
+            0$ and $u(t,1) = 1$.
+        \item[(c)] Solve $u_t = 0.5 u_{xx}$ with $x \in (0,1)$, $u(0,x) = \sin(2\pi x)$, $u(t,0) =
+            0$ and $u(t,1) = \sin(5\pi t)$.
+        \item[(d)] Solve $u_t = 0.5 u_{xx}+x^2$ with $x \in (0,1)$, $u(0,x) = \sin(2\pi x)$, $u(t,0) =
+            0$ and $u(t,1) = 0$.
+    \end{enumerate}
+\end{problem}
+
+The next problem addresses the issue of stability in solving the heat equation with the
+finite difference method.  There are MANY different techniques for dealing with stability
+issues in numerical partial differential equations, and surprisingly enough we can never
+completely beat these issues.  That is to say that no matter how sophisticated of a method
+you use there will always be some region where the parameters of the problem give rise to
+instability.
 \begin{problem}
     The instabilities of the heat equation with and Euler-type time discretization and a
     central differencing scheme is maddening.  Thankfully, we can avoid this issue almost
@@ -336,7 +629,14 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
     very careful of the stability conditions for the heat equation.  
 \end{problem}
 
-\section{1D and 2D Wave Equation}
+\begin{problem}
+    Repeat the previous exercise with different boundary conditions (both Dirichlet and
+    Neumann) and with different domains (rectangular instead of square).  For a
+    rectangular domain it will likely be necessary to have different values for $\Delta
+    x$ and for $\Delta y$. Be prepared to present your solutions to your classmates.
+\end{problem}
+
+\newpage\section{1D and 2D Wave Equation}
 \begin{problem}
    The problems that we've dealt with thus far all model natural diffusion processes: heat
    transport, molecular diffusion, etc.  Another interesting physical phenomenon is that
@@ -388,7 +688,7 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
 \end{problem}
 
 
-\section{Traveling Waves}
+\newpage\section{Traveling Waves}
 
 \begin{problem}
     A traveling wave can be modeled by the PDE
@@ -436,7 +736,7 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
 % *******************************
 
 
-\section{1D and 2D Steady State PDEs}
+\newpage\section{1D and 2D Steady State PDEs}
 \begin{problem}
     Consider a 1-dimensional rod that is infinitely thin and has unit length.  For the
     sake of simplicity assume the following:
@@ -532,7 +832,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 
 
 
-\section{Exercises}
+\newpage\section{Exercises}
 
 \begin{problem}
     In this problem we will solve a more realistic 1D heat equation.  We will allow the
@@ -561,9 +861,25 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 
 \end{problem}
 \hint{
-    Since you are solving the head equation you should be using centered finite
+    Since you are solving the heat equation you should be using centered finite
     differences.
 }
+
+\begin{problem}[The Diffusing Logo]
+    In a square domain create a function $u(0,x,y)$ that looks like your college logo.
+    The simplest way to do this might be to take a photo of the logo, crop it to a square,
+    and use the \mcode{imread} command to read in the image.  Use this function as the
+    initial condition for the heat equation on a square domain with homogeneous Dirichlet
+    boundary conditions.  Numerically solve the heat equation and show an animation for
+    what happens to the logo as time evolves.
+\end{problem}
+
+\begin{problem}[The Wiggling Logo]
+    Repeat the previous exercise but this time solve the wave equation with the logo as the
+    initial condition.
+\end{problem}
+
+
 
 
 \begin{problem}
