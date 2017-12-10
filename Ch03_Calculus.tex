@@ -1,7 +1,9 @@
 \chapter{Numerical Calculus}
 In this brief chapter we discuss techniques for approximating the two primary computations
 in calculus: taking derivatives and evaluating definite integrals. Throughout this chapter
-we will make heavy use of Taylor's Theorem to build these approximations. 
+we will make heavy use of Taylor's Theorem to build these approximations. At the end of
+the chapter we'll examine a numerical technique for solving optimization problems without
+explicitly finding derivatives.  
 
 
 \section{Numerical Differentiation}
@@ -419,7 +421,7 @@ into small pieces and running this process on each piece.
         \item Approximate the integral as
             \[ \int_a^b f(x) dx = \sum_{j=1}^n A_j \]
     \end{enumerate}
-    Draw a picture depicting how the trapezoidal rule works.
+    Draw a picture depicting how Simpson's rule works.
 \end{problem}
 
 \begin{problem}
