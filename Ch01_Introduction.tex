@@ -1,4 +1,11 @@
 \chapter{Introductory Topics}
+\begin{quote}
+    ``In the 1950s and 1960s, the founding fathers of [Numerical Analysis] discovered that inexact
+    arithmetic can be a source of danger, causing errors in results that `ought' to be
+    right.'' \\
+    \\ Lloyd N. Trefethen (2006)
+\end{quote}
+
 The field of Numerical Analysis is really the study of how to take
 mathematical problems and perform them efficiently and accurately on a computer.  There
 are some problems where numerical analysis doesn't make much sense (e.g. finding an
@@ -10,13 +17,16 @@ computational methods that result in a plot of an approximate solution can be ma
 quickly and likely give enough of a solution to be usable.  
 
 In this chapter we will discuss some of the basic underlying ideas behind the scenes in
-Numerical Analysis.  Particularly, we need to know how a computer stores numbers and when that
-storage can get us into trouble.  On a more mathematical side, we offer a brief review of
-the Taylor Series in this chapter. The Taylor Series underpins many of our approximation
-methods in this class; so much so that we could easily rename the course: {\it Applied Taylor
+Numerical Analysis, and the essence of the  above quote will be part of the focus of this chapter.
+Particularly, we need to know how a computer stores numbers and when that storage can get
+us into trouble.  On a more mathematical side, we offer a brief review of the Taylor
+Series in this chapter. The Taylor Series underpins many of our approximation methods in
+this class; so much so that we could easily rename the course: {\it Applied Taylor
 Series}.  Finally, at the end of this chapter we provide several coding exercises that
 will help you to develop your programming skills.  It is expected that you know some of
-the basics of MATLAB programming before beginning this class.  Trust me, you'll have more
+the basics of MATLAB programming before beginning this class.  If you need to review the
+basics the see the Scientific Computing with MATLAB text cited in the bibliography of
+these notes \cite{SciCompMATLAB}.  Trust me, you'll have more
 than just the basics by the end.
 
 \begin{center}
@@ -45,36 +55,79 @@ Why have the computer gods failed you?   More importantly, what happened on the 
 The simplest answer is that $1/10$ is not computer representable.
 }
 
+\begin{problem}
+    Now what happens with this problem when you start with $x_0 = 1/8$?
+\end{problem}
+
 A computer stores numbers using base 2, called a binary number system.  Let's first
-discuss our more familiar base 10 system.  What do the digits in the number $135$ really
+discuss our more familiar base 10 system.  What do the digits in the number ``$135$'' really
 mean?  A moment's reflection likely reveals that 
 \[ 135 = 100 + 30 + 5 =  1 \times 10^2 + 3 \times 10^1 + 5 \times 10^0. \]
-In other words, the location of the digit (as read from the right-hand side of the number
-starting at 0) is the power on the base, 10.  Similarly
+We use what is commonly called a {\it positional number system}.  In such a system, the
+position of the number indicates the power of the base, and the value of the digit itself
+tells you the multiplier of that power.
+% In other words, the location of the digit (as read from the right-hand side of the number
+% starting at 0) is the power on the base, 10.  Similarly
+The number ``48329'' can therefore be interpreted as
 \[ 48329 = 40000 + 8000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 0
 \times 10^0. \]
 
-Now let's switch to binary.  In a binary number system the base is 2 so the only allowable
-digits are 0 and 1.  Similar to the base-10 system, the number $101101$ can be interpreted
+Now let's switch to the number system used by computers: the binary number system.  In a binary number system the base is 2 so the only allowable
+digits are 0 and 1.  In binary (base-2), the number ``$101101$'' can be interpreted
 as
 \[ 101101_2 = 1 \times 2^5 + 0 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1
 \times 2^0 \]
 (where the subscript ``2'' indicates the based to the reader).
 If we put this back into base 10 (so that we can read it more comfortably) we get
-\[ 101101_2 = 32 + 0 + 8 + 4 + 0 + 1 = 45. \] 
+\[ 101101_2 = 32 + 0 + 8 + 4 + 0 + 1 = 45_{10}. \] 
 
 \begin{problem}
 Convert to following numbers from base 10 to base 2 or visa versa.
     \begin{itemize}
         \item Write $12_{10}$ in binary \solution{
-                \[ 12_{10} = 8+4 = 1\cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 0 \cdot 2^0 = 1100_2\]
+                \[ 12_{10} = 8+4 = 1\times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 0 \times 2^0 = 1100_2\]
+            }
+
+        \item Write $11_{10}$ in binary 
+            \solution{The number ``11'' in base 10 is 
+                \[ 11_{10} = 8+2+1 = 1 \times 2^3 + 0\times 2^2 + 1 \times 2^1 + 1 \times
+                2^0 = 1011_{2} \]
+            }
+        \item Write $23_{10}$ in binary
+            \solution{
+                \[ 23_{10} = 16 + 4 + 2 + 1 = 2^4 + 2^2 + 2^1 + 2^0 = 10111_2. \]
+            }
+
+        \item Write $11_2$ in base 10
+            \solution{
+                The number ``$11_2$'' is 
+                \[ 11_2 = 1 \times 2^1 + 1 \times 2^0 = 2+1 = 3_{10}. \]
             }
 
         \item What is $100101_2$ in base $10$? \solution{
-                \[ 100101_2 = 1 \cdot 2^0 + 0 \cdot 2^1 + 1 \cdot 2^2 + 0 \cdot 2^3 + 0 \cdot 2^4 + 1 \cdot 2^5 = 1 + 4 + 32 = 37 \]
+                \[ 100101_2 = 1 \times 2^0 + 0 \times 2^1 + 1 \times 2^2 + 0 \times 2^3 + 0 \times 2^4 + 1 \times 2^5 = 1 + 4 + 32 = 37 \]
             }
     \end{itemize}
 \end{problem}
+
+\begin{problem}
+    Converting base 2 numbers to base 10 is relatively easy; expand in powers of 2 and add
+    up the results.  Converting base 10 numbers to base 2 is a little bit more
+    interesting.  Describe the technique that you used to convert the numbers $12$, $11$,
+    and $23$ into base 2 in the previous problem.  
+\end{problem}
+
+
+\begin{example}
+    Convert the number 137 from base 10 to base 2. \\{\bf Solution:} 
+    \begin{flalign*}
+        137_{10} &= 128 + 8 + 1 \\
+        &= 2^7 + 2^3 + 2^0 \\
+        &= 1 \times 2^7 + 0 \times 2^6 + 0 \times 2^5  + 0 \times 2^4  + 1 \times 2^3  + 0
+        \times 2^2  + 0 \times 2^1  + 1 \times 2^0  \\
+        &= 10001001_2
+    \end{flalign*}
+\end{example}
 
 Next we'll work with fractions and decimals.  For example, let's take the base 10 number
 $5.341_{10}$ and expand it out to get
@@ -119,9 +172,14 @@ We can do a similar thing with binary decimals.
         0.10100010100011110101110000\dots_2$}
     \end{enumerate}
 \end{problem}
+\begin{problem}
+    Based on your previous problem write an algorithm that will convert base-10 decimals
+    (less than 1) to base decimal expansions.
+\end{problem}
+
 
 \begin{problem}
-    Use \mcode{=if( )} in Excel to create a spreadsheet that uses the process from the
+    Use the ``\mcode{=if( )}'' command in Excel to create a spreadsheet that uses the process from the
     previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
 \end{problem}
 
@@ -150,8 +208,8 @@ b
 }
 
 \begin{problem}
-    Convert the base 10 fraction $1/10$ into binary.  How does your solution relate to
-    problems \ref{prob:base_10_faila} - \ref{prob:base_10_failc}?
+    Convert the base 10 fraction $1/10$ into binary.  Use your solution to fully describe
+    what went wrong in problems \ref{prob:base_10_faila} - \ref{prob:base_10_failc}?
 \end{problem}
 \solution{
     \[ \frac{1}{10} = 0.0001100110011001100110011\dots \]
@@ -183,27 +241,40 @@ computer.
             written in this way, what three things do you suppose a computer needs to
             store for any given number? \solution{The sign, the digits after the decimal
             place, and the exponent}
+        \item[(c)] Using your answer to part (b), what would a computer need to store for
+            the binary number $x=10001001.1100110011_2$?
     \end{enumerate}
 \end{problem}
 
 For any number $x$ we can write
 \[ x = (-1)^{s} \times (1+ m) \times 2^E \]
 where $s \in \{0,1\}$ is called the {\it sign bit} and $m$ is a binary number such that $0
-\le m < 1$
-For example: 
-\begin{itemize}
-\item For the number $7_{10}=111_2 = 1.11 \times 2^2$ we have $s=0$, $m=0.11$ and $E=2$.
-\item For the number $-7_{10}=111_2 = -1.11 \times 2^2$ we have $s=1$, $m=0.11$ and $E=2$.
-\item For the number $\frac{1}{10} = 0.000110011001100\cdots = 1.100110011 \times 2^{-4}$
-    we have $s=0$, $m=0.100110011\cdots$, and $E = -4$.
-\end{itemize}
-
-
+\le m < 1$.
 \begin{definition}
-    For a number $x = (-1)^{s} \times m \times 2^E$ stored in a computer, the number $m$
+    For a number $x = (-1)^{s} \times (1+m) \times 2^E$ stored in a computer, the number $m$
     is called the {\bf mantissa} or the {\bf significand}, $s$ is known as the sign bit,
     and $E$ is known as the exponent.
 \end{definition}
+\begin{example}
+    What are the mantissa, sign bit, and exponent for the numbers $7_{10}$, $-7_{10}$,
+    and $(0.1)_{10}$? \\{\bf Solution:} 
+    \begin{itemize}
+        \item For the number $7_{10}=111_2 = 1.11 \times 2^2$ we have $s=0$, $m=0.11$ and $E=2$.
+        \item For the number $-7_{10}=111_2 = -1.11 \times 2^2$ we have $s=1$, $m=0.11$ and $E=2$.
+        \item For the number $\frac{1}{10} = 0.000110011001100\cdots = 1.100110011 \times 2^{-4}$
+            we have $s=0$, $m=0.100110011\cdots$, and $E = -4$.
+    \end{itemize}
+\end{example}
+
+In the last part of the previous example we saw that the number $(0.1)_{10}$ is actually a
+repeating decimal in base-2.  This means that in order to completely represent the number
+$(0.1)_{10}$ in base-2 we need infinitely many decimal places.  Obviously that can't
+happen since we are dealing with computers with finite memory.  Over the course of the
+past several decades there have been many systems developed to properly store numbers.
+The IEEE standard that we now use is the accumulated effort of many computer scientists,
+much trial and error, and deep scientific research.  We now have three standard precisions
+for storing numbers on a computer: single, double, and extended precision.  The double
+precision standard is what most of our modern computers use.
 
 \begin{definition}[Computer Precision Standards]
     There are three standard precisions for storing numbers in a computer.
@@ -224,20 +295,18 @@ For example:
     precision for that computer then $1+\epsilon$ is the next largest number that can
     be stored with that machine. 
 \end{definition}
-For all practical purposes
-the computer cannot tell the difference between two numbers if the difference is smaller
-than machine precision. This is of the utmost important when you want to check that
-something is ``zero'' since a computer
-just cannot know the difference between $0$ and $\epsilon$.
-
+For all practical purposes the computer cannot tell the difference between two numbers if
+the difference is smaller than machine precision. This is of the utmost important when you
+want to check that something is ``zero'' since a computer just cannot know the difference
+between $0$ and $\epsilon$.
 As a side note: You can determine the working precision in MATLAB by typing ``eps'' in the
 command line.
 
 
 
 \begin{problem}
-Let's play with a small computer system where each number is stored in the following
-    format:
+    To make all of these ideas concrete let's play with a small computer system where each
+    number is stored in the following format:
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
@@ -306,15 +375,22 @@ this number is
 More can be said about floating point numbers such as how we store infinity, how we store
 NaN, and how we store 0.  The
 \href{https://en.wikipedia.org/wiki/Floating-point_arithmetic}{Wikipedia page for floating
-point arithmetic} might be an intersting read for the curious student.
+point arithmetic} might be an interesting read for the curious student.
 
 
 
 
 \newpage\section{The Taylor Series}
+Now we turn our attention in this introduction to something more mathematical.  The Taylor
+Series is a mathematical tool that is widely used in approximation theory, and since a 
+computer can only make approximations we need ways to approximate functions so that a
+computer can understand them. The Taylor Series will be just the right tool for our
+purposes.
 
-Consider the function $f(x) = e^x$.  Euler's number, $e$, is irrational and
-potentially difficult for a computer to work with directly.  How, do you suppose, does
+Consider the function $f(x) = e^x$.  Euler's number
+\[ e = 2.718281828459045\cdots \]
+is irrational and
+impossible for a computer to represent directly.  How, do you suppose, does
 a computer actually {\it understand} a function like $e^x$ (or any other
 transcendental function for that matter)? \\
 Answer: Polynomials! \\
@@ -326,6 +402,7 @@ Let's get a feel for how we approximate functions like $f(x) = e^x$ with a simpl
 exercise. In the following exercise we will build a polynomial function with certain
 properties to {\it match} the exponential function.
 \begin{problem}\label{prob:taylor_intro}
+    Let $f(x) = e^x$.
     \begin{enumerate}
         \item[(a)] Find a linear function of the form $g(x) = a_0 + a_1 x$ such that $g(0)
             = f(0)$ and $g'(0) = f'(0)$. \solution{
@@ -371,6 +448,39 @@ infinite sum of power functions
 in some neighborhood of $x=a$. 
 \end{definition}
 
+One should keep in mind that the Taylor Series for a function may not make sense on the
+whole real line even if the function's domain is the entire real line.  To determine the
+radius of convergence for a Taylor Series we should recall the Ratio Test from Calculus
+(see \href{http://faculty.gvsu.edu/boelkinm/Home/AC/sec-8-3-series.html}{Section 8.3 of
+the Active Calculus Text})
+and observe that the Taylor Series for a function $f(x)$ converges under the condition
+that 
+\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)^{k+1}}{(k+1)!}
+\frac{k!}{f^{(k)}(a) (x-a)^k} \right| < 1. \]
+Simplifying the fractions gives 
+\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)}{f^{(k)}(a) (k+1) } \right|<1. \]
+The values of $x$ that satisfy this limit are called the {\it domain of convergence} for
+the Taylor Series.
+\begin{example}
+    Find the domain of convergence of the Taylor Series for the exponential function $f(x)
+    = e^x$. \\{\bf Solution:} \\
+    For simplicity we will take the Taylor series to be centered at $a=0$.  We know that 
+    \[ f(x) = e^x = \sum_{k=0}^\infty \frac{x^k}{k!} \]
+    so we need to determine the following limit.
+    \[ \lim_{k \to \infty} \left| \frac{x^{k+1}}{(k+1)!} \frac{k!}{x^k} \right|. \]
+    Simplifying the fractions inside the absolute values gives
+    \[ \lim_{k \to \infty} \left| \frac{x}{(k+1)} \right| \]
+    which for every $x \in \mathbb{R}$ we see that 
+    \[ \lim_{k \to \infty} \left| \frac{x}{(k+1)} \right| = 0 < 1. \]
+    Therefore, for every value of $x \in \mathbb{R}$ we know that the Taylor Series for
+    $e^x$ converges to the actual function. Hence the ``$=$'' sign that we used in the
+    beginning of this solution is actually valid for every $x$.  Be careful since this is
+    not true for all functions.
+\end{example}
+
+
+
+
 \begin{problem}
     Write MATLAB code to show successive approximations of the function $f(x) = e^x$ on
     the domain $-1 < x < 1$ using a Taylor series centered at $a=0$.  Write your code so
@@ -379,11 +489,23 @@ in some neighborhood of $x=a$.
     at $a=0$.
 \end{problem}
 
+\begin{problem}
+    Consider the function $f(x) = \frac{1}{1+x^2}$.  
+    \begin{enumerate}
+        \item[(a)] Build the Taylor Series for this function centered at $a=0$.
+        \item[(b)] Using the previous example as a guide find the domain of convergence
+            for the Taylor Series.
+        \item[(c)] Modify your MATLAB code from the previous problem to demonstrate the
+            fact that $f(x) = \frac{1}{1+x^2}$ does not have an infinite domain of
+            convergence.
+    \end{enumerate}
+\end{problem}
 
-The great thing about the Taylor Series is that it allow for the
-approximation of smooth functions as polynomials and polynomials are easily dealt with on
+
+The great thing about the Taylor Series is that it allows for the
+approximation of smooth functions as polynomials -- and polynomials are easily dealt with on
 a computer. The down side is that the sum is infinite.  Hence, every time we use a Taylor
-series on a computer we are actually going to be using a truncated Taylor series where we
+series on a computer we are actually going to be using a truncated Taylor Series where we
 only take a certain number of terms.  
 
 % \begin{problem}
@@ -392,7 +514,7 @@ only take a certain number of terms.
 
 
 \begin{thm}[Taylor's Theorem]
-    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous on {\it near} $a$ and let $f^{(n+1)}(x)$
+    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous {\it near} $a$ and let $f^{(n+1)}(x)$
     exist for all $x$ {\it near} $x=a$.  Then there is a number $\xi$ between $x$ and $a$
     such that 
     \begin{flalign}
@@ -434,7 +556,7 @@ restate Taylor's theorem here with $a=0$.
     \approx 1$. \\{\bf Solution:} 
     The remainder function gives us that there exists a number $\xi$ such that $0 < \xi <
     1$ and the remainder in the Taylor series is
-    \[ R_3(x) = \frac{f^{(3)}(\xi)}{4!}(x-0)^3 = \frac{e^\xi}{3!}x^3. \]
+    \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}(x-0)^3 = \frac{e^\xi}{3!}x^3. \]
     Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6} \approx 0.45$. In Figure
     \ref{fig:taylor_thm_exp} we see that the error is indeed less than this.
     Indeed, $f(1) = 2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
@@ -490,7 +612,7 @@ right-hand plot shows a zoomed in view near the point $x=1$.}
     \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}x^3 \]
     where $\xi$ is some number such that $0 < \xi < 0.5$.  Therefore, $R_3(0.5) =
     \frac{-\cos(\xi)}{6} \cdot (0.125) \approx -0.028 \cos(\xi)$ and since $|\cos(x)|\le
-    1$ we know that hte error will be less than $0.028$ (approximately) when using the
+    1$ we know that the error will be less than $0.028$ (approximately) when using the
     engineer's approximation of sine at $0.5$.
 }
 \begin{figure}[ht!]
@@ -609,7 +731,7 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
     get should be familiar!
 \end{problem}
 
-\begin{problem}
+\begin{problem}[modified from \cite{Chartier}]
     In the 1999 movie {\it Office Space}, a character creates a program that takes
     fractions of cents that are truncated in a bank's transactions and deposits them to
     his own account.  This is idea has been attempted in the past and not well that banks
@@ -651,7 +773,7 @@ accounts = floor(100*accounts)/100;
 }
 
 
-\begin{problem}
+\begin{problem}[modified from \cite{Chartier}]
     In the 1991 Gulf War, the Patriot missle defense system failed due to roundoff error.
     The troubles stemmed from a computer that performed the tracking calculations with an
     internal clock whose integer values in tenths of a second were converted to seconds by
