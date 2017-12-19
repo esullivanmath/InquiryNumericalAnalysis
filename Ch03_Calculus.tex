@@ -122,7 +122,7 @@ have the following definition.
 \end{problem}
 
 \begin{problem}
-    Writet MATLAB code that takes a function and a domain $(xmin,xmax)$ and
+    Write MATLAB code that takes a function and a domain $(xmin,xmax)$ and
     returns a numerical approximation to the derivative on the interval
     $(xmin,xmax)$. Your function should accept an anonymous function handle, the
     bounds on the domain, and the number of interior points used for approximation within
@@ -163,7 +163,9 @@ subplot(1,2,2)
 plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 \end{lstlisting}
     \end{enumerate}
-    Discuss how you can see the fact that this is a first order method.
+    Discuss how you can see the fact that this is a first order method.  You may want to
+    put one (or both) of the plots on a log-log scale or a semi-log scale \ldots I'll let
+    you figure out which one makes the most sense.
 \end{problem}
 
 
@@ -239,7 +241,7 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 \end{problem}
 
 
-\begin{problem}
+\begin{problem}\label{prob:numdiff4}
     Add the Taylor series for $f(x+h)$ and $f(x-h)$ to arrive at an approximation of the
     second derivative. What is the order of the error?  
 \end{problem}
@@ -557,60 +559,15 @@ ascent} and follow the positive gradient instead of the negative gradient.
 \end{problem}
 
 \newpage\section{Exercises}
-% \begin{problem}
-%     {\bf Coding Challenge:} The four adjacent digits in the 1000-digit number that have
-%     the greatest product are $9 \times 9 \times 8 \times 9 = 5832$.
-% 
-%     \begin{center}
-%     73167176531330624919225119674426574742355349194934\\
-%     96983520312774506326239578318016984801869478851843\\
-%     85861560789112949495459501737958331952853208805511\\
-%     12540698747158523863050715693290963295227443043557\\
-%     66896648950445244523161731856403098711121722383113\\
-%     62229893423380308135336276614282806444486645238749\\
-%     30358907296290491560440772390713810515859307960866\\
-%     70172427121883998797908792274921901699720888093776\\
-%     65727333001053367881220235421809751254540594752243\\
-%     52584907711670556013604839586446706324415722155397\\
-%     53697817977846174064955149290862569321978468622482\\
-%     83972241375657056057490261407972968652414535100474\\
-%     82166370484403199890008895243450658541227588666881\\
-%     16427171479924442928230863465674813919123162824586\\
-%     17866458359124566529476545682848912883142607690042\\
-%     24219022671055626321111109370544217506941658960408\\
-%     07198403850962455444362981230987879927244284909188\\
-%     84580156166097919133875499200524063689912560717606\\
-%     05886116467109405077541002256983155200055935729725\\
-%     71636269561882670428252483600823257530420752963450
-% \end{center}
-% 
-%     Write code to find the thirteen adjacent digits in the 1000-digit number that have the
-%     greatest product. What is the value of this product?
-% \end{problem}
-% \hint{%Source: Project Euler Problem \#8: 
-%     Solution: 23514624000.  Be sure to write code to find this.}
-
-
-\begin{problem}
-    The number 2520 is the smallest number that can be divided by each of the
-    numbers from 1 to 10 without any remainder.  Write code to find the smallest positive
-    number that is evenly divisible by all of the numbers from 1 to 20?
-\end{problem}
-\hint{% Source: Project Euler Problem \#5: 
-    Solution: 232792560. You may want to use modular division.  The code \mcode{mod(a,b)}
-    will give the remainder when $a$ is divided by $b$.  If the answer is 0 then $a$ can
-be divided by $b$.  For example, \mcode{mod(6,2)} is 0 since 6 is divisible by 2, and
-\mcode{mod(7,3)} is 1 since 7 divided by 3 is 2 with a remainder of 1.
-
-In this problem you should not be doing an exhaustive search.  
-}
 
 \begin{problem}
     For each of the following numerical differentiation formulas (1) prove that the
-    formula is true, and (2) find the order of the method. To prove that each of the
+    formula is true and (2) find the order of the method. To prove that each of the
     formulas is true you will need to write the Taylor series for all of the terms in the
     numerator on the right and then simplify to solve for the necessary derivative.  The
-    highest power of the remainder should reveal the order of the method.
+    highest power of the remainder should reveal the order of the method.  It would be
+    very wise to redo problems \ref{prob:numdiff1} - \ref{prob:num_diff_first_order},
+    \ref{prob:numdiff3}, and \ref{prob:numdiff4} before beginning this problem.
     \begin{enumerate}
         \item[(a)] $\ds f'(x) \approx \frac{\frac{1}{12} f(x-2h) - \frac{2}{3} f(x-h) +
             \frac{2}{3} f(x+h) - \frac{1}{12} f(x+2h)}{h}$
@@ -709,7 +666,8 @@ In this problem you should not be doing an exhaustive search.
             \[ f(t) = \frac{22.8 \text{cars/min}}{3.5 + 7(t-1.25)^4}, \]
             where $t=0$ at 4pm, and is measured in hours.  Estimate the total number of
             cars that cross the bridge betwee 4 and 6pm.  Make sure that your estimate has
-            an error less than 5\%.
+            an error less than 5\% and provide sufficient mathematical evidence of your
+            error estimate.
     \end{enumerate}
 \end{problem}
 

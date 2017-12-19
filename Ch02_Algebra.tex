@@ -1,4 +1,4 @@
-\chapter{Numerical Algebra -- Approximating Roots}
+\chapter{Numerical Root Finding}
 In this chapter we want to solve algebraic equations using a computer.  Consider the equation
 $\ell(x) = r(x)$ (where $\ell$ and $r$ stand for left and right respectively).  To solve
 this equation we can first rewrite it by subtracting the right-hand side from the left to
@@ -7,8 +7,13 @@ get
 For example, if we want to solve $\sin(x) + 9 = x^2 - \tan(x)$ then this is the same as
 solving $(\sin(x) + 9 ) - (x^2 - \tan(x)) = 0$ (please don't try to solve this one by
 hand!).  Hence, we can write $f(x)=\ell(x)-r(x)$
-and observe that every algebraic equation can be written as
-\[ \text{if } f(x) = 0 \quad \text{find } x. \]
+and observe that \underline{every} algebraic equation can be written as: ``if $f(x) = 0$,
+find $x$''.  We illustrate this idea in Figure \ref{fig:initial_root_example}.  On the
+left-hand side of Figure \ref{fig:initial_root_example} we see the solutions to the
+equation $\sin(x) + 9 = x^2 - \tan(x)$, and on the right-hand side of Figure
+\ref{fig:initial_root_example} we see the solutions to the equation $\left( \sin(x)+0
+\right) - \left( x^2 - \tan(x) \right) = 0$.  From the plots it is apparent that the two
+equations have the same solutions.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -41,13 +46,15 @@ and observe that every algebraic equation can be written as
 
 We now have one way to view every algebraic equation-solving problem.  As we'll see in
 this chapter, if $f(x)$ has certain properties then different numerical techniques for
-solving the equation will apply.
+solving the equation will apply -- and some will be much faster and more accurate than
+others. The following sections give several different techniques for solving algebraic
+equations of the form $f(x) = 0$.
 
-\newpage\section{The Bisection Method}
-
+\section{The Bisection Method}
+Let's start with a theorem from Calculus.
 \begin{thm}[The Intermediate Value Theorem]
-    If $f$ is a continuous function on the closed interval $[a,b]$ and $y_*$ lies between
-    $f(a)$ and $f(b)$, then there is a point $x \in [a,b]$ where $f(x) = y_*$.
+    If $f(x)$ is a continuous function on the closed interval $[a,b]$ and $y_*$ lies between
+    $f(a)$ and $f(b)$, then there exists some point $x_* \in [a,b]$ such that $f(x_*) = y_*$.
     \label{thm:IVT}
 \end{thm}
 
@@ -68,24 +75,34 @@ If $y_*=0$ and $f(x)$ is continuous then we know that there is a solution to the
 equation $f(x) = 0$.
 }
 
+\begin{cor}
+    If $f(x)$ is a continuous function on the closed interval $[a,b]$ and if $f(a)$ and $f(b)$ have opposite
+    signs then from the Intermediate Value Theorem we know that there exists some point
+    $x_* \in [a,b]$ such that \underline{\hspace{1in}}.
+\end{cor}
 
-The following (partial) algorithm, known as the Bisection Method, uses the Intermediate
-Value Theorem to systematically approximate solutions to the algebraic equation $f(x) =
+Theorem \ref{thm:IVT} and its corollary are {\it existence theorems} in the sense that
+they tell us that some point exists.  The annoying thing about mathematical existence
+theorems is that they typically don't tell us {\it how} to find the point that is guaranteed to
+exist -- annoying.
+The following algorithm, known as the Bisection Method, uses the Intermediate
+Value Theorem to systematically approximate the point $x_*$ to solve the algebraic
+equation $f(x_*) =
 0$.
 \begin{algorithm}[The Bisection Method]
-    Assume that $f(x)$ is continuous on the interval $[a,b]$. To make approximations of
+    Assume that $f(x)$ is continuous on the closed interval $[a,b]$. To make approximations of
     the solutions to the equation $f(x) = 0$, do the following:
     \begin{enumerate}
         \item Check to see if $f(a)$ and $f(b)$ have opposite signs
             (why is this important?).\solution{In order for the IVT to apply you must have
             $0$ in between $f(a)$ and $f(b)$.}
-        \item Compute the midpoint $m=(a+b)/2$ and evaluate $f(m)$.
+        \item Compute the midpoint of the closed interval, $m=\frac{a+b}{2}$, and evaluate $f(m)$.
         \item Compare the signs of $f(a)$ vs $f(m)$ and $f(b)$ vs $f(m)$.  Replace one of
-            the endpoints with $m=(a+b)/2$. Which one do you replace and why?
+            the endpoints of the closed interval $[a,b]$ with $m=(a+b)/2$. (Which one do
+            you replace and why?)
             \solution{Replace the endpoint where the function has the same sign as
                 $f(m)$}
-        \item Repeat steps 2 and 3
-        \item Stop when $f(m)$ is {\it close enough} to zero.
+        \item Repeat steps 2 and 3 and stop when $f(m)$ is {\it close enough} to zero.
     \end{enumerate}
 \end{algorithm}
 
@@ -191,8 +208,8 @@ function.  The next algorithm takes a slightly different approach.
                     \right) \]
             }
         \item Find the $x$ intercept of the linear function that you wrote in the previous
-            step.
-            \[ x = \underline{\hspace{2in}} \]
+            step.  Call this point $x=c$.
+            \[ c = \underline{\hspace{2in}} \]
             \solution{
                 \[ 0 - f(a) = \left( \frac{f(b) - f(a)}{b-a} \right) \left( x-a
                     \right) \implies x = a+ \left( \frac{-f(a) (b-a)}{f(b)-f(a)} \right) \]
@@ -202,8 +219,7 @@ function.  The next algorithm takes a slightly different approach.
             do you replace and why?
             \solution{Replace the endpoint where the function has the same sign as
                 $f(c)$}
-        \item Repeat steps 2 - 4.
-        \item Stop when $f(c)$ is {\it close enough} to zero.
+        \item Repeat steps 2 - 4, and stop when $f(c)$ is {\it close enough} to zero.
     \end{enumerate}
 \end{algorithm}
 
@@ -260,8 +276,8 @@ and locating where those tangent lines intersect the horizontal axis.
                 \[ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} \]
             }
         \item Now iterate the process by replacing the labels ``$x_1$'' and ``$x_0$'' in
-            the previous step with $x_{n+1}$ and $x_{n}$.
-            \[ x_{new} = \underline{\hspace{2in}} \]
+            the previous step with $x_{n+1}$ and $x_{n}$ respectively.
+            \[ x_{n+1} = \underline{\hspace{2in}} \]
             \solution{
                 \[ x_{n+1} = x_{n} - \frac{f(x_n)}{f'(x_n)} \]
             }
@@ -273,10 +289,10 @@ and locating where those tangent lines intersect the horizontal axis.
     Draw a picture of what Newton's method does graphically.
 \end{problem}
 
-\begin{problem}
+\begin{problem}\label{prob:newton_fail}
     There are several reasons why Newton's method could fail.  Work with your partners to
     come up with a list of all of the reasons.  Support each of your reasons with a
-    sketch.
+    sketch or an algebraic example.
 \end{problem}
 \solution{
     Newton's method will fail if
@@ -290,7 +306,7 @@ and locating where those tangent lines intersect the horizontal axis.
 
 \begin{problem}
     Write a MATLAB function for Newton's method.  Your function needs to accept an
-    anonymous function handle, the derivative of the anonymous function hand, an initial
+    anonymous function handle, the derivative of $f(x)$ as an anonymous function handle, an initial
     guess, and an optional error
     tolerance. The only output should be the solution to the equation that you are
     solving.  Write a test script to verify that your Newton's method code indeed works.
@@ -298,11 +314,29 @@ and locating where those tangent lines intersect the horizontal axis.
     \mcode{function soln = Newton(f , df , x0 , tol)}
 \end{problem}
 
+\begin{problem}
+    The previous problem required that you calculate the derivative ahead of time for
+    Newton's method.  While this is relatively easy with a computer algebra system it
+    might be easier just to have your function compute the derivative for you.  Write a
+    new MATLAB function for Newton's method that accepts the function as an anonymous
+    function handle, the initial point, and an optional error tolerance.  Your function
+    must compute the derivative symbolically behind the scenes. \\
+    \mcode{function soln = NewtonSymbolic(f, x0, tol)}
+\end{problem}
+
+\begin{problem}
+    In Problem \ref{prob:newton_fail} you constructed several examples of where Newton's
+    method will fail.  Modify your Newton's method code
+    to catch these special cases and warns the user before the method fails.  Test your
+    new code with several of the special cases showing that indeed you were able to catch
+    them properly and give the user appropriate feedback.
+\end{problem}
+
 
 \begin{problem}\label{prob:newton_convergence}
     Newton's Method is known to have a {\it quadratic convergence rate}.  This means that 
     \[ \lim_{k \to \infty} \frac{|x_{k+1} - x_*|}{|x_k - x_*|^2} \]
-    will be constant where $x_*$ is the roots that we're hunting for.  This implies that
+    will be constant where $x_*$ is the root that we're hunting for.  This implies that
     if we plot the error in the new iterate on the $y$-axis and the error in the old
     iterate on the $x$ axis of a log-log plot then we will see a constant slope of 2.
     (stop and verify why this would be true).
@@ -332,6 +366,7 @@ and locating where those tangent lines intersect the horizontal axis.
 Newton's method requires that you have a function and a derivative of that function.  The
 conundrum here is that sometimes the derivative is cumbersome or impossible to obtain but
 you still want to have the great quadratic convergence exhibited by Newton's method.
+
 Recall that Newton's method is
 \[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}. \]
 If we replace $f'(x_n)$ with an approximation of the derivative then we may have a method
@@ -343,8 +378,9 @@ approximation is called a {\bf Quasi-Newton Method}.
     To solve $f(x) = 0$:
     \begin{enumerate}
         \item Determine if there is a root {\it near} an arbitrary starting point $x_0$.
-        \item Pick a second starting point {\it near} $x_0$. (Note: the points $x_0$ and
-            $x_1$ should be close to each other.  The choice here is different than for
+        \item Pick a second starting point {\it near} $x_0$.  Call this second starting
+            point $x_1$. Note well that the points $x_0$ and
+            $x_1$ should be close to each other. (Why?)\\ (The choice here is different than for
             the bisection method)
         \item Use the backward difference 
             \[ f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}} \]
@@ -364,7 +400,10 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \begin{problem}
     Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
-    Secant method.  Also write a test script that clearly shows that your code is working.
+    Secant method. Your function should accept an anonymous function handle, two starting
+    points, and an optional error tolerance.  Also write a test script that clearly shows that your code is working.
+    \\
+    \mcode{function soln = SecantMethod(f, x0, x1, tol)}
 \end{problem}
 
 \begin{problem}
@@ -390,8 +429,16 @@ approximation is called a {\bf Quasi-Newton Method}.
 \end{algorithm}
 
 \begin{problem}
+    The Steffensen method uses a really funky approximation of the derivative.  Draw
+    pictures and choose example functions to explain that choice.
+\end{problem}
+
+\begin{problem}
     Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
-    Steffensen's method.  Also write a test script that clearly shows that your code is working.
+    Steffensen's method.  Your function should accept an anonymous function handle, a
+    starting point, and an optional error tolerance.  Also write a test script that
+    clearly shows that your code is working. \\ 
+    \mcode{function soln = Steffensen(f, x0, tol)}
 \end{problem}
 
 \begin{problem}
@@ -402,31 +449,71 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \newpage\section{Exercises}
 
-\begin{problem}
-    The sum of the squares of the first ten natural numbers is,
-    \[ 1^2 + 2^2 + \dots + 10^2 = 385 \]
-    The square of the sum of the first ten natural numbers is,
-    \[ (1 + 2 + \dots + 10)^2 = 55^2 = 3025 \]
-    Hence the difference between the sum of the squares of the first ten natural numbers
-    and the square of the sum is $3025 - 385 = 2640$.
-
-    Write code to find the difference between the sum of the squares of the first one
-    hundred natural numbers and the square of the sum.  Your code needs to run error free
-    and output only the difference.  
+\begin{problem}[modified from \cite{Chartier}]
+    Implement the following algorithm to create a {\it fractal coastline} -- a collection
+    of line
+    segments that looks like a realistic coastline as viewed from above.
+    \begin{enumerate}
+        \item Begin with one straight line segment from the point $(0,0)$ to the point
+            $(1,0)$.  Make a plot of this line segment using the \mcode{plot( )} command in MATLAB.
+        \item Repeat the following until your image looks like a coastline.
+            \begin{enumerate}
+                \item Find the midpoint of every line segment
+                \item For each midpoint create a new point by adding a random $2 \times 1$ vector to that
+                    midpoint.  The largest allowable size of the random vector needs to be
+                    smaller in each iteration.
+                \item Connect the points with the plot command.  You may want to put a
+                    pause command in your code so you can see the evolution of your
+                    coastline
+            \end{enumerate}
+    \end{enumerate}
+    An example of the first few iterations is shown in the figures below where the red arrows indicate
+    the random $2 \times 1$ vectors, the dashed lines indicate the previous iteration, the
+    red circles indicate the midpoints, and the black circles indicate the new points.  The
+    solid black line is the result of the algorithm at the end of the iteration.  Write
+    MATLAB code to implement this algorithm where the resulting animation shows the
+    evolution of the coastline. 
+%     Hint: It would be helpful to figure out what the code below does before proceeding.
+%     \begin{lstlisting}
+%     xy = [0 , 0 ; 0.45 , 0.8 ; 1 , 1];
+%     newpt = [0.3 , 0.6]
+%     xy = [xy(1,:) ; newpt ; xy(2:end,:)] 
+%     \end{lstlisting}
 \end{problem}
-\hint{
-% Source: Project Euler Prolem \#6:
-    (big hint) the answer is 25164150. Of course you'll have to write code to get this. 
-}
+\begin{center}
+    \begin{tikzpicture}
+        \draw[thick, black] (0,0) circle(0.07cm) -- (10,0) circle(0.07cm)
+        node[anchor=west]{Iteration \#0};
+        \draw[dashed, black] (0,-2) circle(0.07cm) -- (10,-2) circle(0.07cm);
+        \draw[thick, black] (0,-2) circle(0.07cm) --(6,-1.2) circle(0.07cm) -- (10,-2)
+        circle(0.07cm) node[anchor=west]{Iteration \#1};
+        \draw[red] (5,-2) circle(0.07cm);
+        \draw[red, ->] (5,-2) -- (5.85,-1.3);
+        \draw[dashed, black] (0,-4) circle(0.07cm) --(6,-3.2) circle(0.07cm) -- (10,-4) circle(0.07cm);
+        \draw[red, ->] (3,-3.6) -- (3.45,-4.1);
+        \draw[red, ->] (8,-3.6) -- (7.55,-3.2);
+        \draw[red] (3,-3.6) circle(0.07cm);
+        \draw[red] (8,-3.6) circle(0.07cm);
+        \draw[thick, black] (0,-4) circle(0.07cm) -- (3.5,-4.2) circle(0.07cm) -- (6,-3.2)
+        circle(0.07cm) -- (7.5,-3.1) circle(0.07cm) -- (10,-4) circle(0.07cm) node[anchor=west]{Iteration \#2};
+        \draw[dashed, black] (0,-6) circle(0.07cm) -- (3.5,-6.2) circle(0.07cm) -- (6,-5.2)
+        circle(0.07cm) -- (7.5,-5.1) circle(0.07cm) -- (10,-6) circle(0.07cm) node[anchor=west]{Iteration \#3};
+        \draw[thick, black] (0,-6) circle(0.07cm) -- (1.65,-6.4) circle(0.07cm) --
+        (3.5,-6.2) circle(0.07cm) -- (5.1,-5.8) circle(0.07cm) -- (6,-5.2)
+        circle(0.07cm) -- (6.9,-5.3) circle(0.07cm) -- (7.5,-5.1) circle(0.07cm) --
+        (8.9,-5.9) circle(0.07cm) -- (10,-6) circle(0.07cm) node[anchor=west]{Iteration \#3};
+        \draw[red] (1.75,-6.1) circle(0.07cm);
+        \draw[red] (4.75,-5.7) circle(0.07cm);
+        \draw[red] (6.75,-5.15) circle(0.07cm);
+        \draw[red] (8.75,-5.55) circle(0.07cm);
+        \draw[red, ->] (1.75,-6.1) -- (1.655,-6.3);
+        \draw[red, ->] (4.75,-5.7) -- (5.02,-5.77);
+        \draw[red, ->] (6.75,-5.15) -- (6.86,-5.25);
+        \draw[red, ->] (8.75,-5.55) -- (8.88,-5.83);
+    \end{tikzpicture}
+\end{center}
 
-\begin{problem}
-    The prime factors of $13195$ are $5, 7, 13$ and $29$.  Write
-    code to find the largest prime factor of the number $600851475143$? Your code needs to
-    run error free and output only the largest prime factor. 
-\end{problem}
-\hint{
-% Source: Project Euler Problem \#3: 
-(big hint) the answer is 6857.  Of course you'll have to write code to get this.}
+
 
 \begin{problem}
     Compare the number of iterations necessary for convergence to within $10^{-8}$ for
@@ -495,6 +582,24 @@ approximation is called a {\bf Quasi-Newton Method}.
     functions that favor one method over the others, etc.
 \end{problem}
 
+
+\begin{problem}
+    A {\it fixed point} of a function $f(x)$ is a point that solves the equation $f(x) =
+    x$.  Fixed points are interesting in iterative processes since fixed points don't
+    change under repeated application of the function $f$.  
+
+    For example, consider the function $f(x) = x^2 - 6$.  The fixed points of $f(x)$ can be found by
+    solving the equation $x^2 - 6 = x$ which, when simplified algebraically, is $x^2 - x -
+    6 = 0$.  Factoring the left-hand side gives $(x-3)(x+2)=0$ which implies that $x=3$
+    and $x=-2$ are fixed points for this function. That is, $f(3) = 3$ and $f(-2) = -2$.
+    Notice, however, that finding fixed points is identical to a root finding problem.
+    \begin{enumerate}
+        \item[(a)] Use a numerical root-finding algorithm to find the fixed points of the
+            function $f(x) = x^2 - 6$ on the interval $[0,\infty)$.
+            \item[(b)] Find the fixed points of the function $f(x) =
+                \sqrt{\frac{8}{x+6}}$.
+    \end{enumerate}
+\end{problem}
 
 \begin{problem}
     In Single Variable Calculus you studied methods for finding local and global extrema
