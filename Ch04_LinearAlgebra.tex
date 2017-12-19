@@ -1,9 +1,18 @@
 \chapter{Numerical Linear Algebra}
-In this chapter we explore the primary questions of linear algebra: solving systems of
-equations, approximating solutions to over-determined and under-determined systems of
-equations, the eigenvalue-eigenvector problem, and the singular value problem. Along the
-way we will encounter several novel ways to factor matrices into products of other
-matrices with more desirable properties.
+\begin{quote}
+    ``Linear algebra is the central subject of mathematics.  You cannot learn too much
+    linear algebra.''\\--Benedict Gross, Harvard University
+\end{quote}
+
+The preceding quote says it all -- linear algebra is the most important of all of the
+mathematical tools that you can learn and build.  The theorems, proofs, conjectures, and
+big ideas in almost every other mathematical field find their roots in linear algebra.
+Our goal in this chapter is to explore numerical algorithms for the primary questions of
+linear algebra: solving systems of equations, approximating solutions to over-determined
+and under-determined systems of equations, the eigenvalue-eigenvector problem, and the
+singular value problem. Take careful note, that in our current digital age numerical
+linear algebra and its fast algorithms are behind the scenes for wide varieties of
+computing applications. 
 
 
 \section{Matrix Operations}
@@ -11,7 +20,7 @@ We start this chapter with the basics: the dot product and matrix multiplication
 is designed to do these tasks in very efficient ways but it is a good coding exercise to
 build your own dot product and matrix multiplication routines.  You'll find in numerical
 linear algebra that the indexing and the housekeeping in the codes is the hardest part, so
-why don't we start easy.
+why don't we start ``easy''.
 
 \begin{problem}
     Recall that the dot product of two vectors $\bu, \bv \in \mathbb{R}^n$ is 
@@ -29,7 +38,7 @@ why don't we start easy.
     command.
 \end{problem}
 
-\begin{problem}
+\begin{problem}\label{prob:matrix_mult}
     Recall that if $A \in \mathbb{R}^{n \times p}$ and $B \in \mathbb{R}^{p \times m}$
     then the product $AB$ is defined as
     \[ \left( AB \right)_{ij} = \sum_{k=1}^p A_{ik} B_{kj}. \]
@@ -49,27 +58,91 @@ why don't we start easy.
     matrix multiplication.
 \end{problem}
 
+If you're having trouble seeing that matrix multiplication is just a bunch of dot products
+then let's examine a fairly simple example.  You are welcome to use this example to test
+your code in the previous problem, but be sure that your code is robust enough to accept
+matrices of any size.
+\begin{example}
+    Find the product of matrices $A$ and $B$ using dot products.
+    \[ A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix} \qquad B =
+    \begin{pmatrix} 7 & 8 & 9 \\ 10 & 11 & 12 \end{pmatrix} \]
+    {\bf Solution:} \\
+    The product $AB$ will clearly be a $3 \times 3$ matrix since $A \in \mathbb{R}^{3
+    \times 2}$ and $B \in \mathbb{R}^{2\times3}$.  To build the matrix product we'll first
+    write matrix $A$ as a matrix filled with row vectors and matrix $B$ as a
+    matrix filled with column vectors.  Let ${\bf a}_1 = \begin{pmatrix} 1 & 2
+    \end{pmatrix}$, ${\bf a}_2 = \begin{pmatrix} 3 & 4 \end{pmatrix}$,  and ${\bf a}_3 =
+    \begin{pmatrix} 5 & 6 \end{pmatrix}$ so that we can write $A$ as
+    \[ A = \begin{pmatrix} {\bf a}_1 \\ {\bf a}_2 \\ {\bf a}_3
+    \end{pmatrix}. \]
+    Similarly, write ${\bf b}_1 = \begin{pmatrix} 7\\10\end{pmatrix}$, ${\bf b}_2 =
+    \begin{pmatrix} 8 \\ 11\end{pmatrix}$, and ${\bf b}_3 = \begin{pmatrix}
+        9\\12\end{pmatrix}$ so that we can write $B$ as
+    \[ B = \begin{pmatrix} {\bf b}_1 & {\bf b}_2 & {\bf b}_3 \end{pmatrix}. \]
+
+    Now to build the matrix multiplication we see that $AB$ is given as
+    \[ AB = \begin{pmatrix} 
+            {\bf a}_1 \cdot {\bf b}_1 & {\bf a}_1 \cdot {\bf b}_2 & {\bf a}_1 \cdot {\bf b}_3 \\
+            {\bf a}_2 \cdot {\bf b}_1 & {\bf a}_2 \cdot {\bf b}_2 & {\bf a}_2 \cdot {\bf b}_3 \\
+            {\bf a}_3 \cdot {\bf b}_1 & {\bf a}_3 \cdot {\bf b}_2 & {\bf a}_3 \cdot {\bf b}_3
+    \end{pmatrix} \]
+    Therefore,
+    \[ AB = \begin{pmatrix} 27 & 30 & 33 \\
+            61 & 68 & 75 \\
+        95 & 106 & 117 \end{pmatrix} \]
+\end{example}
+
+The following MATLAB code gives the matrix product between two matrices, but when you
+build your own code you need to have sufficient catches that avoid inappropriately sized
+matrices.
+\begin{lstlisting}
+for i = 1:size(A,1) % row index
+    for j = 1:size(B,2) % column index
+        AB(i,j) = dot( A(i,:) , B(:,j) );
+    end
+end
+\end{lstlisting}
+
+\begin{problem}
+    In matrix arithmetic there are two types of multiplication: matrix-matrix
+    multiplication and scalar multiplication.  Modify your MATLAB code written in problem
+    \ref{prob:matrix_mult} so that if one of the two matrices is entered as a scalar (a $1
+    \times 1$ matrix) then your \mcode{MatrixMultiply} code gives the correct result. You
+    should be able to do this with no loops.
+\end{problem}
 
 
 \newpage\section{Solving Systems of Linear Equations}
 One of the many classic problems of linear algebra is to solve the linear system $A \bx =
-\bb$. In this chapter we will spend a few days talking about efficient ways to have the computer solve
-these systems. You likely recall row reduction (RREF) from previous linear algebra
+\bb$. In this chapter we will talk about efficient ways to have the computer solve
+these systems. You likely recall row reduction (AKA Gaussian Elimination or RREF) from previous linear algebra
 courses, but the algorithm that you used is actually slow an cumbersome for computer
 implementation.  Even so, let's blow the dust off of what you recall with a small practice
 problem.
 
 \begin{problem}
-    Solve the following problem by hand using Gaussian Elimination (row reduction):
+    Solve the following problem by hand using Gaussian Elimination (row reduction).
     \[ \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \begin{pmatrix}
             x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 2\end{pmatrix} \]
+    Hint: Start by augmenting the coefficient matrix and the right-hand column vector to
+    build the augmented system
+    \[ \left( \begin{array}{ccc|c} 1 & 2 & 3 & 1 \\ 4 & 5 & 6 & 0 \\ 7 & 8 & 0 & 2
+    \end{array} \right). \]
+    Then perform row operations to get to the reduced row echelon form
+    \[ \left( \begin{array}{ccc|c} 1 & 0 & 0 & \star \\
+        0 & 1 & 0 & \star \\
+        0 & 0 & 1 & \star \end{array} \right) \]
 \end{problem}
 
 
 \subsection{Upper and Lower Triangular Systems}
 Row reduction works well on dense (or nearly dense) matrices but if the coefficient matrix
-has special structure then we can avoid row reduction in lieu of faster algorithms. In the
-following two problems you will devise algorithms for triangular matrices.
+has special structure then we can avoid row reduction in lieu of faster algorithms.
+Furthermore, the process that you know as Gaussian Elimination is really just a collection
+of sneaky matrix operations.  In the
+following two problems you will devise algorithms for triangular matrices.  After we know
+how to work with triangular matrices we'll build a general tool for doing Gaussian
+Elimination that is easily implemented in a computer.
 
 \begin{problem}
     Outline a fast algorithm (without formal row reduction) for solving the lower triangular system
@@ -114,13 +187,17 @@ end
     solve for ${\bf y}$.  Your code needs to work on systems of arbitrarily large size.
 \end{problem}
 
+Now that we have a method for solving lower triangular systems, let's build a similar
+method for solving upper triangular systems.  The merging of lower and upper triangular
+systems will play an important role in solving systems of equations.
 \begin{problem}
     Outline a fast algorithm (without formal row reduction) for solving the upper triangular system
     \[ \begin{pmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & 0 & -9 \end{pmatrix}
         \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \\ -4 \\
         3\end{pmatrix} \]
     The most natural algorithm that most people devise here is called {\it backward
-    substitution}.
+    substitution}.  Notice that in our upper triangular matrix we do not have a diagonal
+    containing all ones. 
 \end{problem}
 
 \begin{technique}[Backward Substitution: \texttt{USolve}]\label{tech:usolve}
@@ -146,7 +223,9 @@ end
         \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \\ -4 \\
         3\end{pmatrix} \]
     Work the code from Technique \ref{tech:usolve} \underline{by hand} to solve the
-    system.  Keep track of all of the indices as you work through the code.
+    system.  Keep track of all of the indices as you work through the code.  You may want
+    to work this problem in conjunction with the previous two problems to unpack all of
+    the parts of the {\it backward substitution} algorithm.
 \end{problem}
 
 \begin{problem}
@@ -157,20 +236,32 @@ end
 \end{problem}
 
 \subsection{The LU Factorization}
+In the next few problems we will solve the system of equations
+\[ \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \begin{pmatrix} x_1
+    \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \]
+using upper and lower triangular matrices.  We have already solved this problem with your
+Gaussian Elimination algorithm -- now let's improve upon that algorithm and reveal some
+amazing underlying structure.
+
+Throughout the following several problems, let $A$ and $b$ be defined as
+\[ A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \qquad \bb =
+\begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}. \]
 \begin{problem}
-    Open a new MATLAB script and enter the left-hand matrix of the previous problem into
-    matrix $A$.  Observe what happens when we do the following in sequence:
+    Open a new MATLAB script and enter the matrix $A$.  Observe what happens when we do the following in sequence:
     \begin{itemize}
         \item left multiply $A$ by the matrix
             \[ L_1 = \begin{pmatrix} 1 & 0 & 0 \\ -4 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
-            This gives the matrix $L_1 A$.
+            This gives the matrix $L_1 A$.  (Look at the resulting matrix.  What happened here?)
         \item left multiply $L_1 A$ by the matrix
             \[ L_2 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ -7 & 0 & 1 \end{pmatrix} \]
-            This gives the matrix $L_2 L_1 A$.
+            This gives the matrix $L_2 L_1 A$.  (Look at the resulting matrix.  What happened here?)
         \item left multiply $L_2 L_1 A$ by the matrix 
             \[ L_3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{pmatrix} \]
-
+            (Look at the resulting matrix.  What happened here?)
     \end{itemize}
+\end{problem}
+
+\begin{problem}
     Make a conjecture: If you wanted to multiply row $j$ of an $n\times n$ matrix by $c$
     and add it to row $k$, that is the same as multiplying by what lower triangular
     matrix?
@@ -198,7 +289,7 @@ end
 \end{problem}
 
 \begin{problem}
-    Now for the punch line: If we can write $A \bx = \bb$ then if we can write it as $LU
+    Now for the punch line: If we want to solve $A \bx = \bb$ then if we can write it as $LU
     \bx = \bb$ we can
     \begin{enumerate}
         \item Solve $L \by = \bb$ for $\by$ using forward substitution.  Then,
@@ -216,7 +307,7 @@ end
     \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = 
         \begin{pmatrix} -13 \\ 4 \\ 1 \end{pmatrix} \]
     That is: Find matrices $L$ and $U$ such that $A \bx = \bb$ can be written as $LU\bx =
-    \bb$.  The do two triangular solves to determine $\bx$.\\
+    \bb$.  Then do two triangular solves to determine $\bx$.\\
     Notice that this time there isn't a ``$1$'' in the top left corner to begin with.  Be
     careful.
 \end{problem}
@@ -278,40 +369,6 @@ MyError = norm(x-MATLABExactAnswer)
 \end{problem}
 
 
-% \begin{problem}
-%     {\bf Coding Challenge:} In the $20\times20$ grid below, four numbers along a diagonal line
-%     have been marked in red.
-%     \begin{center}
-%         \begin{tabular}{cccccccccccccccccccc}
-%     08&02&22&97&38&15&00&40&00&75&04&05&07&78&52&12&50&77&91&08\\
-%     49&49&99&40&17&81&18&57&60&87&17&40&98&43&69&48&04&56&62&00\\
-%     81&49&31&73&55&79&14&29&93&71&40&67&53&88&30&03&49&13&36&65\\
-%     52&70&95&23&04&60&11&42&69&24&68&56&01&32&56&71&37&02&36&91\\
-%     22&31&16&71&51&67&63&89&41&92&36&54&22&40&40&28&66&33&13&80\\
-%     24&47&32&60&99&03&45&02&44&75&33&53&78&36&84&20&35&17&12&50\\
-%     32&98&81&28&64&23&67&10&{\color{red} {\bf 26}}&38&40&67&59&54&70&66&18&38&64&70\\
-%     67&26&20&68&02&62&12&20&95&{\color{red} {\bf 63}}&94&39&63&08&40&91&66&49&94&21\\
-%     24&55&58&05&66&73&99&26&97&17&{\color{red} {\bf 78}}&78&96&83&14&88&34&89&63&72\\
-%     21&36&23&09&75&00&76&44&20&45&35&{\color{red} {\bf 14}}&00&61&33&97&34&31&33&95\\
-%     78&17&53&28&22&75&31&67&15&94&03&80&04&62&16&14&09&53&56&92\\
-%     16&39&05&42&96&35&31&47&55&58&88&24&00&17&54&24&36&29&85&57\\
-%     86&56&00&48&35&71&89&07&05&44&44&37&44&60&21&58&51&54&17&58\\
-%     19&80&81&68&05&94&47&69&28&73&92&13&86&52&17&77&04&89&55&40\\
-%     04&52&08&83&97&35&99&16&07&97&57&32&16&26&26&79&33&27&98&66\\
-%     88&36&68&87&57&62&20&72&03&46&33&67&46&55&12&32&63&93&53&69\\
-%     04&42&16&73&38&25&39&11&24&94&72&18&08&46&29&32&40&62&76&36\\
-%     20&69&36&41&72&30&23&88&34&62&99&69&82&67&59&85&74&04&36&16\\
-%     20&73&35&29&78&31&90&01&74&31&49&71&48&86&81&16&23&57&05&54\\
-%     01&70&54&71&83&51&54&69&16&92&33&48&61&43&52&01&89&19&67&48
-% \end{tabular}
-% \end{center}
-% 
-%     The product of these numbers is $26 \times 63 \times 78 \times 14 = 1788696$.  Write
-%     code to find the greatest product of four adjacent numbers in the same direction (up, down,
-%     left, right, diagonally (down and right), or diagonally (down and left)) in the $20\times20$ grid?
-% \end{problem}
-% % \solution{Source: Project Euler Problem \#11: Solution: 70600674 }
-
 
 \begin{problem}
     For this problem we are going to run a numerical experiment to see how the process of
@@ -324,7 +381,7 @@ MyError = norm(x-MATLABExactAnswer)
         \item Build a random vector in $\mathbb{R}^{n}$. You can do this with the code: \\
             \mcode{b = rand(n,1)}
         \item Find MATLAB's exact answer to the problem $A\bx=\bb$ using the backslash: \\
-            \mcode{Xexact = A\b}
+            \verb|Xexact = A \ b|
         \item Write code that uses your three $LU$ functions (\mcode{MyLU, Lsolve,
             Usolve}) to find a solution to the equation $A\bx=\bb$.
         \item Find the error between your answer and the exact answer using the code: \\
@@ -332,18 +389,26 @@ MyError = norm(x-MATLABExactAnswer)
         \item Make a plot that shows how the error behaves as the size of the problem
             changes. You should run this for matrices of larger and larger size but be
             warned that the loop will run for quite a long time if you go above
-            $300×300$ matrices. Just be patient.
+            $300 \times 300$ matrices. Just be patient.
     \end{itemize}
 \end{problem}
 
+\begin{problem}
+    Write a summary of how the \mcode{LU} factorization solve a square system of
+    equations.
+\end{problem}
+
+
 \newpage\section{The Least Squares Problems}
 \begin{problem}\label{prob:least_squares_1}
-    Download the Excel data set from Moodle.  We're going to develop a way to match the
-    data sets using linear algebra.  Before doing the linear algebra versions of this
-    problem though we'll use Excel to match the data sets.  Our goal is to make a guess at
-    the type of polynomial that models the function (given in this case) and to minimize
-    the error between our guess and the data.  Follow these steps in Excel to find best
-    fitting curves.  We'll start with the linear data.
+    Grab the data sets from the Google Sheet
+    \href{https://docs.google.com/spreadsheets/d/1bpqb51eTTtJbe9V1JLt_JkzN-8kbIh2RzisRQHIMLrY/edit?usp=sharing}{HERE}.
+    Copy the data into MS Excel for the following exercise.  We're going to develop a way
+    to match the data sets using linear algebra.  Before doing the linear algebra versions
+    of this problem though we'll use Excel to match the data sets.  Our goal is to make a
+    guess at the type of polynomial that models the function (given in this case) and to
+    minimize the error between our guess and the data.  Follow these steps in Excel to
+    find best fitting curves.  We'll start with the linear data.
     \begin{enumerate}
         \item In column C set up a function for your guess of the model based on the $x$ data in column
             $A$.  You will need to set up cells for the polynomial parameters (for the
@@ -351,14 +416,14 @@ MyError = norm(x-MATLABExactAnswer)
         \item Fill in your guesses based on initial approximations for the slope and
             $y$-intercept.
         \item Use column D to calculate the residual value for each data point.
-            \[ \text{Residual} = \text{Actual $y$ Value - Approximate $y$ Value} \]
+            \[ \text{Residual} = \text{Actual $y$ Value} - \text{Approximate $y$ Value} \]
         \item Use column E to calculate the square of the residual for each data point.
         \item Our goal is the minimize the sum of the squares of the residuals.
             \[ \text{min} \left( \sum_{j=1}^n \left( y_j - \hat{y}_j \right)^2 \right) \]
             For this we can use the \texttt{Excel Solver} to minimize the sum of the
             square residuals.
     \end{enumerate}
-    Now repeat the process for the quadratic and cubic data.
+    Now repeat the process for the quadratic data.
 \end{problem}
 
 
@@ -394,12 +459,12 @@ way to tell at the outset what a {\it good} sum of squares of residuals is.
 
 \begin{thm}
     To calculate the $R^2$ value we can use the following equations where $y_j$ is the
-    $j^{th}$ data point, $\bar{y}$ is the mean $y$-value in the data, and $f_j$ is the
+    $j^{th}$ data point, $\bar{y}$ is the mean $y$-value in the data, and $\hat{y}_j$ is the
     $j^{th}$ predicted output from our model.
     \begin{flalign}
         \text{Total Sum of Squares: } & TSS = \sum_j \left( y_j - \bar{y} \right)^2
         \label{eqn:TSS} \\
-        \text{Residual Sum of Squares: } & RSS = \sum_j \left( y_j - f_j \right)^2 
+        \text{Residual Sum of Squares: } & RSS = \sum_j \left( y_j - \hat{y}_j \right)^2 
         \label{eqn:RSS} \\
         \text{Coeff. of Determination: } & R^2 = 1 - \frac{RSS}{TSS} \label{eqn:Rsquared}
     \end{flalign}
@@ -429,14 +494,18 @@ simple linear algebra behind the scenes.
     Now we'll use Linear Algebra to complete the same types of problems.  Set up a
     \texttt{MATLAB} script the reads the linear data from the Excel sheet.  We are
     assuming that the data are linear so for each $x$-value $x_j$ we assume that the equation 
-    \[ c_0 + c_1 x_j \approx y_j. \]
-    This gives rise to a system of linear equations
+    \[ \hat{y}_j =  \beta_0 + \beta_1 x_j \approx y_j. \]
+    The values of $\beta_0$ and $\beta_1$ are the intercept and slope that best predict
+    the $y$ values from the data.
+
+    The equation $\beta_0 + \beta_1 x_j \approx y_j$ gives rise to a system of linear equations
     \[ \begin{pmatrix} 1 & x_1 \\ 1 & x_2 \\ 1 & x_3 \\ \vdots & \vdots \\ 1 & x_n
-        \end{pmatrix} \begin{pmatrix} c_0 \\ c_1 \end{pmatrix} \approx \begin{pmatrix} y_1
+        \end{pmatrix} \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix} \approx \begin{pmatrix} y_1
             \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{pmatrix} \]
+    when we consider all $n$ of the data points.
     We'll call the left-hand matrix $A$ and the right-hand vector $\by$.  
     \begin{enumerate}
-        \item Get $A$ and $\by$ into \texttt{MATLAB} so we can use them.
+        \item For each data set get $A$ and $\by$ into MATLAB so we can use them.
         \item This is not a square system. In fact, it is {\it overdetermined}.  Consider
             that the column space of $A$ ($Col(A)$) is a subspace of $\mathbb{R}^n$ and
             that $\by \in \mathbb{R}^n$ is likely not in the column space of $A$.  If we
@@ -446,66 +515,105 @@ simple linear algebra behind the scenes.
             Projections onto a subspace can be achieved with matrix multiplication, but
             which matrix shall we multiply by \dots
 
-            \[ (??) A \begin{pmatrix} c_0 \\ c_1 \end{pmatrix}  = (??) \by. \]
+            \[ (??) A \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}  = (??) \by. \]
 
             Once you are satisfied that the right-hand side is a projection of $\by$ onto
             $Col(A)$ you have formed the {\bf normal equations}.  If you've done everthing
-            right then you also now have a square system ($2 \times 2$ in this case).
+            right then you also now have a square system ($2 \times 2$ in the case of the
+            linear data).
 
-        \item Now that this is a square matrix you can solve for $c_0$ and $c_1$ using
+        \item Now that this is a square matrix you can solve for $\beta_0$ and $\beta_1$ using
             your $LU$ code. (You can also use \texttt{MATLAB}'s {\it backslash} (\verb|\|) command to
             do the linear solve)
-        \item Now that you have $c_0$ and $c_1$ you can form the linear approximation.
+        \item Now that you have $\beta_0$ and $\beta_1$ you can form the linear approximation.
             Plot the approximation along with your data.  Also write code to plot the
             residuals (subplot would be great here).
-        \item Repeat the process for the quadratic and cubic data.  For the quadratic data
+        \item Repeat the process for the quadratic.  For the quadratic data
             you are assuming that 
-            \[ c_0 + c_1 x_j + c_2 x_j^2 \approx y_j, \]
-            and for the cubic data you are assuming that 
-            \[ c_0 + c_1 x_j + c_2 x_j^2 + c_3 y_j^3 \approx y_j. \]
+            \[ \beta_0 + \beta_1 x_j + \beta_2 x_j^2 \approx y_j. \]
     \end{enumerate}
 \end{problem}
 
 
 \begin{definition}[The Normal Equations]
-    Let $A \in \mathbb{R}^{n \times m}$, ${\bf c} \in \mathbb{R}^{m}$, and $\by \in
+    Let $A \in \mathbb{R}^{n \times m}$, $\beta \in \mathbb{R}^{m}$, and $\by \in
     \mathbb{R}^n$ where $n \gg m$.  The system of equations
-    \[ A {\bf c} = \by \]
+    \[ A \beta = \by \]
     is over determine since there are more equations than unknowns.  Multiply both sides
     of the equation by $A^T$ yields the {\bf normal equations}
-    \[ A^T A {\bf c} = A^T \by. \]
+    \[ A^T A \beta = A^T \by. \]
     We note here that $A^T A \in \mathbb{R}^{m \times m}$ is square and much smaller than
     $A$.  The right-hand side of the normal equations is the projection of $\by$ onto the
     columns space of $A$.  
 \end{definition}
 
+You should take careful note of something here.  The process that we just formulated is
+called {\it linear regression} even though we were fitting a quadratic function to data.
+This may, at first, seem like an unfortunate or inappropriate naming convention, but stop
+and think more carefully about what we did.  \ldots Good.  Now that you've though about
+it, I'll give you my take.  
+
+For the quadratic data fit we are trying to create the function $\hat{y}_j = \beta_0 +
+\beta_1 x_j + \beta_2 x_j^2$.  Notice that this function is really just a multiple
+regression that is, indeed, linear in the coefficients $\beta_0, \beta_1$, and $\beta_2$.
+The term {\it linear regression} does \underline{not} have anything to do fitting lines to
+data -- a common misconception.  Instead, it pertains to the relationship between the coefficients.
+Since the coefficients of a polynomial function are linearly related to
+each other, we can use linear regression to fit polynomial models for any order
+polynomial.  
+
+The reader should be further warned that polynomial regression comes with some down sides.
+If the order of the polynomial grows the matrix $A^TA$ arising from the normal equations
+formulation gets closer and closer to being singular.  That is to say that as the order of
+the polynomial increases it becomes less and less desirable to solve the problem through
+matrix inversion (or Gaussian Elimination).  
+
 \begin{problem}
-    In the same Excel document you will find a set of data representing a nonlinear
-    function.  Use Excel to find the best fit curve by making a {\it guess} about the form
-    of the function.  Since this is a nonlinear relationship our method of using the
-    normal equations will not work.
+    Create a data set from a third or fourth order polynomial.  Then introduce some random
+    noise onto your data set.  Write a loop in MATLAB that fits polynomials of increasing
+    order to the data set (starting with linear and increasing by 1 each time).  Create
+    two plots.  In the first plot put the order of the polynomial on the horizontal axis
+    and the $R^2$ value on the vertical axis.  On the second plot put the order of the
+    polynomial on the horizontal axis and the ratio $\left| \lambda_{max} \right| / \left| \lambda_{min}
+    \right|$ on the vertical axis, where $\lambda_{max}$ and $\lambda_{min}$ are the
+    maximum and minimum eigenvalues respectively.  You'll probably want to use a \mcode{semilogy} scale
+    for the second plot.  \\
+    Note: Recall that the determinant of a matrix is the product of the eigenvalues.
+    Therefore, if the determinant is getting close to zero then the ratio given above goes
+    to infinity.  To get the eigenvalues use MATLAB's \mcode{eig} command.
 \end{problem}
 
 \begin{problem}
-    The method of using the {\bf normal equations} to solve a least squares regression
-    problem also works for multiple regression.  In this example go to the second tab of
-    the Excel document to find the Hollywood Box Office Receipts (measured in millions).
-    We are seeking a model of the form
-    \[ X_1  \approx \beta_1 + \beta_2 X_2 + \beta_3 X_3. \]
-    That is, we seek to predict first year box office receipts ($X_1$) from production
-    cost data ($X_2$) and promotional cost data ($X_3$).
-    \begin{itemize}
-        \item Read the data into MATLAB
-        \item Find the matrix $A$ to form the overdetermined system of equations
-            \[ A \begin{pmatrix} \beta_1 \\ \beta_2 \\ \beta_3 \end{pmatrix} =
-                    \bx_1 \]
-        \item Form the normal equations and solve for $\beta_1, \beta_2,$ and $\beta_3$.  
-        \item Star Wars: The Force Awakens had a production cost of \$32M and a
-            promotional cost of only \$17M.  What does our model predict about the first
-            year box office receipts?
-    \end{itemize}
+    Explain what the previous problem tells you about fitting polynomials to data.
 \end{problem}
 
+% \begin{problem}
+%     In the same Excel document you will find a set of data representing a nonlinear
+%     function.  Use Excel to find the best fit curve by making a {\it guess} about the form
+%     of the function.  Since this is a nonlinear relationship our method of using the
+%     normal equations will not work.
+% \end{problem}
+% 
+% \begin{problem}
+%     The method of using the {\bf normal equations} to solve a least squares regression
+%     problem also works for multiple regression.  In this example go to the second tab of
+%     the Excel document to find the Hollywood Box Office Receipts (measured in millions).
+%     We are seeking a model of the form
+%     \[ X_1  \approx \beta_1 + \beta_2 X_2 + \beta_3 X_3. \]
+%     That is, we seek to predict first year box office receipts ($X_1$) from production
+%     cost data ($X_2$) and promotional cost data ($X_3$).
+%     \begin{itemize}
+%         \item Read the data into MATLAB
+%         \item Find the matrix $A$ to form the overdetermined system of equations
+%             \[ A \begin{pmatrix} \beta_1 \\ \beta_2 \\ \beta_3 \end{pmatrix} =
+%                     \bx_1 \]
+%         \item Form the normal equations and solve for $\beta_1, \beta_2,$ and $\beta_3$.  
+%         \item Star Wars: The Force Awakens had a production cost of \$32M and a
+%             promotional cost of only \$17M.  What does our model predict about the first
+%             year box office receipts?
+%     \end{itemize}
+% \end{problem}
+% 
 % 
 % \begin{problem}
 %     Let's go back to the World Health Organization, but this time you're looking for a
@@ -525,6 +633,17 @@ This would be FAR more efficient if the columns of $A$ were orthogonal (perpendi
 normalized (unit vectors).  Hence, our goal is to take $A$ and factor it into $A = QR$
 where the columns of $Q$ are orthonormal (orthogonal and normalized) and $R$ is an upper
 triangular matrix.
+
+\begin{problem}
+    If $Q \in \mathbb{R}^{m \times n}$ is an orthonormal matrix then what are the products
+    $Q^TQ$ and $QQ^T$?  
+\end{problem}
+
+\begin{problem}
+    If $A  = QR$ where $Q$ is an orthonormal matrix and $R$ is upper triangular then how
+    would we go about solving the equation $A\bx = \bb$ and where would the $QR$
+    factorization help us?
+\end{problem}
 
 \begin{problem}
     First we'll do a problem by hand: \\
@@ -585,7 +704,7 @@ triangular matrix.
 \end{problem}
 
 \begin{problem}
-    Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs the
+    Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs 
     both the $Q$ matrix and the $R$ matrix. Pseducode for this function is as follows:
     \begin{itemize}
         \item Set up the function call:\\ \mcode{function [Q,R] = MyQR(A)}
@@ -611,37 +730,10 @@ triangular matrix.
 \end{problem}
 
 \begin{problem}
-    Write a script that tests your \mcode{MyQR} function on randomly generated $m×n$ matrices
+    Write a script that tests your \mcode{MyQR} function on randomly generated $m\times n$ matrices
     with randomly generated right-hand sides. Compare the time that it takes to solve the
     least squares problems using QR to the time necessary to solve with LU via the normal
     equations. When is LU more efficient? When is QR more efficient?
-\end{problem}
-
-\begin{problem}
-    Now that you have $QR$ and $LU$ code we're going to use both of them!  The problem is
-    as follows: \\
-    We are going to find the polynomial of degree 4 that best fits the function $y =
-    \cos(4t) + 0.1 \varepsilon(t)$ at 50 equally spaced points $t$ between $0$ and $1$.  Here
-    we are using $\varepsilon(t)$ as a function that outputs normally distrubuted random
-    white noise.  In \texttt{MATLAB} you will build $y$ as \\
-    \mcode{y = cos(4*t) + 0.1*randn(size(t));}
-    
-    Build the $t$ vector
-    and the $y$ vector (these are your data).  We need to set up the least squares
-    problems $A \bx = \bb$ by setting up the matrix $A$
-    as we did in the other least squares curve fitting problems and by setting up the
-    $\bb$ vector using the $y$ data you just built.  
-    \begin{enumerate}
-        \item[(a)] Solve the normal equations $A^T A \bx = A^T \bb$ using your $LU$ code.
-        \item[(b)] Solve the system $A \bx = \bb$ by first transforming $A$ to $A = QR$
-            and then solving $R\bx = Q^T \bb$.
-        \item[(c)] Use \texttt{MATLAB} to find the sum of the square errors between the
-            polynomial approximation and the function $f(t) = \cos(4t)$ for both the $QR$
-            and the $LU$ approaches.  
-        \item[(d)] Build \texttt{MATLAB} code that does parts (a) - (c) several hundered
-            times and complies results comparing which method gives the better
-            approximation (smaller sum of square error).
-    \end{enumerate}
 \end{problem}
 
 
@@ -659,19 +751,19 @@ Recall that to solve the eigen-problem for a square matrix $A$ we complete the f
 steps:
 \begin{enumerate}
     \item First rearrange the definition of the eigenvalue-eigenvector pair to 
-        \[ (A\bx−\lambda \bx)=\bo. \]
+        \[ (A\bx-\lambda \bx)=\bo. \]
     \item Next, factor the $\bx$ on the right to get 
-        \[ (A−\lambda I) \bx=\bo. \]
-    \item Now observe that since $\bx \ne 0$ the matrix $A−\lambda I$ must NOT have an inverse. Therefore,
-        \[ \det(A−\lambda I)=0. \]
-    \item Solve the equation $\det(A−\lambda I)=0$ for all of the values of $\lambda$.
-    \item For each $\lambda$, find a solution to the equation $(A−\lambda I) \bx=\bo$.
+        \[ (A-\lambda I) \bx=\bo. \]
+    \item Now observe that since $\bx \ne 0$ the matrix $A-\lambda I$ must NOT have an inverse. Therefore,
+        \[ \det(A-\lambda I)=0. \]
+    \item Solve the equation $\det(A-\lambda I)=0$ for all of the values of $\lambda$.
+    \item For each $\lambda$, find a solution to the equation $(A-\lambda I) \bx=\bo$.
         Note that there will be infinitely many solutions so you will need to make wise
         choices for the free variables.
 \end{enumerate}
 \begin{problem}
     Find the eigenvalues and eigenvectors of $A = \begin{pmatrix} 1 & 2 \\ 4 & 3
-    \end{pmatrix}$ by hand.
+    \end{pmatrix}$ \underline{by hand}.
 \end{problem}
 % \teacher{the eigenvalues of $\lambda_1 = -1$ and $\lambda_2 = 5$ with eigenvectors $\bv_1
 %     = (1,-1)^T$ and $\bv_2 = (1,2)^T$
@@ -683,8 +775,9 @@ steps:
     \begin{enumerate}
         \item What does that tell us about the matrix $A$?
 %             \teacher{$A$ is not invertible. }
-        \item What is the eigenvector $\bv_1$ associated with $\lambda_1 = 0$?
+        \item What is the eigenvector $\bv_1$ associated with $\lambda_1 = 0$?  
 %             \teacher{$\bv_1 = (1,-2,1)^T$}
+        \item What is the null space of the matrix $A$?
     \end{enumerate}
 \end{problem}
 
@@ -736,29 +829,30 @@ steps:
 %                 \[ \lim_{k \to \infty} A^k \bx = \lambda_1^k c_1 \bv_1 \]
 %             }
     \end{enumerate}
-
-    {\bf The Power Method Algorithm:} This algorithm will quickly find the 
-    eigenvalue of largest absolute value for a square matrix $A \in \mathbb{R}^{n \times
-    n}$ as well as the associated (normalized) eigenvector.  We are
-    assuming that there are $n$ linearly independent eigenvectors of $A$.
-    \begin{description}
-        \item[Step \#1:] Given a nonzero vector $\bx$, set $\bv^{(1)} = \bx / \|\bx\|$.
-            (Here the superscript indiates the iteration number)
-        \item[Step \#2:] For $k=2, 3, \ldots$
-            \begin{description}
-                \item[Step \#2a:] Compute $\tilde{\bv}^{(k)} = A \bv^{(k-1)}$ (this gives
-                    a non-normalized version of the next estimate of the dominant
-                    eigenvector.)
-                \item[Step \#2b:] Set $\lambda^{(k)} = \left< \tilde{\bv}^{(k)} ,
-                    \bv^{(k-1)} \right>$.  (this gives an approximation of the eigenvalue
-                    since if $\bv^{(k-1)}$ was the actual eigenvector we would have
-                    $\lambda = \left< A \bv^{(k-1)}, \bv^{(k-1)} \right>$)
-                \item[Step \#2c:] Normalize $\tilde{\bv}^{(k)}$ by computing $\bv^{(k)} =
-                    \tilde{\bv}^{(k)} / \| \tilde{\bv}^{(k)} \|$. (This guarantees that
-                    you will be sending a unit vector into the next iteration of the loop)
-            \end{description}
-    \end{description}
 \end{problem}
+
+    \begin{technique}[The Power Method Algorithm] This algorithm will quickly find the 
+        eigenvalue of largest absolute value for a square matrix $A \in \mathbb{R}^{n \times
+        n}$ as well as the associated (normalized) eigenvector.  We are
+        assuming that there are $n$ linearly independent eigenvectors of $A$.
+        \begin{description}
+            \item[Step \#1:] Given a nonzero vector $\bx$, set $\bv^{(1)} = \bx / \|\bx\|$.
+                (Here the superscript indiates the iteration number)
+            \item[Step \#2:] For $k=2, 3, \ldots$
+                \begin{description}
+                    \item[Step \#2a:] Compute $\tilde{\bv}^{(k)} = A \bv^{(k-1)}$ (this gives
+                        a non-normalized version of the next estimate of the dominant
+                        eigenvector.)
+                    \item[Step \#2b:] Set $\lambda^{(k)} = \left< \tilde{\bv}^{(k)} ,
+                        \bv^{(k-1)} \right>$.  (this gives an approximation of the eigenvalue
+                        since if $\bv^{(k-1)}$ was the actual eigenvector we would have
+                        $\lambda = \left< A \bv^{(k-1)}, \bv^{(k-1)} \right>$)
+                    \item[Step \#2c:] Normalize $\tilde{\bv}^{(k)}$ by computing $\bv^{(k)} =
+                        \tilde{\bv}^{(k)} / \| \tilde{\bv}^{(k)} \|$. (This guarantees that
+                        you will be sending a unit vector into the next iteration of the loop)
+                \end{description}
+        \end{description}
+\end{technique}
 
 \begin{problem}
     Write a MATLAB function to implement the power method for finding the eigenvalue of
@@ -795,7 +889,8 @@ the matrix $A^T A$, so let's start there.
 
 
 \begin{definition}
-The {\bf singular values} of an $m \times n$ matrix $A$ are the square roots of $A^T A$.
+The {\bf singular values} of an $m \times n$ matrix $A$ are the square roots of the
+eigenvalues of $A^T A$.
 They are typically denoted as $\sigma_1, \sigma_2, \dots, \sigma_n$ where $\sigma_j =
 \sqrt{\lambda_j}$ and $\lambda_j$ is an eigenvalue of $A^T A$.  
 \end{definition}
@@ -1230,6 +1325,46 @@ answer.
     with an upper triangular solve.
 }
 
+\begin{problem}
+    Find a least squares solution to the equation $A \bx = \bb$ in two different ways with 
+    \[ A = \begin{pmatrix} 1 & 3 & 5 \\ 4 & -2 & 6 \\ 4 & 7 & 8 \\ 3 & 7 & 19
+        \end{pmatrix} \quad \text{and} \quad \bb = \begin{pmatrix} 5 \\ 2 \\ -2 \\
+        8\end{pmatrix}. \]
+\end{problem}
+\hint{
+    This is a rectangular system so be careful with your implementation of algorithms.
+    You can't do an LU factorization directly on $A$.
+}
+
+\begin{problem}
+    Now that you have $QR$ and $LU$ code we're going to use both of them!  The problem is
+    as follows: \\
+    We are going to find the polynomial of degree 4 that best fits the function 
+    \[ y =
+    \cos(4t) + 0.1 \varepsilon(t) \]
+    at 50 equally spaced points $t$ between $0$ and $1$.  Here
+    we are using $\varepsilon(t)$ as a function that outputs normally distributed random
+    white noise.  In \texttt{MATLAB} you will build $y$ as \\
+    \mcode{y = cos(4*t) + 0.1*randn(size(t));}
+    
+    Build the $t$ vector
+    and the $y$ vector (these are your data).  We need to set up the least squares
+    problems $A \bx = \bb$ by setting up the matrix $A$
+    as we did in the other least squares curve fitting problems and by setting up the
+    $\bb$ vector using the $y$ data you just built.  
+    \begin{enumerate}
+        \item[(a)] Solve the normal equations $A^T A \bx = A^T \bb$ using your $LU$ code.
+        \item[(b)] Solve the system $A \bx = \bb$ by first transforming $A$ to $A = QR$
+            and then solving $R\bx = Q^T \bb$.
+        \item[(c)] Use \texttt{MATLAB} to find the sum of the square errors between the
+            polynomial approximation and the function $f(t) = \cos(4t)$ for both the $QR$
+            and the $LU$ approaches.  
+        \item[(d)] Build \texttt{MATLAB} code that does parts (a) - (c) several hundred
+            times and complies results comparing which method gives the better
+            approximation (smaller sum of square error).
+    \end{enumerate}
+\end{problem}
+
 
 \begin{problem}
     In this exercise we will use numerical linear algebra to do some handwriting
@@ -1340,16 +1475,6 @@ axis square tight off
 
 
 
-\begin{problem}
-    Find a least squares solution to the equation $A \bx = \bb$ in two different ways with 
-    \[ A = \begin{pmatrix} 1 & 3 & 5 \\ 4 & -2 & 6 \\ 4 & 7 & 8 \\ 3 & 7 & 19
-        \end{pmatrix} \quad \text{and} \quad \bb = \begin{pmatrix} 5 \\ 2 \\ -2 \\
-        8\end{pmatrix}. \]
-\end{problem}
-\hint{
-    This is a rectangular system so be careful with your implementation of algorithms.
-    You can't do an LU factorization directly on $A$.
-}
 
 \begin{problem}
     Find the largest eigenvalue of the matrix $A$ WITHOUT using the built in
@@ -1394,24 +1519,6 @@ axis square tight off
     \end{center}
 \end{problem}
 
-
-\begin{problem}
-    The following iterative sequence is defined for the set of
-    positive integers:
-    \begin{flalign*}
-        & n \to \frac{n}{2} \quad \text{(n is even)} \\
-        & n \to 3n + 1 \quad \text{(n is odd)}
-    \end{flalign*}
-    Using the rule above and starting with $13$, we generate the following sequence:
-    \[ 13 \to  40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1 \]
-    It can be seen that this sequence (starting at 13 and finishing at 1) contains 10
-    terms. Although it has not been proved yet (Collatz Problem), it is thought that all
-    starting numbers finish at 1.
-
-    Write code to determine which starting number, under one million, produces the longest
-    chain? NOTE: Once the chain starts the terms are allowed to go above one million
-\end{problem}
-% \solution{Source: Project Euler Problem \#14: Solution: 837799}
 
 
 \begin{thm}[Eigen-Structure of Symmetric Matrices]\label{thm:symmetric_matrix_thm}

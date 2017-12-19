@@ -83,7 +83,8 @@ finer details associated with the exact curvature.
 \begin{figure}[ht!]
     \begin{center}
         \begin{tikzpicture}
-            \begin{axis}[axis lines=center, grid, domain=0:4, xlabel={$t$}, ymax=15]
+            \begin{axis}[axis lines=center, grid, domain=0:4, xlabel={$t$}, ymax=15,
+                ymin=0]
                 \addplot[smooth, very thick, red] {0.5*exp(x)};
                 \addlegendentry{Exact};
                 \addplot[mark=*, color=black] coordinates{(0,0.5)(1,1)(2,2)(3,4)(4,8)};
@@ -261,8 +262,8 @@ $t=$ time and $x=$ a single spatial dimension.
 
 \begin{problem}
     The 1D Wave Equation is given as 
-    \[ \pdd{u}{t} = k \pdd{u}{x}. \]
-    What does the parameter $k$ control in terms of the physics of the problem?
+    \[ \pdd{u}{t} = \alpha^2 \pdd{u}{x}. \]
+    What does the parameter $\alpha^2$ control in terms of the physics of the problem?
 \end{problem}
 
 
@@ -503,29 +504,29 @@ boundaries of the domain.
 \newpage\section{1D and 2D Heat Equation}
 In this section we'll use a technique called {\it the finite difference method} to find
 numerical approximations to the heat equation
-\[ u_t = k \nabla \cdot \nabla u + f(x). \]
+\[ u_t = D \nabla \cdot \nabla u + f(x). \]
 In one spatial dimension the heat equation can be written as $u_t = ku_{xx} + f(x)$ and in
-two spatial dimensional it can be written as $u_t = k \left( u_{xx} + u_{yy} \right) +
+two spatial dimensional it can be written as $u_t = D \left( u_{xx} + u_{yy} \right) +
 f(x,y)$.  The function $f$ is called a forcing term and in the case of thermal diffusion
 it is an external source of heat in the system.  To begin with we'll let $f(x) = 0$.
 
 \begin{problem}
     Now we would like to consider the time dependent heat equation 
-    \[ u_t = \kappa \nabla \cdot \nabla u \]
-    in 1 spatial dimension.  Note that $\kappa$ is the diffusivity (the rate of
-    diffusion) so in terms of physical problems, if $\kappa$ is small then the diffusion
-    occurs slowly and if $\kappa$ is large then the diffusion occurs quickly.
+    \[ u_t = D \nabla \cdot \nabla u \]
+    in 1 spatial dimension.  Note that $D$ is the diffusivity (the rate of
+    diffusion) so in terms of physical problems, if $D$ is small then the diffusion
+    occurs slowly and if $D$ is large then the diffusion occurs quickly.
 
     In 1 spatial dimension, the heat equation is simply
-    \[ u_t = \kappa u_{xx} \]
+    \[ u_t = D u_{xx} \]
     and we can approximate the derivatives with an Euler-type approximation of the time
     and a central difference in space:
-    \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = \kappa \left( \frac{U_{i+1}^n - 2U_i^n +
+    \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = D \left( \frac{U_{i+1}^n - 2U_i^n +
     U_{i-1}^n}{\Delta x^2} \right). \]
     Here we are taking $U_i^n \approx u(t_n,x_i)$ (superscripts represent time step and
     subscripts represent spatial steps).  Rearranging we see that 
     \begin{flalign}
-        U_i^{n+1} = U_i^n + \frac{\kappa \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2U_i^n +
+        U_i^{n+1} = U_i^n + \frac{D \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2U_i^n +
         U_{i-1}^n \right). \label{eqn:heat_euler}
     \end{flalign}
 
@@ -539,7 +540,7 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
 
 \begin{problem}
     You may have noticed in the previous problem that you will have terribly unstable
-    solutions for certain choices of $\Delta x$ and $\Delta t$.  Set $\kappa = 1$ in the
+    solutions for certain choices of $\Delta x$ and $\Delta t$.  Set $D = 1$ in the
     previous problem and experiment with choices for $\Delta x$ and $\Delta t$ to find
     where \eqref{eqn:heat_euler} gives a stable numerical solution to the heat equation.
     For each choice of $\Delta x$ and $\Delta t$ report the value of $\frac{\Delta
@@ -547,11 +548,11 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
 \end{problem}
 
 \begin{thm}[Stability of Finite Differences for the Heat Equation]
-    Consider the 1D Heat Equation $u_t = \kappa u_{xx}$.  In the finite difference scheme for the 1D heat equation
-    \[ U_i^{n+1} = U_i^n + \frac{\kappa \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2 U_i^n +
+    Consider the 1D Heat Equation $u_t = D u_{xx}$.  In the finite difference scheme for the 1D heat equation
+    \[ U_i^{n+1} = U_i^n + \frac{D \Delta t}{\Delta x^2} \left( U_{i+1}^n - 2 U_i^n +
     U_{i-1}^n\right) \]
     the solution will be stable for
-    \[ \frac{\kappa \Delta t}{\Delta x^2} < \underline{\hspace{1in}} \]
+    \[ \frac{D \Delta t}{\Delta x^2} < \underline{\hspace{1in}} \]
 \end{thm}
 \begin{proof}
     For a detailed proof of this fact we need to use a method called {\it Von Neumann
@@ -588,10 +589,10 @@ instability.
     this method we approximate the temporal derivative with an Euler-type approximation,
     but we approximate the spatial derivative as the average of the central difference at
     the old time step and the central difference at the new time step.  That is:
-    \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[\kappa \left( \frac{U_{i+1}^n - 2U_i^n +
-        U_{i+1}^n}{\Delta x^2}\right) +\kappa \left(\frac{U_{i+1}^{n+1} - 2U_i^{n+1} +
+    \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{i+1}^n - 2U_i^n +
+        U_{i+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{i+1}^{n+1} - 2U_i^{n+1} +
     U_{i+1}^{n+1}}{\Delta x^2} \right) \right]. \]
-    Letting $r = \kappa \Delta t / (2\Delta x^2)$ we can rearrange to get
+    Letting $r = D \Delta t / (2\Delta x^2)$ we can rearrange to get
     \[ -r U_{i-1}^{n+1} + (1+2r) U_{i}^{n+1} - r U_{i+1}^{n+1} = r U_{i-1}^{n} + (1-2r)
     U_{i}^{n} + r U_{i+1}^{n}. \]
     This can now be viewed as a system of equation that can be solved for all $U_j^{n+1}$
@@ -606,7 +607,7 @@ instability.
     In Figure \ref{fig:2DHeat_BC} you will see a schematic of the domain
     $\Omega=(0,1)\times (0,1)$ with homogeneous Dirichlet boundary conditions.  Write code
     to solve the 2D Dirichlet problem
-    \[ \text{Solve: } u_t = \kappa \nabla \cdot \nabla u  \quad \text{in} \quad x \in
+    \[ \text{Solve: } u_t = D \nabla \cdot \nabla u  \quad \text{in} \quad x \in
     \Omega \]
     with
     \[ u(0,x,y) = 2000 (x-0.5)(y-0.5)\text{exp}\left( -\frac{(x-0.5)^2 + (y-0.5)^2}{0.02} \right) \]
@@ -692,8 +693,8 @@ instability.
 
 \begin{problem}
     A traveling wave can be modeled by the PDE
-    \[ u_t + a u_x = 0 \]
-    where $a$ is the speed of the wave propogation and $u(t,x)$ is the height of the wave.
+    \[ u_t + v u_x = 0 \]
+    where $v$ is the speed of the wave propogation and $u(t,x)$ is the height of the wave.
     Write a numerical solve for the traveling wave problem on $x \in (0,\infty)$ with initial condition $u(0,x)
     = \text{exp}\left( -\frac{(x-1)^2}{0.1} \right)$, boundary condition $u(t,0) = 0$, and $a=1$.
 
@@ -707,8 +708,8 @@ instability.
     solutions should actually give a traveling wave, but that is what is
     expected out of the solution.  
 
-    {\bf Note about the analytic solution:} If $\eta(x)$ is the initial condition for $u_t + a u_x = 0$ then
-    $u(t,x) = \eta(x-at)$ is the analytic solution to the PDE.  You should check this
+    {\bf Note about the analytic solution:} If $\eta(x)$ is the initial condition for $u_t + v u_x = 0$ then
+    $u(t,x) = \eta(x-vt)$ is the analytic solution to the PDE.  You should check this
     using the chain rule.
 \end{problem}
 
@@ -717,15 +718,15 @@ instability.
     Three ways to fix the issues seen in the previous problem are the ``Leapfrog'' scheme,
     the ``Lax-Friedrichs'' scheme, and the ``Lax-Wendroff'' scheme:
     \begin{flalign}
-        \text{Leapfrog: } & \frac{U_j^{n+1} - U_j^{n-1}}{2\Delta t} = -a
+        \text{Leapfrog: } & \frac{U_j^{n+1} - U_j^{n-1}}{2\Delta t} = -v
         \frac{U_{j+1}^n - U_{j-1}^n}{2\Delta x}
         \label{eqn:frog} \\
         \text{Lax-Friedrichs: } & \frac{U_j^{n+1} - \frac{1}{2} \left( U_{j+1}^n +
-        U_{j-1}^n \right)}{\Delta t} = -a \frac{U_{j+1}^n - U_{j-1}^n}{2\Delta x}
+        U_{j-1}^n \right)}{\Delta t} = -v \frac{U_{j+1}^n - U_{j-1}^n}{2\Delta x}
         \label{eqn:fried} \\
-        \text{Lax-Wendroff: } & U_j^{n+1} = U_j^n - \frac{a \Delta t}{2\Delta x} \left(
+        \text{Lax-Wendroff: } & U_j^{n+1} = U_j^n - \frac{v \Delta t}{2\Delta x} \left(
         U_{j+1}^n - U_{j-1}^n
-        \right) + \left( \frac{a^2 \Delta t^2}{2\Delta x^2} \right) \left( U_{j-1}^n - 2
+        \right) + \left( \frac{v^2 \Delta t^2}{2\Delta x^2} \right) \left( U_{j-1}^n - 2
         U_j^n + U_{j+1}^n.
         \right) \label{eqn:wend}
     \end{flalign}
@@ -836,13 +837,13 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 
 \begin{problem}
     In this problem we will solve a more realistic 1D heat equation.  We will allow the
-    diffusivity to change spatially, so $\kappa = \kappa(x)$ and we want to solve
-    \[ u_t = \left( \kappa(x) u'(x) \right)' \]
+    diffusivity to change spatially, so $D = D(x)$ and we want to solve
+    \[ u_t = \left( D(x) u'(x) \right)' \]
     on $x \in (0,1)$ with Dirichlet boundary conditions $u(t,0) = u(t,1) = 0$ and initial
-    condition $u(0,x) = \sin(2 \pi x)$. In this problem we will take $\kappa(x)$ to be the
-    parabola $\kappa(x)= x(1-x)$. We start by doing some calculus to rewrite the
+    condition $u(0,x) = \sin(2 \pi x)$. In this problem we will take $D(x)$ to be the
+    parabola $D(x)= x(1-x)$. We start by doing some calculus to rewrite the
     differential equation:
-    \[ u_t = \kappa(x) u''(x) + \kappa'(x) u'(x). \]
+    \[ u_t = D(x) u''(x) + D'(x) u'(x). \]
 
     Your job is:
     \begin{enumerate}
@@ -855,7 +856,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
         \item Write a clear and thorough discussion about how your will choose $\Delta x$
             and $\Delta t$ to give stable solutions to this equation.
         \item Graphically compare your solution to this problem with a heat equation where
-            $\kappa$ is taken to be the average diffusivity: $\kappa = 0.5.$  How does the
+            $\kappa$ is taken to be the average diffusivity: $D = 0.5.$  How does the
             changing diffusivity change the shape of the solution?
     \end{enumerate}
 

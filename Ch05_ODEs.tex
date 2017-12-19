@@ -1,4 +1,8 @@
 \chapter{Numerical Ordinary Differential Equations}\label{ch:odes}
+\begin{quote}
+    ``The mathematical discipline of differential equations furnishes the explanation of
+    all those elementary manifestations of nature which involve time.'' \\ --Sophus Lie
+\end{quote}
 
 In this chapter we will solve first order ordinary differential equations of the form
 \[ y'(t) = f(t,y(t)) \]
@@ -232,6 +236,22 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 \end{problem}
 
 \begin{problem}
+    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
+    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
+    initial position and initial velocity as you normally would with a second order
+    differential equation.  Devise a method for finding a numerical solution to this
+    problem. \\
+    Hint: First write the problem as a system of first order differential equations.  Then
+    think about how your bisection method code might help you.
+\end{problem}
+
+
+\newpage\section{ODE Modeling Exercises}
+In this section we give several problems which model real-world scenarios with ordinary
+differential equations.  For every one of these problems you will need to use a numerical
+method to solve the differential equation(s).
+
+\begin{problem}
     In this model there are two characters, Romeo and Juliet, whose affection is
     quantified on the scale from $-5$ to $5$ described below:
     \begin{center}
@@ -248,7 +268,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     The characters struggle with frustrated love due to the lack of reciprocity of their
     feelings.  Mathematically,
     \begin{itemize}
-        \item Romeo: ``My feelinfs for Juliet decrease in proportion to her love for me.''
+        \item Romeo: ``My feelings for Juliet decrease in proportion to her love for me.''
         \item Juliet: ``My love for Romeo grows in proportion to his love for me.''
         \item Juliet's emotional swings lead to many sleepless nights, which consequently
             dampens her emotions.
@@ -284,22 +304,6 @@ gives the exact solution at the tradeoff of needing infinite computational resou
             \end{itemize}
     \end{enumerate}
 \end{problem}
-
-\begin{problem}
-    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
-    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
-    initial position and initial velocity as you normally would with a second order
-    differential equation.  Devise a method for finding a numerical solution to this
-    problem. \\
-    Hint: First write the problem as a system of first order differential equations.  Then
-    think about how your bisection method code might help you.
-\end{problem}
-
-
-\newpage\section{ODE Modeling Exercises}
-In this section we give several problems which model real-world scenarios with ordinary
-differential equations.  For every one of these problems you will need to use a numerical
-method to solve the differential equation(s).
 
 \begin{problem}[Orbiting Bodies Problem]
     In this problem we'll look at the orbit of a celestial body around the sun.  The body

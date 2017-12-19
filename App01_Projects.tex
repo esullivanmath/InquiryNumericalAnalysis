@@ -226,7 +226,10 @@ One rule of thumb must prevail throughout all mathematical writing:\index{writin
     \item[Label and reference equations:] When you need to refer to an equation later it is
         common practice to label the equation with a number and then to refer to this
         equation by that number.  This avoids ambiguity and gives the reader a better
-        chance at understanding what you're writing. \\
+        chance at understanding what you're writing. Furthermore, avoid using words like
+        ``below'' and ``above'' since the reader doesn't really know where to look. One
+        implication to this style of referencing is that you should never reference an
+        equation before you define it. \\
         {\bf Incorrect:}
         \begin{quote}
             In the equation below we consider the domain $x \in (-1,1)$
@@ -234,8 +237,9 @@ One rule of thumb must prevail throughout all mathematical writing:\index{writin
         \end{quote}
         {\bf Correct:}
         \begin{quote}
-            In equation \eqref{eqn:sample_eqn} we consider the domain $x \in (-1,1)$
+            Consider the summation
             \begin{flalign} f(x) = \sum_{j=1}^\infty \frac{x^n}{n!}.\label{eqn:sample_eqn} \end{flalign}
+            In \eqref{eqn:sample_eqn} we are assuming the domain $x \in (-1,1)$
         \end{quote}
 
     \item[``Timesing'':] The act of multiplication should not be called ``timesing'' as in
