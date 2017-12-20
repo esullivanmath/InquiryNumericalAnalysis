@@ -499,6 +499,96 @@ boundaries of the domain.
     \end{itemize}
 \end{definition}
 
+Let's play with a couple problems that should help to build your intuition about boundary
+conditions in PDEs.  Again, we will do this graphically instead of numerically.
+\begin{problem}
+    Consider solving the heat equation $u_t = u_{xx}$ in 1 spatial dimension.  It will
+    be helpful to reconsider Problem \ref{prob:heat_intuition_1} for this problem.
+    \begin{enumerate}
+        \item[(a)] In Problem \ref{prob:heat_intuition_1} we didn't explicitly state the
+            boundary conditions.  What type of boundary conditions were they?  How can
+            you tell?
+        \item[(b)] What if we take the initial condition for the 1D heat equation to be
+            $u(0,x) = \cos(2\pi x)$ and enforce the conditions $\pd{u}{x}\Big|_{x=0} = 0$
+            and $u(t,1) = 1$.
+            What types of boundary conditions are these?  Draw a collection of pictures
+            showing the expected evolution of the heat equation with these boundary
+            conditions.
+    \end{enumerate}
+\end{problem}
+
+
+
+
+
+
+\begin{problem}
+    Consider solving the wave equation $u_{tt} = u_{xx}$ in 1 spatial dimension.  It will
+    be helpful to reconsider Problem \ref{prob:wave_intuition_1} for this problem.
+    \begin{enumerate}
+        \item[(a)] In Problem \ref{prob:wave_intuition_1} we didn't explicitly state the
+            boundary conditions.  What type of boundary conditions were they?  How can
+            you tell?
+        \item[(b)] What if we take the initial condition for the 1D wave equation to be
+            $u(0,x) = \cos(2\pi x)$ and enforce the conditions $\pd{u}{x}\Big|_{x=0} = 0$
+            and $u(t,1) = 1$.
+            What types of boundary conditions are these?  Draw a collection of pictures
+            showing the expected evolution of the heat equation with these boundary
+            conditions.
+    \end{enumerate}
+\end{problem}
+
+An important lesson when solving partial differential equations is that if you get the
+boundary conditions wrong then the solution to your problem is meaningless.  The next two
+problems should help you to understand some of the basic scenarios that we might wish to
+solve with the heat and wave equation. 
+\begin{problem}\label{prob:heat_bc}
+    For each of the following situations propose meaningful boundary conditions for the 1D
+    or 2D heat equation.
+    \begin{enumerate}
+        \item[(a)] A thin metal rod 1 meter long is heated to $100^\circ$C on the left end and is
+            cooled to $0^\circ$C on the right end.  We model the heat transport with the
+            1D heat equation $u_t = u_{xx}$.  What are the appropriate boundary
+            conditions?
+        \item[(b)] A thin metal rod 1 meter long is insulated on the left end so that the
+            heat flux through that end is 0.  The rod is held at a constant temperature of
+            $50^\circ$C on the right end.  We model the heat transport with the
+            1D heat equation $u_t = u_{xx}$.  What are the appropriate boundary
+            conditions?
+        \item[(c)] In a soil-science lab a column of packed soil is insulated on the sides
+            and cooled to $20^\circ$C at the bottom.  The top of the column is exposed to
+            a heat lamp that cycles periodically between $15^\circ$C and $25^\circ$C and is supposed to mimic the heating and cooling that occurs
+            during a day.  We model the heat transport within the column with the 1D heat
+            equation $u_t = u_{xx}$.  Wat are the appropriate boundary conditions?
+        \item[(d)] A thin rectangular slab of concrete is being designed for a sidewalk.
+            Imagine the slab as viewed from above.  We expect
+            the right-hand side to be heated to $50^\circ$C due to radiant heating from
+            the road and the left-hand side to be cooled to approximately $20^\circ$C due to
+            proximity to a grassy hillside.  The top and bottom of the slab are insulated
+            with a felt mat so that the flux of heat through both ends is zero.  We model
+            the heat transport with the 2D heat equation $u_t = u_{xx} + u_{yy}$.  What
+            are the appropriate boundary conditions?
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}\label{prob:wave_bc}
+   For each of the following situations propose meaningful boundary conditions for the 1D
+   and 2D wave equation.
+   \begin{enumerate}
+       \item[(a)] A guitar string is held tight at both ends and plucked in the middle.
+           We model the vibration of the guitar string with the 1D wave equation $u_{tt} =
+           u_{xx}$.  What are the appropriate boundary conditions?
+       \item[(b)] A rope is stretched between two people.  The person on the left holds
+           the rope tight and doesn't move.  The person on the right wiggles the rope in a
+           periodic fashion completing one full oscillation per second.  We model the
+           waves in the rope with the 1D wave equation $u_{tt} = u_{xx}$.  What are the
+           appropriate boundary conditions?
+       \item[(c)] A rubber membrane is stretched taught on a rectangular frame.  The frame is
+           held completely rigid while the membrane is stretched from equilibrium and then
+           released.  We model the vibrations in the membrane with the 2D wave equation
+           $u_{tt} = u_{xx} + u_{yy}$.  What are the appropriate boundary conditions?
+   \end{enumerate}
+\end{problem}
 
 
 \newpage\section{1D and 2D Heat Equation}
@@ -836,6 +926,20 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 \newpage\section{Exercises}
 
 \begin{problem}
+    For every one of the scenarios described in Problem \ref{prob:heat_bc}, propose a
+    sensible initial condition and solve the problem numerically.  Notice that the
+    diffusion coefficient, $D$, is set to 1 for all of these models.  You are welcome to
+    change $D$ if you see that it is necessary.
+\end{problem}
+
+\begin{problem}
+    For every one of the scenarios described in Problem \ref{prob:wave_bc}, propose a
+    sensible initial condition and solve the problem numerically.  Notice that the
+    tension coefficient, $\alpha^2$, is set to 1 for all of these models.  You are welcome to
+    change $\alpha^2$ if you see that it is necessary.
+\end{problem}
+
+\begin{problem}
     In this problem we will solve a more realistic 1D heat equation.  We will allow the
     diffusivity to change spatially, so $D = D(x)$ and we want to solve
     \[ u_t = \left( D(x) u'(x) \right)' \]
@@ -845,19 +949,22 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     differential equation:
     \[ u_t = D(x) u''(x) + D'(x) u'(x). \]
 
-    Your job is:
+    Your jobs are:
     \begin{enumerate}
-        \item Write an explicit scheme to solve this problem by using centered differences
+        \item[(a)] Describe what this choice of $D(x)$ might mean physically in the heat
+            equation.
+        \item[(b)] Write an explicit scheme to solve this problem by using centered differences
             for the spatial derivatives and an Euler-type discretization for the temporal
             derivative.  Write a clear and thorough explanation for how you are doing the
             discretization as well as a discussion for the errors that are being made with
             each discretization.
-        \item Write a MATLAB script to find an approximate solution to this problem.
-        \item Write a clear and thorough discussion about how your will choose $\Delta x$
+        \item[(c)] Write a MATLAB script to find an approximate solution to this problem.
+        \item[(d)] Write a clear and thorough discussion about how your will choose $\Delta x$
             and $\Delta t$ to give stable solutions to this equation.
-        \item Graphically compare your solution to this problem with a heat equation where
-            $\kappa$ is taken to be the average diffusivity: $D = 0.5.$  How does the
-            changing diffusivity change the shape of the solution?
+        \item[(e)] Graphically compare your solution to this problem with a heat equation
+            where $D$ is taken to be the constant average diffusivity found by calculating
+            $D_{ave} = \int_0^1 D(x) dx.$  How does the changing diffusivity change the
+            shape of the solution?
     \end{enumerate}
 
 \end{problem}
