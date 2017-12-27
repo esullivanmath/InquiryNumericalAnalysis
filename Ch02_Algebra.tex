@@ -1,40 +1,119 @@
 \chapter{Numerical Root Finding}
+Let's play a game!
+\begin{problem}\label{prob:bisection_game}
+    Find a partner in the room to play a two-person game.  Choose someone to go first and
+    follow these steps to play.
+    \begin{description}
+        \item[Step \#1:] The first player secretly chooses a positive real number. For
+            simplicity let's choose something less than 100.
+        \item[Step \#2:] The first player chooses non-negative real numbers $a$ and $b$ so that the
+            secret number is between $a$ and $b$.  
+        \item[Step \#3:] The first player tells the second player ``{\it my number is between $a$
+            and $b$}''.
+        \item[Step \#4:] The second player makes a guess at the secret number.  We'll call
+            that number $c$.
+        \item[Step \#5:] The first player responds with one of the following three
+            responses.
+            \begin{itemize}
+                \item If $c$ is within $0.01$ of the secret number then say\\ ``{\it you win!}''
+                \item If the secret number is between $a$ and $c$ then say\\ ``{\it the secret
+                number is between $a$ and $c$}.''
+                \item If the secret number is between $c$ and $b$ then say\\ ``{\it the secret
+                number is between $c$ and $b$}.''
+            \end{itemize}
+        \item[Step \#6:] Repeat steps 4 and 5 until the second player guesses the secret
+            number to within $0.01$ or you have repeated more than 20 times. The second
+            player wins if he/she guesses the number in 20 or fewer steps.
+    \end{description}
+\end{problem}
+
+\begin{problem}
+    Discuss with your partner what the optimal strategy for the second player is for the
+    game in Problem \ref{prob:bisection_game}.
+\end{problem}
+
+\begin{problem}
+    Now we want to write MATLAB code so you can play the game from Problem
+    \ref{prob:bisection_game} against the computer.  The following incomplete code should
+    get you started.  Fill in the missing pieces of the code and play the game several
+    times to be sure that it works.  What strategy do you find yourself using to play the
+    game?
+\begin{lstlisting}
+%% Secret Number Guesser Game
+clear; clc; format compact;
+secret = 100*rand(1,1); % random secret number between 0 and 100
+tolerance = 0.01;
+a = randi(floor(secret),1); % initial lower bound integer below the secret
+b = randi( [ceil(secret),101] , 1); % initial upper bound integer above the secret
+c = 1000; % dummy initial value for c
+n = 1; % initialize the game counter
+while abs( secret - c ) > tolerance
+    fprintf('Guess #%g.\n',n)
+    fprintf('The secret number is between %g and %g.\n',a,b)
+    c = input('What is your guess for the secret number? ');
+    if abs( secret - c ) < tolerance
+        fprintf('  \n') % respond appropriately here
+        ... % write more code here if necessary
+    elseif secret < (c-tol)
+        ... % write appropriate code here in this case
+    elseif secret > (c+tol)
+        ... % write appropriate code here in this case
+    end
+    if n>=20
+        fprintf('   \n') % respond appropriately here
+        break % this will break out of the loop
+    end
+    n=n+1; % increment the game counter
+end
+\end{lstlisting}
+\end{problem}
+
+
+
+\newpage
+\section{Introduction to Root Finding}
 In this chapter we want to solve algebraic equations using a computer.  Consider the equation
 $\ell(x) = r(x)$ (where $\ell$ and $r$ stand for left and right respectively).  To solve
 this equation we can first rewrite it by subtracting the right-hand side from the left to
 get
 \[ \ell(x) - r(x) = 0. \]
-For example, if we want to solve $\sin(x) + 9 = x^2 - \tan(x)$ then this is the same as
-solving $(\sin(x) + 9 ) - (x^2 - \tan(x)) = 0$ (please don't try to solve this one by
-hand!).  Hence, we can write $f(x)=\ell(x)-r(x)$
+For example, if we want to solve $3\sin(x) + 9 = x^2 - \cos(x)$ then this is the same as
+solving $(3\sin(x) + 9 ) - (x^2 - \cos(x)) = 0$.  Hence, we can define a function $f(x)$
+as $f(x)=\ell(x)-r(x)$
 and observe that \underline{every} algebraic equation can be written as: ``if $f(x) = 0$,
 find $x$''.  We illustrate this idea in Figure \ref{fig:initial_root_example}.  On the
 left-hand side of Figure \ref{fig:initial_root_example} we see the solutions to the
-equation $\sin(x) + 9 = x^2 - \tan(x)$, and on the right-hand side of Figure
-\ref{fig:initial_root_example} we see the solutions to the equation $\left( \sin(x)+0
-\right) - \left( x^2 - \tan(x) \right) = 0$.  From the plots it is apparent that the two
-equations have the same solutions.
+equation $3\sin(x) + 9 = x^2 - \cos(x)$, and on the right-hand side of Figure
+\ref{fig:initial_root_example} we see the solutions to the equation $\left( 3\sin(x)+9
+\right) - \left( x^2 - \cos(x) \right) = 0$.  From the plots it is apparent that the two
+equations have the same solutions: $x_1 \approx -2.55$ and $x_2 \approx 2.88$.
 
 \begin{figure}[ht!]
     \begin{center}
         \begin{tikzpicture}
-            \begin{axis}[axis lines=center, grid, xmin=0, xmax=2, ymin=-5, ymax=15, legend
+            \begin{axis}[axis lines=center, grid, xmin=-4, xmax=4, ymin=-5, ymax=15, legend
                 pos=north west]
-                \addplot[black, smooth, very thick] {sin(deg(x)) + 9};
-                \addlegendentry{$\sin(x) + 9$};
-                \addplot[red, smooth, dashed, very thick] {x^2 - tan(deg(x))};
-                \addlegendentry{$x^2-\tan(x)$};
-                \draw[thick, blue] (axis cs:1.55,10) circle(0.1cm);
-                \draw[thick, blue] (axis cs:1.885,10) circle(0.1cm);
+                \addplot[black, smooth, very thick] {3*sin(deg(x)) + 9};
+                \addlegendentry{$3\sin(x) + 9$};
+                \addplot[blue, smooth, dashed, very thick] {x^2 - cos(deg(x))};
+                \addlegendentry{$x^2-\cos(x)$};
+                \draw[thick, red] (axis cs:-2.556,7.32) circle(0.1cm);
+                \draw[dashed, red] (axis cs:-2.556,7.32) -- (axis cs:-2.556,-0.1) node[anchor=north]{$x_1$};
+                \draw[thick, red] (axis cs:2.94,9.61) circle(0.1cm);
+                \draw[dashed, red] (axis cs:2.94,9.61) -- (axis cs:2.94,-0.1)
+                node[anchor=north]{$x_2$};
             \end{axis}
         \end{tikzpicture}
         \begin{tikzpicture}
-            \begin{axis}[axis lines=center, grid, xmin=0, xmax=2, ymin=-5, ymax=15, legend
+            \begin{axis}[axis lines=center, grid, xmin=-4, xmax=4, ymin=-5, ymax=15, legend
                 pos=north west]
-                \addplot[blue!50!black, dotted, smooth, very thick] {sin(deg(x)) + 9 - x^2 + tan(deg(x))};
-                \addlegendentry{$f(x) = \left(\sin(x) + 9\right) - \left( x^2-\tan(x)\right)$};
-                \draw[thick, blue] (axis cs:1.55,0) circle(0.1cm);
-                \draw[thick, blue] (axis cs:1.885,0) circle(0.1cm);
+                \addplot[black!50!green, dotted, smooth, very thick] {3*sin(deg(x)) + 9 - x^2
+                + cos(deg(x))};
+                \addlegendentry{$f(x) = \left(3\sin(x) + 9\right) - \left( x^2-\cos(x)\right)$};
+                \draw[thick, red] (axis cs:-2.55,0) circle(0.1cm);
+                \draw[thick, red] (axis cs:-2.55,-0.1) node[anchor=north]{$x_1$};
+                \draw[thick, red] (axis cs:2.94,0) circle(0.1cm);
+                \draw[thick, red] (axis cs:2.94,-0.1) node[anchor=north]{$x_2$};
             \end{axis}
         \end{tikzpicture}
     \end{center}
@@ -50,9 +129,10 @@ solving the equation will apply -- and some will be much faster and more accurat
 others. The following sections give several different techniques for solving algebraic
 equations of the form $f(x) = 0$.
 
+\newpage
 \section{The Bisection Method}
-Let's start with a theorem from Calculus.
-\begin{thm}[The Intermediate Value Theorem]
+We'll start the mathematical discussion with a theorem from Calculus.
+\begin{thm}[The Intermediate Value Theorem (IVT)]
     If $f(x)$ is a continuous function on the closed interval $[a,b]$ and $y_*$ lies between
     $f(a)$ and $f(b)$, then there exists some point $x_* \in [a,b]$ such that $f(x_*) = y_*$.
     \label{thm:IVT}
@@ -89,6 +169,15 @@ The following algorithm, known as the Bisection Method, uses the Intermediate
 Value Theorem to systematically approximate the point $x_*$ to solve the algebraic
 equation $f(x_*) =
 0$.
+
+\begin{problem}
+    Discussion: What does the game from Problem \ref{prob:bisection_game} have in common
+    with the Intermediate Value Theorem
+    and its corollary?  Use your optimal strategy from the game along with
+    the corollary to the IVT to propose a strategy to find roots of a continuous function.
+    Write psuedo-code for your solution strategy.
+\end{problem}
+
 \begin{algorithm}[The Bisection Method]
     Assume that $f(x)$ is continuous on the closed interval $[a,b]$. To make approximations of
     the solutions to the equation $f(x) = 0$, do the following:
@@ -113,11 +202,45 @@ equation $f(x_*) =
 
 
 \begin{problem}
-    Write a MATLAB function for the Bisection Method, and write a test script
-   that verifies that your function works properly. Be sure that it can take an
-    anonymous function handle as an input along with an initial lower bound, an initial
-    upper bound, and an optional error tolerance. The output should be only 1 single number: the
-    root.\\
+    We want to write a MATLAB function for the Bisection Method.  Instead of jumping
+    straight into the code we should ALWAYS write pseudo-code first.  It is often helpful
+    to write pseudo-code as comments in your MATLAB file.  Use the template below to
+    complete your pseudo-code.
+\begin{lstlisting}
+function root = Bisection(f , a , b , tol)
+% The input parameters are
+% f is an anonymous function handle
+% a is the lower guess
+% b is the upper guess
+% tol is an optional tolerance for the accuracy of the root
+
+% if the user doesn't define a tolerance we need code to create a default
+
+% check that there is a root between a and b
+% if not we should return an error and break the code
+
+% next calculate the midpoint m = (a+b)/2
+
+% start a while loop
+    % in the while loop we need an if statement
+    % if ...
+    % elseif ...
+    % elseif ...
+
+    % we should check that the while loop isn't running away
+
+% end the while loop
+% define the root
+\end{lstlisting}
+\end{problem}
+
+
+\begin{problem}
+    Now use the pseudo-code as structure to complete a MATLAB function for the Bisection
+    Method.  Also write a test script that verifies that your function works properly. Be
+    sure that it can take an anonymous function handle as an input along with an initial
+    lower bound, an initial upper bound, and an optional error tolerance. The output
+    should be only 1 single number: the root.\\
     \mcode{function root=Bisection(f , a , b , tol)}
 \end{problem}
 
@@ -240,7 +363,12 @@ function.  The next algorithm takes a slightly different approach.
 }
 
 \begin{problem}
-   Write a MATLAB function to implement the Regula Falsi method, and write a test script
+    Create a new MATLAB function called \mcode{RegulaFalsi} and write comments giving pseudo-code
+    for the Regula-Falsi method.
+\end{problem}
+
+\begin{problem}
+   Use your pseudo-code to create a MATLAB function that implements the Regula Falsi method, and write a test script
    that verifies that your function works properly. Your function should accept an
     anonymous function handle as an input along with an initial lower bound, an initial
     upper bound, and an optional error tolerance. The output should be only 1 single number: the
@@ -303,6 +431,13 @@ and locating where those tangent lines intersect the horizontal axis.
         \item the initial guess is {\it too far away} from the intended root.
     \end{itemize}
 }
+
+\begin{problem}
+    Create a new MATLAB function called \mcode{Newton} and write comments giving
+    pseudo-code for Newton's method.  This version of Newton's method will accept the
+    function and the first derivative so you don't need to set aside any code for
+    calculating the derivative.
+\end{problem}
 
 \begin{problem}
     Write a MATLAB function for Newton's method.  Your function needs to accept an
@@ -400,7 +535,8 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \begin{problem}
     Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
-    Secant method. Your function should accept an anonymous function handle, two starting
+    Secant method.  You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.   Your function should accept an anonymous function handle, two starting
     points, and an optional error tolerance.  Also write a test script that clearly shows that your code is working.
     \\
     \mcode{function soln = SecantMethod(f, x0, x1, tol)}
@@ -435,7 +571,8 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \begin{problem}
     Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
-    Steffensen's method.  Your function should accept an anonymous function handle, a
+    Steffensen's method. You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.    Your function should accept an anonymous function handle, a
     starting point, and an optional error tolerance.  Also write a test script that
     clearly shows that your code is working. \\ 
     \mcode{function soln = Steffensen(f, x0, tol)}
