@@ -144,9 +144,62 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     will be a remarkable difference.  
 \end{problem}
 
+We have studied two methods thus far: Euler's method and the Midpoint method.  In Figure
+\ref{fig:Euler_Midpoint} we see a graphical depiction of how each method works on the
+differential equation $y' = y$ with $\Delta t = 1$ and $y(0) = 1$.  The exact solution
+at $t=1$ is $y(1) = e^1 \approx 2.718$ and is shown in red in each figure.  The methods
+can be summarized as 
+\begin{center}
+    \begin{tabular}{|l|l|}
+        \hline
+        Euler's Method & Midpoint Method \\ \hline \hline
+        1. Get the slope at time $t_n$ & 1. Get the slope at time $t_n$ \\ \hline
+        2. Follow the slope for time $\Delta t$ & 2. Follow the slope for time $\Delta
+        t/2$ \\ \hline
+        & 3. Get the slope at the point $t_n  + \Delta t/2$ \\ \hline
+        & 4. Follow the new slope from time $t_n$ for time $\Delta t$ \\ \hline
+    \end{tabular}
+\end{center}
 
-\begin{problem}
-    {\bf The Runge-Kutta Method:}\\
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=-0.1, xmax=1.1, ymin=0, ymax=3,
+                title={Euler}]
+                \draw[fill=red] (axis cs:1,2.7182) circle(0.07cm); 
+                \addplot[dashed, red, samples=50] {1*exp(x)};
+                \draw[fill=black] (axis cs:0,1) circle(0.07cm); 
+                \draw[blue, ->] (axis cs:0,1) -- (axis cs:0.98,1.99);
+                \draw[fill=blue] (axis cs:1,2) circle(0.07cm);
+                \draw (axis cs:0.5,1.5) node[anchor=north]{$m=1$};
+                \draw[color=blue] (axis cs:1,2) node[anchor=north]{$(1,2)$};
+                \draw[color=red] (axis cs:1,2.7182) node[anchor=south east]{$(1,2.71)$};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=-0.1, xmax=1.1, ymin=0, ymax=3,
+                title={Midpoint}]
+                \draw[fill=red] (axis cs:1,2.7182) circle(0.07cm); 
+                \addplot[dashed, red, samples=50] {1*exp(x)};
+                \draw[fill=black] (axis cs:0,1) circle(0.07cm); 
+                \draw[fill=blue] (axis cs:0.5,1.5) circle(0.07cm);
+                \draw[color=blue, dashed] (axis cs:0.4,1.35) -- (axis cs:0.6,1.65);
+                \draw (axis cs:0.45,1.5) node[anchor=north west]{$m=1.5$};
+                \draw[color=green!30!black, ->] (axis cs:0,1) -- (axis cs:0.98,2.49);
+                \draw[fill=green!30!black] (axis cs:1,2.5) circle(0.07cm);
+                \draw[color=green!30!black] (axis cs:1,2.5) node[anchor=north]{$(1,2.5)$};
+                \draw[color=red] (axis cs:1,2.7182) node[anchor=south east]{$(1,2.71)$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Graphical depictions of two numerical methods: Euler (left) and Midpoint
+    (right). Here we use the simple differential equation
+$y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$.  The exact solution is shown in red.}
+    \label{fig:Euler_Midpoint}
+\end{figure}
+
+
+\begin{technique}[The Runge-Kutta 4 (RK4) Method]
     Another method for approximating the solution to a first order initial value problem
     is to take several approximations and average them in a smart way.  The Runge-Kutta 4
     method is one (of many) such methods.  In this method, each $k_j$ is an approximation
@@ -158,7 +211,66 @@ gives the exact solution at the tradeoff of needing infinite computational resou
         k_4 &= f(t_n + h , y_n + h k_3) \\
         y_{n+1} &= y_n + \frac{h}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4 \right)
     \end{flalign*}
+\end{technique}
 
+Before we write code to implement the RK4 method we will examine it graphically just as we
+did with Euler's method and the Midpoint method in Figure \ref{fig:Euler_Midpoint}.  For
+simplicity we will examine the differential equation $y' = y$ with initial condition $y(0)
+=1$ and $\Delta t = 1$.  In Figure \ref{fig:RK4_graphical} the red dashed line is the
+exact solution $y(t) = e^t$.  In this example, $k_1 = 1$, $k_2 = 1.5$, $k_3 = 1.75$, and
+$k_4 = 2.75$.  Hence the final slope propogating forward with $\Delta t = 1$ is 
+\[ \frac{1}{6} \left(  1 + 2(1.5) + 2(1.75) + 2.75 \right) = 1.708. \]
+Propogating this forward from the point $(0,1)$ gives the new point $(1,2.708)$.  Knowing
+that $e \approx2.718$ we see a very high level of accuracy even with a really large time
+step!
+
+\begin{center}
+    \begin{tabular}{|l|}
+        \hline
+        Runge-Kutta 4 Method \\ \hline \hline
+        1. $k_1$ is the slope evaluated at time $t_n$ \\ 
+        Project this slope half a step forward from time $t_n$ to the point $y_1$ \\ \hline
+        2. $k_2$ is the slope evaluated at $y_1$ \\ 
+        Project the slope $k_2$ half a step forward from time $t_n$ to the point $y_2$
+        \\ \hline
+        3. $k_3$ is the slope evaluated at the point $y_2$ \\
+        Project the slope $k_3$ a full step foward from time $t_n$ to the point $y_3$ \\
+        \hline
+        4. $k_4$ is the slope evaluated at the point $y_3$ \\ \hline
+        5. Project forward with slope $\frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)$ from time
+        $t_n$ \\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=-0.1, xmax=1.1, ymin=0, ymax=3,
+                title={Runge-Kutta 4}]
+                \draw[fill=red] (axis cs:1,2.7182) circle(0.07cm); 
+                \addplot[dashed, red, samples=50] {1*exp(x)};
+                \draw[fill=black] (axis cs:0,1) circle(0.07cm); 
+                \draw[blue,->] (axis cs:0,1) -- (axis cs:0.48,1.48);
+                \draw[blue] (axis cs:0.5,1.5) circle(0.07cm) node[anchor=north]{$y_1$};
+%                 \draw (axis cs:0.05,1.1) node[anchor=north west]{$k_1 = 1$};
+                \draw[color=green!30!black, dashed, ->] (axis cs:0,1) -- (axis
+                cs:0.48,1.735);
+                \draw[color=green!30!black] (axis cs:0.5,1.75) circle(0.07cm);
+                \draw[color=green!30!black] (axis cs:0.5,1.75) node[anchor=south]{$y_2$};
+                \draw[color=black, dotted, ->] (axis cs:0,1) -- (axis cs:1,2.75);
+                \draw[fill=black] (axis cs:1,2.75) circle(0.07cm);
+                \draw (axis cs:1,2.75) node[anchor=south]{$y_3$};
+                \draw (axis cs:0,1) -- (axis cs:1,2.708);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Graphical depiction of the RK4 method.  The red dashed curve gives the exact
+    solution to the differential equation $y' = y$ with initial condition $y(0) = 1$. The
+solid black line gives the final projection.}
+    \label{fig:RK4_graphical}
+\end{figure}
+
+\begin{problem}
     Write a MATLAB function that implements the Runge-Kutta 4 method in one dimension.\\
     \mcode{function [t,y]=MyRk4(f,tmin,tmax,num\_pts,IC)} \\
     Test the problem on a known differential equation.
@@ -196,6 +308,8 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     and Runge-Kutta solutions to these systems. Devise several systems to test your code
     (including 1D and 2D).
 \end{problem}
+
+
 
 
 \newpage\section{Implicit Methods and Shooting Methods}
