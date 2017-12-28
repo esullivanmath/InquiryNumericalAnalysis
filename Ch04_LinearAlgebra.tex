@@ -399,7 +399,7 @@ MyError = norm(x-MATLABExactAnswer)
 \end{problem}
 
 
-\newpage\section{The Least Squares Problems}
+\newpage\section{The Least Squares Problems}\label{sec:least_squares}
 \begin{problem}\label{prob:least_squares_1}
     Grab the data sets from the Google Sheet
     \href{https://docs.google.com/spreadsheets/d/1bpqb51eTTtJbe9V1JLt_JkzN-8kbIh2RzisRQHIMLrY/edit?usp=sharing}{HERE}.
@@ -736,6 +736,281 @@ triangular matrix.
     equations. When is LU more efficient? When is QR more efficient?
 \end{problem}
 
+
+\newpage
+\section{Interpolation}
+The least squares problem that we studied in the previous sections seeks to find a best
+fitting function that is {\it closest} (in the 2-norm sense) to a set of data.  What if,
+instead, we want to match the data points \underline{exactly} with a function. This is the realm of
+interpolation.  Take note that there are many many forms of interpolation that are
+tailored to specific problems.  In this brief section we cover only a few of the simplest
+forms of interpolation involving only polynomial functions.
+The problem that we'll focus on can be phrased as:\\  Given a set of $n+1$ data points $(x_0, y_0), (x_1, y_1), \ldots,
+(x_n,y_n)$, find a polynomial of degree at most $n$ that exactly fits these points.
+\subsection{Vandemonde Interpolation}
+We have technically already seen Vandermonde interpolation.  In Section
+\ref{sec:least_squares} we built a system of equations to solve the least squares problem.
+In the least squares problem we had more data points than unknown parameters resulting in
+an over-determined system (look back to Section \ref{sec:least_squares} to remind
+yourself).  If, however, we choose a polynomial model that has the same number of unknown
+parameters as data points then the resulting system if not over-determined.
+
+For example, let's say that we have the data set 
+\[ S = \{ (0,1) \, , \, (1,2) \, , \, (2,5) \, , \, (3,10) \} \]
+and we want to fit a polynomial then we can use a cubic function (which has 4 parameters)
+to match the data perfectly.  Indeed, if we choose $p(x) = \beta_0 + \beta_1 x + \beta_2
+x^2 + \beta_3 x^3$ then the resulting system of equations is
+\[ \begin{pmatrix}  1 & 0 & 0 & 0 \\
+                    1 & 1 & 1 & 1 \\
+                    1 & 2 & 4 & 8 \\
+                    1 & 3 & 9 & 27 \end{pmatrix} \begin{pmatrix} \beta_0 \\ \beta_1 \\
+                    \beta_2 \\ \beta_3 \end{pmatrix} = \begin{pmatrix} 1 \\ 2 \\ 5 \\ 10
+            \end{pmatrix}. \]
+
+Notice that the system of equations is square, and solving using any method discussed in
+this chapter results in $\beta_0 = 1$, $\beta_1 = 0$, $\beta_2 = 1$, and $\beta_3 = 0$.
+Hence, the interpolating function is $p(x) = 1 + 0x + 1x^2 + 0x^3 = 1+x^2$, and we know
+that $p(x)$ matches this data set perfectly as seen in Figure \ref{fig:vandermonde}.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=-0.5, xmax=3.5, ymin=-1, ymax=11]
+                \addplot[smooth, very thick, blue] {x^2 + 1};
+                \addplot[mark=*, only marks] coordinates{(0,1)(1,2)(2,5)(3,10)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A simple Vandermonde interpolation for the data set $S = \{(0,1) \, , \,
+(1,2) \, , \, (2,5) \, , \, (3,10) \}$ resulting in the interpolating function $p(x) =
+1+x^2$.}
+    \label{fig:vandermonde}
+\end{figure}
+
+
+\begin{problem}\label{prob:vandermonde_1}
+   Write a MATLAB function that accepts a list of ordered pairs (where each $x$ value is
+   unique) and builds a Vandermonde interpolation polynomial.  Test your function on the
+   simple example listed above and then on several larger problems.  It may be simplest to
+   initially test on functions that we know.
+\end{problem}
+
+\begin{problem}
+    Build a Vandermonde interpolation polynomial to interpolate the function $f(x) =
+    \cos(2 \pi x)$ with 10 points that are linearly spaced on the interval $x \in [0,2]$.
+\end{problem}
+
+\begin{definition}[The Vandermonde Matrix]
+    Let $S = \{(x_0,y_0) \,,\, (x_1,y_1) \,,\, \ldots, (x_n,y_n)\}$ be a list of ordered
+    pairs where the $x$ values are all unique.  Using Vandermonde interpolation we arrive
+    at the system of equations
+    \begin{flalign}
+        \begin{pmatrix} 1 & x_0 & x_0^2 & \cdots & x_0^n \\
+                        1 & x_1 & x_1^2 & \cdots & x_1^n \\
+                        1 & x_2 & x_2^2 & \cdots & x_2^n \\
+                        \vdots & \vdots & \vdots & \ddots & \vdots \\
+                        1 & x_n & x_n^2 & \cdots & x_n^n \end{pmatrix}
+        \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_n \end{pmatrix}
+        =
+        \begin{pmatrix} y_0 \\ y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}.
+        \label{eqn:vandermonde}
+    \end{flalign}
+    The matrix on the left-hand side of \eqref{eqn:vandermonde} is called the {\bf
+    Vandermonde Matrix}.
+\end{definition}
+
+\begin{problem}
+    Vandermonde matrix is relatively easy to conceptualize and code, but there is an
+    inherent problem.  Use your code from Problem \ref{prob:vandermonde_1} to create a
+    plot on a \mcode{semilogy} scale.  The horizontal axis of the plot is the order of the
+    interpolating polynomial and the vertical axis is the ratio
+    $|\lambda_{max}|/|\lambda_{min}|$ where $\lambda_{max}$ and $\lambda_{min}$ are the
+    maximum and minimum eigenvalues of the Vandermonde matrix respectively.  What does
+    this plot tell you about Vandermonde interpolation for high-order polynomials?
+\end{problem}
+
+\subsection{Lagrange Interpolation}
+Lagrange interpolation is a rather clever interpolation scheme where we build up the
+polynomial from simpler polynomials.  For interpolation we want to build a polynomial
+$p(x)$ such that $p(x_j) = y_j$.  If we can find a polynomial $\phi_j(x)$ that 
+\[ \phi_j(x) = \left\{ \begin{array}{ll} 0, & \text{ if } x = x_i \text{ and } i \ne j \\ 1, & \text{ if
+    } x=x_j \end{array} \right. \]
+then for Lagrange interpolation we build $p(x)$ as a linear combination of the $\phi_j$ functions.
+
+\begin{problem}
+    Consider the data set $S = \{(0,1) \, , \, (1,2) \, , \, (2,5) \, , \, (3,10) \}$.
+    
+    \begin{enumerate}
+        \item[(a)] Based on the descriptions of the $p(x)$ and $\phi_j(x)$ functions, why would
+            $p(x)$ be defined as
+            \[ p(x) = 1 \phi_0(x) + 2 \phi_1(x) + 5 \phi_2(x) + 10 \phi_3(x)? \]
+        \item[(b)] Verify that $\phi_0(x)$ can be defined as
+            \[ \phi_0(x) = \frac{(x-1)(x-2)(x-3)}{(0-1)(0-2)(0-3)}. \]
+        \item[(c)] Verify that $\phi_1(x)$ can be defined as
+            \[ \phi_1(x) = \frac{(x-0)(x-2)(x-3)}{(1-0)(1-2)(1-3)}. \]
+        \item[(d)] Define $\phi_2(x)$ and $\phi_3(x)$ in a similar way.
+        \item[(e)] Build the linear combination from part (a) and create a plot showing that
+            this polynomial indeed interpolates the points in the set $S$.
+    \end{enumerate}
+\end{problem}
+
+\begin{technique}[Lagrange Interpolation]
+    To build an interpolating polynomial $p(x)$ for the set of points
+    $\{(x_0,y_0)\,,\,(x_1,y_1)\,,\,(x_2,y_2)\,,\ldots,\,(x_n,y_n)\}$ we first build the
+    polynomials $\phi_j(x)$ for each $j = 0, 1, 2, \ldots, n$ and then construct the
+    polynomial $p(x)$ as 
+    \[ p(x) = \sum_{j=0}^n y_j \phi_j(x). \]
+    The $\phi_j(x)$ functions are defined as
+    \[ \phi_j(x) = \prod_{i \ne j} \frac{x-x_i}{x_j-x_i}. \]
+\end{technique}
+
+\begin{example}
+    Build a Lagrange interpolation polynomial for the set of points
+    \[ S  = \{(1,5)\,,\,(2,9)\,,\,(3,11)\}. \]
+    {\bf Solution} \\
+    We first build the three $\phi_j$ functions.
+    \begin{flalign*}
+        \phi_0(x) = \frac{(x-2)(x-3)}{(1-2)(1-3)} \\
+        \phi_1(x) = \frac{(x-1)(x-3)}{(2-1)(2-3)} \\
+        \phi_2(x) = \frac{(x-1)(x-2)}{(3-1)(3-2)}.
+    \end{flalign*}
+    Take careful note that the $\phi$ functions are built in a very particular way.
+    Indeed, $\phi_0(1) = 1$, $\phi_0(2) =0$, and $\phi_0(3) = 0$.  Also, $\phi_1(1) = 0$,
+    $\phi_1(2) = 1)$, and $\phi_1(3) = 0$.  Finally, note that $\phi_2(1) = 0$, $\phi_2(1)
+    = 0$ and $\phi_2(3) = 1$.  Thus, the polynomial $p(x)$ can be built as
+    \[ p(x) = 5 \phi_0(x) + 9 \phi_1(x) + 11 \phi(2(x) = 5 \frac{(x-2)(x-3)}{(1-2)(1-3)} +
+    \frac{(x-1)(x-3)}{(2-1)(2-3)} + \frac{(x-1)(x-2)}{(3-1)(3-2)}. \]
+    The remainder of the simplification is left to the reader.
+\end{example}
+
+\begin{problem}
+    Write a MATLAB function that accepts a list of list of ordered pairs (where each $x$
+    value is unique) and builds a Lagrange interpolation polynomial.  Test your function
+    on the examples that we've presented in this section.
+\end{problem}
+
+\subsection{Interpolation at Chebyshev Points}
+\begin{problem}
+    Using either Vandermonde or Lagrange interpolation build a polynomial that
+    interpolates the function 
+    \[ f(x) = \frac{1}{1+x^2} \]
+    for $x \in [-5,5]$
+    with polynomials of order $n=2, 3, \ldots$ and linearly spaced interpolation
+    points.  What do you notice about the
+    quality of the interpolating polynomial near the endpoints?
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, domain=-5.5:5.5, xmin=-5, xmax=5,
+                ymin=0, ymax=1.1] 
+                \addplot[smooth, very thick, blue] {1/(1+x^2)};
+                \addlegendentry{$f(x) = \frac{1}{1+x^2}$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+As you should have noticed the quality of the interpolation gets rather terrible near the
+endpoints when you use linearly spaced points for the interpolation.  A fix to this was
+first proposed by the Russian mathematician Pafnuty Chebyshev (1821-1894).  The idea is as
+follows:
+\begin{itemize}
+    \item Draw a semicircle above the closed interval on which you are interpolating
+        (shown in black in Figure \ref{fig:chebyshev_nodes}).
+    \item Pick $n$ equally spaced points along the semicircle (i.e. same arc length between
+        each point).  (shown in blue in Figure \ref{fig:chebyshev_nodes})
+    \item Project the points on the semicircle down to the interval.  Use these projected
+        points for the interpolation. (shown in red in Figure \ref{fig:chebyshev_nodes})
+\end{itemize}
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis equal, axis lines=center, xmin=-1.1, xmax=1.1, ymin=-0.2, ymax=1.1,
+                grid]
+%                 \addplot[smooth, very thick, samples=200] {sqrt(1-x^2)};
+                %
+                \draw[dashed, color=green!50!black] (axis cs:1,0) -- (axis cs:1,0);
+                \draw[dashed, color=green!50!black] (axis cs:0.965,0.259) -- (axis cs:0.965,0);
+                \draw[dashed, color=green!50!black] (axis cs:0.866,0.5) -- (axis cs:0.866,0);
+                \draw[dashed, color=green!50!black] (axis cs:0.707,0.707) -- (axis cs:0.707,0);
+                \draw[dashed, color=green!50!black] (axis cs:0.5,0.866) -- (axis cs:0.5,0);
+                \draw[dashed, color=green!50!black] (axis cs:0.259,0.965) -- (axis cs:0.259,0);
+                \draw[dashed, color=green!50!black] (axis cs:0,1) -- (axis cs:0,0);
+                \draw[dashed, color=green!50!black] (axis cs:-1,0) -- (axis cs:-1,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0.965,0.259) -- (axis cs:-0.965,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0.866,0.5) -- (axis cs:-0.866,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0.707,0.707) -- (axis cs:-0.707,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0.5,0.866) -- (axis cs:-0.5,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0.259,0.965) -- (axis cs:-0.259,0);
+                \draw[dashed, color=green!50!black] (axis cs:-0,1) -- (axis cs:-0,0);
+                %
+                \draw[black] (axis cs:0,0) circle(3.1cm);
+                \draw[fill=blue] (axis cs:1,0) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0.965,0.259) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0.866,0.5) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0.707,0.707) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0.5,0.866) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0.259,0.965) circle(0.07cm);
+                \draw[fill=blue] (axis cs:0,1) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-1,0) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0.965,0.259) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0.866,0.5) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0.707,0.707) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0.5,0.866) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0.259,0.965) circle(0.07cm);
+                \draw[fill=blue] (axis cs:-0,1) circle(0.07cm);
+                %
+                \draw[fill=red] (axis cs:1,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0.965,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0.866,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0.707,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0.5,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0.259,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:0,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-1,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-0.965,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-0.866,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-0.707,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-0.5,0) circle(0.07cm);
+                \draw[fill=red] (axis cs:-0.259,0) circle(0.07cm);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Chebyshev interpolation nodes for the interval $[-1,1]$. In this case each
+    node is separated by $\pi/8$ radians giving 13 interpolations points including the
+endpoints.}
+    \label{fig:chebyshev_nodes}
+\end{figure}
+
+It should be clear that since we are projecting down to the $x$-axis from a circle then
+all we need are the cosine values from the circle.  Hence we can form the Chebyshev
+interpolation points from the formula
+\begin{flalign}
+    x_j = \cos\left( \frac{\pi j}{n} \right), \quad \text{for} \quad j=0, 1, \ldots, n
+    \label{eqn:chebyshev_cosine}
+\end{flalign}
+on the interval $[-1,1]$.  
+
+To transform the Chebyshev points from the interval $[-1,1]$ (found with
+\eqref{eqn:chebyshev_cosine}) to the interval $[a,b]$ we can apply a linear function which
+maps $-1$ to $a$ and $1$ to $b$:
+\[ x_j \gets \left( \frac{b-a}{2} \right)\left( x_j + 1 \right) + a \]
+where the ``$x_j$'' on the left is on the interval $[a,b]$ and the ``$x_j$'' on the right
+is on the interval $[-1,1]$.
+
+\begin{problem}
+    Consider the function $f(x) = \frac{1}{1+x^2}$ just as we did for the first problem in
+    this subsection.  Write MATLAB code that overlays an interpolation with linearly spaced
+    points an interpolation with Chebyshev nodes.  Give plots for polynomial of order
+    $n=2,3, 4, \ldots$.  Be sure to show the original function on your plots as well.
+\end{problem}
+
+\begin{problem}
+    Demonstrate that the Chebyshev interpolation nodes will improve the stability of the
+    Vandermonde matrix over using linearly spaced nodes.
+\end{problem}
+
+% \subsection{Cubic Splines}
 
 \newpage\section{The Eigenvalue-Eigenvector Problem}
 Recall that the eigenvectors, $\bx$, and the eigenvalues, $\lambda$ of a square matrix satisfy the
@@ -1295,7 +1570,6 @@ answer.
 
 
 % \section{Principal Component Analysis (Incomplete)}
-
 
 \newpage\section{Exercises}
 

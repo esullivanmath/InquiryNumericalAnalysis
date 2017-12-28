@@ -124,7 +124,8 @@ have the following definition.
 \begin{problem}
     Write MATLAB code that takes a function and a domain $(xmin,xmax)$ and
     returns a numerical approximation to the derivative on the interval
-    $(xmin,xmax)$. Your function should accept an anonymous function handle, the
+    $(xmin,xmax)$. You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.   Your function should accept an anonymous function handle, the
     bounds on the domain, and the number of interior points used for approximation within
     the domain.  Your function should output the $x$ values and $y$ values associated with
     the derivative.\\
@@ -233,7 +234,8 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 
 \begin{problem}
     Write a MATLAB function that takes a function and a domain and returns a second order
-    numerical approximation to the first derivative on the interval.  Your function should
+    numerical approximation to the first derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.    Your function should
     accept an anonymous function handle, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
@@ -248,7 +250,8 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 
 \begin{problem}
     Write a MATLAB function that takes a function and a domain and returns a second order
-    numerical approximation to the second derivative on the interval.  Your function should
+    numerical approximation to the second derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.    Your function should
     accept an anonymous function handle, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
@@ -339,7 +342,8 @@ a depiction of this in Figure \ref{fig:integral_with_rectangles}.
 
 Clearly, the more rectangles we choose the closer the sum of the areas of the rectangles will get to the integral.
 \begin{problem}
-    Write MATLAB code approximate an integral withe Riemann sums.  Your MATLAB function
+    Write MATLAB code approximate an integral withe Riemann sums. You should ALWAYS start by writing pseudo-code as comments in your
+    MATLAB file.    Your MATLAB function
     should accept an anonymous function handle, a lower bound, an upper bound, the number
     of subintervals, and an optional input that allows the user to designate whether they
     want left, right, or midpoint rectangles. \\
@@ -428,8 +432,9 @@ into small pieces and running this process on each piece.
 
 \begin{problem}
     Write MATLAB functions that implement both the trapezoidal rule and Simpson's rule.
-    Keep in mind that MATLAB deals with vectors and iteration in very nice ways.  You
-    shouldn't need a \texttt{for loop} in your function.
+    You should ALWAYS start by writing pseudo-code as comments in your MATLAB file.   Keep
+    in mind that MATLAB deals with vectors and iteration in very nice ways.  You shouldn't
+    need a \texttt{for loop} in your function.
 
     Test both MATLAB functions on known integrals and approximate the order of the error
     based on the mesh size.  
