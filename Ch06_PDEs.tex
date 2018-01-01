@@ -1051,7 +1051,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     temperature of $90^\circ$.  Assume that the thermal diffusivity of concrete is about
     $k = 10^{-5}$ m$^2$/s.  Assume that the initial temperature of the slab is given by
     the function $T(x) = 75 + 1.5x - 20 \sin( \pi x / 10)$.  In this case, the temperature
-    can be analytically sollved by the function $T(x,t) = 75 + 1.5x - 20 \sin(\pi x / 10)
+    can be analytically solved by the function $T(x,t) = 75 + 1.5x - 20 \sin(\pi x / 10)
     e^{-ct}$ for some value of $c$.  
     \begin{enumerate}
         \item[(a)] Working by hand (no computers!) test this function by substituting it
@@ -1063,4 +1063,29 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     \end{enumerate}
 \end{problem}
 
-
+\begin{problem}
+    Adobe houses, typically built in desert climates, are known for their great thermal
+    efficiency.  The heat equation 
+    \[ \frac{\partial T}{\partial t} = \frac{k}{c_p \rho} \nabla \cdot \nabla T, \]
+    where $c_p$ is the specific heat of the adobe, $\rho$ is the mass density of the
+    adobe, and $k$ is the thermal conductivity of the adobe, can be used to model the heat
+    transfer through the adobe from the outside of the house to the inside.  Clearly, the
+    thicker the adobe walls the better, but there is a trade off to be considered: 
+    \begin{itemize}
+        \item it would be prohibitively expensive to build walls so think that the inside
+            temperature was (nearly) constant, and 
+        \item if the walls are too thin then the cost is low but the temperature inside
+            has a large amount of variability.  
+    \end{itemize}
+    Your Tasks:
+    \begin{enumerate}
+        \item[(a)] Pick a desert location in the southwestern US (New Mexico, Arizona, Nevada, or
+            Southern California) and find some basic temperature data to model the outside
+            temperature during typical summer and winter months.
+        \item[(b)] Do some research on the cost of building adobe walls and find approximations for the
+            parameters in the heat equation.
+        \item[(c)] Use a numerical model to find the optimal thickness of an adobe wall.
+            Be sure to fully describe your criteria for optimality, the initial and
+            boundary conditions used, and any other simplifying assumptions needed for your model.
+    \end{enumerate}
+\end{problem}

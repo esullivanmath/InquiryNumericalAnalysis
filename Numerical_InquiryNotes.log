@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 DEC 2017 21:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 JAN 2018 15:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3756,7 +3756,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=2133, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=2134, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3883,8 +3883,8 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
  ) 
 Here is how much of TeX's memory you used:
- 44359 strings out of 493014
- 974704 string characters out of 6133351
+ 44360 strings out of 493014
+ 974716 string characters out of 6133351
  1163665 words of memory out of 5000000
  46074 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
@@ -3911,10 +3911,10 @@ y.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb
 fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (166 pages, 699423 bytes).
+Output written on Numerical_InquiryNotes.pdf (166 pages, 700718 bytes).
 PDF statistics:
- 2513 PDF objects out of 2984 (max. 8388607)
- 2284 compressed objects within 23 object streams
- 1102 named destinations out of 1200 (max. 500000)
+ 2514 PDF objects out of 2984 (max. 8388607)
+ 2285 compressed objects within 23 object streams
+ 1103 named destinations out of 1200 (max. 500000)
  728 words of extra memory for PDF output out of 10000 (max. 10000000)
 
