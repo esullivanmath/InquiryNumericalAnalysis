@@ -25,7 +25,7 @@ this class; so much so that we could easily rename the course: {\it Applied Tayl
 Series}.  Finally, at the end of this chapter we provide several coding exercises that
 will help you to develop your programming skills.  It is expected that you know some of
 the basics of MATLAB programming before beginning this class.  If you need to review the
-basics the see the Scientific Computing with MATLAB text cited in the bibliography of
+basics then see the Scientific Computing with MATLAB text cited in the bibliography of
 these notes \cite{SciCompMATLAB}.  Trust me, you'll have more
 than just the basics by the end.
 
@@ -69,8 +69,8 @@ tells you the multiplier of that power.
 % In other words, the location of the digit (as read from the right-hand side of the number
 % starting at 0) is the power on the base, 10.  Similarly
 The number ``48329'' can therefore be interpreted as
-\[ 48329 = 40000 + 8000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 0
-\times 10^0. \]
+\[ 48329 = 40000 + 8000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 2
+\times 10^1 + 9 \times 10^0. \]
 
 Now let's switch to the number system used by computers: the binary number system.  In a binary number system the base is 2 so the only allowable
 digits are 0 and 1.  In binary (base-2), the number ``$101101$'' can be interpreted
@@ -515,7 +515,7 @@ The great thing about the Taylor Series is that it allows for the
 approximation of smooth functions as polynomials -- and polynomials are easily dealt with on
 a computer. The down side is that the sum is infinite.  Hence, every time we use a Taylor
 series on a computer we are actually going to be using a truncated Taylor Series where we
-only take a certain number of terms.  
+only take a finite number of terms.  
 
 % \begin{problem}
 %     Write a Taylor Series expansion for $f(x) = \cos(x)$ centered at $x=0$.
@@ -533,7 +533,7 @@ only take a certain number of terms.
     \end{flalign}
     where the remainder function $R_n(x)$ is given as
     \begin{flalign}
-        R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} (x-a)^{n+1}
+        R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} (x-a)^{n+1}.
         \label{eqn:taylor_remainder}
     \end{flalign}
     \label{thm:taylor}
@@ -596,6 +596,11 @@ truncated Taylor series.
 %                 \addlegendentry{$g(x) = 1+x+x^2/2$};
                 \draw[fill=black] (axis cs:1,2.718282) circle(0.05cm);
                 \draw[color=red, fill=red] (axis cs:1,2.5) circle(0.05cm);
+%                 \draw[blue, thick, dashed] (axis cs:1.1,2.6) -- (axis cs:1,2.71828);
+%                 \draw[blue, thick, dashed] (axis cs:1.1,2.6)
+%                 node[anchor=west]{$\approx0.218$} -- (axis cs:1,2.5);
+                \draw[red] (axis cs:1,2.5) node[anchor=north west]{$(1,2.5)$};
+                \draw[black] (axis cs:1,2.71828) node[anchor=south east]{$(1,e)$};
             \end{axis}
         \end{tikzpicture}
     \end{center}

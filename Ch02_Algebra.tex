@@ -37,7 +37,8 @@ Let's play a game!
     \ref{prob:bisection_game} against the computer.  The following incomplete code should
     get you started.  Fill in the missing pieces of the code and play the game several
     times to be sure that it works.  What strategy do you find yourself using to play the
-    game?
+    game? You can get a copy of the partial code
+    \href{https://drive.google.com/file/d/1QFeb6ZGMppKtV-03_cbUzwaaKM8N39t2/view?usp=sharing}{HERE}.
 \begin{lstlisting}
 %% Secret Number Guesser Game
 clear; clc; format compact;
@@ -54,9 +55,9 @@ while abs( secret - c ) > tolerance
     if abs( secret - c ) < tolerance
         fprintf('  \n') % respond appropriately here
         ... % write more code here if necessary
-    elseif secret < (c-tol)
+    elseif secret < (c-tolerance)
         ... % write appropriate code here in this case
-    elseif secret > (c+tol)
+    elseif secret > (c+tolerance)
         ... % write appropriate code here in this case
     end
     if n>=20
