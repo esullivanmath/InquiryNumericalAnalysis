@@ -587,6 +587,21 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \newpage\section{Exercises}
 
+
+
+\begin{problem}
+    In this problem you will demonstrate that all of your root finding codes work.
+    At the beginning of this chapter we proposed the algebraic equation solving problem
+    \[ 3\sin(x) + 9 = x^2 - \cos(x). \]
+    Write a MATLAB script that calls upon your Bisection, Regula Falsi, Newton, Secant,
+    and Steffensen methods one at a time to find the positive solution to this equation.
+    Your script needs to output the solutions in a clear and readable way so you can
+    tell which answer can from which root finding algorithm. Clearly all of your root
+    finding routines will be stored as MATLAB functions so be sure to turn in all of these
+    functions along with this problem.
+\end{problem}
+
+
 \begin{problem}[modified from \cite{Chartier}]
     Implement the following algorithm to create a {\it fractal coastline} -- a collection
     of line
@@ -663,7 +678,7 @@ approximation is called a {\bf Quasi-Newton Method}.
 \end{problem}
 
 
-\begin{problem}
+\begin{problem}[Modified from \cite{Chartier}]
     An artillery officer wishes to fire his cannon on an enemy brigade.  He wants to know
     the angle to aim the cannon in order to strike the target.  Follow the steps below to
     arrive at an approximate answer.
@@ -671,7 +686,7 @@ approximation is called a {\bf Quasi-Newton Method}.
         \item[(a)] Solve the differential equation $v_y'(t) = -g$ where $v_y(t)$ is the
             vertical
             velocity of the canon and gravity is given as $g \approx 9.8$m/s$^2$.  We
-            don't know the initial velocity so just use $v(0) = v_0$ and hence $v_y(t) =
+            don't know the initial velocity so just use $v(0) = v_0$ and hence $v_y(0) =
             v_0 \sin(\theta)$.
         \item[(b)] Solve the differential equation $s_y'(t) = v_y(t)$ for the position
             function $s_y(t)$.  Assume that $s_y(0) = 0$.
@@ -711,14 +726,27 @@ approximation is called a {\bf Quasi-Newton Method}.
 }
 
 
+\begin{problem}
+    Consider our three primary root finding methods: Bisection, Newton's method, and the
+    Secant method.  
+    \begin{enumerate}
+        \item[(a)] For each method give a mathematical situation where you might want to
+            use the method and give a mathematical situation where you might not want to
+            use the method.  
+        \item[(b)] For each of these methods give one example where the method will fail.  
+        \end{enumerate}
+        Support your arguments with proper mathematics.  You are welcome to argue
+        graphically but be sure to fully explain your graphical reasoning.
+\end{problem}
+
 
 \begin{problem}
-    Write MATLAB code that compares the convergence rates for the bisection method, the
-    regula-falsi method, Newton's method, the secant method, and Steffensen's method. Find examples
-    and conditions where each method ``wins'' by having the faster convergence rate.  For
-    example, find different starting points that favor one method over the others, find
-    functions that favor one method over the others, etc.
+    Write MATLAB code that produces a loglog plot that compares the convergence rates for
+    the bisection method, the regula-falsi method, Newton's method, the secant method, and
+    Steffensen's method on a problem where we know the exact answer. 
 \end{problem}
+
+
 
 
 \begin{problem}
@@ -804,3 +832,6 @@ approximation is called a {\bf Quasi-Newton Method}.
 
     For part (c) be sure to first make the right-hand side zero.
 }
+
+
+
