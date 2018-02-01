@@ -683,26 +683,33 @@ approximation is called a {\bf Quasi-Newton Method}.
     the angle to aim the cannon in order to strike the target.  Follow the steps below to
     arrive at an approximate answer.
     \begin{enumerate}
-        \item[(a)] Solve the differential equation $v_y'(t) = -g$ where $v_y(t)$ is the
-            vertical
-            velocity of the canon and gravity is given as $g \approx 9.8$m/s$^2$.  We
-            don't know the initial velocity so just use $v(0) = v_0$ and hence $v_y(0) =
-            v_0 \sin(\theta)$.
-        \item[(b)] Solve the differential equation $s_y'(t) = v_y(t)$ for the position
-            function $s_y(t)$.  Assume that $s_y(0) = 0$.
-        \item[(c)] Solve $s_y(t) = 0$ for $t$ to find a function for the amount of time
-            the projectile takes to reach the ground.
+        \item[(a)] Solve the simple differential equation $v_y'(t) = -g$ by hand where $v_y(t)$
+            is the vertical velocity of the canon and gravity is given as $g \approx
+            9.8$m/s$^2$.  We don't know the initial velocity so just use $v(0) = v_0$ and
+            hence $v_y(0) = v_0 \sin(\theta)$. Note: your answer will have a ``$v_0$'' and a
+            ``$\sin(\theta)$'' in it.
+        \item[(b)] Solve the differential equation $s_y'(t) = v_y(t)$ by hand for the position
+            function $s_y(t)$.  Assume that $s_y(0) = 0$.  Your answer will still have a ``$v_0$'' and a
+            ``$\sin(\theta)$'' in it.
+        \item[(c)] Solve $s_y(t) = 0$ by hand for $t$ in terms of $v_0$ and $\theta$ to
+            find a function for the amount of time the projectile takes to reach the
+            ground.
         \item[(d)] In the absence of air resistance the projectile will have a constant
             velocity in the horizontal direction.  Solve the differential equation
             $s_x'(t) = v_0 \cos(\theta)$ for the horizontal position function $s_x(t)$.  
         \item[(e)] The range function $R(v_0,\theta)$ can be found by substituting the
             time from part (c) into the horizontal position function in part (d).  Find
-            $R(v_0,\theta)$.
+            the function $R(v_0,\theta)$.
         \item[(f)] For a certain projectile and canon the initial velocity is $v_0 =
             126$m/s.  We want to give the artillery officer a distance, $d$, and have them
             calculate the angle to hit the target.  Write MATLAB code to approximate
             $\theta$ in the equation 
             \[ R(126,\theta) = d. \]
+            (Hint: remember that we can rewrite the equation $R(126,\theta)=d$ in the form
+            $f(\theta) = 0$ for some function $f$ so that we can actually use our
+            numerical root finding techniques. See the discussion at the very beginning of
+            this chapter.)
+
             Report a table of values of the form shown below and provide an appropriate
             plot showing your results.  Clearly some distances will be out of range so be
             sure to clearly indicate the range of the weapon.
@@ -743,7 +750,8 @@ approximation is called a {\bf Quasi-Newton Method}.
 \begin{problem}
     Write MATLAB code that produces a loglog plot that compares the convergence rates for
     the bisection method, the regula-falsi method, Newton's method, the secant method, and
-    Steffensen's method on a problem where we know the exact answer. 
+    Steffensen's method on a problem where we know the exact answer. See problem
+    \ref{prob:newton_convergence} to get you started.
 \end{problem}
 
 
