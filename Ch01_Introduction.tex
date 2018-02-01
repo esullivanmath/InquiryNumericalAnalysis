@@ -452,25 +452,27 @@ One should keep in mind that the Taylor Series for a function may not make sense
 whole real line even if the function's domain is the entire real line.  To determine the
 radius of convergence for a Taylor Series we should recall the Ratio Test from Calculus
 (see \href{http://faculty.gvsu.edu/boelkinm/Home/AC/sec-8-3-series.html}{Section 8.3 of
-the Active Calculus Text} for example)
-and observe that the Taylor Series for a function $f(x)$ converges under the condition
-that 
-\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)^{k+1}}{(k+1)!}
-\frac{k!}{f^{(k)}(a) (x-a)^k} \right| < 1. \]
+the Active Calculus Text}):
+The infinite sum $\sum_{n=0}^\infty a_n$ converges if 
+\[ \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1. \]
+
+As a consequence of the ratio test, the Taylor Series for a function $f(x)$ converges
+under the condition that 
+\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)^{k+1}}{(k+1)!} \Big/
+\frac{f^{(k)}(a) (x-a)^k}{k!} \right| < 1. \]
 Simplifying the fractions gives 
 \[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)}{f^{(k)}(a) (k+1) } \right|<1. \]
 The values of $x$ that satisfy this limit are called the {\it domain of convergence} for
 the Taylor Series.  
-\begin{thm}
-    If $f(x)$ is a continuously differentiable function then the Taylor Series for $f(x)$
-    centered at $x=a$ converges for all $x$ that satisfy
-    \[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a)}{f^{(k)}(a) (k+1) }\cdot (x-a) \right|<1. \]
-\end{thm}
-\begin{proof}
-    This is an immediate corollary of the Ratio Test from Calculus.
-\end{proof}
-
-\begin{example}
+% \begin{thm}
+%     If $f(x)$ is a continuously differentiable function then the Taylor Series for $f(x)$
+%     centered at $x=a$ converges for all $x$ that satisfy
+%     \[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a)}{f^{(k)}(a) (k+1) }\cdot (x-a) \right|<1. \]
+% \end{thm}
+% \begin{proof}
+%     This is an immediate corollary of the Ratio Test from Calculus.
+% \end{proof}
+\begin{example}\label{ex:Taylor1}
     Find the domain of convergence of the Taylor Series for the exponential function $f(x)
     = e^x$. \\{\bf Solution:} \\
     For simplicity we will take the Taylor series to be centered at $a=0$.  We know that 
@@ -485,6 +487,42 @@ the Taylor Series.
     $e^x$ converges to the actual function. Hence the ``$=$'' sign that we used in the
     beginning of this solution is actually valid for every $x$.  Be careful since this is
     not true for all functions.
+\end{example}
+
+
+\begin{example}\label{ex:Taylor2}
+    Find the Taylor series centered at $a=0$ for the function $f(x) = \frac{1}{1-x}$ and determine the
+    domain of convergence. \\{\bf Solution:} \\
+    Recall from the definition of the Taylor series that 
+    \[ f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n. \]
+    Hence we need to find a pattern in the sequence of derivatives $f^{(n)}(0)$ first.
+    \begin{flalign*}
+        f(x) &= (1-x)^{-1} \quad \implies \quad f(0) = 1 \\
+        f'(x) &= (1-x)^{-2} \quad \implies \quad f'(0) = 1 \\
+        f''(x) &= 2(1-x)^{-3} \quad \implies \quad f''(0) = 2 \\
+        f'''(x) &= 6(1-x)^{-4} \quad \implies \quad f'''(0) = 6 = 3! \\
+        f^{(4)}(x) &= 24(1-x)^{-5} \quad \implies \quad f^{(4)}(0) = 24 = 4! \\
+        f^{(5)}(x) &= 120(1-x)^{-6} \quad \implies \quad f^{(5)}(0) = 120 = 5! \\
+        & \vdots \\
+        f^{(n)}(x) &= (-1)^n n! (1-x)^{-n-1} \quad \implies \quad f^{(n)}(0) = n! 
+    \end{flalign*}
+    Therefore the Taylor series for $f(x) = \frac{1}{1-x}$ is 
+    \[ \frac{1}{1-x} = \sum_{n=0}^\infty \frac{n!}{n!} x^n \]
+    which can clearly simplify to 
+    \[ \frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3 + x^4 + \cdots \]
+    (a beautifully simple Taylor series for kind of a complex function).
+
+    To find the domain of convergence we note that the absolute value of the ratio of
+    successive terms in the series is 
+    \[ \left| \frac{x^{n+1}}{x^n} \right| = \left| x \right|. \]
+    Hence 
+    \[ \lim_{n\to 0} \left| \frac{x^{n+1}}{x^n} \right| = |x| \]
+    and we see from the ratio test that $|x|<1$ is the domain of convergence.  In other
+    words, the Taylor series only makes sense for $x$ values on the inverval $-1 < x < 1$.
+
+    A deeper look at this function reveals a deeper insight: The domain of convergence is
+    the distance from the center of the series, $a=0$, to the neareest vertical asymptote
+    at $x=1$.  
 \end{example}
 
 
@@ -542,7 +580,7 @@ only take a finite number of terms.
 Often times we are using Taylor series that are centered at $a=0$ so for simplicity we
 restate Taylor's theorem here with $a=0$.
 \begin{cor}[Taylor's Theorem at $a=0$]
-    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous on {\it near} $a$ and let $f^{(n+1)}(x)$
+    Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous {\it near} $a$ and let $f^{(n+1)}(x)$
     exist for all $x$ {\it near} $x=0$.  Then there is a number $\xi$ between $x$ and $0$
     such that 
     \begin{flalign}
@@ -559,17 +597,36 @@ restate Taylor's theorem here with $a=0$.
 
 
 \begin{example}
-    The first three terms of the Taylor series for $f(x) = e^x$ centered at $x=0$ are
-    \[ f(x) = e^x \approx 1 + x + \frac{x^2}{2}. \]
-    Use Taylor's theorem to approximate the error in this approximation when $x
-    \approx 1$. \\{\bf Solution:} 
-    The remainder function gives us that there exists a number $\xi$ such that $0 < \xi <
-    1$ and the remainder in the Taylor series is
-    \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}(x-0)^3 = \frac{e^\xi}{3!}x^3. \]
-    Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6} \approx 0.45$. In Figure
-    \ref{fig:taylor_thm_exp} we see that the error is indeed less than this.
-    Indeed, $f(1) = 2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
-    $0.218 < 0.45$.  
+    Consider the following uses of Taylor's remainder theorem.
+    \begin{enumerate}
+        \item[(a)] The first three terms of the Taylor series for $f(x) = e^x$ centered at
+            $x=0$ are \[ f(x) = e^x \approx 1 + x + \frac{x^2}{2}. \] Use Taylor's theorem
+            to approximate the error in this approximation when $x \approx 1$. 
+        \item[(b)] The Taylor series for $g(x) = \frac{1}{1-x}$ is given in Example
+            \ref{ex:Taylor2}.  What is the maximum error that can occur when approximating
+            $f(c)$ for $c \in (-1,1)$ with a fifth-order polynomial?
+    \end{enumerate}
+            
+            {\bf
+            Solutions:} 
+            \begin{enumerate}
+                \item[(a)] The remainder function gives us that there exists a number
+                    $\xi$ such that $0 < \xi < 1$ and the remainder in the Taylor series
+                    is \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}(x-0)^3 = \frac{e^\xi}{3!}x^3.
+                    \] Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6}
+                    \approx 0.45$. In Figure \ref{fig:taylor_thm_exp} we see that the
+                    error is indeed less than this.  Indeed, $f(1) =
+                    2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
+                    $0.218 < 0.45$.  
+                \item[(b)] We know that $g(x) \approx \frac{1}{1-x} = 1+x+x^2 + x^3 + x^4
+                    + x^5$ for $x \in (-1,1)$ and from Taylor's remainder theorem we know
+                    that $R_5(x) = g^{(6)}(\xi) x^{5+1} / (5+1)!$.  The sixth derivative
+                    of $g$ is $g^{(6)}(x) = 6! (1-x)^{-7}$ and therefore the largest that
+                    $g^{(6)}{\xi}$ can be for $\xi \in (-1,1)$ is $6!$.  Therefore the
+                    remainder term simplifies to $R_5(x) = x^6$.  Finally, the largest that
+                    $R_5(x)$ can be on $x \in (-1,1)$ is $1$ so the maximum error is $1$.
+
+            \end{enumerate}
 \end{example}
 Taylor's theorem gives a bound on the amount of error that you can make when using a
 truncated Taylor series.  
@@ -842,7 +899,10 @@ accounts = floor(100*accounts)/100;
     number $\pi$.
     \begin{enumerate}
         \item[(a)] Write the Taylor series centered at $a=0$ for the function $f(x) =
-            \frac{1}{1+x}$.
+            \frac{1}{1+x}$.  You may want to refer back to Examples \ref{ex:Taylor1} and
+            \ref{ex:Taylor2} to get started.
+        \item[(b)] Use the ratio test to determine the domain of convergence for this
+            Taylor series.
         \item[(b)] Substitute $t^2$ for $x$ to get a Taylor series for $g(t) =
             \frac{1}{1+t^2}$.
         \item[(c)] Integrate both sides from $t=0$ to $t=y$ to get a Taylor series for
