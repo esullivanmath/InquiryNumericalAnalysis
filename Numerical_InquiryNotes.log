@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 FEB 2018 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 FEB 2018 17:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2719,49 +2719,48 @@ Package mdframed Info: mdframed detected package amsthm
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 458.
+Package pdftex.def Info: CreativeCommons.png used on input line 461.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [50]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 462.
+Package pdftex.def Info: CreativeCommons.png used on input line 520.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [51]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 520.
+Package pdftex.def Info: CreativeCommons.png used on input line 553.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [52]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 536.
-Package mdframed Info: Box was splittet wrong
- starting loop to iterate the splitting point
-(mdframed)              on input line 551.
+(mdframed)              on input line 594.
+Package mdframed Info: Not enough space on this page on input line 609.
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 551.
+Package pdftex.def Info: CreativeCommons.png used on input line 609.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [53]
+Package mdframed Info: Not enough space on this page on input line 609.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 570.
+Package pdftex.def Info: CreativeCommons.png used on input line 628.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [54]
-Overfull \hbox (0.6564pt too wide) in paragraph at lines 633--642
+Overfull \hbox (0.6564pt too wide) in paragraph at lines 691--700
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 663.
+Package pdftex.def Info: CreativeCommons.png used on input line 721.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [55]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 736.
+Package pdftex.def Info: CreativeCommons.png used on input line 794.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [56]
 Missing character: There is no â in font jkpmn7t!
@@ -3130,7 +3129,7 @@ ge-eps-converted-to.pdf mnist_average_training_image.eps>
 (epstopdf)             \includegraphics on input line 1742.
 Package epstopdf Info: Output file is already uptodate.
 
-<mnist_average_training_image-eps-converted-to.pdf, id=1474, 421.575pt x 316.18
+<mnist_average_training_image-eps-converted-to.pdf, id=1476, 421.575pt x 316.18
 124pt>
 File: mnist_average_training_image-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -3772,7 +3771,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=2155, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=2157, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3899,10 +3898,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
  ) 
 Here is how much of TeX's memory you used:
- 42895 strings out of 493089
- 938253 string characters out of 6134842
- 1126048 words of memory out of 5000000
- 44547 multiletter control sequences out of 15000+600000
+ 42948 strings out of 493089
+ 939667 string characters out of 6134842
+ 1126118 words of memory out of 5000000
+ 44599 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,20n,100p,10445b,2404s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3927,10 +3926,10 @@ y.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb
 fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (169 pages, 709252 bytes).
+Output written on Numerical_InquiryNotes.pdf (169 pages, 714362 bytes).
 PDF statistics:
- 2537 PDF objects out of 2984 (max. 8388607)
- 2304 compressed objects within 24 object streams
- 1109 named destinations out of 1200 (max. 500000)
+ 2539 PDF objects out of 2984 (max. 8388607)
+ 2306 compressed objects within 24 object streams
+ 1110 named destinations out of 1200 (max. 500000)
  728 words of extra memory for PDF output out of 10000 (max. 10000000)
 

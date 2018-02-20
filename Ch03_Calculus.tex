@@ -449,13 +449,71 @@ approximations for integrals and we leave the further research to the curious re
     f(x) dx$ can be approximated with any of the following.
     \begin{flalign*}
        &\text{Riemann Sum: }  \int_a^b f(x) dx \approx \sum_{j=1}^N f(x_j) \Delta x \\
+       & \qquad \text{Error for Riemann Sums: } \mathcal{O}(\Delta x) \\
        &\text{Trapezoidal Rule: }  \int_a^b f(x) dx \approx \frac{1}{2} \sum_{j=1}^N
        \left( f(x_j) + f(x_{j-1}) \right) \Delta x \\
+       & \qquad \text{Error for Trapezoidal Rule: } \mathcal{O}(\Delta x^2) \\
        &\text{Simpson's Rule: }  \int_a^b f(x) dx \approx \frac{1}{6} \sum_{j=1}^N \left(
        f(x_j) + 4 f\left( \frac{x_j + x_{j-1}}{2} \right) + f(x_{j-1}) \right) \Delta x \\
+       & \qquad \text{Error for Simpson's Rule: } \mathcal{O}(\Delta x^4) \\
     \end{flalign*}
     where $\Delta x = x_j - x_{j-1}$ and $N$ is the number of subintervals.
 \end{thm}
+
+
+In Figure \ref{fig:integration_errors} you'll see the error for our three primary integration techniques on the
+problem
+\[ \int_0^1 \sin(2x) dx \]
+which has an exact answer of 
+\[ \int_0^1 \sin(2x) dx = \frac{1}{2} - \frac{\cos(2)}{2}. \]  
+You'll see that Simpson's rule gains 4 orders of accuracy for every order of magnitude
+that the $\Delta x$ is decreased.  Similarly you'll see that
+Trapezoidal method gains 2 orders of magnitude of accuracy for every order of magnitude
+that $\Delta x$ is decreased, and Riemann sums only gain 1 order of magnitude.  Plots such
+as this can reveal the performance of a numerical method and give you a sense of how it is
+going to behave on a problem where you don't know the exact answer.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{loglogaxis}[xlabel={$\Delta x$}, ylabel={Error}, legend pos=outer north
+                east]
+                \addplot[color=blue, mark=*] coordinates {
+               (0.10,0.0534328071726731)
+               (0.0100,0.00461649308296008)
+               (0.001000,0.000455340314476471)
+               (0.00010000,0.0000454717790016046)
+               (0.0000100000,0.00000454655620385491)
+               (0.000001000000,0.00000045464940112705)
+           };
+           \addlegendentry{Riemann Sum}
+                \addplot[color=red, mark=*] coordinates {
+               (0.10,0.00291628346013517)
+               (0.0100,0.000024)
+               (0.001000,0.000000236)
+               (0.00010000,0.00000000236)
+               (0.0000100000,0.0000000000236)
+               (0.000001000000,0.000000000000234)
+           };
+           \addlegendentry{Trapezoid Rule}
+                \addplot[color=black, mark=*] coordinates {
+               (0.10,0.0000006)
+               (0.0100,0.000000000041)
+               (0.001000,0.00000000000000355)
+               (0.00010000,0.00000000000000111)
+               (0.0000100000,0.000000000000000444)
+               (0.000001000000,0.00000000000000132)
+           };
+           \addlegendentry{Simpson's Rule}
+            \end{loglogaxis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Errors with integration techniques.}
+    \label{fig:integration_errors}
+\end{figure}
+
+
+
 
 
 
