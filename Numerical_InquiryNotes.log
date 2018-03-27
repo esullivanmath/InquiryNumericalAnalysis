@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 FEB 2018 17:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 MAR 2018 07:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3900,7 +3900,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
 Here is how much of TeX's memory you used:
  42948 strings out of 493089
  939667 string characters out of 6134842
- 1126118 words of memory out of 5000000
+ 1126117 words of memory out of 5000000
  44599 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -3926,7 +3926,7 @@ y.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb
 fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (169 pages, 714362 bytes).
+Output written on Numerical_InquiryNotes.pdf (169 pages, 713830 bytes).
 PDF statistics:
  2539 PDF objects out of 2984 (max. 8388607)
  2306 compressed objects within 24 object streams
