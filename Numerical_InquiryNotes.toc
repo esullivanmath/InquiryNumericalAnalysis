@@ -37,51 +37,51 @@
 \contentsline {section}{\numberline {4.10}Exercises}{90}{section.4.10}
 \contentsline {chapter}{\numberline {5}Numerical Ordinary Differential Equations}{96}{chapter.5}
 \contentsline {section}{\numberline {5.1}Euler, Runge-Kutta, and Friends}{96}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implicit Methods and Shooting Methods}{102}{section.5.2}
-\contentsline {section}{\numberline {5.3}ODE Modeling Exercises}{103}{section.5.3}
-\contentsline {section}{\numberline {5.4}Additional ODE Exercises}{112}{section.5.4}
-\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{113}{chapter.6}
-\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{113}{section.6.1}
-\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{115}{section.6.2}
-\contentsline {section}{\numberline {6.3}An Analytic Introduction to Conservation Law PDEs}{120}{section.6.3}
-\contentsline {section}{\numberline {6.4}Boundary Conditions}{124}{section.6.4}
-\contentsline {section}{\numberline {6.5}1D and 2D Heat Equation}{127}{section.6.5}
-\contentsline {section}{\numberline {6.6}1D and 2D Wave Equation}{130}{section.6.6}
-\contentsline {section}{\numberline {6.7}Traveling Waves}{131}{section.6.7}
-\contentsline {section}{\numberline {6.8}1D and 2D Steady State PDEs}{132}{section.6.8}
-\contentsline {section}{\numberline {6.9}Exercises}{134}{section.6.9}
-\contentsline {chapter}{\numberline {A}Writing and Projects}{137}{appendix.A}
-\contentsline {section}{\numberline {A.1}The Paper}{137}{section.A.1}
-\contentsline {section}{\numberline {A.2}Figures and Tables}{137}{section.A.2}
-\contentsline {section}{\numberline {A.3}Writing Style}{138}{section.A.3}
-\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{138}{section.A.4}
-\contentsline {subsection}{\numberline {A.4.1}Audience}{138}{subsection.A.4.1}
-\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{139}{subsection.A.4.2}
-\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{139}{subsection.A.4.3}
-\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{143}{subsection.A.4.4}
-\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{144}{section.A.5}
-\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{145}{section.A.6}
-\contentsline {chapter}{\numberline {B}MATLAB Basics}{147}{appendix.B}
-\contentsline {section}{\numberline {B.1}Vectors and Matrices}{147}{section.B.1}
-\contentsline {section}{\numberline {B.2}Looping}{149}{section.B.2}
-\contentsline {subsection}{\numberline {B.2.1}For Loops}{149}{subsection.B.2.1}
-\contentsline {subsection}{\numberline {B.2.2}The While Loop}{150}{subsection.B.2.2}
-\contentsline {section}{\numberline {B.3}Conditional Statements}{151}{section.B.3}
-\contentsline {subsection}{\numberline {B.3.1}If Statements}{151}{subsection.B.3.1}
-\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{152}{subsection.B.3.2}
-\contentsline {section}{\numberline {B.4}Functions}{152}{section.B.4}
-\contentsline {section}{\numberline {B.5}Plotting}{153}{section.B.5}
-\contentsline {section}{\numberline {B.6}Animations}{154}{section.B.6}
-\contentsline {chapter}{\numberline {C}\LaTeX }{156}{appendix.C}
-\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{156}{section.C.1}
-\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{159}{section.C.2}
-\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{159}{subsection.C.2.1}
-\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{160}{subsection.C.2.2}
-\contentsline {subsection}{\numberline {C.2.3}Figures}{160}{subsection.C.2.3}
-\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{160}{subsection.C.2.4}
-\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{163}{section.C.3}
-\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{163}{subsection.C.3.1}
-\contentsline {section}{\numberline {C.4}Bibliography Management}{166}{section.C.4}
-\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{167}{subsection.C.4.1}
-\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{167}{subsection.C.4.2}
-\contentsline {chapter}{Bibliography}{167}{Item.146}
+\contentsline {section}{\numberline {5.2}Implicit Methods and Shooting Methods}{103}{section.5.2}
+\contentsline {section}{\numberline {5.3}ODE Modeling Exercises}{104}{section.5.3}
+\contentsline {section}{\numberline {5.4}Additional ODE Exercises}{113}{section.5.4}
+\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{114}{chapter.6}
+\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{114}{section.6.1}
+\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{116}{section.6.2}
+\contentsline {section}{\numberline {6.3}An Analytic Introduction to Conservation Law PDEs}{121}{section.6.3}
+\contentsline {section}{\numberline {6.4}Boundary Conditions}{125}{section.6.4}
+\contentsline {section}{\numberline {6.5}1D and 2D Heat Equation}{128}{section.6.5}
+\contentsline {section}{\numberline {6.6}1D and 2D Wave Equation}{131}{section.6.6}
+\contentsline {section}{\numberline {6.7}Traveling Waves}{132}{section.6.7}
+\contentsline {section}{\numberline {6.8}1D and 2D Steady State PDEs}{133}{section.6.8}
+\contentsline {section}{\numberline {6.9}Exercises}{135}{section.6.9}
+\contentsline {chapter}{\numberline {A}Writing and Projects}{138}{appendix.A}
+\contentsline {section}{\numberline {A.1}The Paper}{138}{section.A.1}
+\contentsline {section}{\numberline {A.2}Figures and Tables}{138}{section.A.2}
+\contentsline {section}{\numberline {A.3}Writing Style}{139}{section.A.3}
+\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{139}{section.A.4}
+\contentsline {subsection}{\numberline {A.4.1}Audience}{139}{subsection.A.4.1}
+\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{140}{subsection.A.4.2}
+\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{140}{subsection.A.4.3}
+\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{144}{subsection.A.4.4}
+\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{145}{section.A.5}
+\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{146}{section.A.6}
+\contentsline {chapter}{\numberline {B}MATLAB Basics}{148}{appendix.B}
+\contentsline {section}{\numberline {B.1}Vectors and Matrices}{148}{section.B.1}
+\contentsline {section}{\numberline {B.2}Looping}{150}{section.B.2}
+\contentsline {subsection}{\numberline {B.2.1}For Loops}{150}{subsection.B.2.1}
+\contentsline {subsection}{\numberline {B.2.2}The While Loop}{151}{subsection.B.2.2}
+\contentsline {section}{\numberline {B.3}Conditional Statements}{152}{section.B.3}
+\contentsline {subsection}{\numberline {B.3.1}If Statements}{152}{subsection.B.3.1}
+\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{153}{subsection.B.3.2}
+\contentsline {section}{\numberline {B.4}Functions}{153}{section.B.4}
+\contentsline {section}{\numberline {B.5}Plotting}{154}{section.B.5}
+\contentsline {section}{\numberline {B.6}Animations}{155}{section.B.6}
+\contentsline {chapter}{\numberline {C}\LaTeX }{157}{appendix.C}
+\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{157}{section.C.1}
+\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{160}{section.C.2}
+\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{160}{subsection.C.2.1}
+\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{161}{subsection.C.2.2}
+\contentsline {subsection}{\numberline {C.2.3}Figures}{161}{subsection.C.2.3}
+\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{161}{subsection.C.2.4}
+\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{164}{section.C.3}
+\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{164}{subsection.C.3.1}
+\contentsline {section}{\numberline {C.4}Bibliography Management}{167}{section.C.4}
+\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{168}{subsection.C.4.1}
+\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{168}{subsection.C.4.2}
+\contentsline {chapter}{Bibliography}{168}{Item.146}

@@ -301,12 +301,41 @@ solid black line gives the final projection.}
 
 
 \begin{problem}
-    Solving systems of ordinary differential equations would become challenging if we were
-    to continue coding in the same way as in the previous problem. Write a MATLAB function
+    Solving \underline{systems} of ordinary differential equations would become challenging if we were
+    to continue coding in the same way as in the previous problem -- modifying your code
+    to account for the number of differential equations. Write a MATLAB function
     that accepts any number of right-hand sides from a system of differential equations
     and then leverages the fact that MATLAB works very well with vectors to create Euler
     and Runge-Kutta solutions to these systems. Devise several systems to test your code
     (including 1D and 2D).
+
+    One particular nonlinear system of differential equations that you can test on is
+    \[ \left\{ \begin{array}{rlc} y_1' &= -0.1y_2 y_1 - y_1 & y_1(0) = 2 \\
+            y_2' &= -y_1 + 0.9y_2 & y_2(0) = 1 \\
+        y_3' &= \sin(t)+ \cos(y_2) & y_3(0)=-2 \end{array} \right.. \]
+    Note that we would probably never try to solve this problem by hand so a numerical
+    method is warranted.
+
+    A test script to check your General Euler and General RK code is as follows.  You can
+    use my notation here to possibly reverse engineer the construction of your general ODE
+    solver codes.
+\begin{lstlisting}
+numpts = 1000;
+f = @(t,y) [-0.1*y(2)*y(1)-y(1) ; 
+    -y(1)+0.9*y(2) ; 
+    sin(t) + cos(y(2))];
+
+tmax = 5.5;
+
+[t,yeuler]=MyGeneralEuler(f,0,tmax,numpts,[2,1,-2]);
+plot(t,yeuler(1,:),'b--',t,yeuler(2,:),'r--',t,yeuler(3,:),'k--')
+hold on
+
+[t,yrk]=MyGeneralRK4(f,0,tmax,numpts,[2,1,-2]);
+plot(t,yrk(1,:),'k-.',t,yrk(2,:),'m-.',t,yrk(3,:),'c--')
+grid on
+legend('y_1''(t)' , 'y_2''(t)' , 'y_3''(t)')
+\end{lstlisting}
 \end{problem}
 
 
