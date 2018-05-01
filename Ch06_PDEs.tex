@@ -591,15 +591,20 @@ solve with the heat and wave equation.
 \end{problem}
 
 
-\newpage\section{1D and 2D Heat Equation}
+\newpage\section{The Heat Equation}
 In this section we'll use a technique called {\it the finite difference method} to find
 numerical approximations to the heat equation
 \[ u_t = D \nabla \cdot \nabla u + f(x). \]
+Recall that this equation governs the diffusive process of heat diffusion.
+
 In one spatial dimension the heat equation can be written as $u_t = ku_{xx} + f(x)$ and in
 two spatial dimensional it can be written as $u_t = D \left( u_{xx} + u_{yy} \right) +
 f(x,y)$.  The function $f$ is called a forcing term and in the case of thermal diffusion
-it is an external source of heat in the system.  To begin with we'll let $f(x) = 0$.
+it is an external source of heat in the system.  We'll let $f(x) = 0$ for the majority of
+this section for simplicity, but you can modify any of the code that you write in this
+section to include a forcing term.
 
+\subsection{1D Heat Equation}
 \begin{problem}
     Now we would like to consider the time dependent heat equation 
     \[ u_t = D \nabla \cdot \nabla u \]
@@ -666,6 +671,7 @@ it is an external source of heat in the system.  To begin with we'll let $f(x) =
     \end{enumerate}
 \end{problem}
 
+\subsection{Stabilized 1D Heat Equation -- The Crank Nicolson Method}
 The next problem addresses the issue of stability in solving the heat equation with the
 finite difference method.  There are MANY different techniques for dealing with stability
 issues in numerical partial differential equations, and surprisingly enough we can never
@@ -679,19 +685,110 @@ instability.
     this method we approximate the temporal derivative with an Euler-type approximation,
     but we approximate the spatial derivative as the average of the central difference at
     the old time step and the central difference at the new time step.  That is:
-    \[ \frac{U_i^{n+1} - U_i^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{i+1}^n - 2U_i^n +
-        U_{i+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{i+1}^{n+1} - 2U_i^{n+1} +
-    U_{i+1}^{n+1}}{\Delta x^2} \right) \right]. \]
+    \[ \frac{U_j^{n+1} - U_j^n}{\Delta t} = \frac{1}{2} \left[D \left( \frac{U_{j+1}^n - 2U_j^n +
+        U_{j+1}^n}{\Delta x^2}\right) +D \left(\frac{U_{j+1}^{n+1} - 2U_j^{n+1} +
+    U_{j+1}^{n+1}}{\Delta x^2} \right) \right]. \]
     Letting $r = D \Delta t / (2\Delta x^2)$ we can rearrange to get
-    \[ -r U_{i-1}^{n+1} + (1+2r) U_{i}^{n+1} - r U_{i+1}^{n+1} = r U_{i-1}^{n} + (1-2r)
-    U_{i}^{n} + r U_{i+1}^{n}. \]
-    This can now be viewed as a system of equation that can be solved for all $U_j^{n+1}$
-    all at once with one linear solve.  Write MATLAB code to solve the heat equation from
-    the previous problems with the Crank-Nicolson method.
+    \[ -r U_{j-1}^{n+1} + (1+2r) U_{j}^{n+1} - r U_{j+1}^{n+1} = r U_{j-1}^{n} + (1-2r)
+    U_{j}^{n} + r U_{j+1}^{n}. \]
+    This can now be viewed as a system of equations.  Let's build this system carefully
+    and then write MATLAB code to solve the heat equation from the previous problems with
+    the Crank-Nicolson method.  For this problem we will assume fixed Dirichlet boundary
+    conditions on both the left- and right-hand sides of the domain.  
+    \begin{enumerate}
+        \item[(a)] First let's write the equations for several values of $j$. 
+            \begin{flalign*}
+                (j=2): \qquad -r U_1^{n+1} + (1+2r) U^{n+1}_2 - rU^{n+1}_3 &= rU^n_1 +
+                (1-2r) U^n_2 + rU^n_3 \\
+                (j=3): \qquad -r U_2^{n+1} + (1+2r) U^{n+1}_3 - rU^{n+1}_4 &= rU^n_2 +
+                (1-2r) U^n_3 + rU^n_4 \\
+                (j=4): \qquad -r U_3^{n+1} + (1+2r) U^{n+1}_4 - rU^{n+1}_5 &= rU^n_3 +
+                (1-2r) U^n_4 + rU^n_5 \\
+                \qquad \vdots & \qquad \vdots \\
+                (j=N-1): \qquad -r U_{N-2}^{n+1} + (1+2r) U^{n+1}_{N-1} - rU^{n+1}_N &=
+                rU^n_{N-2} +
+                (1-2r) U^n_{N-1} + rU^n_{N} 
+            \end{flalign*}
+            where $N$ is the number of spatial points.
+        \item[(b)]  The first and last equations can be simplified since we have the
+            Dirichlet boundary conditions.  Therefore for $j=2$  we can
+            rearrange to move $U_1$ to the right-hand side since it is fixed for all time.
+            Similarly for $j=N-1$ we can move $U_N$ to the right-hand side since it is
+            fixed for all time.  Rewrite these two equtions.
+        \item[(c)] Verify that the left-hand side of the equations that we have built in
+            parts (a) and (b) can be written as the following matrix-vector product:
+            \begin{flalign*}
+                \begin{pmatrix}
+                    (1+2r) & -r & 0 & 0 & 0 & \cdots & 0 \\
+                    -r & (1+2r) & -r & 0 & 0 & \cdots & 0 \\
+                    0 & -r & (1+2r) & -r & 0 & \cdots & 0 \\
+                    \vdots & &  & \ddots &  & & 0 \\
+                    0 & \cdots & & & 0 & -r & (1+2r)
+                \end{pmatrix} 
+                \begin{pmatrix} 
+                    U^{n+1}_2 \\ U^{n+1}_3 \\ U^{n+1}_4 \\ \vdots
+                    \\U^{n+1}_{N-1}   
+                \end{pmatrix}
+            \end{flalign*}
+        \item[(d)] Verify that the right-hand side of the equations that we built in parts
+            (a) and (b) can be written as 
+            \begin{flalign*}
+                \begin{pmatrix}
+                    (1-2r) & r & 0 & 0 & 0 & \cdots & 0 \\
+                    r & (1-2r) & r & 0 & 0 & \cdots & 0 \\
+                    0 & r & (1-2r) & r & 0 & \cdots & 0 \\
+                    \vdots & &  & \ddots &  & & 0 \\
+                    0 & \cdots & & & 0 & r & (1-2r)
+                \end{pmatrix} 
+                \begin{pmatrix} 
+                    U^{n}_2 \\ U^{n}_3 \\ U^{n}_4 \\ \vdots
+                    \\U^{n}_{N-1}   
+                \end{pmatrix} + 
+                \begin{pmatrix}
+                    2rU_1 \\ 0 \\ \vdots \\ 0 \\ 2rU_N 
+                \end{pmatrix}
+            \end{flalign*}
+        \item[(e)] Now for the wonderful part!  The entire system of equations from part
+            (a) can be written as
+            \[ A U^{n+1} = B U^n + D. \]
+            What are the matrices $A$ and $B$ and what are the vectors
+            $U^{n+1}$, $U^n$, and $D$?
+        \item[(f)] To solve for $U^{n+1}$ at each time step we simply need to do a linear
+            solve: 
+            \[ U^{n+1} = A^{-1} \left( B U^n + D \right). \]
+            Of course, we will never do a matrix inverse on a computer so in MATLAB this
+            code looks like
+\begin{lstlisting}
+Un = U(n,2:end-1)'; % note the transpose
+RHS = B*Un + D;
+temp = A \ RHS; % note the \ doing the work of the inverse
+U(n+1, 2:end-1) = temp;
+\end{lstlisting}
+\item[(g)] Finally.  Write code to solve the 1D Heat Equation implementing the Crank
+    Nicolson method described in this problem.  The setup of your code should be largely
+    the same as for the regular heat equation.  You will need to construct the matrices
+    $A$ and $B$ as well as the vector $D$.  Then your time stepping loop will contain the
+    code from part (f) of this problem.
+    \end{enumerate}
 \end{problem}
 
 
+\subsection{2D Heat Equation}
+For the 2D heat equation we notice that the only new part of the PDE is the $\nabla \cdot
+\nabla u$ term in place of the 1 dimensional $u_{xx}$ term.  Recall that $\nabla \cdot
+\nabla u = u_{xx} + u_{yy}$ so we can use what we know about approximating second
+derivatives to approximate the right-hand side of the heat equation with
+\[ D \nabla \cdot \nabla u \approx D \left[ \frac{U^n_{j+1,k} - 2U^n_{j,k}
++ U^n_{j-1,k} }{\Delta x^2} + \frac{U^n_{j,k+1} - 2U^n_{j,k} + U^n_{j,k-1} }{\Delta y^2}
+\right]. \]
+Assuming that $\Delta x = \Delta y$ and simplifying we can write the right-hand side of
+the 2D heat equation as
+\[ D \nabla \cdot \nabla u \approx \frac{D}{\Delta x^2} \left[  U^n_{j+1,k} + U^n_{j,k+1} - 4U^n_{j,k}
++ U^n_{j-1,k} + U^n_{j,k-1} \right]. \]
 
+Notice that we had to invent a bit of notation in the process.  The superscript, just as
+before, stands for the time step.  The subscripts stand for the two spatial indices.  More
+specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
 
 \begin{problem}
     In Figure \ref{fig:2DHeat_BC} you will see a schematic of the domain
@@ -700,7 +797,7 @@ instability.
     \[ \text{Solve: } u_t = D \nabla \cdot \nabla u  \quad \text{in} \quad x \in
     \Omega \]
     with
-    \[ u(0,x,y) = 2000 (x-0.5)(y-0.5)\text{exp}\left( -\frac{(x-0.5)^2 + (y-0.5)^2}{0.02} \right) \]
+    \[ u(0,x,y) = \sin(\pi x)\sin(\pi y) \]
     subject to the boundary conditions in the figure.
 
     \begin{figure}[ht!]
@@ -727,7 +824,7 @@ instability.
     x$ and for $\Delta y$. Be prepared to present your solutions to your classmates.
 \end{problem}
 
-\newpage\section{1D and 2D Wave Equation}
+\newpage\section{The Wave Equation}
 \begin{problem}
    The problems that we've dealt with thus far all model natural diffusion processes: heat
    transport, molecular diffusion, etc.  Another interesting physical phenomenon is that
@@ -827,7 +924,7 @@ instability.
 % *******************************
 
 
-\newpage\section{1D and 2D Steady State PDEs}
+\newpage\section{The Laplace and Poisson Equations -- Steady State PDEs}
 \begin{problem}
     Consider a 1-dimensional rod that is infinitely thin and has unit length.  For the
     sake of simplicity assume the following:
