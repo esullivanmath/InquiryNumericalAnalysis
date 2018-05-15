@@ -14,7 +14,10 @@ approximate answer is both more efficient and more versatile than any analytic t
 For example, if we needed to solve the differential equation $\frac{dy}{dt} = \sin(y^2) +
 t$ the nonlinear nature of the problem makes it hard to work with analytically but
 computational methods that result in a plot of an approximate solution can be made very
-quickly and likely give enough of a solution to be usable.  
+quickly and likely give enough of a solution to be usable.  Similarly, efficient
+algorithms to do the basic operations of linear algebra (e.g. Gaussian elimination, matrix
+factorization, or eigenvalue decomposition) are highly sought after and useful when
+the matrices used for a model are very large. 
 
 In this chapter we will discuss some of the basic underlying ideas behind the scenes in
 Numerical Analysis, and the essence of the  above quote will be part of the focus of this chapter.
@@ -49,14 +52,16 @@ In both Excel and MATLAB you lose accuracy at about the 40th iteration.
 }
 
 \begin{problem}\label{prob:base_10_failc}
-Why have the computer gods failed you?   More importantly, what happened on the computer and why did it give you a different answer?  Most importantly, what is the cautionary tale hiding behind the scenes with this problem?
+It seems like the computer has failed you!   What do you think happened on the computer
+and why did it give you a different answer?  What, do you suppose, is the cautionary tale hiding behind the scenes with this problem?
 \end{problem}
 \solution{
 The simplest answer is that $1/10$ is not computer representable.
 }
 
 \begin{problem}
-    Now what happens with this problem when you start with $x_0 = 1/8$?
+    Now what happens with this problem when you start with $x_0 = 1/8$?  Why does this new
+    initial condition work better?
 \end{problem}
 
 A computer stores numbers using base 2, called a binary number system.  Let's first
@@ -111,7 +116,7 @@ Convert to following numbers from base 10 to base 2 or visa versa.
 \end{problem}
 
 \begin{problem}
-    Converting base 2 numbers to base 10 is relatively easy; expand in powers of 2 and add
+    Converting base 2 numbers to base 10 is relatively easy -- expand in powers of 2 and add
     up the results.  Converting base 10 numbers to base 2 is a little bit more
     interesting.  Describe the technique that you used to convert the numbers $12$, $11$,
     and $23$ into base 2 in the previous problem.  
@@ -398,6 +403,7 @@ Polynomials are some of the simplest types of functions since they involve very 
 mathematical operations: really just addition and multiplication (since subtraction
 and division are just {\it special} addition and multiplication).  
 
+\subsection{Polynomial Approximation}
 Let's get a feel for how we approximate functions like $f(x) = e^x$ with a simple
 exercise. In the following exercise we will build a polynomial function with certain
 properties to {\it match} the exponential function.
@@ -424,54 +430,168 @@ properties to {\it match} the exponential function.
     \end{enumerate}
 \end{problem}
 
-\begin{problem}
+\begin{problem}\label{prob:taylor_intro2}
     Repeat Problem \ref{prob:taylor_intro} with the function $f(x) = \sin(x)$.
 \end{problem}
 \solution{
     \[ g(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots . \]
 }
 
-\begin{problem}
+\begin{problem}\label{prob:taylor_intro3}
     Repeat Problem \ref{prob:taylor_intro} with the function $f(x) = \cos(x)$.
 \end{problem}
 \solution{
     \[ g(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots . \]
 }
 
+\begin{problem}\label{prob:taylor_graphically}
+    Now let's graphically explore the results that you got from Problems \ref{prob:taylor_intro},
+    \ref{prob:taylor_intro2}, and \ref{prob:taylor_intro3}.  You should have found the
+    following results (check your work from the previous problems):
+    \begin{itemize}
+        \item The exponential function:
+    \begin{flalign*}
+        f(x) &= e^x \approx 1+x \qquad \text{(First order approximation)} \\
+        f(x) &= e^x \approx 1+x+\frac{x^2}{2} \qquad \text{(Second order approximation)} \\
+        f(x) &= e^x \approx 1+x+\frac{x^2}{2} + \frac{x^3}{6} \qquad \text{(Third order
+        approximation)} \\
+        f(x) &= e^x \approx 1+x +\frac{x^2}{2} + \frac{x^3}{6} + \cdots +
+        \frac{x^n}{n!} \qquad \text{($n^{th}$ order approximation)} \\
+    \end{flalign*}
+\item The sine function
+    \begin{flalign*}
+        f(x) &= \sin(x) \approx x \qquad \text{(First order approximation)} \\
+        f(x) &= \sin(x) \approx x - \frac{x^3}{6} \qquad \text{(Third order
+        approximation)} \\
+        f(x) &= \sin(x) \approx x - \frac{x^3}{6} + \cdots +
+        \frac{(-1)^{n} x^{2n+1}}{(2n+1)!} \qquad \text{($n^{th}$ order approximation)} \\
+    \end{flalign*}
+\item The cosine function
+    \begin{flalign*}
+        f(x) &= \cos(x) \approx 1 - \frac{x^2}{2} \qquad \text{(Second order approximation)} \\
+        f(x) &= \cos(x) \approx 1 - \frac{x^2}{2} + \frac{x^4}{24} \qquad \text{(Fourth order
+        approximation)} \\
+        f(x) &= \cos(x) \approx 1 - \frac{x^2}{2} + \cdots +
+        \frac{(-1)^{n} x^{2n}}{(2n)!} \qquad \text{($n^{th}$ order approximation)} \\
+    \end{flalign*}
+    \end{itemize}
+    \begin{enumerate}
+        \item[(a)] Using any convenient graphing tool (e.g. Desmos, a graphing calculator,
+            MATLAB, etc) make a plot of the exponential function along with the first,
+            second, and third order approximations.  What do you notice and what do you
+            wonder?
+        \item[(b)] Repeat part (a) with the sine function.
+        \item[(c)] Repeat part (a) with the cosine function.
+        \item[(d)] Graphically test the following conjecture:
+            \begin{quote}
+                {\bf Conjecture: } {\it If I add more and more terms to the exponential, sine, or cosine
+                polynomial approximation then the resulting polynomial will match the
+            actual function better and better over a larger domain.}
+            \end{quote}
+            Based on the graphs that you made do you think that this conjecture is true or
+            false?
+    \end{enumerate}
+\end{problem}
 
-Now let's formally state the definition of a Taylor Series.  
-\begin{definition}[Taylor Series]
+
+\begin{problem}\label{prob:taylor_graphically2}
+    In Problem \ref{prob:taylor_graphically} you should have confirmed that the Taylor
+    series for the exponential, sine, and cosine functions appear to get better and better
+    on larger and larger domains as the degree of the polynomial increases.  Now we'll
+    test the conjecture in general:
+    \begin{quote}
+        {\bf Conjecture: } {\it Will the Taylor polynomial always be a better approximation over a larger
+        domain when we add more terms?}
+    \end{quote}
+    Below you will find several functions along with their polynomial approximations.
+    Test the above conjecture graphically on these approximations.
+    \begin{enumerate}
+        \item[(a)] $\displaystyle f(x) = \frac{1}{1-x} \approx 1 + x + x^2 + x^3 + x^4 +
+            \cdots x^n.$
+        \item[(b)] $\displaystyle f(x) = \ln(1+x) \approx x - \frac{x^2}{2} +
+            \frac{x^3}{3} - \frac{x^4}{4} + \cdots + \frac{x^n}{n}.$
+        \item[(c)] $\displaystyle f(x) = \arctan(x) = x - \frac{x^3}{3} +
+            \frac{x^5}{5} - \frac{x^7}{7} + \cdots + \frac{(-1)^n x^{2n+1} }{2n+1}.$
+    \end{enumerate}
+\end{problem}
+
+Now we'll formally state the actual definition of a Taylor Series.  
+\begin{definition}[Taylor Series]\label{def:taylor}
 If $f$ is
 infinitely smooth (has infinitely many derivatives) then $f$ can be expressed as an
 infinite sum of power functions
 \[ f(x) = \sum_{k=0}^\infty \frac{f^{(k)}(a)}{k!}(x-a)^k \]
 in some neighborhood of $x=a$. 
 \end{definition}
+It is sometimes easier to look at the definition of the Taylor series without the
+summation notation.  
+\[ f(x) = f(a) + \frac{f'(a)}{1!}(x-a)^1 + \frac{f''(a)}{2!}(x-a)^2 +
+\frac{f'''(a)}{3!}(x-a)^3 + \frac{f^{(4)}(a)}{4!}(x-a)^4 + \cdots. \]
+
+\begin{example}\label{ex:taylor_exp}
+    Verify that the Taylor series for $f(x) = e^x$ is exactly what we found in Problems
+    \ref{prob:taylor_intro} and \ref{prob:taylor_graphically}. \\
+    {\bf Solution:}
+    First note that $f(x) = e^x$ has the beautiful property that $f^{(n)}(x) = e^x$.  That
+    is, every derivative of the exponential function is just the exponential function
+    again.  If we take $a = 0$ in the definition of the Taylor Series then we see that 
+    \begin{flalign*}
+        e^x &= f(0) + \frac{f'(0)}{1!}(x-0)^1 + \frac{f''(0)}{2!}(x-0)^2 +
+        \frac{f'''(0)}{3!}(x-0)^3 + \frac{f^{(4)}(0)}{4!}(x-0)^4 + \cdots \\
+        &= e^0 + e^0 x + \frac{e^0}{2} x^2 + \frac{e^0}{3!}x^3 + \frac{e^0}{4!}x^4 +
+        \cdots \\
+        &= 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots.
+    \end{flalign*}
+\end{example}
+
+\begin{problem}
+    We have encountered 6 different Taylor series thus far:
+    \[ e^x, \quad \sin(x), \quad \cos(x), \quad \frac{1}{1-x}, \quad \ln(1+x), \quad
+    \text{and} \quad \arctan(x). \]
+    Using the definition of the Taylor series, verify each of the formulas that we have
+    used. You can see a verification for $e^x$ in Example \ref{ex:taylor_exp}.
+\end{problem}
+
 
 One should keep in mind that the Taylor Series for a function may not make sense on the
-whole real line even if the function's domain is the entire real line.  To determine the
-radius of convergence for a Taylor Series we should recall the Ratio Test from Calculus
-(see \href{http://faculty.gvsu.edu/boelkinm/Home/AC/sec-8-3-series.html}{Section 8.3 of
-the Active Calculus Text}):
-The infinite sum $\sum_{n=0}^\infty a_n$ converges if 
-\[ \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1. \]
+whole real line even if the function's domain is the entire real line.  You should have
+taken note of this in problem \ref{prob:taylor_graphically2} (if you didn't then go back
+to problem \ref{prob:taylor_graphically2}).  The domain on which the
+Taylor series makes sense is called the {\bf domain of convergence}.  We can also talk
+about a Taylor series having a {\bf radius of convergence} where the radius is the
+distance from the center (the $a$ in Definition \ref{def:taylor}) to the first point where
+the Taylor series does not converge.  
 
-As a consequence of the ratio test, the Taylor Series for a function $f(x)$ converges
-under the condition that 
-\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)^{k+1}}{(k+1)!} \Big/
-\frac{f^{(k)}(a) (x-a)^k}{k!} \right| < 1. \]
-Simplifying the fractions gives 
-\[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a) (x-a)}{f^{(k)}(a) (k+1) } \right|<1. \]
-The values of $x$ that satisfy this limit are called the {\it domain of convergence} for
-the Taylor Series.  
-% \begin{thm}
-%     If $f(x)$ is a continuously differentiable function then the Taylor Series for $f(x)$
-%     centered at $x=a$ converges for all $x$ that satisfy
-%     \[ \lim_{k \to \infty} \left| \frac{f^{(k+1)}(a)}{f^{(k)}(a) (k+1) }\cdot (x-a) \right|<1. \]
-% \end{thm}
-% \begin{proof}
-%     This is an immediate corollary of the Ratio Test from Calculus.
-% \end{proof}
+
+To determine the
+radius of convergence for a Taylor Series we should recall the Ratio Test from Calculus
+\begin{thm}[The Ratio Test from Calculus]\label{thm:ratio_test1}
+    Let $\sum_{n=0}^\infty a_n$ be an infinite series.  Suppose that 
+    \[ \lim_{n \to \infty} \frac{|a_{n+1}|}{|a_n|} = r. \]
+    \begin{enumerate}
+        \item[(a)] If $0 < r < 1$ then the infinite series converges.
+        \item[(b)] If $r > 1$ then the infinite series diverges.
+        \item[(c)] If $r=1$ then the ratio test is inconclusive.
+    \end{enumerate}
+\end{thm}
+
+For the purposes of Taylor series we need a more robust statement of the Ratio Test.
+Notice that in Theorem \ref{thm:ratio_test1} we are only considering an infinite series of
+numbers, not an infinite series of functions.  The following corollary gives a more
+thorough statement of the Ratio Test as it applies to Taylor Series.
+
+\begin{cor}[The Ratio Test for Taylor Series]
+    Let $f(x)$ be given as a Taylor Series 
+    \[ f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n. \]
+    The series converges for all $x$ such that 
+    \[ \lim_{n \to \infty} \left| \frac{f^{(n+1)}(a) (x-a)^{n+1}}{(n+1)!} \right| \Big/
+    \left| \frac{f^{(n)}(a) (x-a)^k}{n!} \right|  < 1. \]
+    Simplifying the fractions gives 
+    \[ \lim_{n \to \infty}  \frac{|f^{(n+1)}(a) (x-a)|}{|f^{(n)}(a) (n+1)| } <1. \]
+    The values of $x$ that satisfy this limit are called the {\it domain of convergence} for
+    the Taylor Series.  
+\end{cor}
+
 \begin{example}\label{ex:Taylor1}
     Find the domain of convergence of the Taylor Series for the exponential function $f(x)
     = e^x$. \\{\bf Solution:} \\
@@ -510,7 +630,7 @@ the Taylor Series.
     \[ \frac{1}{1-x} = \sum_{n=0}^\infty \frac{n!}{n!} x^n \]
     which can clearly simplify to 
     \[ \frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3 + x^4 + \cdots \]
-    (a beautifully simple Taylor series for kind of a complex function).
+    (a beautifully simple Taylor series for kind of a complicated function).
 
     To find the domain of convergence we note that the absolute value of the ratio of
     successive terms in the series is 
@@ -549,18 +669,50 @@ the Taylor Series.
 \end{problem}
 
 
+\subsection{Truncation Error in Taylor Series}
 The great thing about the Taylor Series is that it allows for the
 approximation of smooth functions as polynomials -- and polynomials are easily dealt with on
 a computer. The down side is that the sum is infinite.  Hence, every time we use a Taylor
 series on a computer we are actually going to be using a truncated Taylor Series where we
 only take a finite number of terms.  
 
-% \begin{problem}
-%     Write a Taylor Series expansion for $f(x) = \cos(x)$ centered at $x=0$.
-% \end{problem}
+\begin{problem}
+    What is the absolute truncation error when calculating $e^1$ with the Taylor Series
+    \[ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} \]
+    using the following values for $n$? Recall that $e^1 \approx 2.718281828459045$.
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            $n$ & Value from the Taylor Series & Absolute Error \\ \hline \hline
+            0 & 1 & $1.718281828459045\ldots$ \\ \hline
+            1 & 1+1=2 & $0.718281828459045\ldots$ \\ \hline
+            2 & $1+1+1^2/2=2.5$ & $0.218281828459045\ldots$ \\ \hline
+            3 & $1+1+1^2/2+1^3/6=2.\bar{6}$ & \\ \hline
+            4 & & \\ \hline
+            5 & & \\ \hline
+            6 & & \\ \hline
+        \end{tabular}
+    \end{center}
+\end{problem}
 
+\begin{problem}
+    Based on your answers to the previous problem, how many terms do you need in the
+    Taylor Series for $e^x$ to approximation $e$ to two decimal places?
+\end{problem}
 
-\begin{thm}[Taylor's Theorem]
+Remember that when using a computer we cannot ever use an
+infinite series.  Thus, every time we use a Taylor Series approximation we will naturally
+be using a truncated version of the infinite series.  This means that we need a good tool
+to measure the error that we make when doing so.  
+
+To set the stage, let's say that we truncate a Taylor series at the $n^{th}$ term.
+Therefore there is some remainder left over in the infinity of terms from the $(n+1)^{st}$
+term on and we can write the series as
+\[ f(x) = P_n(x) + R_n(x) \]
+where $P_n(x)$ is just the $n^{th}$ order polynomial coming from the $0^{th}$ to the
+$n^{th}$ terms of the Taylor Series.  The remainder is the subject of the next theorem.
+
+\begin{thm}[Taylor's Theorem]\label{thm:taylors_theorem}
     Let $f$, $f'$, $f''$, \dots, $f^{(n)}$ be continuous {\it near} $a$ and let $f^{(n+1)}(x)$
     exist for all $x$ {\it near} $x=a$.  Then there is a number $\xi$ between $x$ and $a$
     such that 
@@ -595,41 +747,52 @@ restate Taylor's theorem here with $a=0$.
     \label{cor:taylor}
 \end{cor}
 
+\begin{example}
+    The first three terms of the Taylor series for $f(x) = e^x$ centered at $x=0$ are \[
+    f(x) = e^x \approx 1 + x + \frac{x^2}{2}. \] Use Taylor's theorem to approximate the
+    error in this approximation when $x \approx 1$. \\ {\bf Solution:}
+    The remainder function gives us that there exists a number
+    $\xi$ such that $0 < \xi < 1$ and the remainder in the Taylor series
+    is \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}(x-0)^3 = \frac{e^\xi}{3!}x^3.
+    \] Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6}
+    \approx 0.45$. In Figure \ref{fig:taylor_thm_exp} we see that the
+    error is indeed less than this.  Indeed, $f(1) =
+    2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
+    $0.218 < 0.45$.
+
+    If we extend this example a bit we can see that the absolute error and the
+    approximated error (as found with Taylor's Theorem) converge to each other rather
+    quickly.  
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $n$ & Value from the Taylor Series & Absolute Error & Approximate Error \\ \hline \hline
+            0 & 1 & $1.71828$ & $2.71828$ \\ \hline
+            1 & 2 & $0.71828$ & $1.35914$ \\ \hline
+            2 & $2.5$ & $0.21828$ & $0.45305$\\ \hline
+            3 & $2.66666$ & $0.05162$ & $0.11326$ \\ \hline
+            4 & $2.70833$ & $0.00995$ & $0.02265$ \\ \hline
+            5 & $2.71806$ & $0.00023$ & $0.00054$ \\ \hline
+            6 & $2.71825$ & $0.00003$ & $0.00006$ \\ \hline
+        \end{tabular}
+    \end{center}
+\end{example}
 
 \begin{example}
-    Consider the following uses of Taylor's remainder theorem.
-    \begin{enumerate}
-        \item[(a)] The first three terms of the Taylor series for $f(x) = e^x$ centered at
-            $x=0$ are \[ f(x) = e^x \approx 1 + x + \frac{x^2}{2}. \] Use Taylor's theorem
-            to approximate the error in this approximation when $x \approx 1$. 
-        \item[(b)] The Taylor series for $g(x) = \frac{1}{1-x}$ is given in Example
-            \ref{ex:Taylor2}.  What is the maximum error that can occur when approximating
-            $f(c)$ for $c \in (-1,1)$ with a fifth-order polynomial?
-    \end{enumerate}
-            
-            {\bf
-            Solutions:} 
-            \begin{enumerate}
-                \item[(a)] The remainder function gives us that there exists a number
-                    $\xi$ such that $0 < \xi < 1$ and the remainder in the Taylor series
-                    is \[ R_3(x) = \frac{f^{(3)}(\xi)}{3!}(x-0)^3 = \frac{e^\xi}{3!}x^3.
-                    \] Therefore $R_3(x) \le \frac{e^1}{3!} \cdot 1^3 = \frac{e}{6}
-                    \approx 0.45$. In Figure \ref{fig:taylor_thm_exp} we see that the
-                    error is indeed less than this.  Indeed, $f(1) =
-                    2.718281828459045\cdots$ and $g(1) = 2.5$ so the actual error is about
-                    $0.218 < 0.45$.  
-                \item[(b)] We know that $g(x) \approx \frac{1}{1-x} = 1+x+x^2 + x^3 + x^4
-                    + x^5$ for $x \in (-1,1)$ and from Taylor's remainder theorem we know
-                    that $R_5(x) = g^{(6)}(\xi) x^{5+1} / (5+1)!$.  The sixth derivative
-                    of $g$ is $g^{(6)}(x) = 6! (1-x)^{-7}$ and therefore the largest that
-                    $g^{(6)}{\xi}$ can be for $\xi \in (-1,1)$ is $6!$.  Therefore the
-                    remainder term simplifies to $R_5(x) = x^6$.  Finally, the largest that
-                    $R_5(x)$ can be on $x \in (-1,1)$ is $1$ so the maximum error is $1$.
-
-            \end{enumerate}
+    The Taylor series for $g(x) = \frac{1}{1-x}$ is given in Example \ref{ex:Taylor2}.
+    What is the maximum error that can occur when approximating $f(c)$ for $c \in (-1,1)$
+    with a fifth-order polynomial? \\{\bf Solution:}  
+    We know that $g(x) \approx \frac{1}{1-x} = 1+x+x^2 + x^3 + x^4
+    + x^5$ for $x \in (-1,1)$ and from Taylor's remainder theorem we know
+    that $R_5(x) = g^{(6)}(\xi) x^{5+1} / (5+1)!$.  The sixth derivative
+    of $g$ is $g^{(6)}(x) = 6! (1-x)^{-7}$ and therefore the largest that
+    $g^{(6)}{\xi}$ can be for $\xi \in (-1,1)$ is $6!$.  Therefore the
+    remainder term simplifies to $R_5(x) = x^6$.  Finally, the largest that
+    $R_5(x)$ can be on $x \in (-1,1)$ is $1$ so the maximum error is $1$.
 \end{example}
-Taylor's theorem gives a bound on the amount of error that you can make when using a
-truncated Taylor series.  
+
+Long story short: Taylor's theorem gives a way to bound the amount of error that you can
+make when using a truncated Taylor series.  
 
 \begin{figure}[ht!]
     \begin{center}
@@ -770,6 +933,8 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
 
 
 \newpage\section{Exercises}
+Several of the exercises in this section are designed just to get you coding.  If you are
+having trouble getting started on the coding please see Appendix \ref{app:MATLAB}.
 
 \begin{problem}
     For each of the following commands tell what the command is asking MATLAB to do and
@@ -830,6 +995,12 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
     number from a uniform distribution with bounds $[0,1]$. \\ Hint \#2: You should do
     this more than 1,000,000 times to get a good average \ldots and the number that you
     get should be familiar!
+\end{problem}
+
+\begin{problem}
+    Use the ratio test to determine the radius of convergence for the functions $\sin(x)$, $\cos(x)$,
+    $\ln(1+x)$, and $\arctan(x)$.  Show all of your work and support your answer with
+    plots demonstrating your findings graphically.
 \end{problem}
 
 \begin{problem}[modified from \cite{Chartier}]
