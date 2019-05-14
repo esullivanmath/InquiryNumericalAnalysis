@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  15 MAY 2018 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 MAY 2019 22:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1838,53 +1838,53 @@ File: pgflibraryshapes.geometric.code.tex 2008/06/26 v3.0.0 (rcs-revision 1.1)
 )) (./Numerical_InquiryNotes.aux)
 \openout1 = `Numerical_InquiryNotes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 194.
-LaTeX Font Info:    Try loading font information for OML+jkp on input line 194.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 195.
+LaTeX Font Info:    Try loading font information for OML+jkp on input line 195.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 194.
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 194.
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 194.
-LaTeX Font Info:    Try loading font information for OMS+jkp on input line 194.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 195.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 195.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 195.
+LaTeX Font Info:    Try loading font information for OMS+jkp on input line 195.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 194.
-LaTeX Font Info:    Try loading font information for OMX+jkp on input line 194.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 195.
+LaTeX Font Info:    Try loading font information for OMX+jkp on input line 195.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 194.
-LaTeX Font Info:    Try loading font information for U+jkpexa on input line 194
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 195.
+LaTeX Font Info:    Try loading font information for U+jkpexa on input line 195
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 194.
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 194.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 194.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 195.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 195.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 195.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 194.
-LaTeX Font Info:    Try loading font information for OT1+jkp on input line 194.
+LaTeX Font Info:    ... okay on input line 195.
+LaTeX Font Info:    Try loading font information for OT1+jkp on input line 195.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
@@ -1931,7 +1931,7 @@ e
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.12} into 
 your preamble.
- on input line 194.
+ on input line 195.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1968,7 +1968,7 @@ your preamble.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box118
-Package hyperref Info: Link coloring ON on input line 194.
+Package hyperref Info: Link coloring ON on input line 195.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1977,61 +1977,61 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count222
 )
-LaTeX Info: Redefining \ref on input line 194.
-LaTeX Info: Redefining \pageref on input line 194.
-LaTeX Info: Redefining \nameref on input line 194.
+LaTeX Info: Redefining \ref on input line 195.
+LaTeX Info: Redefining \pageref on input line 195.
+LaTeX Info: Redefining \nameref on input line 195.
 
 (./Numerical_InquiryNotes.out) (./Numerical_InquiryNotes.out)
 \@outlinefile=\write4
 \openout4 = `Numerical_InquiryNotes.out'.
 
 \c@lstlisting=\count223
-LaTeX Font Info:    Try loading font information for U+jkpmia on input line 206
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 207
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 206.
+LaTeX Font Info:    Try loading font information for U+msa on input line 207.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 206.
+LaTeX Font Info:    Try loading font information for U+msb on input line 207.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 206
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 207
 .
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 206.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 207.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Try loading font information for U+wasy on input line 206.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 207.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-<CoverWave.pdf, id=372, 614.295pt x 794.97pt>
+<CoverWave.pdf, id=384, 614.295pt x 794.97pt>
 File: CoverWave.pdf Graphic file (type pdf)
  <use CoverWave.pdf>
-Package pdftex.def Info: CoverWave.pdf used on input line 206.
+Package pdftex.def Info: CoverWave.pdf used on input line 207.
 (pdftex.def)             Requested size: 281.85587pt x 181.98666pt.
 LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 20
-6.
+7.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
 File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
 )
-<CreativeCommons.png, id=374, 88.33pt x 31.11626pt>
+<CreativeCommons.png, id=386, 88.33pt x 31.11626pt>
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 206.
+Package pdftex.def Info: CreativeCommons.png used on input line 207.
 (pdftex.def)             Requested size: 88.32977pt x 31.11617pt.
 
 [1
@@ -2039,13 +2039,13 @@ Package pdftex.def Info: CreativeCommons.png used on input line 206.
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Cover
 Wave.pdf> <./CreativeCommons.png>]
-LaTeX Font Info:    Try loading font information for TS1+jkp on input line 207.
+LaTeX Font Info:    Try loading font information for TS1+jkp on input line 208.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/kpfonts/ts1jkp.fd
 File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
 )
-Overfull \hbox (21.38939pt too wide) in paragraph at lines 210--220
+Overfull \hbox (21.38939pt too wide) in paragraph at lines 211--221
 []\OT1/jkp/m/n/12 This work is li-censed un-der a Cre-ative Com-mons Attributio
 n-NonCommercial-ShareAlike
  []
@@ -2058,28 +2058,23 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 220.
+Package pdftex.def Info: CreativeCommons.png used on input line 221.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.220 \tableofcontents
+l.221 \tableofcontents
                        [1] (./Numerical_InquiryNotes.toc [2
 
 ]
-Overfull \hbox (1.01994pt too wide) detected at line 41
- []\OT1/jkp/m/n/12 104
- []
-
-
-Overfull \hbox (1.01994pt too wide) detected at line 42
+Overfull \hbox (1.01994pt too wide) detected at line 43
  []\OT1/jkp/m/n/12 105
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 43
- []\OT1/jkp/m/n/12 114
+Overfull \hbox (1.01994pt too wide) detected at line 44
+ []\OT1/jkp/m/n/12 106
  []
 
 
@@ -2088,48 +2083,43 @@ Overfull \hbox (1.01994pt too wide) detected at line 45
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 46
- []\OT1/jkp/m/n/12 117
- []
-
-
 Overfull \hbox (1.01994pt too wide) detected at line 47
- []\OT1/jkp/m/n/12 122
+ []\OT1/jkp/m/n/12 116
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 48
- []\OT1/jkp/m/n/12 126
+ []\OT1/jkp/m/n/12 118
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 49
- []\OT1/jkp/m/n/12 129
+ []\OT1/jkp/m/n/12 123
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 50
- []\OT1/jkp/m/n/12 129
+ []\OT1/jkp/m/n/12 128
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 51
- []\OT1/jkp/m/n/12 130
+ []\OT1/jkp/m/n/12 131
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 52
- []\OT1/jkp/m/n/12 132
+ []\OT1/jkp/m/n/12 131
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 53
- []\OT1/jkp/m/n/12 134
+ []\OT1/jkp/m/n/12 132
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 54
- []\OT1/jkp/m/n/12 135
+ []\OT1/jkp/m/n/12 134
  []
 
 
@@ -2139,52 +2129,52 @@ Overfull \hbox (1.01994pt too wide) detected at line 55
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 56
+ []\OT1/jkp/m/n/12 137
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 57
  []\OT1/jkp/m/n/12 138
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 58
- []\OT1/jkp/m/n/12 141
- []
-
-
-Overfull \hbox (1.01994pt too wide) detected at line 59
- []\OT1/jkp/m/n/12 141
+ []\OT1/jkp/m/n/12 140
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 60
- []\OT1/jkp/m/n/12 142
+ []\OT1/jkp/m/n/12 143
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 61
- []\OT1/jkp/m/n/12 142
+ []\OT1/jkp/m/n/12 143
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 62
- []\OT1/jkp/m/n/12 142
+ []\OT1/jkp/m/n/12 144
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 63
- []\OT1/jkp/m/n/12 143
+ []\OT1/jkp/m/n/12 144
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 64
- []\OT1/jkp/m/n/12 143
+ []\OT1/jkp/m/n/12 144
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 65
- []\OT1/jkp/m/n/12 147
+ []\OT1/jkp/m/n/12 145
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 66
- []\OT1/jkp/m/n/12 148
+ []\OT1/jkp/m/n/12 145
  []
 
 
@@ -2193,13 +2183,13 @@ Overfull \hbox (1.01994pt too wide) detected at line 67
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 69
- []\OT1/jkp/m/n/12 151
+Overfull \hbox (1.01994pt too wide) detected at line 68
+ []\OT1/jkp/m/n/12 150
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 70
- []\OT1/jkp/m/n/12 153
+Overfull \hbox (1.01994pt too wide) detected at line 69
+ []\OT1/jkp/m/n/12 151
  []
 
 
@@ -2209,7 +2199,7 @@ Overfull \hbox (1.01994pt too wide) detected at line 71
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 72
- []\OT1/jkp/m/n/12 154
+ []\OT1/jkp/m/n/12 155
  []
 
 
@@ -2223,22 +2213,22 @@ Package pdftex.def Info: CreativeCommons.png used on input line 74.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [3]
 Overfull \hbox (1.01994pt too wide) detected at line 74
- []\OT1/jkp/m/n/12 155
+ []\OT1/jkp/m/n/12 156
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 75
- []\OT1/jkp/m/n/12 156
+ []\OT1/jkp/m/n/12 157
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 76
- []\OT1/jkp/m/n/12 156
+ []\OT1/jkp/m/n/12 157
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 77
- []\OT1/jkp/m/n/12 157
+ []\OT1/jkp/m/n/12 158
  []
 
 
@@ -2247,58 +2237,68 @@ Overfull \hbox (1.01994pt too wide) detected at line 78
  []
 
 
+Overfull \hbox (1.01994pt too wide) detected at line 79
+ []\OT1/jkp/m/n/12 159
+ []
+
+
 Overfull \hbox (1.01994pt too wide) detected at line 80
  []\OT1/jkp/m/n/12 160
  []
 
 
-Overfull \hbox (1.01994pt too wide) detected at line 81
- []\OT1/jkp/m/n/12 163
- []
-
-
 Overfull \hbox (1.01994pt too wide) detected at line 82
- []\OT1/jkp/m/n/12 163
+ []\OT1/jkp/m/n/12 162
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 83
- []\OT1/jkp/m/n/12 164
+ []\OT1/jkp/m/n/12 165
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 84
- []\OT1/jkp/m/n/12 164
+ []\OT1/jkp/m/n/12 165
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 85
- []\OT1/jkp/m/n/12 164
+ []\OT1/jkp/m/n/12 166
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 86
- []\OT1/jkp/m/n/12 167
+ []\OT1/jkp/m/n/12 166
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 87
- []\OT1/jkp/m/n/12 167
+ []\OT1/jkp/m/n/12 166
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 88
- []\OT1/jkp/m/n/12 170
+ []\OT1/jkp/m/n/12 169
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 89
- []\OT1/jkp/m/n/12 171
+ []\OT1/jkp/m/n/12 169
  []
 
 
 Overfull \hbox (1.01994pt too wide) detected at line 90
- []\OT1/jkp/m/n/12 171
+ []\OT1/jkp/m/n/12 172
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 91
+ []\OT1/jkp/m/n/12 173
+ []
+
+
+Overfull \hbox (1.01994pt too wide) detected at line 92
+ []\OT1/jkp/m/n/12 173
  []
 
 )
@@ -2654,34 +2654,39 @@ Package pdftex.def Info: CreativeCommons.png used on input line 550.
  [40]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 589.
+Package pdftex.def Info: CreativeCommons.png used on input line 590.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [41]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 652.
+Package pdftex.def Info: CreativeCommons.png used on input line 648.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [42]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 723.
+Package pdftex.def Info: CreativeCommons.png used on input line 711.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [43]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 787.
+Package pdftex.def Info: CreativeCommons.png used on input line 782.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [44]) (./Ch03_Calculus.tex
+ [44]
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 846.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [45])
+(./Ch03_Calculus.tex
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
-
-[45]
+ [46]
 Chapter 3.
-[46
+[47
 
 ]
 Package mdframed Info: mdframed detected package amsthm 
@@ -2698,7 +2703,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 114.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [47]
+ [48]
 Package mdframed Info: Not enough space on this page on input line 114.
 
 Overfull \hbox (6.39508pt too wide) in paragraph at lines 125--133
@@ -2709,7 +2714,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 170.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [48]
+ [49]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 197.
@@ -2727,23 +2732,23 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 287.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [49]
+ [50]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 302.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [50]
+ [51]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 359.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [51]
+ [52]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 402.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [52]
+ [53]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 447.
@@ -2752,7 +2757,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 461.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [53]
+ [54]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 473.
@@ -2760,13 +2765,13 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 485.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [54]
+ [55]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 639.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [55]
+ [56]
 Overfull \hbox (0.6564pt too wide) in paragraph at lines 702--711
 [][][][][][][][][][][][][][][][][][][][][][] 
  []
@@ -2775,12 +2780,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 732.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [56]
+ [57]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 805.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [57]
+ [58]
 Missing character: There is no â in font jkpmn7t!
 Missing character: There is no € in font jkpmn7t!
 Missing character: There is no ™ in font jkpmn7t!
@@ -2790,9 +2795,9 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [58]
+ [59]
 Chapter 4.
-[59
+[60
 
 ]
 Package mdframed Info: mdframed detected package amsthm 
@@ -2805,12 +2810,12 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 93.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [60]
+ [61]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 115.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [61]
+ [62]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 158.
@@ -2820,7 +2825,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 173.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [62]
+ [63]
 Package mdframed Info: Not enough space on this page on input line 173.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2846,18 +2851,18 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 218.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [63]
+ [64]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 256.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [64]
+ [65]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 313.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [65]
+ [66]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 316.
@@ -2891,12 +2896,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 353.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [66]
+ [67]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 402.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [67]
+ [68]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 434.
@@ -2908,7 +2913,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 453.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [68]
+ [69]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 460.
@@ -2916,7 +2921,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 514.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [69]
+ [70]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 538.
@@ -2925,12 +2930,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 564.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [70]
+ [71]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 627.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [71]
+ [72]
 Underfull \hbox (badness 10000) in paragraph at lines 655--660
 
  []
@@ -2949,12 +2954,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 696.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [72]
+ [73]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 740.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [73]
+ [74]
 Underfull \hbox (badness 10000) in paragraph at lines 786--786
 []\OT1/jkp/m/n/12 Figure 4.1. |A sim-ple Van-der-monde in-ter-po-la-tion for th
 e data set $\OML/jkp/m/it/12 S \OT1/jkp/m/n/12 =
@@ -2968,13 +2973,13 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 820.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [74]
+ [75]
 Package mdframed Info: Not enough space on this page on input line 820.
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 844.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [75]
+ [76]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 857.
@@ -2986,24 +2991,24 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 884.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [76]
+ [77]
 Missing character: There is no ; in font nullfont!
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 917.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [77]
+ [78]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1006.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [78]
+ [79]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1015.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [79]
+ [80]
 Overfull \hbox (17.48247pt too wide) in paragraph at lines 1016--1024
 \OT1/jkp/m/n/12 ca-tion. For a graph-i-cal ex-plo-ration of this idea see: [][]
 https://www.geogebra.org/m/JP2XZpzV[][]. 
@@ -3013,7 +3018,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1090.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [80]
+ [81]
 Underfull \hbox (badness 10000) in paragraph at lines 1100--1106
 
  []
@@ -3025,7 +3030,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1139.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [81]
+ [82]
 Overfull \hbox (3.17647pt too wide) in paragraph at lines 1140--1145
 \OT1/jkp/m/n/12 Our over-ar-ch-ing goal of this sec-tion is to dis-cuss an ana-
 logue to the eigenvalue-eigenvector
@@ -3047,34 +3052,34 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1195.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [82]
+ [83]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1235.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [83]
+ [84]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1253.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [84]
+ [85]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1301.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [85]
+ [86]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1374.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [86]
+ [87]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1420.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [87]
+ [88]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1431.
@@ -3100,7 +3105,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1479.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [88]
+ [89]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1484.
@@ -3108,18 +3113,18 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1568.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [89]
+ [90]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1574.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [90]
+ [91]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1639.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [91]
+ [92]
 Overfull \hbox (9.65509pt too wide) in paragraph at lines 1683--1688
 \OT1/jkp/m/n/12 Then type [][][] to see the vari-ables con-tain-ing train-ing d
 ig-its (\OT1/jkptt/m/n/12 train0, ..., train9\OT1/jkp/m/n/12 )
@@ -3129,12 +3134,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1690.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [92]
+ [93]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1738.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [93]
+ [94]
 Package epstopdf Info: Source file: <mnist_average_training_image.eps>
 (epstopdf)                    date: 2017-06-21 10:36:28
 (epstopdf)                    size: 61471 bytes
@@ -3147,7 +3152,7 @@ ge-eps-converted-to.pdf mnist_average_training_image.eps>
 (epstopdf)             \includegraphics on input line 1742.
 Package epstopdf Info: Output file is already uptodate.
 
-<mnist_average_training_image-eps-converted-to.pdf, id=3130, 421.575pt x 316.18
+<mnist_average_training_image-eps-converted-to.pdf, id=3152, 421.575pt x 316.18
 124pt>
 File: mnist_average_training_image-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -3160,7 +3165,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1793.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [94 <./mnist_average_training_image-eps-converted-to.pdf>]
+ [95 <./mnist_average_training_image-eps-converted-to.pdf>]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1798.
@@ -3168,13 +3173,13 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1832.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [95]) (./Ch05_ODEs.tex
+ [96]) (./Ch05_ODEs.tex
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [96]
+ [97]
 Chapter 5.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -3189,7 +3194,7 @@ hod
 Package mdframed Info: Box was splittet wrong
  starting loop to iterate the splitting point
 (mdframed)              on input line 58.
-[97
+[98
 
 ]
 Missing character: There is no ; in font nullfont!
@@ -3199,7 +3204,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 110.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [98]
+ [99]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 118.
@@ -3207,7 +3212,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 163.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [99]
+ [100]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 203.
@@ -3216,84 +3221,84 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 223.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [100]
+ [101]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 284.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [101]
+ [102]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 329.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [102]
+ [103]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 345.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [103]
+ [104]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 393.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [104]
+ [105]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 460.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [105]
+ [106]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 506.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [106]
+ [107]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 550.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [107]
+ [108]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 604.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [108]
+ [109]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 657.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [109]
+ [110]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 711.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [110]
+ [111]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 778.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [111]
+ [112]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 830.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [112]
+ [113]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 861.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [113])
+ [114])
 (./Ch06_PDEs.tex
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [114]
+ [115]
 Chapter 6.
 
 Overfull \hbox (3.6205pt too wide) in paragraph at lines 2--7
@@ -3305,7 +3310,7 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 30.
 Package mdframed Info: Not enough space on this page on input line 57.
-[115
+[116
 
 ]
 Package mdframed Info: Not enough space on this page on input line 57.
@@ -3313,14 +3318,14 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 59.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [116]
+ [117]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 108.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [117]
+ [118]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -3330,13 +3335,13 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 151.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [118]
+ [119]
 Missing character: There is no ; in font nullfont!
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 211.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [119]
+ [120]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -3345,39 +3350,70 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 252.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [120]
+ [121]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 271.
+Package pdftex.def Info: CreativeCommons.png used on input line 269.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [121]
+ [122]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 278.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 333.
-(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [122]
-File: CreativeCommons.png Graphic file (type png)
- <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 392.
+Package pdftex.def Info: CreativeCommons.png used on input line 323.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [123]
 File: CreativeCommons.png Graphic file (type png)
-
-<use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 465.
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 371.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [124]
-File: CreativeCommons.png Graphic file (type png)
- <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 471.
-(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [125]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 477.
+(mdframed)              on input line 389.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 413.
 
-Overfull \hbox (2.6292pt too wide) in paragraph at lines 532--538
+
+Package mdframed Warning: You got a bad break
+(mdframed)                because the last box will be empty
+(mdframed)                you have to change it manually
+(mdframed)                by changing the text, the space
+(mdframed)                or something else on input line 418.
+
+Package mdframed Info: Box was splittet wrong
+ starting loop to iterate the splitting point
+(mdframed)              on input line 418.
+File: CreativeCommons.png Graphic file (type png)
+<use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 418.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [125]
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 483.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [126]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 492.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 510.
+File: CreativeCommons.png Graphic file (type png)
+
+<use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 531.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [127]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 537.
+
+Overfull \hbox (2.6292pt too wide) in paragraph at lines 592--598
 []\OT1/jkp/m/n/12 What if we take the ini-tial con-di-tion for the 1D wave equa
 -tion to be $\OML/jkp/m/it/12 u\OT1/jkp/m/n/12 (0\OML/jkp/m/it/12 ; x\OT1/jkp/m
 /n/12 ) = [](2\OML/jkp/m/it/12 ^^Yx\OT1/jkp/m/n/12 )$
@@ -3385,119 +3421,119 @@ Overfull \hbox (2.6292pt too wide) in paragraph at lines 532--538
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 538.
-(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [126]
-File: CreativeCommons.png Graphic file (type png)
- <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 590.
-(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [127]
-File: CreativeCommons.png Graphic file (type png)
-
-<use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 594.
+Package pdftex.def Info: CreativeCommons.png used on input line 598.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [128]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 645.
-Package mdframed Info: Not enough space on this page on input line 651.
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 651.
+Package pdftex.def Info: CreativeCommons.png used on input line 650.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [129]
-Package mdframed Info: Not enough space on this page on input line 651.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 699.
+Package pdftex.def Info: CreativeCommons.png used on input line 654.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [130]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 705.
+Package mdframed Info: Not enough space on this page on input line 711.
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 762.
+Package pdftex.def Info: CreativeCommons.png used on input line 711.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [131]
+Package mdframed Info: Not enough space on this page on input line 711.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 825.
+Package pdftex.def Info: CreativeCommons.png used on input line 759.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [132]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 827.
+Package pdftex.def Info: CreativeCommons.png used on input line 822.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [133]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 879.
+Package pdftex.def Info: CreativeCommons.png used on input line 885.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [134]
-Overfull \hbox (4.6205pt too wide) in paragraph at lines 905--907
-[][]\OT1/jkp/b/n/12 Problem 6.29. []\OT1/jkp/m/n/12 Three ways to fix the is-su
-es seen in the pre-vi-ous prob-lem are the ``Leapfrog''
- []
-
 File: CreativeCommons.png Graphic file (type png)
-<use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 927.
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 887.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [135]
-Overfull \hbox (4.68416pt too wide) in paragraph at lines 927--927
-[]\OT1/jkp/b/n/17.28 The Laplace and Pois-son Equa-tions -- Steady State PDEs 
- []
+File: CreativeCommons.png Graphic file (type png)
 
-
-Overfull \hbox (33.32156pt too wide) in paragraph at lines 968--969
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-] 
+<use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 939.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [136]
+Overfull \hbox (4.6205pt too wide) in paragraph at lines 965--967
+[][]\OT1/jkp/b/n/12 Problem 6.49. []\OT1/jkp/m/n/12 Three ways to fix the is-su
+es seen in the pre-vi-ous prob-lem are the ``Leapfrog''
  []
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 987.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [136]
-Overfull \hbox (39.32162pt too wide) in paragraph at lines 987--988
+ [137]
+Overfull \hbox (4.68416pt too wide) in paragraph at lines 987--987
+[]\OT1/jkp/b/n/17.28 The Laplace and Pois-son Equa-tions -- Steady State PDEs 
+ []
+
+
+Overfull \hbox (33.32156pt too wide) in paragraph at lines 1028--1029
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1023.
-(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [137]
-File: CreativeCommons.png Graphic file (type png)
- <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1094.
+Package pdftex.def Info: CreativeCommons.png used on input line 1047.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [138]
+Overfull \hbox (39.32162pt too wide) in paragraph at lines 1047--1048
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+] 
+ []
+
+File: CreativeCommons.png Graphic file (type png)
+<use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 1083.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [139]
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 1154.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [140]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1154.
+Package pdftex.def Info: CreativeCommons.png used on input line 1214.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [139]) (./App01_Projects.tex
+ [141]) (./App01_Projects.tex
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [140]
+ [142]
 Appendix A.
-[141
+[143
 
 ]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 85.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [142]
+ [144]
 Missing character: There is no â in font jkpmn7t!
 Missing character: There is no € in font jkpmn7t!
 Missing character: There is no “ in font jkpmn7t!
@@ -3505,7 +3541,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 134.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [143]
+ [145]
 Underfull \hbox (badness 10000) in paragraph at lines 180--183
 
  []
@@ -3514,12 +3550,12 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 184.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [144]
+ [146]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 222.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [145]
+ [147]
 Missing character: There is no â in font jkpmn7t!
 Missing character: There is no € in font jkpmn7t!
 Missing character: There is no “ in font jkpmn7t!
@@ -3528,7 +3564,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 268.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [146]
+ [148]
 Missing character: There is no â in font jkpmn7t!
 Missing character: There is no € in font jkpmn7t!
 Missing character: There is no “ in font jkpmn7t!
@@ -3551,24 +3587,24 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 309.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [147]
+ [149]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 363.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [148]
+ [150]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 417.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [149])
+ [151])
 (./App02_Coding.tex
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [150]
+ [152]
 Appendix B.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -3586,7 +3622,7 @@ Overfull \hbox (53.49594pt too wide) in paragraph at lines 60--61
 Package mdframed Info: You first box width is to small
  mdframed fixed it
 (mdframed)              on input line 68.
-[151
+[153
 
 ]
 Package mdframed Info: mdframed detected package amsthm 
@@ -3607,7 +3643,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 75.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [152]
+ [154]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 77.
@@ -3627,7 +3663,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 131.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [153]
+ [155]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 133.
@@ -3642,7 +3678,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 174.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [154]
+ [156]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 177.
@@ -3656,7 +3692,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 223.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [155]
+ [157]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 228.
@@ -3674,7 +3710,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 274.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [156]
+ [158]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 277.
@@ -3685,7 +3721,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 320.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [157]
+ [159]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 323.
@@ -3716,13 +3752,13 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 371.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [158]) (./App03_LaTeX.tex
+ [160]) (./App03_LaTeX.tex
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
 
-[159]
+[161]
 Appendix C.
 
 Overfull \hbox (2.8885pt too wide) in paragraph at lines 7--9
@@ -3733,7 +3769,7 @@ nd nec-es-sary to cross-reference
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 9.
-[160
+[162
 
 ]
 Overfull \hbox (17.53862pt too wide) in paragraph at lines 97--97
@@ -3745,7 +3781,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 104.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [161]
+ [163]
 Overfull \hbox (55.05554pt too wide) in paragraph at lines 104--116
 []\OT1/jkptt/m/n/12 (\ref{eqn:sample_equation}) \OT1/jkp/m/n/12 or, more sim-pl
 y, [] us-ing []\OT1/jkptt/m/n/12 \eqref{eqn:sample_equation}\OT1/jkp/m/n/12 .
@@ -3781,7 +3817,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 176.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [162]
+ [164]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 189.
@@ -3795,7 +3831,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 232.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [163]
+ [165]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 262.
@@ -3810,7 +3846,7 @@ Package epstopdf Info: Source file: <SampleFigure.eps>
 (epstopdf)             \includegraphics on input line 279.
 Package epstopdf Info: Output file is already uptodate.
 
-<SampleFigure-eps-converted-to.pdf, id=3844, 562.1pt x 421.575pt>
+<SampleFigure-eps-converted-to.pdf, id=3857, 562.1pt x 421.575pt>
 File: SampleFigure-eps-converted-to.pdf Graphic file (type pdf)
 
 <use SampleFigure-eps-converted-to.pdf>
@@ -3821,7 +3857,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 295.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [164]
+ [166]
 Underfull \hbox (badness 10000) in paragraph at lines 303--304
 
  []
@@ -3841,7 +3877,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 319.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [165 <./SampleFigure-eps-converted-to.pdf>]
+ [167 <./SampleFigure-eps-converted-to.pdf>]
 Overfull \hbox (11.17863pt too wide) in paragraph at lines 332--332
  []\OT1/jkptt/m/n/12 \cc \hspace{1cm} \nn \hspace{1cm} \qq \hspace{1cm} \rr \hs
 pace{1cm} \zz[] 
@@ -3851,7 +3887,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 366.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [166]
+ [168]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 401.
@@ -3862,7 +3898,7 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 418.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [167]
+ [169]
 Overfull \hbox (19.14767pt too wide) in paragraph at lines 433--436
 []\OT1/jkp/m/n/12 For more ex-am-ples about the Tikz pack-age, see [][]http://w
 ww.texample.net/tikz/examples/[][]
@@ -3885,7 +3921,7 @@ File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 460.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [168]
+ [170]
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -3899,48 +3935,68 @@ File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 520.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [169]
+ [171]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png used on input line 558.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [170]
+ [172]
 Overfull \hbox (17.15642pt too wide) in paragraph at lines 564--567
 \OT1/jkp/m/n/12 If you're us-ing an em-bed-ded bib for a stand-alone pa-per the
 n just be-fore the []\OT1/jkptt/m/n/12 \end{document}
  []
 
 
-LaTeX Warning: Citation `lamport94' on page 171 undefined on input line 583.
+LaTeX Warning: Citation `lamport94' on page 173 undefined on input line 583.
 
-)
+) (./App04_PDE_From_Conservation.tex
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 238.
+Package pdftex.def Info: CreativeCommons.png used on input line 1.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
- [171] [172
+ [173]
+Appendix D.
+[174
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 264.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 264.
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 117.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [175]
+File: CreativeCommons.png Graphic file (type png)
+ <use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 195.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [176])
+File: CreativeCommons.png Graphic file (type png)
+
+<use CreativeCommons.png>
+Package pdftex.def Info: CreativeCommons.png used on input line 240.
+(pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
+ [177] [178
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
  (./Numerical_InquiryNotes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 264.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 264.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
 Package rerunfilecheck Info: File `Numerical_InquiryNotes.out' has not changed.
 
-(rerunfilecheck)             Checksum: 7657E5F0464C1516FFDC722246414571;6503.
+(rerunfilecheck)             Checksum: F809D7DF00927BDC2506611C497EF5CE;6740.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 264.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 266.
  ) 
 Here is how much of TeX's memory you used:
- 42999 strings out of 493089
- 940455 string characters out of 6134842
- 1127995 words of memory out of 5000000
- 44624 multiletter control sequences out of 15000+600000
+ 43038 strings out of 493089
+ 940953 string characters out of 6134842
+ 1128956 words of memory out of 5000000
+ 44627 multiletter control sequences out of 15000+600000
  86947 words of font info for 217 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,20n,100p,10445b,2404s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3965,10 +4021,10 @@ y.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb
 fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (173 pages, 1827770 bytes).
+Output written on Numerical_InquiryNotes.pdf (179 pages, 1846921 bytes).
 PDF statistics:
- 4232 PDF objects out of 4296 (max. 8388607)
- 3195 compressed objects within 32 object streams
- 1135 named destinations out of 1200 (max. 500000)
- 771 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4302 PDF objects out of 5155 (max. 8388607)
+ 3258 compressed objects within 33 object streams
+ 1168 named destinations out of 1200 (max. 500000)
+ 795 words of extra memory for PDF output out of 10000 (max. 10000000)
 

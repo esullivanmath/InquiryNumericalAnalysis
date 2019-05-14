@@ -1,4 +1,4 @@
-\chapter{Numerical Root Finding}
+\chapter{Numerical Algebra}
 Let's play a game!
 \begin{problem}\label{prob:bisection_game}
     Find a partner in the room to play a two-person game.  Choose someone to go first and
@@ -584,6 +584,65 @@ approximation is called a {\bf Quasi-Newton Method}.
 %     script to empirically determine the convergence rate of Steffensen's method.  You may want to
 %     look back at \ref{prob:newton_convergence}.
 % \end{problem}
+
+
+
+\newpage\section{Numerical Curve Fitting}
+In this section we'll change our focus a bit to look at a different question from algebra.
+Instead of finding the roots of an algebraic equation, what if we have a few data points
+and a reasonable guess for the type of function fitting the points, how would we determine
+the actual function?  
+
+\begin{problem}
+    Consider the function $f(x)$ that goes exactly through the points $(0,1)$, $(1,4)$,
+    and $(2,13)$.  
+    \begin{enumerate}
+        \item[(a)] Find a function that goes through these points exactly.  Be able to
+            defend your work.
+        \item[(b)] Is your function unique?  That is to say, is there another function out
+            there that also goes exactly through these points?  
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Now let's make a minor tweak to the previous problem.  Let's say that we have the data
+    points $(0,1.07)$, $(1,3.9)$, $(2,14.8)$, and $(3,26.8)$.  Notice that these points
+    are {\it close} to the points we had in the previous problem, but all of the $y$
+    values have a little noise in them and we have added a fourth point.  If we suspect
+    that a function $f(x)$ that {\it best} fits this data is quadratic then $f(t) = ax^2 +
+    bx + c$ for some constants $a$, $b$, and $c$.  
+    \begin{enumerate}
+        \item[(a)] Plot the four points along with the function $f(t)$ for arbitrarily
+            chosen values of $a$, $b$, and $c$.  
+        \item[(b)] Work with your partner(s) to systematically change $a$, $b$, and $c$ so
+            that you get a good visual match to the data.  
+        \item[(c)] Now let's be a bit more systematic about things.  Let's say that you
+            have a pretty good guess that $b \approx 2$ and $c \approx 0.7$.  We need to
+            get a good estimate for $a$.
+            \begin{enumerate}
+                \item[(i)] Pick an arbitrary starting value for $a$.  For each
+                    of the four points find the error between the predicted $y$ value and
+                    the actual $y$ value.
+                \item[(ii)] Square all four of your errors and add them up.  (Stop and
+                    think: why are we squaring the errors before we sum them \ldots have a
+                    discussion here)
+                \item[(iii)] Now change your value of $a$ to several different values and
+                    record the sum of the square errors for each of your values of $a$. It
+                    may be worth while to use a spreadsheet to keep track of your work
+                    here.
+                \item[(iv)] Make a plot with the value of $a$ on the horizontal axis and
+                    the value of the sum of the square errors on the vertical axis.  Use
+                    your plot to defend the optimal choice for $a$.
+            \end{enumerate}
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    We're going to revisit part (c) of the previous problem.  Write a loop that tries many
+    values of $a$ in very small increments and calculates the sum of the squared errors.
+    Have your loop stop when you think that it has reached the best value of $a$.
+\end{problem}
+
 
 
 \newpage\section{Exercises}

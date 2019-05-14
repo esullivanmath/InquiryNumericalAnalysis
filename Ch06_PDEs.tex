@@ -266,206 +266,266 @@ $t=$ time and $x=$ a single spatial dimension.
     What does the parameter $\alpha^2$ control in terms of the physics of the problem?
 \end{problem}
 
+\newpage\section{Analytic Solutions to Linear PDEs}
+If I were to claim that $y = f(t) = 7e^{3t}$ is a solution to the ordinary differential
+equation $\frac{dy}{dt} = 3y$ with $y(0) = 7$ then you could easily check that my claim
+were true by checking the initial condition
+\[ f(0) = 7e^{3 \cdot 0} = 7 \quad \checkmark \]
+and checking that the function satisfies the differential equation
+\[ y' = 3\cdot 7e^{3t} = 3 y \quad \checkmark . \]
+Let's do the same for some partial differential equations.  
 
+\begin{example}
+    Consider the diffusion equation $u_t = k u_{xx}$.  This is known as the ``heat'' or
+    ``diffusion'' equation as we saw in the previous section, and the function $u$ can be
+    thought of as the temperature of some heated object.  \\
+    {\bf Question:} Is the function $u(x,t) = x^2 -
+    t^3$ a valid solution for this differential equation?  If so, what is the value of the
+    constant $k$? \\
+    {\bf Solution:} \\
+    We will check this by taking a few derivatives.
+    \begin{flalign*}
+        \pd{u}{t} &= -3t^2 \\
+        \pdd{u}{x} &= 2.
+    \end{flalign*}
+    As we can see, there is no constant value of $k$ that makes the equation
+    $-3t^2 = 2k$ valid.  Therefore, the function $u(x,t) = x^2 - t^2$ is not a solution to
+    the heat equation.
+\end{example}
 
-\newpage\section{An Analytic Introduction to Conservation Law PDEs}
-In the previous section
-we just gave you the PDEs without any proof of where they came from.  In this section
-we'll give a more analytic introduction to most of the primary partial
-differential equations of interest in basic mathematical physics.  We will make reference
-to Fick's Law for mass transport and Fourier's Law for thermal transport, so interested
-readers should dig deeper by examining the relevant Wikipedia pages.
-  
-Conservation laws pervade all of physics -- conservation of energy, conservation of
-momentum, and conservation of mass.  These laws are sometimes stated colloquially as
-{\it energy (or momentum or mass) can neither be created nor destroyed}, but this phrase
-is not super helpful mathematically.  We start this section with a brief mathematical
-derivation of a {\it general conservation law} to further clarify what we mean
-mathematically.  The resulting general conservation law will be a
-partial differential equation that can be used to mathematically express the physical laws
-of conservation of mass, momentum, or
-energy.
-
-Let $u$ be the quantity you are trying to conserve, $\bq$ be the flux of that quantity,
-and $f$ be any source of that quantity.  For example, if we are to derive a conservation
-of energy equation, $u$ might be energy, $\bq$ might be temperature flux, and $f$ might be
-a temperature source (or sink).
-
-\subsection*{Derivation of General Balance Law}
-Let $\Omega$ be a fixed volume and denote the boundary of this volume by $\partial
-\Omega$. The rate at which $u$ is changing in time throughout $\Omega$ needs to be
-balanced by the rate at which $u$ leaves the volume plus any sources of $u$.
-Mathematically, this means that
-\begin{flalign}
-    \pd{ }{t} \iiint_{\Omega} u dV = -\iint_{\partial \Omega} \bq \cdot n dA +
-    \iiint_\Omega f dV.
-    \label{eqn:global_balance}
-\end{flalign}
-This is a global balance law in the sense that it holds for all volumes $\Omega$.  The
-mathematical 
-troubles here are two fold: (1) there are many integrals, and (2) there are really two variables
-($u$ and $q$ since $f=f(u,x,t)$) so the equation is not closed.  In order to mitigate
-that fact we apply the divergence theorem to the first term on the right-hand side of
-\eqref{eqn:global_balance} to get
-\begin{flalign}
-    \pd{ }{t} \iiint_{\Omega} u dV = -\iiint_{\Omega} \nabla \cdot \bq dV +
-    \iiint_\Omega f dV.
-    \label{eqn:global_balance2}
-\end{flalign}
-
-Gathering all of the terms on the right of \eqref{eqn:global_balance2}, interchanging the integral and the derivative on
-the left (since the volume is not changing in time), and rewriting gives
-\begin{flalign}
-    \iiint_\Omega \left( \pd{u}{t} + \nabla \cdot \bq \right) dV = \iiint_\Omega f dV
-    \label{eqn:global_balance3}
-\end{flalign}
-If we presume that this equation holds for all volumes $\Omega$ then the integrands must
-be equal and we get the local balance law
-\begin{flalign}
-    \pd{u}{t} + \nabla \cdot \bq = f.
-    \label{eqn:local_balance}
-\end{flalign}
-
-Equation \eqref{eqn:local_balance} is an expression of the balances of changes in time to
-changes in space of a conserved quantity such as mass, momentum, or energy.  What remains
-is to make clear the meaning and functional form of the flux $\bq$ and the source function
-$f$.
-
-\subsection*{Simplification of the Local Balance Law}
-In equation \eqref{eqn:local_balance} it is often assumed that the system is free of
-external sources.  In this case we set $f$ to zero and obtain the source-free balance law
-\begin{flalign}
-    \pd{u}{t} + \nabla \cdot \bq = 0.
-    \label{eqn:local_source_free}
-\end{flalign}
-It is this form of balance law where many of the most interesting and important partial
-differential equations come from.  In particular consider the following two cases: mass
-balance and energy balance.
-\subsection*{Mass Balance}
-In mass balance we take $u$ to either be the density of a substance (e.g. in the case of
-liquids) or the concentration of a substance in a mixture (e.g. in the case of
-gasses). If $C$ is the mass concentration of a substance in a gas then the flux of that
-substance is given via Fick's Law as
-\begin{flalign}
-    \bq = -k \nabla C.
-    \label{eqn:fick}
-\end{flalign}
-Combining \eqref{eqn:fick} with \eqref{eqn:local_source_free} (and assuming that $k$ is
-independent of space, time, and concentration) gives
-\begin{flalign}
-    \pd{C}{t} = k \nabla \cdot \nabla C. 
-    \label{eqn:fick2_simp}
-\end{flalign}
-In the presence of external sources of mass, \eqref{eqn:fick2_simp} is
-\begin{flalign}
-    \pd{C}{t} = k \nabla \cdot \nabla C + f(x).
-    \label{eqn:fick3}
-\end{flalign}
-Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fick3} we get
-\begin{flalign}
-    \pd{C}{t} = k\left( \pdd{C}{x} + \pdd{C}{y} + \pdd{C}{z} \right) + f(x)
-    \label{eqn:fick3_expanded}
-\end{flalign}
-where the reader should note that this can be easily simplified in 1 or 2 spatial
-dimensions.
 % \begin{problem}
-%     What does \eqref{eqn:fick3} equation look like in terms of spatial derivatives on the
-%     right-hand side?
-%     \begin{flalign*}
-%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
-%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
-%     \end{flalign*}
+%     Consider the partial differential equation 
+%     \[ \pd{u}{t} = \pdd{u}{x} \]
+%     and work with your group to decide if the function $u(t,x) = x^2 - t^2$ is a
+%     solution.
 % \end{problem}
 
-\subsection*{Energy Balance}
-The energy balance equation is essentially the same as the mass balance equation.  If $u$
-is temperature then the flux of temperature is given by Fourier's Law for heat conduction
-\begin{flalign}
-    \bq = -k\nabla T.
-    \label{eqn:fourier}
-\end{flalign}
-Making the same simplifications as in the mass balance equation we arrive at
-\begin{flalign}
-    \pd{T}{t} = k \nabla \cdot \nabla T.
-    \label{eqn:fourier2}
-\end{flalign}
-In the presence of external sources of heat, \eqref{eqn:fourier2} becomes
-\begin{flalign}
-    \pd{T}{t} = k \nabla \cdot \nabla T + f(x).
-    \label{eqn:fourier3}
-\end{flalign}
-Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fourier3} we get
-\begin{flalign}
-    \pd{T}{t} = k\left( \pdd{T}{x} + \pdd{T}{y} + \pdd{T}{z} \right) + f(x)
-    \label{eqn:fourier3_expanded}
-\end{flalign}
-where the reader should note that this can be easily simplified in 1 or 2 spatial
-dimensions.
-% \begin{problem}
-%     What does \eqref{eqn:fourier3} equation look like in terms of spatial derivatives on the
-%     right-hand side?
-%     \begin{flalign*}
-%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)}\\
-%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
-%     \end{flalign*}
-% \end{problem}
+\begin{problem}
+    Consider the diffusion equation $T_t = k T_{xx}$ where $T(x,t)$ is the temperature of a long
+    thin metal rod at time $t$ (in seconds) and spatial location $x$ (in meters).   
+    \begin{enumerate}
+        \item[(a)] What are the units of the constant $k$?
+        \item[(b)] For each of the following functions, test whether it is an analytical
+            solution to this PDE by taking the first derivative with respect to time, the
+            second derivative with respect to position, and substituting them into this
+            equation to see if we get an identity.  If $k = 3$, which of these functions
+            is a solution? Be able to defend your answer.
+
+            \begin{enumerate}
+                \item[(1)] $T(x,t) = 4 x^3 + 6 t^2$
+                \item[(2)] $T(x,t) = 7 x + 5$
+                \item[(3)] $T(x,t) = 8 x^2 t$
+                \item[(4)] $T(x,t) = e^{3 t + x}$
+                \item[(5)] $T(x,t) = 6 e^{3 t + x} +5x - 2$
+                \item[(6)] $T(x,t) = e^{-3t} + \sin (x)$
+                \item[(7)] $T(x,t) = e^{3t} \sin (x)$
+                \item[(8)] $T(x,t) = e^{-3t} \sin (x)$
+                \item[(9)] $T(x,t) = 5 e^{-3t} \sin (x) + 6x + 7$
+                \item[(10)] $T(x,t) = -4 e^{-3t} \sin (x) + 3t + 2$
+                \item[(11)] $T(x,t) = e^{-2t} \sin (3x)$
+                \item[(12)] $T(x,t) = e^{-12 t} \cos (3x)$
+                \item[(13)] $T(x,t) = e^{-12 t} \cos (3x)+4x^2 + 8$
+                \item[(14)] $T(x,t) = e^{-75 t} \cos (5x)$
+                \item[(15)] $T(x,t) = 9 e^{-75 t} \cos (5x) + 2 x + 7$
+            \end{enumerate}
+    \end{enumerate}
+\end{problem}
 
 
 
-\subsection*{Laplace's Equation and Poisson's Equation}
-Equations \eqref{eqn:fick3} and \eqref{eqn:fourier3} are the same partial differential
-equation for two very important physical phenomenon; mass and heat transfer.  In the case
-where time is allowed to run to infinity and no external sources of mass or energy are
-included these equations reach a steady state solution (no longer changing in time) and we
-arrive at Laplace's Equation
-\begin{flalign}
-    \nabla \cdot \nabla u = 0.
-    \label{eqn:laplace}
-\end{flalign}
-Laplace's equation is actually a statement of minimal energy as well as steady state heat
-or temperature.  We can see this since entropy always drives systems from high energy to
-low energy, and if we have reached a steady state then we must have also reached a surface
-of minimal energy.
 
-Equation \eqref{eqn:laplace} is sometimes denoted as $\nabla \cdot \nabla u = \nabla^2 u =
-\Delta u$, and in terms of the partial derivatives it is written as
-\begin{flalign*}
-    \pdd{u}{x} + \pdd{u}{y} + \pdd{u}{z} = 0.
-% V    0 &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
-%     0 &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
-%     0 &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)} 
-\end{flalign*}
+\begin{problem}
+    Consider the diffusion equation $T_t = k T_{xx}$, and suppose that $k=4$.  For each of
+    the following functions, find the value of the parameter $a$ that will make the
+    function solve the PDE, by taking derivatives and substituting them into the equation.
 
-If there is a time-independent external source the right-hand side of
-\eqref{eqn:laplace} will be non-zero and we arrive at Poisson's equation:
-\begin{flalign}
-    \nabla \cdot \nabla u = -f(x).
-    \label{eqn:poisson}
-\end{flalign}
-Note that the negative on the right-hand side comes from the fact that
-$\pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ and $\pd{u}{t} \to 0$.  Technically we are
-absorbing the constant $k$ into $f$ (that is ``$f$'' is really ``$f/k$'').  Also
-note that in many instances the value of $k$ is not constant and cannot therefore be pulled
-out of the derivative without a use of the product rule.
+    \begin{enumerate}
+        \item[(a)] $T(x,t) = 6 e^{-8 t} \sin(ax)$  % a = \sqrt{2}
+        \item[(b)] $T(x,t) = -5 e^{38 t} \cos(ax)$ 
+        \item[(c)] $T(x,t) = 3 e^{at} \sin(5 x)$  
+        \item[(d)] $T(x,t) = 7 e^{at} \cos(2 x)$  
+        \item[(e)] $T(x,t) = a e^{-36t} \cos(3 x)$  
+        \item[(f)] $T(x,t) = a e^{-4t} \cos(6 x)$  %impossible
+    \end{enumerate}
+\end{problem}
 
-Let's summarize:
-\begin{center}
-    \begin{tabular}{|c|c|c|}
-        \hline
-        Name of PDE & PDE & What the PDE Models \\ \hline \hline
-        The Heat Equation & $\ds \pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Diffusion \\
-        Laplace's Equation & $\ds k \nabla \cdot \nabla u =-f(x)$ & Minimal Energy
-        Surfaces \\
-%         The Wave Equation & $\ds \pdd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Wave
-%         phenomena \\
-        \hline
-    \end{tabular}
-\end{center}
+In your study of ordinary differential equations you likely ran into the dissatisfying
+realization that you could simply {\it guess} the answer by knowing a little bit of
+calculus.  As much as it might make you uncomfortable, this is a totally legitimate
+technique: guess the form of the answer, put it into the differential equation, and see
+what has to happen in order for your guess to be valid.  
 
-Further discussion of the origins of the wave equation and other interesting PDE's is left
-to the reader.
+\begin{problem}
+    Consider the diffusion equation 
+    \[ \pd{T}{t} = k \pdd{T}{x}. \]
+    \begin{enumerate}
+        \item[(a)] Reading from left-to-right, the partial differential equation says that
+            the derivative of some function of $t$ is related to that same function.  If
+            you had to guess the {\it type} of function, what would you guess and why?
+        \item[(b)] Reading from right-to-left, the partial differential equation says that
+            the second derivative of some function of $x$ is related to that same
+            function.  If you had to guess the {\it type} of function, what would you
+            guess and why?
+        \item[(c)] Based on your guesses from parts (a) and (b), what type of function
+            would think is a reasonable solution for the differential equation?  Why?
+    \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+    Find an analytical solution to the diffusion equation that satisfies the following:
+    \begin{itemize}
+        \item[(a)] Our domain is $-10 \leq x \leq 10$ and $-20 \leq y \leq 20$, with both
+            measured in meters.
+        \item[(b)] The thermal diffusivity is a constant $k$.
+        \item[(c)] The temperature around the edges is 20 degrees C.
+        \item[(d)] At the first instant of time, the temperature reaches a minimum at the
+            center of 5 degrees C.
+    \end{itemize}    
+\end{problem}
+
+Based on what you have explored in the previous few problems you should now have a
+reasonable guess for the functional forms of solutions to the diffusion equation are.
+\begin{thm}
+    If the function $u(x,t)$ solves the diffusion equation $u_t = k u_{xx}$ in one spatial
+    dimension then $u(x,t)$ likely takes the form
+    \[ u(x,t) = \underline{\hspace{0.25in}} e^{(\underline{\hspace{0.25in}})} \sin\left(
+    \underline{\hspace{0.25in}} \right) \]
+    or
+    \[ u(x,t) = \underline{\hspace{0.25in}} e^{(\underline{\hspace{0.25in}})} \cos\left(
+    \underline{\hspace{0.25in}} \right). \]
+\end{thm}
+
+\begin{problem}
+    Prove that your hypotheses in the previous theorem are indeed solutions to the
+    diffusion equation $u_t = k u_{xx}$ for some constant $k$.
+\end{problem}
+
+\begin{problem}
+    As a sanity check, pick reasonable values for your constants and create an animation
+    showing how your function evolves in time.  Does your function show the behavior
+    expected of the 1D diffusion equation?  \\
+    Hint: Think of this as a cooling metal rod \ldots does your solution look
+    plausible for this physical scenario?
+\end{problem}
+
+
+\begin{thm}
+    If the function $u(x,y,t)$ solves the diffusion equation $u_t = k(u_{xx} + u_{yy})$ in
+    two spatial dimensions then $u(x,y,t)$ likely takes the form
+    \[ u(x,y,t) = \underline{\hspace{2in}} \]
+    (Hint: There might be several answers)
+\end{thm}
+
+\begin{problem}
+    Prove that your hypotheses in the previous theorem are indeed solutions to the 2D
+    diffusion equation $u_t = k (u_{xx} + u_{yy})$ for some constant $k$.
+\end{problem}
+
+\begin{problem}
+    As a sanity check, pick reasonable values for your constants and create an animation
+    showing how your function evolves in time.  Does your function show the behavior
+    expected of the 2D diffusion equation?  \\
+    Hint: Think of this as a cooling metal plate \ldots does your solution look
+    plausible for this physical scenario?
+\end{problem}
+
+
+
+\begin{problem}
+    Consider the wave equation 
+    \[ \pdd{W}{t} = c^2 \pdd{W}{x}. \]
+    \begin{enumerate}
+        \item[(a)] Reading from left-to-right, the partial differential equation says that
+            the second derivative of some function of $t$ is related to that same function.  If
+            you had to guess the {\it type} of function, what would you guess and why?
+        \item[(b)] Reading from right-to-left, the partial differential equation says that
+            the second derivative of some function of $x$ is related to that same
+            function.  If you had to guess the {\it type} of function, what would you
+            guess and why?
+        \item[(c)] Based on your guesses from parts (a) and (b), what type of function
+            would think is a reasonable solution for the differential equation?  Why?
+    \end{enumerate}
+\end{problem}
+
+
+
+
+\begin{problem}
+    Consider the wave equation $W_{tt} = c^2 ( W_{xx} + W_{yy})$ where $W(x,y,t)$ is the
+    height (in centimeters) of a wave at time $t$ in seconds and spatial location $(x,y)$
+    (each in centimeters).
+    \begin{enumerate}
+        \item[(a)] What are the units of the constant $c$?
+        \item[(b)] For each of the following functions, test whether it is an analytical
+            solution to this PDE by substituting the derivatives into the equation.  If $c
+            = 2$, which of these functions is a solution?
+
+            \begin{enumerate}
+                \item[(1)] $W(x,y,t) = 3x + 2y + 5 t - 6$
+                \item[(2)] $W(x,y,t) = 3x^2 + 2y^2 + 5 t^2 - 6$
+                \item[(3)] $W(x,y,t) = \sin( 2 x) + \cos(3 y) + \sin(4t)$
+                \item[(4)] $W(x,y,t) = \sin( 2 x) \cos(3 y) \sin(4t)$
+                \item[(5)] $W(x,y,t) = \sin(3 x) \cos(4 y) \sin(10t)$
+                \item[(6)] $W(x,y,t) = -6\sin( 3 x) \cos(4 y) \sin(10t)+2x -3y+9-12$
+                \item[(7)] $W(x,y,t) = \cos(7 x) \cos(3 y) \cos(12t)$
+                \item[(8)] $W(x,y,t) = \cos(5 x) \sin(12 y) \cos(26t)$
+            \end{enumerate}
+    \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+    Find an analytical solution to the wave equation that satisfies the following
+    \begin{itemize}
+        \item[(a)] Our domain is $0 \leq x \leq 5$ and $-6 \leq y \leq 6$, with both measured
+            in meters.
+        \item[(b)] The wave speed is a constant $c$.
+        \item[(c)] The function equals zero at the edges.
+        \item[(d)] The initial velocity is zero everywhere.
+        \item[(e)] At the first instant of time, the height reaches a maximum at the center of
+            2 cm.
+    \end{itemize}
+\end{problem}
+
+
+\begin{thm}
+    If the function $u(x,t)$ solves the 1D wave equation $u_{tt} = c^2 u_{xx}$ then
+    $u(x,t)$ likely has the functional form
+    \[ u(x,t) = \underline{\hspace{2in}}. \]
+\end{thm}
+
+\begin{problem}
+    Prove your hypotheses from the previous theorem.
+\end{problem}
+
+\begin{problem}
+    As a sanity check, pick reasonable values for your constants and create an animation
+    showing how your function evolves in time.  Does your function show the behavior
+    expected of a wave equation?  \\
+    Hint: Think of this as a vibrating guitar string \ldots does your solution look
+    plausible for this physical scenario?
+\end{problem}
+
+\begin{thm}
+    If the function $u(x,y,t)$ solves the 2D wave equation $u_{tt} = c^2 \left( u_{xx} +
+    u_{yy}
+    \right)$ then $u(x,y,t)$ likely has the functional form
+    \[ u(x,y,t) = \underline{\hspace{2in}}. \]
+\end{thm}
+
+\begin{problem}
+    Prove your hypotheses from the previous theorem.
+\end{problem}
+
+\begin{problem}
+    As a sanity check, pick reasonable values for your constants and create an animation
+    showing how your function evolves in time.  Does your function show the behavior
+    expected of a wave equation?  \\
+    Hint: Think of this as a vibrating drum head \ldots does your solution look
+    plausible for this physical scenario?
+\end{problem}
+
 
 
 \newpage\section{Boundary Conditions}
@@ -591,7 +651,7 @@ solve with the heat and wave equation.
 \end{problem}
 
 
-\newpage\section{The Heat Equation}
+\newpage\section{Numerical Solutions of The Heat Equation}
 In this section we'll use a technique called {\it the finite difference method} to find
 numerical approximations to the heat equation
 \[ u_t = D \nabla \cdot \nabla u + f(x). \]
@@ -824,7 +884,7 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
     x$ and for $\Delta y$. Be prepared to present your solutions to your classmates.
 \end{problem}
 
-\newpage\section{The Wave Equation}
+\newpage\section{Numerical Solutions of The Wave Equation}
 \begin{problem}
    The problems that we've dealt with thus far all model natural diffusion processes: heat
    transport, molecular diffusion, etc.  Another interesting physical phenomenon is that

@@ -1,0 +1,199 @@
+\chapter{Building PDE's From Conservation Laws}
+
+In this section
+we'll give a more analytic introduction to most of the primary partial
+differential equations of interest in basic mathematical physics.  We will make reference
+to Fick's Law for mass transport and Fourier's Law for thermal transport, so interested
+readers should dig deeper by examining the relevant Wikipedia pages or other sources.
+  
+Conservation laws pervade all of physics -- conservation of energy, conservation of
+momentum, and conservation of mass.  These laws are sometimes stated colloquially as
+{\it energy (or momentum or mass) can neither be created nor destroyed}, but this phrase
+is not super helpful mathematically.  We start this section with a brief mathematical
+derivation of a {\it general conservation law} to further clarify what we mean
+mathematically.  The resulting general conservation law will be a
+partial differential equation that can be used to mathematically express the physical laws
+of conservation of mass, momentum, or
+energy.
+
+Let $u$ be the quantity you are trying to conserve, $\bq$ be the flux of that quantity,
+and $f$ be any source of that quantity.  For example, if we are to derive a conservation
+of energy equation, $u$ might be energy, $\bq$ might be temperature flux, and $f$ might be
+a temperature source (or sink).
+
+\subsection*{Derivation of General Balance Law}
+Let $\Omega$ be a fixed volume and denote the boundary of this volume by $\partial
+\Omega$. The rate at which $u$ is changing in time throughout $\Omega$ needs to be
+balanced by the rate at which $u$ leaves the volume plus any sources of $u$.
+Mathematically, this means that
+\begin{flalign}
+    \pd{ }{t} \iiint_{\Omega} u dV = -\iint_{\partial \Omega} \bq \cdot n dA +
+    \iiint_\Omega f dV.
+    \label{eqn:global_balance}
+\end{flalign}
+This is a global balance law in the sense that it holds for all volumes $\Omega$.  The
+mathematical 
+troubles here are two fold: (1) there are many integrals, and (2) there are really two variables
+($u$ and $q$ since $f=f(u,x,t)$) so the equation is not closed.  In order to mitigate
+that fact we apply the divergence theorem to the first term on the right-hand side of
+\eqref{eqn:global_balance} to get
+\begin{flalign}
+    \pd{ }{t} \iiint_{\Omega} u dV = -\iiint_{\Omega} \nabla \cdot \bq dV +
+    \iiint_\Omega f dV.
+    \label{eqn:global_balance2}
+\end{flalign}
+
+Gathering all of the terms on the right of \eqref{eqn:global_balance2}, interchanging the integral and the derivative on
+the left (since the volume is not changing in time), and rewriting gives
+\begin{flalign}
+    \iiint_\Omega \left( \pd{u}{t} + \nabla \cdot \bq \right) dV = \iiint_\Omega f dV
+    \label{eqn:global_balance3}
+\end{flalign}
+If we presume that this equation holds for all volumes $\Omega$ then the integrands must
+be equal and we get the local balance law
+\begin{flalign}
+    \pd{u}{t} + \nabla \cdot \bq = f.
+    \label{eqn:local_balance}
+\end{flalign}
+
+Equation \eqref{eqn:local_balance} is an expression of the balances of changes in time to
+changes in space of a conserved quantity such as mass, momentum, or energy.  What remains
+is to make clear the meaning and functional form of the flux $\bq$ and the source function
+$f$.
+
+\subsection*{Simplification of the Local Balance Law}
+In equation \eqref{eqn:local_balance} it is often assumed that the system is free of
+external sources.  In this case we set $f$ to zero and obtain the source-free balance law
+\begin{flalign}
+    \pd{u}{t} + \nabla \cdot \bq = 0.
+    \label{eqn:local_source_free}
+\end{flalign}
+It is this form of balance law where many of the most interesting and important partial
+differential equations come from.  In particular consider the following two cases: mass
+balance and energy balance.
+\subsection*{Mass Balance}
+In mass balance we take $u$ to either be the density of a substance (e.g. in the case of
+liquids) or the concentration of a substance in a mixture (e.g. in the case of
+gasses). If $C$ is the mass concentration of a substance in a gas then the flux of that
+substance is given via Fick's Law as
+\begin{flalign}
+    \bq = -k \nabla C.
+    \label{eqn:fick}
+\end{flalign}
+Combining \eqref{eqn:fick} with \eqref{eqn:local_source_free} (and assuming that $k$ is
+independent of space, time, and concentration) gives
+\begin{flalign}
+    \pd{C}{t} = k \nabla \cdot \nabla C. 
+    \label{eqn:fick2_simp}
+\end{flalign}
+In the presence of external sources of mass, \eqref{eqn:fick2_simp} is
+\begin{flalign}
+    \pd{C}{t} = k \nabla \cdot \nabla C + f(x).
+    \label{eqn:fick3}
+\end{flalign}
+Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fick3} we get
+\begin{flalign}
+    \pd{C}{t} = k\left( \pdd{C}{x} + \pdd{C}{y} + \pdd{C}{z} \right) + f(x)
+    \label{eqn:fick3_expanded}
+\end{flalign}
+where the reader should note that this can be easily simplified in 1 or 2 spatial
+dimensions.
+% \begin{problem}
+%     What does \eqref{eqn:fick3} equation look like in terms of spatial derivatives on the
+%     right-hand side?
+%     \begin{flalign*}
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
+%         \pd{C}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
+%     \end{flalign*}
+% \end{problem}
+
+\subsection*{Energy Balance}
+The energy balance equation is essentially the same as the mass balance equation.  If $u$
+is temperature then the flux of temperature is given by Fourier's Law for heat conduction
+\begin{flalign}
+    \bq = -k\nabla T.
+    \label{eqn:fourier}
+\end{flalign}
+Making the same simplifications as in the mass balance equation we arrive at
+\begin{flalign}
+    \pd{T}{t} = k \nabla \cdot \nabla T.
+    \label{eqn:fourier2}
+\end{flalign}
+In the presence of external sources of heat, \eqref{eqn:fourier2} becomes
+\begin{flalign}
+    \pd{T}{t} = k \nabla \cdot \nabla T + f(x).
+    \label{eqn:fourier3}
+\end{flalign}
+Expanding the Laplacian operator on the right-hand side of \eqref{eqn:fourier3} we get
+\begin{flalign}
+    \pd{T}{t} = k\left( \pdd{T}{x} + \pdd{T}{y} + \pdd{T}{z} \right) + f(x)
+    \label{eqn:fourier3_expanded}
+\end{flalign}
+where the reader should note that this can be easily simplified in 1 or 2 spatial
+dimensions.
+% \begin{problem}
+%     What does \eqref{eqn:fourier3} equation look like in terms of spatial derivatives on the
+%     right-hand side?
+%     \begin{flalign*}
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)}\\
+%         \pd{T}{t} &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)}
+%     \end{flalign*}
+% \end{problem}
+
+
+
+\subsection*{Laplace's Equation and Poisson's Equation}
+Equations \eqref{eqn:fick3} and \eqref{eqn:fourier3} are the same partial differential
+equation for two very important physical phenomenon; mass and heat transfer.  In the case
+where time is allowed to run to infinity and no external sources of mass or energy are
+included these equations reach a steady state solution (no longer changing in time) and we
+arrive at Laplace's Equation
+\begin{flalign}
+    \nabla \cdot \nabla u = 0.
+    \label{eqn:laplace}
+\end{flalign}
+Laplace's equation is actually a statement of minimal energy as well as steady state heat
+or temperature.  We can see this since entropy always drives systems from high energy to
+low energy, and if we have reached a steady state then we must have also reached a surface
+of minimal energy.
+
+Equation \eqref{eqn:laplace} is sometimes denoted as $\nabla \cdot \nabla u = \nabla^2 u =
+\Delta u$, and in terms of the partial derivatives it is written as
+\begin{flalign*}
+    \pdd{u}{x} + \pdd{u}{y} + \pdd{u}{z} = 0.
+% V    0 &= \underline{\hspace{2in}} \quad \text{(1 Spatial Dimension)} \\
+%     0 &= \underline{\hspace{2in}} \quad \text{(2 Spatial Dimensions)} \\
+%     0 &= \underline{\hspace{2in}} \quad \text{(3 Spatial Dimensions)} 
+\end{flalign*}
+
+If there is a time-independent external source the right-hand side of
+\eqref{eqn:laplace} will be non-zero and we arrive at Poisson's equation:
+\begin{flalign}
+    \nabla \cdot \nabla u = -f(x).
+    \label{eqn:poisson}
+\end{flalign}
+Note that the negative on the right-hand side comes from the fact that
+$\pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ and $\pd{u}{t} \to 0$.  Technically we are
+absorbing the constant $k$ into $f$ (that is ``$f$'' is really ``$f/k$'').  Also
+note that in many instances the value of $k$ is not constant and cannot therefore be pulled
+out of the derivative without a use of the product rule.
+
+Let's summarize:
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Name of PDE & PDE & What the PDE Models \\ \hline \hline
+        The Heat Equation & $\ds \pd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Diffusion \\
+        Laplace's Equation & $\ds k \nabla \cdot \nabla u =-f(x)$ & Minimal Energy
+        Surfaces \\
+%         The Wave Equation & $\ds \pdd{u}{t} = k \nabla \cdot \nabla u + f(x)$ & Wave
+%         phenomena \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Further discussion of the origins of the wave equation and other interesting PDE's is left
+to the reader.
+
