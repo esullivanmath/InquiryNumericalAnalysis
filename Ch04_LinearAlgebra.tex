@@ -1248,328 +1248,220 @@ error = norm(A - U*S*V')
 
 
 
-
-
-\newpage\section{Low Rank Approximations of Matrices}
+\newpage\section{Multi-Dimensional Newton's Method}\label{sec:mv_newton}
+Now that we know some linear algebra let's return to the Newton's Method root finding
+technique from earlier in the book. This time we will consider root finding problems where
+we are not just solving the equation $f(x) = 0$ as we did Chapter
+\ref{ch:numerical_algebra}.  Instead consider the function $F$ that takes a vector of
+variables in and outputs a vector.  An example of such a function is
+\[ F(x,y) = \begin{pmatrix} x\sin(y) \\ \cos(x) + \sin(y^2)
+\end{pmatrix}. \]
+It should be clear that making a picture of this type of function is a frivolous endeavor!
+In the case of the previous example, there are two inputs and two outputs so the
+``picture'' would have to be four dimensional.  Even so, we can still ask the question:
+\begin{quote}
+    {\it For what values of $x$ and $y$ does the function $F$ give the zero vector?}
+\end{quote}
+That is, what if we have $F$ defined as 
+\[ F(x,y) = \begin{pmatrix} f(x,y) \\ g(x,y) \end{pmatrix} \]
+and want to solve the system of equations
+\begin{flalign*}
+    f(x,y) &= 0 \\ 
+    g(x,y) &= 0. 
+\end{flalign*}
+In the present problem this amounts to solving the nonlinear system of equations
+\begin{flalign*}
+    x\sin(y) &= 0 \\
+    \cos(x) + \sin(y^2) &=0.
+\end{flalign*}
+In this case it should be clear that we are implicitly defining $f(x,y) = x\sin(y)$ and
+$g(x,y) = \cos(x) + \sin(y^2)$.  A moment's reflection (or perhaps some deep meditation)
+should reveal that $(\pm\pi/2,0)$ are two solutions to the system, and given the trig
+functions it stands to reason that $(\pi/2 + \pi k,\pi j)$ will be a solution for all
+integer values of $k$ and $j$.
 
 \begin{problem}
-    One particular use of the SVD is for data reduction.  The word ``reduction'' here
-    really means that we are going to make approximations of data using lower dimensions,
-    and a very visually stunning way to do this is to do data reduction on images.  The following code will read
-    the file \mcode{TestImage.jpg} into MATLAB and convert it to a rectangular matrix of
-    values.  It is up to the reader to supply the necessary image.
-\begin{lstlisting}
-A = imread('TestImage.jpg');
-A = A(:,:,1);
-A = im2double(A);
-imshow(A)
-\end{lstlisting}
-    Once the matrix is in MATLAB do the following.  In this we assume that $A$ is an $m
-    \times n$ matrix.
+To build a numerical solver for a nonlinear system of equations, let's just recall
+Newton's Method in one dimension and then mimic that for systems of higher dimensions.
+We'll stick to two dimensions in this problem for relative simplicity.
+\begin{enumerate}
+    \item[(a)] In Newton's Method we first found the derivative of our function.  In a
+        nonlinear system such as this one, talking about ``the derivative'' is a bit
+        nonsense since there are many first derivatives.  Instead we will define the
+        Jacobian matrix $J(x,y)$ as a matrix of the first partial derivatives of the
+        functions $f$ and $g$.
+        \[ J(x,y) = \begin{pmatrix} f_x & f_y \\ g_x & g_y \end{pmatrix}. \]
+        In the present example (fill in the rest of the blanks),
+        \[ J(x,y) = \begin{pmatrix} \sin(y) &
+                \underline{\hspace{0.5in}} \\  \underline{\hspace{0.5in}} &
+            \underline{\hspace{0.5in}} \end{pmatrix}. \]
+    \item[(b)] Now let's do some Calculus and algebra.  Your job in this part of this
+        problem is to follow all of the algebraic steps.
+        \begin{enumerate}
+            \item[(i)] In one-dimensional Newton's Method we then write the equation of a tangent
+        line at a point $(x_0, f(x_0))$
+        \[ f(x) - f(x_0) \approx f'(x_0)(x-x_0) \]
+        to give a local approximation to the function.  
+        We'll do the exact same thing here, but in place of ``$x$'' we need to have a
+        vector and in place of the derivative we need to have the Jacobian
+        \[ F(x,y) - F(x_0,y_0) \approx J(x_0, y_0) \left( \begin{pmatrix} x \\ y
+        \end{pmatrix} - \begin{pmatrix} x_0 \\ y_0 \end{pmatrix} \right). \]
+%         Write this equation in vector form for the functions $f(x,y) = x\sin(y)$ and
+%         $g(x,y) = \cos(x) + \sin(y^2)$.
+    \item[(ii)] In one-dimensional Newton's Method we then set $f(x)$ to zero since we were
+        ultimately trying to solve the equation $f(x) = 0$.  Hence we got the equation 
+        \[ 0 - f(x_0) \approx f'(x_0)(x-x_0) \]
+        and then rearranged to solve for $x$.  This gave us 
+        \[ x \approx x_0 - \frac{f(x_0)}{f'(x_0)}. \]
+        In the multi-dimensional case we have the same goal.  If we set $F(x,y)$ to the
+        zero vector and solve for the vector $\begin{pmatrix}x\\y\end{pmatrix}$ then we
+        get
+        \[ \begin{pmatrix} x\\y\end{pmatrix} \approx \begin{pmatrix}
+                x_0 \\ y_0 \end{pmatrix} -
+            \left[ J(x_0,y_0) \right]^{-1} F(x_0,y_0). \]
+        Take very careful note here that we didn't divide by the Jacobian \ldots it is a
+        matrix after all!!
+        \item[(iii)] The final step in one-dimensional Newton's Method was to turn the
+            approximation of $x$ into an iterative process by replacing $x$ with $x_{n+1}$ and
+            replacing $x_0$ with $x_{n}$ resulting in the iterative form of Newton's
+            Method
+            \[ x_{n+1} = x_{n} - \frac{f(x_n)}{f'(x_n)}. \]
+            We can do the exact same thing in the two-dimensional version of Newton's
+            Method to arrive at 
+            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
+            x_n \\ y_n \end{pmatrix} - J^{-1}(x_n,y_n) F(x_n, y_n).} \]
+        Writing this in full matrix-vector form we get
+            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
+                x_n \\ y_n \end{pmatrix} - \begin{pmatrix} f_x & f_y \\ g_x & g_y
+        \end{pmatrix}^{-1} \begin{pmatrix} f(x_n,y_n) \\ g(x_n,y_n) \end{pmatrix}.} \]
+\end{enumerate}
+\item[(c)] Write down the Newton iteration formula for the system
+    \begin{flalign*}
+        x\sin(y) &= 0 \\
+        \cos(x) + \sin(y^2) &= 0.
+    \end{flalign*}
+    Do not actually compute the matrix inverse of the Jacobian.
+\item[(d)] The inverse of the Jacobian needs to be dealt with carefully.  We typically
+    don't calculate inverses directly in numerical analysis, but since we have some other
+    tools to do the work we can think of it as follows:
+    \begin{itemize}
+        \item We need the vector $\bb = J^{-1}(x_n,y_n) F(x_n,y_n)$.
+        \item The vector $\bb$ is the same as the solution to the equation $J(x_n,y_n) \bb
+            = F(x_n,y_n)$ at each iteration of Newton's Method.
+        \item Therefore we can so a relatively fast linear solve (using any technique from
+            this chapter) to find $\bb$.
+        \item The Newton iteration becomes 
+            \[ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix} x_n \\
+                y_n \end{pmatrix} - \bb. \]
+    \end{itemize}
+    Write code to solve the present nonlinear system of equations.  Implement some sort of
+    linear solver within your code and be able to defend your technique.  Be prepared to
+    share your answer and your technique with your peers.  Try to pick a starting point so
+    that you find the solution $(\pi/2,\pi)$ on your first attempt at solving this
+    problem.  Then play with the starting point to verify that you can get the other
+    solutions.
+\end{enumerate}
+\end{problem}
+
+
+
+\begin{problem}
+    Test your code from the previous problem on the system of nonlinear equations
+    \begin{flalign*}
+        1+x^2 - y^2 + e^x\cos(y) &= 0 \\
+        2xy + e^x\sin(y) &=0.
+    \end{flalign*}
+    Note here that $f(x,y) = 1+x^2 - y^2 + e^x\cos(y)$ and $g(x,y) = 2xy + e^x \sin(y)$.
+\end{problem}
+
+
+
+\begin{problem}\label{prob:mv_newton}
+    Let's generalize the process a bit so we can numerically approximate solutions to systems of nonlinear algebraic
+    equations in any number of dimensions.
+    The Newton's method that we derived in Chapter \ref{ch:numerical_algebra} is only
+    applicable to functions $f: \mathbb{R} \to \mathbb{R}$ (functions mapping a real
+    number to a real number).   In the previous problem we build a method for solving the
+    equation $F(x,y) = (0,0)$ where $F: \mathbb{R}^2 \to \mathbb{R}^2$.  What about
+    vector-valued functions in $n$ dimensions?  In particular, we
+    would like to have an analogous method for finding roots of a function $F$ where $F:
+    \mathbb{R}^k \to \mathbb{R}^k$.
+
+    Let $\bx$ be a vector in $\mathbb{R}^k$, let 
+    \[ F(\bx) = \begin{pmatrix} f_1(\bx) \\ f_2(\bx) \\ \vdots \\ f_k(\bx) \end{pmatrix} \]
+    be a vector valued function, and let $J$ be the Jacobian matrix
+    \[ J(\bx) = 
+        \begin{pmatrix} \partial f_1 / \partial x_1(\bx) & \partial f_1 / \partial
+            x_2(\bx) & \cdots
+            & \partial f_1 / \partial x_k(\bx) \\ 
+         \partial f_2 / \partial x_1(\bx) & \partial f_2 / \partial x_2(\bx) & \cdots &
+         \partial f_2 / \partial x_k(\bx) \\ 
+         \vdots & \vdots & \ddots & \vdots \\
+         \partial f_k / \partial x_1(\bx) & \partial f_k / \partial x_2(\bx) & \cdots & \partial f_k /
+     \partial x_k(\bx) \end{pmatrix} \]
+    By analogy, the multi-dimensional Newton's method is
+    \[ \bx_{n+1} = \bx_n -  J^{-1}(\bx_n)F(\bx_n) \]
+    where $J^{-1}(\bx_n)$ is the inverse of the Jacobian matrix evaluated at the point
+    $\bx_n$.
     \begin{enumerate}
-        \item Find the SVD of the image (remember the semicolons!!!!!!).  This will take
-            over a minute with our code so be patient.  Once it is done check that your
-            SVD code does a decent approximation of the original image.
-\begin{lstlisting}
-[U,S,V] = MySVD(A);
-error = norm(A - U*S*V')
-\end{lstlisting}
-        \item Get the singular values out of $\Sigma$ and find the largest $P$\% of the
-            singular values. Let's say that this is $N$ values.  Create four new matrices
-            $U_{new}$, $\Sigma_{new}$, $V_{new}$, and $A_{new}$ in the following way.
-            \begin{enumerate}
-                \item $U_{new}$ is $m \times N$ and contains only the first $N$ columns of
-                    $U$.
-                \item $\Sigma_{new}$ is $N \times N$ and contains only the top $P$\% of
-                    the singular values of $A$.
-                \item $V_{new}$ is $n \times N$ and contains the first $N$ columns of $V$.
-                \item $A_{new}$ is $m \times n$ and is formed by $U_{new} \Sigma_{new}
-                    V_{new}^T$.  
-            \end{enumerate}
-        \item Show the newly data-reduced image with \\
-            \mcode{imshow(Anew)}
-        \item The rank of the new image is equal to the number of singular values that you
-            kept in step 2.  
-        \item Experiment with several low rank approximations of an image starting with
-            rank 1 and progress up to larger and larger ranks matrices.  You'll find that
-            the rank necessary to recover the full image is much lower than than the full
-            original rank.
+        \item[(a)] Write MATLAB code that accepts any number of functions and an initial
+            vector guess and returns an approximation to the root for the problem $F(\bx) = \bo$.
+        \item[(c)] Use Newton's method to find an approximate solution to the system of
+            equations
+            \begin{flalign*}
+                x^2 + y^2 + z^2 &= 100 \\
+                xyz &= 1 \\
+                x - y - \sin(z) &= 0
+            \end{flalign*}
     \end{enumerate}
 \end{problem}
+\hint{
+    If you want to evaluate the matrix-vector multiplication $J^{-1}(\bx_n) F(\bx_n)$ then
+    you are really looking for the solution $\bu$ to the system of equations $J(\bx_n) \bu =
+    F(\bx_n)$ and you can use MATLAB's backslash command to get it quickly. 
 
+    For part (c) be sure to first make the right-hand side zero.
+}
 
-\newpage\section{The Google Page Rank Algorithm}
-In this section you will discover how the PageRank algorithm works to give the most relevant
-information as the top hit on a Google search.  
+\begin{technique}[Multi-Dimensional Newton's Method]
+    The iteration for Newton's Method in multiple dimensions is
+    \[ \bx_{n+1} = \bx_n - J^{-1}(\bx_n) F(\bx_n) \]
+    where $\bx_n \in \mathbb{R}^k$, $J$ is the $k$-dimensional Jacobian matrix, and
+    $F:\mathbb{R}^k \to \mathbb{R}^k$.  Take note that numerically you do not want to
+    directly compute the inverse of the Jacobian.  Instead you solve the sub-problem
+    \[ J(\bx_n) \bb = F(\bx_n) \]
+    for the vector $\bb$ using any technique from linear algebra (e.g. an LU or QR
+    decomposition) and iterate the equation
+    \[ \bx_{n+1} = \bx_n - \bb. \]
+\end{technique}
 
-Search engines compile large indexes of the dynamic information on the Internet so they
-are easily searched.  This means that when you do a Google search, you are not actually
-searching the Internet; instead, you are searching the indexes at Google.
-
-When you type a query into Google the following two steps take place:
-\begin{enumerate}
-    \item Query Module: The query module at Google converts your natural language into a
-        language that the search system can understand and consults the various indexes
-        at Google in order to answer the query.  This is done to find the list of relevant
-        pages.
-    \item Ranking Module: The ranking module takes the set of relevant pages and ranks
-        them. The outcome of the ranking is an ordered list of web pages such
-        that the pages near the top of the list are most likely to be what you desire from
-        your search. This ranking is the same as assigning a {\it popularity score} to
-        each web site and then listing the relevant sites by this score.  
-\end{enumerate}
-
-This section focuses on the Linear Algebra behind the Ranking Module developed by the
-founders of Google: Sergey Brin and Larry Page.  Their algorithm is called the
-\emph{PageRank algorithm}, and you use it every single time you use Google's search
-engine.
-
-
-In simple terms: {\it A webpage is important if it is pointed to by other important
-pages}.
-
-The Internet can be viewed as a directed graph (look up this term
-\href{https://en.wikipedia.org/wiki/Directed_graph}{here on Wikipedia}) where the nodes
-are the web pages and the edges are the hyperlinks between the pages. The hyperlinks into a
-page are called {\it inlinks}, and the ones pointing out of a page are called {\it
-outlinks}.  In essence, a hyperlink from my page to yours is my endorsement of your page.
-Thus, a page with more recommendations must be more important than a page with a few
-links.  However, the status of the recommendation is also important. 
-
-Let us now translate this into mathematics. To help understand
-this we first consider the small web of six pages shown in Figure
-\ref{fig:example_graph} (a graph of the router level of the internet can be found
-\href{https://personalpages.manchester.ac.uk/staff/m.dodge/cybergeography/atlas/lumeta_large.jpg}{here}).  The links between the
-pages are shown by arrows. An arrow pointing into a node is an {\it inlink}
-and an arrow pointing out of a node is an {\it outlink}. In Figure
-\ref{fig:example_graph}, node 3 has three outlinks (to nodes 1, 2, and 5)
-and 1 inlink (from node 1).
-
-\begin{figure}[ht]
-    \begin{center}
-        \begin{tikzpicture}
-            \draw (0,0) node[circle,draw]{3};
-            \draw (-1,1) node[circle,draw]{1};
-            \draw (1,1) node[circle,draw]{2};
-            \draw (-1,-1) node[circle,draw]{6};
-            \draw (1,-1) node[circle,draw]{5};
-            \draw (0,-2) node[circle,draw]{4};
-        %
-            \draw[<->] (-0.25,0.25) -- (-0.75,0.75);
-            \draw[->] (-0.65,1) -- (0.65,1);
-            \draw[->] (0.25,0.25) -- (0.75,0.75);
-            \draw[->] (0.25,-0.25) -- (0.75,-0.75);
-            \draw[->] (0.65,-1) -- (-0.65,-1);
-            \draw[<->] (-0.75,-1.25) -- (-.25,-1.75);
-            \draw[<->] (0.75,-1.25) -- (0.25,-1.75);
-        \end{tikzpicture}
-    \end{center}
-        \caption{Sample graph of a web with six pages.}
-        \label{fig:example_graph}
-\end{figure}
-
-We will first define some notation in the PageRank algorithm:
-\begin{itemize}
-    \item $|P_i|$ is the number of outlinks from page $P_i$
-    \item $H$ is the {\it hyperlink} matrix defined as 
-        \[ H_{ij} = \left\{ \begin{array}{cl} \frac{1}{|P_j|}, & \text{if there is a link
-            from node $j$ to node $i$} \\ 0, & \text{otherwise} \end{array} \right. \]
-        where the ``$i$'' and ``$j$'' are the row and column indices respectively.  
-    \item $\bx$ is a vector that contains all of the PageRanks for the individual pages.
-\end{itemize}
-
-The PageRank algorithm works as follows:
-\begin{enumerate}
-    \item Initialize the page ranks to all be equal. This means that our initial
-        assumption is that all pages are of equal rank.  In the case of Figure
-        \ref{fig:example_graph} we would take $\bx_0$ to be 
-        \[ \bx_0 = \begin{pmatrix} 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \end{pmatrix}. \]
-    \item Build the hyperlink matrix.  \\ As an example we'll consider node 3 in Figure
-        \ref{fig:example_graph}.  There are three outlinks from node 3 (to nodes 1, 2, and
-        5).  Hence $H_{13}=1/3$, $H_{23} = 1/3$, and $H_{53} = 1/3$ and the partially
-        complete hyperlink matrix is
-        \[ H = \begin{pmatrix} 
-                - & - & 1/3 & - & - & - \\
-                - & - & 1/3 & - & - & - \\
-                - & - & 0   & - & - & - \\
-                - & - & 0   & - & - & - \\
-                - & - & 1/3 & - & - & - \\
-                - & - & 0   & - & - & - 
-            \end{pmatrix} \]
-    \item The difference equation $\bx_{n+1} = H \bx_n$ is used to iteratively refine the
-        estimates of the page ranks.  You can view the iterations as a person visiting a
-        page and then following a link at random, then following a random link on the next
-        page, and the next, and the next, etc.  Hence we see
-        that the iterations evolve exactly as expected for a difference equation.
-        \begin{center}
-            \begin{tabular}{|c|c|}
-                \hline
-                Iteration & New Page Rank Estimation \\ \hline \hline
-                0 & $\bx_0$ \\
-                1 & $\bx_1 = H \bx_0$ \\
-                2 & $\bx_2 = H \bx_1 = H^2 \bx_0$ \\
-                3 & $\bx_3 = H \bx_2 = H^3 \bx_0$ \\
-                4 & $\bx_4 = H \bx_3 = H^4 \bx_0$ \\
-                \vdots & \qquad \vdots \\
-                $k$ & $\bx_k = H^k \bx_0$ \\ \hline
-            \end{tabular}
-        \end{center}
-    \item When a steady state is reached we sort the resulting vector $\bx_k$ to give the
-        page rank. The node (web page) with the highest rank will be the top search
-        result, the second highest rank will be the second search result, and so on.
-\end{enumerate}
-
-It doesn't take much to see that this process can be very time consuming.  Think about
-your typical web search with hundreds of thousands of hits; that makes a square matrix $H$
-that has a size of hundreds of thousands of entries by hundreds of thousands of entries!
-The matrix multiplications alone would take many minutes (or possibly many hours) for
-every search! \dots but Brin and Page were pretty smart dudes!!
-
-
-We now state a few theorems and definitions that will help us simplify the iterative
-PageRank process.
-\begin{thm}\label{thm:eigen_expand}
-    If $A$ is an $n \times n$ matrix with $n$ linearly independent eigenvectors $\bv_1,
-    \bv_2, \bv_3,$ $\ldots, \bv_n$ and associated eigenvalues $\lambda_1, \lambda_2,
-    \lambda_3, \ldots, \lambda_n$ then for any initial vector $\bx \in \mathbb{R}^n$ we
-    can write $A^k \bx$ as
-    \[ A^k \bx = c_1 \lambda_1^k \bv_1 + c_2 \lambda_2^k \bv_2 + c_3 \lambda_3^k \bv_3 +
-        \cdots c_n \lambda_n^k \bv_n \]
-    where $c_1, c_2, c_3, \ldots, c_n$ are the constants found by expressing $\bx$ as a
-    linear combination of the eigenvectors. \\Note: We can assume that the eigenvalues are ordered
-    such that $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge \cdots \ge \lambda_n$.
-\end{thm}
-\begin{proof}
-    (Prove the preceding theorem)
-\end{proof}
-
-\begin{definition}
-    A {\bf probability vector} is a vector with entries on the interval $[0,1]$ that add up to 1. 
-\end{definition}
-\begin{definition}
-    A {\bf stochastic matrix} is a square matrix whose columns are probability vectors.
-\end{definition}
-
-\begin{thm} \label{thm:largest_ev_stochastic}
-    If $A$ is a stochastic $n \times n$ matrix then $A$ will have $n$ linearly independent
-    eigenvectors.  Furthermore, the largest eigenvalue of a stochastic matrix will
-    \underline{always} be $\lambda_1 = 1$ and the smallest eigenvalue  will always be
-    nonnegative: $0 \le \lambda_n < 1$.
-\end{thm}
-
-Some of the following tasks will ask you to {\it prove} a statement or a theorem.  This
-means to clearly write all of the logical and mathematical reasons why the statement is
-true. Your proof should be absolutely crystal clear to anyone with a similar mathematical
-background \dots if you are in doubt then have a peer from a different group read your
-proof to you \underline{out loud}.
 
 \begin{problem}
-    Finish writing the hyperlink matrix $H$ from Figure \ref{fig:example_graph}.
+    When will the multi-dimensional version of Newton's Method fail?  Compare and contrast
+    this with what you found about the one-dimensional version of Newton's Method in
+    Chapter \ref{ch:numerical_algebra}.  Extend your discussion to talk about the
+    eigenvalues of the Jacobian matrix for a nonlinear system.
 \end{problem}
 
+One place that solving nonlinear systems arises naturally is when we need to find
+equilibrium points for systems of differential equations.  Remember that to find the
+equilibrium points for a first order differential equation we set the derivative term to
+zero and solve the resulting equation.  
 \begin{problem}
-    Write MATLAB code to implement the iterative process defined previously. Make a plot
-    that shows how the rank evolves over the iterations.
-\end{problem}
-
-
-\begin{problem}
-    What must be true about a collection of $n$ pages such that an $n\times n$
-        hyperlink matrix $H$ is a stochastic matrix.
-\end{problem}
-
-The statement of the next theorem is incomplete, but the proof is given to you.  Fill in
-the blank in the statement of the theorem and provide a few sentences supporting your
-answer.
-\begin{thm}\label{thm:steady}
-    If $A$ is an $n \times n$ stochastic matrix and $\bx_0$ is some initial vector
-    for the difference equation $\bx_{n+1} = A \bx_n$, then the steady state
-    vector is
-    \[ \bx_{equilib} = \lim_{k \to\infty} A^k \bx_0 = \underline{\hspace{1in}}. \]
-\end{thm}
-\begin{proof}
-    First note that $A$ is an $n \times n$ stochastic matrix so from Theorem
-    \ref{thm:largest_ev_stochastic} we know that there are $n$ linearly
-    independent eigenvectors.  We can then substitute
-    the eigenvalues from Theorem \ref{thm:largest_ev_stochastic} in Theorem
-    \ref{thm:eigen_expand}. Noting that if $0<\lambda_j<1$ we have $\lim_{k \to
-    \infty} \lambda_j^k = 0$ the result follows immediately.
-\end{proof}
-\begin{problem}
-    Discuss how Theorem \ref{thm:steady} greatly simplifies the PageRank iterative process
-    described previously.  In other words: there is no reason to iterate at all.  Instead,
-    just find \underline{\hspace{1in}}.
-\end{problem}
-\begin{problem}
-\item Now use the previous two problems to find the resulting PageRank vector from the web in Figure
-    \ref{fig:example_graph}?  Be sure to rank the pages in order of importance.
-    Compare your answer to the one that you got in problem 2.
-\end{problem}
-
-
-\begin{problem}
-    Consider the web in Figure \ref{fig:graph2}.
-        \begin{enumerate}
-            \item[(a)] Write the $H$ matrix and find the initial state $\bx_0$, 
-            \item[(b)] Find
-                steady state PageRank vector using the two different methods described:
-                one using the iterative difference equation and the other using Theorem
-                \ref{thm:steady} and the dominant eigenvector.
-            \item[(c)] Rank the pages in order of importance.
-        \end{enumerate}
-\end{problem}
-\begin{figure}[ht!]
-    \begin{center}
-        \begin{tikzpicture}
-            \draw (0,0) node[circle,draw]{3};
-            \draw (-1,1) node[circle,draw]{1};
-            \draw (1,1) node[circle,draw]{2};
-            \draw (-1,-1) node[circle,draw]{6};
-            \draw (1,-1) node[circle,draw]{5};
-            \draw (0,-2) node[circle,draw]{4};
-            \draw (-2,0) node[circle,draw]{7};
-            \draw (-2,-2) node[circle,draw]{8};
-        %
-            \draw[<-] (-0.25,0.25) -- (-0.75,0.75);
-            \draw[->] (-0.65,1) -- (0.65,1);
-            \draw[<->] (0.25,0.25) -- (0.75,0.75);
-            \draw[<->] (0.25,-0.25) -- (0.75,-0.75);
-            \draw[->] (0.65,-1) -- (-0.65,-1);
-            \draw[<->] (-0.75,-1.25) -- (-.25,-1.75);
-            \draw[<->] (0.75,-1.25) -- (0.25,-1.75);
-            \draw[<->] (-1.75,0.25) -- (-1.25,0.75);
-            \draw[<->] (-1.65,0) -- (-0.35,0);
-            \draw[<-] (-1.75,-0.25) -- (0.7,-0.8);
-            \draw[->] (-2,-0.35) -- (-2,-1.65);
-            \draw[<->] (-1.65,-2) -- (-0.35,-2);
-        \end{tikzpicture}
-    \end{center}
-    \caption{Graph of a web with eight pages.}
-    \label{fig:graph2}
-\end{figure}
-
-
-\begin{problem}
-    One thing that we didn't consider in this version of the Google Page Rank algorithm is
-    the random behavior of humans.  One, admittedly slightly naive, modification that we
-    can make to the present algorithm is to assume that the person surfing the web will
-    randomly jump to any other page in the web at any time.  For example, if someone is on
-    page 1 in Figure \ref{fig:graph2} then they could randomly jump to any page 2 - 8.
-    They also have links to pages 2, 3, and 7.  That is a total of 10 possible next steps
-    for the web surfer.  There is a $2/10$ chance of heading to page 2.  One of those is
-    following the link from page 1 to page 2 and the other is a random jump to page 2
-    without following the link.  Similarly, there is a $2/10$ chance of
-    heading to page 3, $2/10$ chance of heading to page 7, and a $1/10$ chance of randomly
-    heading to any other page.
-
-    Implement this new algorithm, called the {\it random surfer algorithm}, on the web in
-    Figure \ref{fig:graph2}.  Compare your ranking to the non-random surfer results from
-    the previous problem.
+    Find the equilibrium point(s) for the system of differential equations 
+    \begin{flalign*}
+        x' &= \alpha x - \beta xy \\
+        y' &= \delta y + \gamma xy
+    \end{flalign*}
+    where $\alpha = 1, \beta = 0.05, \gamma = 0.01$ and $\delta =1$.  You will play more
+    with this differential equation system later.
 \end{problem}
 
 
 
-% \section{Principal Component Analysis (Incomplete)}
+
+
+
 
 \newpage\section{Exercises}
 
@@ -1841,3 +1733,36 @@ A = A'*A; % this will be a random symmetric NxN matrix.
     choice of $k$).  It would be cool to check what this does to the efficiency of your
     algorithm.
 }
+
+
+
+\begin{problem}
+    Find the equilibrium point(s) for the system of differential equations
+    \begin{flalign*}
+        x' &= -0.1 xy - x \\
+        y' &= -x + 0.9y \\
+        z' &= \cos(y) - xz
+    \end{flalign*}
+    if they exist.
+\end{problem}
+
+
+
+\begin{problem}\label{prob:lawn_chair}
+    (This problem is modified from \cite{Meerschaert}) \\
+    A manufacturer of lawn furniture makes two types of lawn chairs, one with a wood
+    frame and one with a tubular aluminum frame.  The wood-frame model costs \
+    418 per unit to manufacture, and the aluminum-frame model costs \$10 per unit.  The
+    company operates in a market where the number of units that can be sold depends on the
+    price.  It is estimated that in order to sell $x$ units per day of the wood-frame
+    model and $y$ units per day of the aluminum-frame model, the selling price cannot
+    exceed 
+    \[ 10 + \frac{31}{\sqrt{x}} + \frac{1.3}{y^{0.2}} \text{ dollars per unit} \]
+    for wood-frame chairs, and 
+    \[ 5 + \frac{15}{y^{0.4}} + \frac{0.8}{x^{0.08}} \text{ dollars per unit} \]
+    for the aluminum chairs.  We want to find the optimal production levels.  Write this
+    situation as a multi-variable mathematical model, use a computer
+    algebra system (or by-hand computation) to find the gradient vector, and then use the
+    multi-variable Newton's method to find the critical points.  Classify the critical
+    points as either local maximums or local minimums.
+\end{problem}

@@ -16,28 +16,28 @@
 \BOOKMARK [1][-]{section.2.3}{The Regula Falsi Method}{chapter.2}% 16
 \BOOKMARK [1][-]{section.2.4}{Newton's Method}{chapter.2}% 17
 \BOOKMARK [1][-]{section.2.5}{Quasi-Newton Methods}{chapter.2}% 18
-\BOOKMARK [1][-]{section.2.6}{Numerical Curve Fitting}{chapter.2}% 19
-\BOOKMARK [1][-]{section.2.7}{Exercises}{chapter.2}% 20
-\BOOKMARK [0][-]{chapter.3}{Numerical Calculus}{}% 21
-\BOOKMARK [1][-]{section.3.1}{Numerical Differentiation}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.2}{Numerical Integration}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.3}{Exercises}{chapter.3}% 24
-\BOOKMARK [0][-]{chapter.4}{Numerical Linear Algebra}{}% 25
-\BOOKMARK [1][-]{section.4.1}{Matrix Operations}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.2}{Solving Systems of Linear Equations}{chapter.4}% 27
-\BOOKMARK [2][-]{subsection.4.2.1}{Upper and Lower Triangular Systems}{section.4.2}% 28
-\BOOKMARK [2][-]{subsection.4.2.2}{The LU Factorization}{section.4.2}% 29
-\BOOKMARK [1][-]{section.4.3}{The Least Squares Problems}{chapter.4}% 30
-\BOOKMARK [1][-]{section.4.4}{The QR Factorization}{chapter.4}% 31
-\BOOKMARK [1][-]{section.4.5}{Interpolation}{chapter.4}% 32
-\BOOKMARK [2][-]{subsection.4.5.1}{Vandemonde Interpolation}{section.4.5}% 33
-\BOOKMARK [2][-]{subsection.4.5.2}{Lagrange Interpolation}{section.4.5}% 34
-\BOOKMARK [2][-]{subsection.4.5.3}{Interpolation at Chebyshev Points}{section.4.5}% 35
-\BOOKMARK [1][-]{section.4.6}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.7}{The Singular Value Decomposition}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.8}{Low Rank Approximations of Matrices}{chapter.4}% 38
-\BOOKMARK [1][-]{section.4.9}{The Google Page Rank Algorithm}{chapter.4}% 39
-\BOOKMARK [1][-]{section.4.10}{Exercises}{chapter.4}% 40
+\BOOKMARK [1][-]{section.2.6}{Exercises}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{Numerical Calculus}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Numerical Differentiation}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{Numerical Integration}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Numerical Optimization}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Numerical Curve Fitting}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{Exercises}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Numerical Linear Algebra}{}% 26
+\BOOKMARK [1][-]{section.4.1}{Matrix Operations}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Solving Systems of Linear Equations}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.2.1}{Upper and Lower Triangular Systems}{section.4.2}% 29
+\BOOKMARK [2][-]{subsection.4.2.2}{The LU Factorization}{section.4.2}% 30
+\BOOKMARK [1][-]{section.4.3}{The Least Squares Problems}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.4}{The QR Factorization}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.5}{Interpolation}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.5.1}{Vandemonde Interpolation}{section.4.5}% 34
+\BOOKMARK [2][-]{subsection.4.5.2}{Lagrange Interpolation}{section.4.5}% 35
+\BOOKMARK [2][-]{subsection.4.5.3}{Interpolation at Chebyshev Points}{section.4.5}% 36
+\BOOKMARK [1][-]{section.4.6}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.7}{The Singular Value Decomposition}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.8}{Multi-Dimensional Newton's Method}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.9}{Exercises}{chapter.4}% 40
 \BOOKMARK [0][-]{chapter.5}{Numerical Ordinary Differential Equations}{}% 41
 \BOOKMARK [1][-]{section.5.1}{Euler, Runge-Kutta, and Friends}{chapter.5}% 42
 \BOOKMARK [1][-]{section.5.2}{Implicit Methods and Shooting Methods}{chapter.5}% 43
@@ -90,5 +90,9 @@
 \BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 90
 \BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 91
 \BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 92
-\BOOKMARK [0][-]{appendix.D}{Building PDE's From Conservation Laws}{}% 93
-\BOOKMARK [0][-]{equation.D.0.15}{Bibliography}{}% 94
+\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 93
+\BOOKMARK [1][-]{section.D.1}{Low Rank Approximations of Matrices}{appendix.D}% 94
+\BOOKMARK [1][-]{section.D.2}{The Google Page Rank Algorithm}{appendix.D}% 95
+\BOOKMARK [1][-]{section.D.3}{Principal Component Analysis \(Incomplete\)}{appendix.D}% 96
+\BOOKMARK [1][-]{section.D.4}{Building PDE's From Conservation Laws}{appendix.D}% 97
+\BOOKMARK [0][-]{equation.D.4.15}{Bibliography}{}% 98

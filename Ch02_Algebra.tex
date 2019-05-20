@@ -1,4 +1,4 @@
-\chapter{Numerical Algebra}
+\chapter{Numerical Algebra}\label{ch:numerical_algebra}
 Let's play a game!
 \begin{problem}\label{prob:bisection_game}
     Find a partner in the room to play a two-person game.  Choose someone to go first and
@@ -587,63 +587,6 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 
 
-\newpage\section{Numerical Curve Fitting}
-In this section we'll change our focus a bit to look at a different question from algebra.
-Instead of finding the roots of an algebraic equation, what if we have a few data points
-and a reasonable guess for the type of function fitting the points, how would we determine
-the actual function?  
-
-\begin{problem}
-    Consider the function $f(x)$ that goes exactly through the points $(0,1)$, $(1,4)$,
-    and $(2,13)$.  
-    \begin{enumerate}
-        \item[(a)] Find a function that goes through these points exactly.  Be able to
-            defend your work.
-        \item[(b)] Is your function unique?  That is to say, is there another function out
-            there that also goes exactly through these points?  
-    \end{enumerate}
-\end{problem}
-
-\begin{problem}
-    Now let's make a minor tweak to the previous problem.  Let's say that we have the data
-    points $(0,1.07)$, $(1,3.9)$, $(2,14.8)$, and $(3,26.8)$.  Notice that these points
-    are {\it close} to the points we had in the previous problem, but all of the $y$
-    values have a little noise in them and we have added a fourth point.  If we suspect
-    that a function $f(x)$ that {\it best} fits this data is quadratic then $f(t) = ax^2 +
-    bx + c$ for some constants $a$, $b$, and $c$.  
-    \begin{enumerate}
-        \item[(a)] Plot the four points along with the function $f(t)$ for arbitrarily
-            chosen values of $a$, $b$, and $c$.  
-        \item[(b)] Work with your partner(s) to systematically change $a$, $b$, and $c$ so
-            that you get a good visual match to the data.  
-        \item[(c)] Now let's be a bit more systematic about things.  Let's say that you
-            have a pretty good guess that $b \approx 2$ and $c \approx 0.7$.  We need to
-            get a good estimate for $a$.
-            \begin{enumerate}
-                \item[(i)] Pick an arbitrary starting value for $a$.  For each
-                    of the four points find the error between the predicted $y$ value and
-                    the actual $y$ value.
-                \item[(ii)] Square all four of your errors and add them up.  (Stop and
-                    think: why are we squaring the errors before we sum them \ldots have a
-                    discussion here)
-                \item[(iii)] Now change your value of $a$ to several different values and
-                    record the sum of the square errors for each of your values of $a$. It
-                    may be worth while to use a spreadsheet to keep track of your work
-                    here.
-                \item[(iv)] Make a plot with the value of $a$ on the horizontal axis and
-                    the value of the sum of the square errors on the vertical axis.  Use
-                    your plot to defend the optimal choice for $a$.
-            \end{enumerate}
-    \end{enumerate}
-\end{problem}
-
-\begin{problem}
-    We're going to revisit part (c) of the previous problem.  Write a loop that tries many
-    values of $a$ in very small increments and calculates the sum of the squared errors.
-    Have your loop stop when you think that it has reached the best value of $a$.
-\end{problem}
-
-
 
 \newpage\section{Exercises}
 
@@ -784,56 +727,6 @@ the actual function?
     Recall that if the derivative of a single variable function is zero then the function
     has a possible local extrema.  In this problem it is likely best to find the first and
     second derivatives on paper before writing any code.
-}
-
-
-\begin{problem}\label{prob:mv_newton}
-    The Newton's method that we derived in this chapter is only applicable to functions
-    $f: \mathbb{R} \to \mathbb{R}$ (functions mapping a real number to a real number).
-    What about vector-valued functions?  In particular, we would like to have an analogous
-    method for finding roots of a function $F$ where $F: \mathbb{R}^n \to \mathbb{R}^n$.
-
-    Let $\bx$ be a vector in $\mathbb{R}^n$, let 
-    \[ F(\bx) = \begin{pmatrix} f_1(\bx) \\ f_2(\bx) \\ \vdots \\ f_n(\bx) \end{pmatrix} \]
-    be a vector valued function, and let $J$ be the Jacobian matrix
-    \[ J(\bx) = 
-        \begin{pmatrix} \partial f_1 / \partial x_1(\bx) & \partial f_1 / \partial
-            x_2(\bx) & \cdots
-            & \partial f_1 / \partial x_n(\bx) \\ 
-         \partial f_2 / \partial x_1(\bx) & \partial f_2 / \partial x_2(\bx) & \cdots &
-         \partial f_2 / \partial x_n(\bx) \\ 
-         \vdots & \vdots & \ddots & \vdots \\
-         \partial f_n / \partial x_1(\bx) & \partial f_n / \partial x_2(\bx) & \cdots & \partial f_n /
-     \partial x_n(\bx) \end{pmatrix} \]
-    By analogy, the multi-dimensional Newton's method is
-    \[ \bx_{n+1} = \bx_n -  J^{-1}(\bx_n)F(\bx_n) \]
-    where $J^{-1}(\bx_n)$ is the inverse of the Jacobian matrix evaluated at the point
-    $\bx_n$.
-    \begin{enumerate}
-        \item[(a)] Write MATLAB code that accepts any number of functions and an initial
-            vector guess and returns an approximation to the root for the problem $F(\bx) = \bo$.
-        \item[(b)] Test your code on the system of nonlinear equations
-            \begin{flalign*}
-                1+x^2 - y^2 + e^x\cos(y) &= 0 \\
-                2xy + e^x\sin(y) &=0.
-            \end{flalign*}
-            Note here that $f_1(x,y) = 1+x^2 - y^2 + e^x\cos(y)$ and $f_2(x,y) = 2xy + e^x
-            \sin(y)$.
-        \item[(c)] Use Newton's method to find an approximate solution to the system of
-            equations
-            \begin{flalign*}
-                x^2 + y^2 + z^2 &= 100 \\
-                xyz &= 1 \\
-                x - y - \sin(z) &= 0
-            \end{flalign*}
-    \end{enumerate}
-\end{problem}
-\hint{
-    If you want to evaluate the matrix-vector multiplication $J^{-1}(\bx_n) F(\bx_n)$ then
-    you are really looking for the solution $\bu$ to the system of equations $J(\bx_n) \bu =
-    F(\bx_n)$ and you can use MATLAB's backslash command to get it quickly. 
-
-    For part (c) be sure to first make the right-hand side zero.
 }
 
 

@@ -528,42 +528,173 @@ approximations for integrals and we leave the further research to the curious re
 
 
 
-% \newpage\section{Numerical Optimization}
-% Recall the optimization process from single variable calculus:
-% \begin{itemize}
-%     \item Write a function that models a scenario in one variable,
-%     \item take the first derivative (presuming that the function is differentiable),
-%     \item set the first derivative to zero and solve for the critical point(s), and
-%     \item interpret your answer in the context of the problem.
-% \end{itemize}
-% The part of this whole process that might be impossible, and might therefore require
-% numerical analysis, is the ``set the first derivative to zero and solve'' part.  That is,
-% there is an algebraic step required to get the critical points(s) that might not be
-% possible by hand or even with a computer algebra system.    
-% 
-% \begin{problem}\label{prob:pig_numerical}
-%     (This problem is modified from \cite{Meerschaert}) \\
-%     A pig weighs 200 pounds and gains weight at a rate proportional to its current weight.
-%     Today the growth rate if 5 pounds per day.  The pig costs 45 cents per day to keep due
-%     mostly to the price of food.  The market price for pigs if 65 cents per pound but is
-%     falling at a rate of 1 cent per day.  When should the pig be sold and how much profit
-%     do you make on the pig when you sell it?  Write this situation as a single variable
-%     mathematical model, use a computer algebra system (or by-hand computation) to find the
-%     first derivative, and then use a numerical root finding to find the critical points.
-% \end{problem}
-% 
-% \begin{problem}
-%     (This problem is modified from \cite{Meerschaert}) \\
-%     Reconsider the pig problem \ref{prob:pig_numerical} but now suppose that the weight of
-%     the pig after $t$ days is 
-%     \[ w = \frac{800}{1+3e^{-t/30}} \text{ pounds}. \]
-%     When should the pig be sold and how much profit do you make on the pig when you sell
-%     it?  Write this situation as a single variable mathematical model, use a computer
-%     algebra system (or by-hand computation) to find the first derivative, and then use a
-%     numerical root finding to find the critical points.
-% \end{problem}
-% 
-% In unconstrained multivariable optimization the process for finding optimal solutions is
+\newpage\section{Numerical Optimization}
+You likely recall that one of the major applications of Calculus was to solve optimization
+problems -- find the value of $x$ which makes some function as big or as small as
+possible.  The process itself can sometimes be rather challenging since due to the
+modeling aspect of the problems but all due to the fact that the differentiation might be
+quite cumbersome.  In this section we will revisit those problems from Calculus, but our
+goal will be to build a numerical method for the Calculus step in hopes to avoid the messy
+algebra and differentiation.
+
+\begin{problem}[The Classic Cardboard Box Problem]\label{prob:cardboard}
+    A piece of cardboard measuring 20cm by 20cm is to be cut so that it can be folded into
+    a box without a lid. Find the size of the cut, $x$, that maximizes the volume of the
+    box. 
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[thick, black] (0,0) -- (5,0) -- (5,5) -- (0,5) -- (0,0);
+            \draw[dashed, thick] (1,0) -- (1,1) -- (0,1);
+            \draw[dashed, thick] (4,0) -- (4,1) -- (5,1);
+            \draw[dashed, thick] (4,5) -- (4,4) -- (5,4);
+            \draw[dashed, thick] (0,4) -- (1,4) -- (1,5);
+            \draw[thick, |-|] (0,-0.2) -- (5,-0.2);
+            \draw (2.5,-0.2) node[anchor=north]{$20$cm};
+            \draw[thick, |-|] (-0.2,0) -- (-0.2,5);
+            \draw (-0.2,2.5) node[anchor=east]{$20$cm};
+            \draw (1,0.5) node[anchor=west]{$x$};
+            \draw (4,0.5) node[anchor=east]{$x$};
+            \draw (4,4.5) node[anchor=east]{$x$};
+            \draw (1,4.5) node[anchor=west]{$x$};
+            \draw (0.5,1) node[anchor=south]{$x$};
+            \draw (4.5,1) node[anchor=south]{$x$};
+            \draw (0.5,4) node[anchor=north]{$x$};
+            \draw (4.5,4) node[anchor=north]{$x$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{enumerate}
+        \item[(a)] Write a function for the volume of the box resulting from a cut of size
+            $x$.  What is the domain of your function?
+        \item[(b)] We know that we want to maximize this function so go through the
+            full Calculus exercise to find the maximum:
+            \begin{itemize}
+                \item take the derivative
+                \item set it to zero
+                \item find the critical points
+                \item test the critical points and the boundaries of the domain using the
+                    extreme value theorem to determine the $x$ that gives the maximum.
+            \end{itemize}
+    \end{enumerate}
+\end{problem}
+
+% \subsection{Single Variable Numerical Optimization}
+
+Now we'll propose a few numerical techniques that can approximate the solution to these
+types of problems.
+\begin{algorithm}[Derivative Free Optimization]
+    Let $f(x)$ be the objective function which you are seeking to maximize (or minimize).
+    \begin{itemize}
+        \item Pick a starting point, $x_0$, and find the value of your
+            objective function at this point, $f(x_0)$.
+        \item Pick a small step size (say, $\Delta x \approx 0.01$).
+        \item Calculate the objective function one step to the left and
+            one step to the right from your starting point.  Which ever
+            point is larger (if you're seeking a maximum) is the point
+            that you keep for your next step.
+        \item Iterate (decide on a good stopping rule)
+    \end{itemize}
+\end{algorithm}
+\begin{problem}
+    Write code to implement the 1D derivative free optimization algorithm and use it to solve
+    Problem \ref{prob:cardboard}.  Compare your answer to the analytic solution.
+\end{problem}
+
+\begin{algorithm}[Gradient Ascent/Descent]
+    Let $f(x)$ be the objective function which you are seeking to maximize (or minimize).
+    \begin{itemize}
+        \item Find the derivative of your objective function, $f'(x)$.
+        \item Pick a starting point, $x_0$.
+        \item Pick a small control parameter, $\alpha$, called the ``learning rate''
+        \item Use the iteration $x_{n+1} = x_n + \alpha f'(x_n) $ if you're maximizing.
+            Use the iteration $x_{n+1} = x_n - \alpha f'(x_n)$ if you're minimizing.
+        \item Iterate (decide on a good stopping rule)
+    \end{itemize}
+\end{algorithm}
+\begin{problem}
+    Write code to implement the 1D gradient descent algorithm and use it to solve
+    Problem \ref{prob:cardboard}. Compare your answer to the analytic solution.
+\end{problem}
+
+\begin{algorithm}[Monte Carlo Search]
+    Let $f(x)$ be the objective function which you are seeking to maximize (or minimize).
+    \begin{itemize}
+        \item Pick many (perhaps several thousand!) different $x$ values.
+        \item Find the value of the objective function at every one of
+            these points (Hint: use lists, not loops)
+        \item Keep the $x$ value that has the largest (or smallest if
+            you're minimizing) value of the objective function.
+        \item Iterate many times and compare the function value in each
+            iteration to the previous best function value
+    \end{itemize}
+\end{algorithm}
+\begin{problem}
+    Write code to implement the 1D monte carlo search algorithm and use it to solve
+    Problem \ref{prob:cardboard}. Compare your answer to the analytic solution.
+\end{problem}
+
+\begin{algorithm}[Optimization via Numerical Root Finding]
+    Let $f(x)$ be the objective function which you are seeking to maximize (or minimize).
+    \begin{itemize}
+        \item Find the derivative of your objective function.
+        \item Set the derivative to zero and use a numerical root finding
+            method (such as bisection or Newton) to find the critical
+            point.
+        \item Use the extreme value theorem to determine if the critical point or one of
+            the endpoints is the maximum (or minimum).
+    \end{itemize}
+\end{algorithm}
+\begin{problem}
+    Write code to implement the 1D numerical root finding optimization algorithm and use
+    it to solve Problem \ref{prob:cardboard}. Compare your answer to the analytic solution.
+\end{problem}
+
+
+
+
+
+\begin{problem}
+    In this problem we will compare an contrast the four methods proposed in the previous
+    problem.
+    \begin{enumerate}
+        \item[(a)] What are the advantages to each of the methods proposed?
+        \item[(b)] What are the disadvantages to each of the methods proposed?
+        \item[(c)] Which method, do you suppose, will be faster in general?  Why?
+        \item[(d)] Which method, do you suppose, will be slower in general?  Why?
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    The Gradient Ascent/Descent algorithm is the most geometrically interesting of the
+    four that we have proposed.  The others are pretty brute force algorithms.  What is
+    the Gradient Ascent/Descent algorithm doing geometrically?  Draw a picture and be
+    prepared to explain to your peers.
+\end{problem}
+
+
+\begin{problem}\label{prob:pig_numerical}
+    (This problem is modified from \cite{Meerschaert}) \\
+    A pig weighs 200 pounds and gains weight at a rate proportional to its current weight.
+    Today the growth rate if 5 pounds per day.  The pig costs 45 cents per day to keep due
+    mostly to the price of food.  The market price for pigs if 65 cents per pound but is
+    falling at a rate of 1 cent per day.  When should the pig be sold and how much profit
+    do you make on the pig when you sell it?  Write this situation as a single variable
+    mathematical model and solve the problem analytically (by hand).  Then solve the
+    problem with all four methods outlined thus far in this section.
+\end{problem}
+
+\begin{problem}
+    (This problem is modified from \cite{Meerschaert}) \\
+    Reconsider the pig problem \ref{prob:pig_numerical} but now suppose that the weight of
+    the pig after $t$ days is 
+    \[ w = \frac{800}{1+3e^{-t/30}} \text{ pounds}. \]
+    When should the pig be sold and how much profit do you make on the pig when you sell
+    it?  Write this situation as a single variable mathematical model.  You should notice
+    that the algebra and calculus for solving this problem is no longer really a desirable
+    way to go.  Use an appropriate numerical technique to solve this problem.
+\end{problem}
+
+% \subsection{Multivariable Numerical Optimization}
+% Now let's look at multivariable optimization.  The process for finding optimal solutions is
 % essentially the same as for single variable.
 % \begin{itemize}
 %     \item Write a function that models a scenario in multiple variables,
@@ -573,34 +704,12 @@ approximations for integrals and we leave the further research to the curious re
 % \end{itemize}
 % The trouble with unconstrained multivariable optimization is that finding the critical
 % points is now equivalent to solving a system of nonlinear equations; a task that is likely
-% impossible even with a computer algebra system.  In Problem \ref{prob:mv_newton} we built
-% a multivariable version of Newton's method.  
+% impossible even with a computer algebra system.  (In Section \ref{sec:mv_newton} we will
+% build a multivariable version of Newton's method if you want to look ahead.)
 % 
-% 
-% \begin{problem}\label{prob:lawn_chair}
-%     (This problem is modified from \cite{Meerschaert}) \\
-%     A manufacturer of lawn furniture makes two types of lawn chairs, one with a wood
-%     frame and one with a tubular aluminum frame.  The wood-frame model costs \
-%     418 per unit to manufacture, and the aluminum-frame model costs \$10 per unit.  The
-%     company operates in a market where the number of units that can be sold depends on the
-%     price.  It is estimated that in order to sell $x$ units per day of the wood-frame
-%     model and $y$ units per day of the aluminum-frame model, the selling price cannot
-%     exceed 
-%     \[ 10 + \frac{31}{\sqrt{x}} + \frac{1.3}{y^{0.2}} \text{ dollars per unit} \]
-%     for wood-frame chairs, and 
-%     \[ 5 + \frac{15}{y^{0.4}} + \frac{0.8}{x^{0.08}} \text{ dollars per unit} \]
-%     for the aluminum chairs.  We want to find the optimal production levels.  Write this
-%     situation as a multi-variable mathematical model, use a computer
-%     algebra system (or by-hand computation) to find the gradient vector, and then use the
-%     multi-variable Newton's method outlined in Problem \ref{prob:mv_newton} to find the critical points.
-% \end{problem}
-% 
-% Sometimes Newton's method is still a cumbersome method for solving the system of equations
-% resulting from multivariable optimization.  Another method stems from the fact that the
-% gradient vector will always point in the direction of greatest increase.  If we follow the
-% gradient in this direction from a wisely chosen starting point we should find a local
-% maximum for a function.  Alternatively, if we follow the negative gradient we should find
-% a local minimum for a function.  This technique is called Gradient Descent.  
+% The derivative free, gradient ascent/descent, and monte carlo techniques still have good
+% analogues in higher dimensions.  We just need to be a bit careful since in higher
+% dimensions there is much more room to move.
 % 
 % \begin{algorithm}[Gradient Descent]
 %     We want to solve the problem 
@@ -609,11 +718,11 @@ approximations for integrals and we leave the further research to the curious re
 %         \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
 %         \item We are going to define a difference equation that gives successive guesses
 %             for the optimal value:
-%             \[ \bx_{n+1} = \bx_n - \gamma \nabla f(\bx_n). \]
+%             \[ \bx_{n+1} = \bx_n - \alpha \nabla f(\bx_n). \]
 %             The difference equation says to follow the negative gradient a certain
 %             distance from your present point (why are we doing this).  Note that the value
-%             of $\gamma$ is up to you so experiment with a few values (you should probably
-%             take $\gamma \le 1$ \ldots why?).
+%             of $\alpha$ is up to you so experiment with a few values (you should probably
+%             take $\alpha \le 1$ \ldots why?).
 %         \item Repeat the iterative process in step 2 until two successive points are {\it
 %             close enough} to each other.
 %     \end{enumerate}
@@ -633,8 +742,436 @@ approximations for integrals and we leave the further research to the curious re
 %     optimization challenging.  Impelement your Gradient Descent code on this function to
 %     find the local minimum $(0,0)$.  Start somewhere near $(0,0)$ and show by way of
 %     example that your gradient descent code may not converge to this particular local
-%     minimum.  
+%     minimum. 
 % \end{problem}
+% 
+
+\newpage\section{Numerical Curve Fitting}
+In this section we'll change our focus a bit to look at a different question from algebra.
+Instead of finding the roots of an algebraic equation, what if we have a few data points
+and a reasonable guess for the type of function fitting the points, how would we determine
+the actual function?  
+
+\begin{problem}
+    Consider the function $f(x)$ that goes exactly through the points $(0,1)$, $(1,4)$,
+    and $(2,13)$.  
+    \begin{enumerate}
+        \item[(a)] Find a function that goes through these points exactly.  Be able to
+            defend your work.
+        \item[(b)] Is your function unique?  That is to say, is there another function out
+            there that also goes exactly through these points?  
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Now let's make a minor tweak to the previous problem.  Let's say that we have the data
+    points $(0,1.07)$, $(1,3.9)$, $(2,14.8)$, and $(3,26.8)$.  Notice that these points
+    are {\it close} to the points we had in the previous problem, but all of the $y$
+    values have a little noise in them and we have added a fourth point.  If we suspect
+    that a function $f(x)$ that {\it best} fits this data is quadratic then $f(x) = ax^2 +
+    bx + c$ for some constants $a$, $b$, and $c$.  
+    \begin{enumerate}
+        \item[(a)] Plot the four points along with the function $f(x)$ for arbitrarily
+            chosen values of $a$, $b$, and $c$.  
+        \item[(b)] Work with your partner(s) to systematically change $a$, $b$, and $c$ so
+            that you get a good visual match to the data.  
+        \item[(c)] Now let's be a bit more systematic about things.  Let's say that you
+            have a pretty good guess that $b \approx 2$ and $c \approx 0.7$.  We need to
+            get a good estimate for $a$.
+            \begin{enumerate}
+                \item[(i)] Pick an arbitrary starting value for $a$.  For each
+                    of the four points find the error between the predicted $y$ value and
+                    the actual $y$ value.
+                \item[(ii)] Square all four of your errors and add them up.  (Stop and
+                    think: why are we squaring the errors before we sum them \ldots have a
+                    discussion here)
+                \item[(iii)] Now change your value of $a$ to several different values and
+                    record the sum of the square errors for each of your values of $a$. It
+                    may be worth while to use a spreadsheet to keep track of your work
+                    here.
+                \item[(iv)] Make a plot with the value of $a$ on the horizontal axis and
+                    the value of the sum of the square errors on the vertical axis.  Use
+                    your plot to defend the optimal choice for $a$.
+            \end{enumerate}
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    We're going to revisit part (c) of the previous problem.  Write a loop that tries many
+    values of $a$ in very small increments and calculates the sum of the squared errors.
+    Have your loop stop when you think that it has reached the best value of $a$.
+\end{problem}
+
+
+\begin{technique}[Nonlinear Least Squares Curve Fitting]\label{tech:least_squares}
+    Let 
+    \[ S = \{ (x_1, y_1), \, (x_2, y_2), \, \ldots, \, (x_n, y_n) \} \] 
+    be a set of $n$
+    ordered pairs in $\mathbb{R}^2$.  If we guess that a function $f(x)$ is a best choice
+    to fit the data and if $f(x)$ depends on parameters $a_1, a_2, \ldots$ then 
+    \begin{enumerate}
+        \item Pick initial values for the parameters $a_1, a_2, \ldots$ so that the
+            function $f(x)$ {\it looks like} it is close to the data (this is strictly a
+            visual step \ldots take care that it may take some playing around to guess the
+            initial values of the parameters)
+        \item Calculate the square error between the data point and the prediction from the
+            function $f(x)$
+            \[ \text{error for the point $x_i$: } e_i = \left( y_i - f(x_i) \right)^2. \]
+            Note that squaring the error has the advantages of removing the sign,
+            accentuating errors larger than 1, and decreasing errors that are less than 1.
+        \item As a measure of the total error between the function and the data, sum the
+            squared errors 
+            \[ \text{sum of square errors } = \sum_{i=1}^n \left( y_i - f(x_i) \right)^2.
+            \]
+            (Take note that if there were a continuum of points instead of a discrete set
+            then we would integrate the square errors instead of taking a sum.)
+        \item Change the parameters $a_1, a_2, \ldots$ so as to minimize the sum of the
+            square errors.
+    \end{enumerate}
+\end{technique}
+
+In Technique \ref{tech:least_squares} the last step is a bit vague.  That was purposeful
+since there are many techniques that could be used to minimize the sum of the square
+errors.  In this particular section of this text we'll look at two of them: (1) Solver in
+MS Excel and (2) \texttt{fminsearch} in MATLAB.  Before we get into how those techniques
+work let's look at an example of how the minimization step works graphically.
+
+Let's return to the data set 
+\[ S = \{ (0,1.07), \, (1,3.9), \, (2,14.8), \, (3,26.8)\} \]
+under the assumption that the curve we want to use is quadratic: $f(x) = ax^2 + bx +
+c$.\footnote{Take note that since we have four points then we could find an exact
+    interpolating fit if we used a cubic function instead, but that isn't the point.  In
+    fact, using higher order polynomials has the disadvantage of potentially fitting the
+curve to measurement noise.} In Figure \ref{fig:least_squares_ex} we see the points in red
+along with several guesses for the values of the parameters.  In these figures we are just
+changing one of the parameters while keeping the other two fixed for easier illustration.
+In reality we should note that all three of the parameters need to be changed to achieve
+the desired minimization.  
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, xmin=-0.5, xmax=3.5, ymin=0, ymax=30,
+                domain=-1:3.5, title={Guess: $f(x) = 1x^2 + 2x + 0.7$, Sum of Sq. Error
+                $\approx 160.6$}]
+                \addplot[smooth, very thick, blue, dashed] {1.0*x^2 + 2*x + 0.7};
+                \addplot[only marks, mark=*, red]
+                coordinates{(0,1.07)(1,3.9)(2,14.8)(3,26.8)};
+                \addplot[only marks, mark=*, blue]
+                coordinates{(0,0.07)(1,3.7)(2,8.7)(3,15.7)};
+                \draw[very thick, black] (axis cs:0,1.07) -- (axis cs:0,0.7);
+                \draw[very thick, black] (axis cs:1,3.90) -- (axis cs:1,3.7);
+                \draw[very thick, black] (axis cs:2,14.8) -- (axis cs:2,8.7);
+                \draw[very thick, black] (axis cs:3,26.8) -- (axis cs:3,15.7);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, xmin=-0.5, xmax=3.5, ymin=0, ymax=30,
+                domain=-1:3.5, title={Guess: $f(x) = 1.5x^2 + 2x + 0.7$, Sum of Sq. Error
+                $\approx 60.6$}]
+                \addplot[smooth, very thick, blue, dashed] {1.5*x^2 + 2*x + 0.7};
+                \addplot[only marks, mark=*, red]
+                coordinates{(0,1.07)(1,3.9)(2,14.8)(3,26.8)};
+                \addplot[only marks, mark=*, blue]
+                coordinates{(0,0.07)(1,4.2)(2,10.8)(3,20.2)};
+                \draw[very thick, black] (axis cs:0,1.07) -- (axis cs:0,0.7);
+                \draw[very thick, black] (axis cs:1,3.90) -- (axis cs:1,4.2);
+                \draw[very thick, black] (axis cs:2,14.8) -- (axis cs:2,10.8);
+                \draw[very thick, black] (axis cs:3,26.8) -- (axis cs:3,20.2);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, xmin=-0.5, xmax=3.5, ymin=0, ymax=30,
+                domain=-1:3.5, title={Guess: $f(x) = 2x^2 + 2x + 0.7$, Sum of Sq. Error
+                $\approx 9.6$}]
+                \addplot[smooth, very thick, blue, dashed] {2*x^2 + 2*x + 0.7};
+                \addplot[only marks, mark=*, red]
+                coordinates{(0,1.07)(1,3.9)(2,14.8)(3,26.8)};
+                \addplot[only marks, mark=*, blue]
+                coordinates{(0,0.07)(1,4.7)(2,12.7)(3,24.7)};
+                \draw[very thick, black] (axis cs:0,1.07) -- (axis cs:0,0.7);
+                \draw[very thick, black] (axis cs:1,3.90) -- (axis cs:1,4.7);
+                \draw[very thick, black] (axis cs:2,14.8) -- (axis cs:2,12.7);
+                \draw[very thick, black] (axis cs:3,26.8) -- (axis cs:3,24.7);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.8]
+            \begin{axis}[axis lines=center, grid, xmin=-0.5, xmax=3.5, ymin=0, ymax=30,
+                domain=-1:3.5, title={Guess: $f(x) = 2.5x^2 + 2x + 0.7$, Sum of Sq. Error
+                $\approx 7.6$}]
+                \addplot[smooth, very thick, blue, dashed] {2.5*x^2 + 2*x + 0.7};
+                \addplot[only marks, mark=*, red]
+                coordinates{(0,1.07)(1,3.9)(2,14.8)(3,26.8)};
+                \addplot[only marks, mark=*, blue]
+                coordinates{(0,0.07)(1,5.2)(2,14.7)(3,29.2)};
+                \draw[very thick, black] (axis cs:0,1.07) -- (axis cs:0,0.7);
+                \draw[very thick, black] (axis cs:1,3.90) -- (axis cs:1,5.2);
+                \draw[very thick, black] (axis cs:2,14.8) -- (axis cs:2,14.7);
+                \draw[very thick, black] (axis cs:3,26.8) -- (axis cs:3,29.2);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Demonstration of the curve fitting technique. The vertical black bars between
+    the points show the point-wise error in the estimate. In these four pictures we are
+only modifying the value of $a$ while leaving $b = 2$ and $c=0.7$ fixed for simplicity.
+In reality we need to change all three parameters in the minimization process - hence the
+actual minimization takes place in three dimensions.}
+    \label{fig:least_squares_ex}
+\end{figure}
+
+In Figure \ref{fig:least_squares_ex} we saw that for $b=2$ and $c=0.7$ then the quadratic
+function $f(x) \approx 2.5 x^2 + 2x + 0.7$ is a pretty good approximation of the data $S =
+\{ (0,1.07), \, (1,3.9), \, (2,14.8), \, (3,26.8)\}.$ If, however, we take finer
+increments between our guesses for $a$ we can get a refined estimate of the value of $a$
+that minimizes the sum of the squared errors.  In Figure
+\ref{fig:least_squares_ex_error_plot} we see the values of the sum of the squared errors
+for many estimates of $a$.  In \ref{fig:least_squares_ex_error_plot} we see that $a
+\approx 2.3$ gives a slightly better value of the sum of the square errors and is
+(visually) near the minimum of the error curve.  
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=0, xmax=3, ymin=0, ymax=165,
+                xlabel={$a$}, title={Sum of Square Errors}]
+                \addplot[very thick, black, dashed, domain=1:3] {98*x^2 - 445*x + 507.6};
+                \addplot[black, only marks, mark=*] coordinates{
+(1,160.5969)
+(1.1,136.6769)
+(1.2,114.7169)
+(1.3,94.7169)
+(1.4,76.6769)
+(1.5,60.5969)
+(1.6,46.4769)
+(1.7,34.3169)
+(1.8,24.1169)
+(1.9,15.8769)
+(2,9.5969)
+(2.1,5.2769)
+(2.2,2.9169)
+(2.3,2.5169)
+(2.4,4.0769)
+(2.5,7.5969)
+(2.6,13.0769)
+(2.7,20.5169)
+(2.8,29.9169)
+(2.9,41.2769)
+(3,54.5969)};
+                \addplot[only marks, thick, red, mark=*] coordinates{(2.3,2.51)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The sum of the squared errors for the function $f(x) = ax^2 + bx + c$ for the
+    data set $S = \{ (0,1.07), \, (1,3.9), \, (2,14.8), \, (3,26.8)\}$. For $b=2$ and
+$c=0.7$ the minimum occurs on this curve at approximately $a \approx 2.3$ with the sum of
+the square errors of approximately 2.51. (To build this plot we took increments of $0.1$
+between different guesses for $a$ from $1$ to $3$ -- a very brute-force way of
+approximating a minimum.}
+    \label{fig:least_squares_ex_error_plot}
+\end{figure}
+
+
+\begin{problem}\label{prob:least_squares_plots}
+    For each of the plots in Figure \ref{fig:plot_least_squares_prob} give a functional
+    form that {\it might} be a good model for the data.  Be sure to choose the most
+    general form of your guess (for example, if you choose ``quadratic'' then your
+    functional guess is $f(x) = ax^2 + bx + c$).  Once you have a guess of the function
+    type create a plot showing your data along with your guess for a reasonable set of
+    parameters. Your instructor will make the data available to you.
+\end{problem}
+
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[axis lines=center, grid, xmin=1970, xmax=2020, ymin=0,
+                ymax=140000, ytick={20000,40000,60000,80000,100000,120000,140000},
+            xtick={1970, 1980, 1990, 2000, 2010, 2020}, xlabel={$x$}, title={Data Set A}]
+                \addplot[only marks, mark=*, black] coordinates{
+(1970,14443)
+(1972,15465)
+(1974,16831)
+(1976,16280)
+(1978,21159)
+(1980,24427)
+(1982,23541)
+(1984,28643)
+(1986,29463)
+(1988,38355)
+(1990,40244)
+(1992,46740)
+(1994,50676)
+(1996,59060)
+(1998,67122)
+(2000,73668)
+(2002,80678)
+(2004,86763)
+(2006,97481)
+(2008,102878)
+(2010,113314)
+(2012,122238)
+(2014,132645)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[axis lines=center, xmin=0, xmax=20, ymin=0, ymax=16, grid,
+                xlabel={$x$}, title={Data Set B}]
+                \addplot[only marks, mark=*, blue] coordinates{
+(0,0.582100861)
+(0.25,1.651055541)
+(0.5,2.882416411)
+(0.75,3.717797895)
+(1,5.132399665)
+(1.25,6.369000119)
+(1.5,6.734741617)
+(1.75,7.604108155)
+(2,8.178632241)
+(2.25,8.708613982)
+(2.5,9.714736882)
+(2.75,10.07421665)
+(3,10.04271604)
+(3.25,11.01046563)
+(3.5,11.37732629)
+(3.75,11.43607843)
+(4,11.96616171)
+(4.25,11.72225998)
+(4.5,12.0620352)
+(4.75,12.19243965)
+(5,13.15165084)
+(5.25,12.60932538)
+(5.5,12.92675124)
+(5.75,12.83330417)
+(6,13.85374617)
+(6.25,13.32748754)
+(6.5,13.47426035)
+(6.75,14.25917749)
+(7,13.48781964)
+(7.25,14.38714334)
+(7.5,14.34069055)
+(7.75,14.55105169)
+(8,14.12389207)
+(8.25,13.96255959)
+(8.5,14.23544928)
+(8.75,14.69309385)
+(9,14.57472964)
+(9.25,14.90832914)
+(9.5,14.18763374)
+(9.75,14.8603983)
+(10,14.13555604)
+(10.25,14.83016945)
+(10.5,15.03918587)
+(10.75,14.9228424)
+(11,14.38124871)
+(11.25,14.20006999)
+(11.5,15.02628609)
+(11.75,14.80054635)
+(12,14.77921618)
+(12.25,14.26918288)
+(12.5,14.76285923)
+(12.75,14.70457635)
+(13,14.36665995)
+(13.25,14.52763132)
+(13.5,14.7602034)
+(13.75,15.13930503)
+(14,14.98096155)
+(14.25,15.16100739)
+(14.5,15.14435175)
+(14.75,14.8201741)
+(15,14.28843305)
+(15.25,14.91406464)
+(15.5,15.1121328)
+(15.75,14.2922203)
+(16,14.40273029)
+(16.25,14.79309362)
+(16.5,14.76448318)
+(16.75,14.522059)
+(17,14.48959447)
+(17.25,15.07954907)
+(17.5,14.42998833)
+(17.75,14.7945363)
+(18,15.04238656)
+(18.25,14.40160076)
+(18.5,15.23388445)
+(18.75,14.55934369)
+(19,15.2901908)
+(19.25,14.97760313)};
+\end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.85]
+            \begin{axis}[axis lines=center, xmin=0, xmax=4, ymin=0, ymax=16, grid,
+                xlabel={$x$}, title={Data Set C}]
+                \addplot[only marks, mark=*, red] coordinates{
+(0.1,5.726977149)
+(0.2,5.451391016)
+(0.3,5.268948381)
+(0.4,8.522301974)
+(0.5,8.888857507)
+(0.6,11.20634597)
+(0.7,13.83745495)
+(0.8,14.13499226)
+(0.9,13.41374698)
+(1,12.7198408)
+(1.1,9.671884968)
+(1.2,8.206222419)
+(1.3,6.057714947)
+(1.4,5.928402975)
+(1.5,4.450516096)
+(1.6,4.758844484)
+(1.7,7.788150805)
+(1.8,8.629901355)
+(1.9,10.471519)
+(2,11.6626857)
+(2.1,13.94041078)
+(2.2,12.79412449)
+(2.3,12.71650125)
+(2.4,10.42173634)
+(2.5,7.934935177)
+(2.6,7.366601573)
+(2.7,5.108323902)
+(2.8,5.609689017)
+(2.9,4.470001691)
+(3,7.460556729)
+(3.1,8.890990059)
+(3.2,10.12523049)
+(3.3,12.86572276)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Several data plots for Problem \ref{prob:least_squares_plots}.}
+    \label{fig:plot_least_squares_prob}
+\end{figure}
+
+It should be clear to the reader at this point that curve fitting is actually an
+optimization problem.  For every collection of parameters in your chosen function there is
+a unique sum of square errors.  The goal, of course, is to pick parameters that minimize
+the sum of square errors.  It is beyond the scope of this book to write a gradient
+descent or derivative free optimization routine to do this optimization.  Instead we will
+lean on several pre-built tools that can do this optimization for us: MS Excel's Solver
+and MATLAB's \texttt{fminsearch} to name two of them.  If you are curious about how the
+optimization occurs see a course in mathematical optimization or machine learning.
+
+\begin{problem}
+    In Problem \ref{prob:least_squares_plots} you made hypotheses about the types of
+    functions that fit the data shown in \ref{fig:plot_least_squares_prob}.  Use Excel's
+    Solver function to minimize the sum of the square residuals for between your
+    parameterized function and the data.  
+\end{problem}
+
+\begin{problem}
+    Repeat the previous problem with MATLAB's \texttt{fminsearch} function.
+\end{problem}
+
+\begin{problem}
+    With your partner come up with an algebraic function governed by several parameters.
+    Add some random noise to your function and then save the data (without any formulas).
+    Give your data to a different group in the class and have them reverse engineer your
+    function from your data.  The second group should report the function, the parameters,
+    and the sum of the square errors.
+\end{problem}
+
+
+
+
 
 \newpage\section{Exercises}
 
@@ -846,4 +1383,410 @@ approximations for integrals and we leave the further research to the curious re
     \frac{Cx^2}{2} + Dx \right) \Big|_{\alpha}^{\beta} = \cdots. \]
     Verify that
     Simpson's rule gives exactly the same answer symbolically.
+
+
+
 }
+
+
+\newpage
+\begin{problem}\label{prob:curve_fitting_exercises}
+    The plots in Figure \ref{fig:curve_fitting_exercises_plots} show noisy data from
+    measurements of elementary single variable functions.
+    \begin{enumerate}
+        \item[(a)] Make a hypothesis about which function would best model the data.  Be
+            sure to choose the most general (parameterized) form of your function.
+        \item[(b)] Use appropriate tools to find the parameters for the function that best
+            fits the data.  Report you sum of square residuals for each function.
+    \end{enumerate}
+    Your instructor will provide you with the raw data.  Note that in the pictures the
+    points are connected with line segments simply for visual effect.  The functions that
+    you propose must be continuous functions.
+\end{problem}
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 1}]
+                \addplot[mark=*] coordinates{
+(-2,1.827786408)
+(-1.75,2.170530273)
+(-1.5,2.019732122)
+(-1.25,2.057766355)
+(-1,2.17271598)
+(-0.75,1.942496758)
+(-0.5,2.292477808)
+(-0.25,2.375761311)
+(0,2.513562722)
+(0.25,3.442073414)
+(0.5,3.61851248)
+(0.75,4.475996146)
+(1,4.789748499)
+(1.25,4.933434388)
+(1.5,5.550603846)
+(1.75,6.487375499)
+(2,7.240339006)
+(2.25,7.86003591)
+(2.5,9.11138024)
+(2.75,10.27594456)
+(3,11.33635172)
+(3.25,12.18428112)
+(3.5,14.14964853)
+(3.75,16.56485404)
+(4,18.2238497)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 2}]
+                \addplot[mark=*] coordinates{
+(2.1,0.620338852)
+(2.15,0.759019708)
+(2.2,0.482214049)
+(2.25,0.53588217)
+(2.3,0.34247563)
+(2.35,0.439417407)
+(2.4,0.429595117)
+(2.45,0.302408858)
+(2.5,0.223982914)
+(2.55,0.173392192)
+(2.6,0.028261824)
+(2.65,0.021951597)
+(2.7,0.107375196)
+(2.75,-0.069410942)
+(2.8,-0.314749946)
+(2.85,-0.236846404)
+(2.9,-0.317968664)
+(2.95,-0.426385845)
+(3,-0.505269643)
+(3.05,-0.531048933)
+(3.1,-0.462195205)
+(3.15,-0.626844591)
+(3.2,-0.813851088)
+(3.25,-0.735954667)
+(3.3,-0.735269866)
+(3.35,-0.921349293)
+(3.4,-0.946931813)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 3}]
+                \addplot[mark=*] coordinates{
+(0,-0.49450467)
+(0.1,0.074882224)
+(0.2,-0.280201153)
+(0.3,0.018639459)
+(0.4,0.639046545)
+(0.5,0.727185342)
+(0.6,0.485092813)
+(0.7,0.963801405)
+(0.8,1.159105789)
+(0.9,2.008918263)
+(1,1.930847198)
+(1.1,2.843770713)
+(1.2,4.143790566)
+(1.3,5.014551507)
+(1.4,5.952787591)
+(1.5,6.913618934)
+(1.6,8.03577976)
+(1.7,9.551625656)
+(1.8,11.13870628)
+(1.9,12.76217261)
+(2,15.47325475)
+(2.1,16.88943329)
+(2.2,19.69117887)
+(2.3,21.68001629)
+(2.4,24.44268896)
+(2.5,28.17440543)
+(2.6,30.99558273)
+(2.7,33.84180928)
+(2.8,37.84754694)
+(2.9,41.12278565)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 4}]
+                \addplot[mark=*] coordinates{
+(1.5,2.31155657)
+(2.5,5.491397071)
+(3.5,7.190096486)
+(4.5,8.297376083)
+(5.5,9.741290241)
+(6.5,10.30523328)
+(7.5,11.0397925)
+(8.5,11.94081088)
+(9.5,13.08619213)
+(10.5,13.56793153)
+(11.5,14.04205556)
+(12.5,14.40464555)
+(13.5,14.42870765)
+(14.5,14.62766086)
+(15.5,14.93646003)
+(16.5,15.73757069)
+(17.5,15.98043913)
+(18.5,15.87607647)
+(19.5,17.00392144)
+(20.5,16.8631223)
+(21.5,17.10052368)
+(22.5,17.20283334)
+(23.5,17.13711573)
+(24.5,17.45093371)
+(25.5,18.04228498)
+(26.5,17.95394595)
+(27.5,17.99192879)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 5}]
+                \addplot[mark=*] coordinates{
+(-40,4.724118031)
+(-35,2.970593363)
+(-30,2.022103405)
+(-25,0.988760498)
+(-20,-0.638952765)
+(-15,-1.451314878)
+(-10,-1.689669505)
+(-5,-1.070830009)
+(0,0.632982269)
+(5,1.318823566)
+(10,3.619200845)
+(15,3.926166409)
+(20,4.448776279)
+(25,4.562237908)
+(30,3.807258343)
+(35,2.922016094)
+(40,1.253764377)
+(45,0.766680021)
+(50,-0.947218851)
+(55,-0.913895463)
+(60,-1.220299677)
+(65,-0.095971864)
+(70,0.833611733)
+(75,1.980746366)
+(80,3.7049767)
+(85,4.050528706)
+(90,4.707082482)
+(95,5.153787151)
+(100,3.762765979)
+(105,3.285155548)};
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 6}]
+                \addplot[mark=*] coordinates{
+(0.00,-4.449456854)
+(0.15,-4.212500338)
+(0.30,-4.086912168)
+(0.45,-3.958253448)
+(0.60,-2.881162505)
+(0.75,-1.516197323)
+(0.90,-0.68014595)
+(1.05,-0.177100517)
+(1.20,1.118573477)
+(1.35,0.44615688)
+(1.50,0.320134332)
+(1.65,0.342550908)
+(1.80,-0.535494042)
+(1.95,-1.397032043)
+(2.10,-1.859736685)
+(2.25,-2.745103944)
+(2.40,-2.488002665)
+(2.55,-2.782439112)
+(2.70,-2.841948189)
+(2.85,-2.75955687)
+(3.00,-2.722051195)
+(3.15,-1.545683776)
+(3.30,-1.228319356)
+(3.45,-1.230759993)
+(3.60,-0.540113141)
+(3.75,-0.592703675)
+(3.90,0.215782074)
+(4.05,-0.031060909)
+(4.20,-0.115011378)
+(4.35,-1.175832922)
+(4.50,-0.951259528)
+(4.65,-2.08979662)
+(4.80,-2.18517115)
+(4.95,-2.725035231)
+(5.10,-2.219480806)
+(5.25,-2.45141889)
+(5.40,-1.800646406)
+(5.55,-1.86379778)
+(5.70,-1.792482425)
+(5.85,-1.200554602)
+(6.00,-0.835991703)
+(6.15,-0.46111166)
+(6.30,-0.958544571)
+(6.45,-0.354479352)
+(6.60,-1.044511886)
+(6.75,-0.476860167)
+(6.90,-1.477006626)
+(7.05,-1.382719845)
+(7.20,-1.948987485)
+(7.35,-1.996719751)
+(7.50,-2.404790592)
+                };
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 7}]
+                \addplot[mark=*] coordinates{
+(10,206.0162568)
+(20,213.4795786)
+(30,213.8403229)
+(40,227.802522)
+(50,225.6197982)
+(60,178.7024779)
+(70,154.6892911)
+(80,81.70057476)
+(90,-8.290132861)
+(100,-44.3517702)
+(110,-95.36553972)
+(120,-83.44395348)
+(130,-85.20228987)
+(140,-69.12110337)
+(150,-41.58994093)
+(160,-61.22638559)
+(170,-110.0814716)
+(180,-122.2322317)
+(190,-176.5522583)
+(200,-259.8652098)
+(210,-313.825314)
+(220,-369.8081213)
+(230,-373.4277422)
+(240,-402.7449841)
+(250,-355.602077)
+(260,-356.3934396)
+(270,-342.7772839)
+(280,-386.4015738)
+(290,-391.7199628)
+(300,-454.393317)
+(310,-524.6232437)
+(320,-614.1378148)
+(330,-648.8071556)
+(340,-703.8465558)
+(350,-695.5106182)
+(360,-668.7108834)
+(370,-671.599177)
+(380,-682.674601)
+(390,-666.2483273)
+(400,-689.8332274)
+(410,-753.9896633)
+(420,-796.7433458)
+(430,-837.4518064)
+(440,-909.9882962)
+(450,-974.8774748)
+(460,-998.042244)
+(470,-1002.693716)
+(480,-984.0242486)
+(490,-948.3226958)
+(500,-964.1660252)
+(510,-988.8113091)
+(520,-994.1954627)
+(530,-1072.776731)
+(540,-1107.559613)
+(550,-1170.933896)
+(560,-1260.422949)
+(570,-1291.672619)
+(580,-1291.217712)
+(590,-1268.269071)
+(600,-1272.855738)
+(610,-1277.466874)
+(620,-1249.499903)
+(630,-1265.720551)
+(640,-1350.556404)
+(650,-1406.935395)
+(660,-1432.828131)
+(670,-1495.389775)
+(680,-1560.88485)
+(690,-1573.797742)
+(700,-1606.136223)
+(710,-1600.866859)
+(720,-1552.632809)
+(730,-1544.440208)
+(740,-1587.076728)
+(750,-1582.311195)
+                };
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[axis lines=center, grid, title={Plot 8}]
+                \addplot[mark=*] coordinates{
+(0.0,0.659805301)
+(0.5,-0.415972824)
+(1.0,-1.093474007)
+(1.5,-1.249873742)
+(2.0,0.395555473)
+(2.5,1.597684532)
+(3.0,3.399269869)
+(3.5,3.362888296)
+(4.0,0.959267282)
+(4.5,-1.844324035)
+(5.0,-5.044155285)
+(5.5,-4.903557845)
+(6.0,-1.279140485)
+(6.5,5.424622027)
+(7.0,11.22472144)
+(7.5,10.60573166)
+(8.0,3.089113846)
+(8.5,-8.380206751)
+(9.0,-18.584297)
+(9.5,-17.57421137)
+(10.0,-4.636727794)
+(10.5,16.70714519)
+(11.0,34.61943853)
+(11.5,34.08552591)
+(12.0,9.999537095)
+(12.5,-28.4617782)
+(13.0,-61.08782039)
+(13.5,-61.18615294)
+(14.0,-17.08638893)
+(14.5,53.43805698)
+(15.0,112.0812828)
+(15.5,112.1685705)
+(16.0,32.51571344)
+(16.5,-96.36121442)
+(17.0,-201.8196697)
+(17.5,-201.9570412)
+(18.0,-57.87079944)
+(18.5,176.8096134)
+(19.0,368.4821508)
+(19.5,366.9361248)
+(20.0,106.9307101)
+(20.5,-318.9581464)
+(21.0,-667.3899625)
+(21.5,-665.4839399)
+(22.0,-192.7005797)
+(22.5,581.542834)
+(23.0,1214.089857)
+(23.5,1210.65027)
+(24.0,351.9569967)
+(24.5,-1054.078092)
+(25.0,-2203.468422)
+(25.5,-2197.234689)
+(26.0,-636.8994402)
+(26.5,1915.326131)
+(27.0,4003.513699)
+(27.5,3992.263187)
+(28.0,1158.068478)
+(28.5,-3477.726226)
+(29.0,-7269.851302)
+(29.5,-7248.790785)
+(30.0,-2101.934685)
+(30.5,6317.854301)
+(31.0,13205.51654)
+(31.5,13166.34932)
+(32.0,3819.087971)
+(32.5,-11472.95664)
+(33.0,-23982.027)
+(33.5,-23910.41909)
+(34.0,-6934.694149)
+(34.5,20838.7478)
+(35.0,43557.86423)
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Plots for Problem \ref{prob:curve_fitting_exercises}.}
+    \label{fig:curve_fitting_exercises_plots}
+\end{figure}
+
