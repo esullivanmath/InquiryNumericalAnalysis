@@ -259,8 +259,23 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 \end{problem}
 
 \begin{problem}
-    Test your second derivative code on the function $f(x) = \sin(x) - x\sin(x)$.  Create
-    an error plot showing the accuracy of the method.
+    Test your second derivative code on the function $f(x) = \sin(x) - x\sin(x)$ by doing
+    the following.  
+    \begin{enumerate}
+        \item[(a)] Find the analytic second derivative by hand.
+        \item[(b)] Find the numerical second derivative with the code that you just wrote.
+        \item[(c)] Find the absolute difference between your numerical second derivative
+            and the actual second derivative.  This is point-by-point subtraction so you
+            should end up with a vector of errors. 
+        \item[(d)] Find the maximum of your errors.
+        \item[(e)] Now we want to see how the code works if you change the number of
+            points used.  Build a plot showing the value of $h$ on the horizontal axis
+            and the maximum error on the vertical axis.  You will need to write a loop
+            that gets the error for many different values of $h$.  Finally, it is probably
+            best to build this plot on a log-log scale.
+        \item[(f)] Discuss what you see?  How do you see the fact that the numerical
+            second derivative is second order accurate?
+    \end{enumerate}
 \end{problem}
 
 Table \ref{tab:first_and_second_derivatives} summarizes the formulas that we have for
@@ -284,6 +299,7 @@ differential equations in Chapter \ref{ch:odes}.
     \caption{First and second derivatives.}
     \label{tab:first_and_second_derivatives}
 \end{table}
+
 
 
 % \begin{problem}
@@ -1380,10 +1396,11 @@ optimization occurs see a course in mathematical optimization or machine learnin
                 \end{tabular}
             \end{center}
         \item[(b)] The department of transportation finds that the rate at which cars
-            cross a bridge can be approximated by the fucntion
-            \[ f(t) = \frac{22.8 \text{cars/min}}{3.5 + 7(t-1.25)^4}, \]
-            where $t=0$ at 4pm, and is measured in hours.  Estimate the total number of
-            cars that cross the bridge betwee 4 and 6pm.  Make sure that your estimate has
+            cross a bridge can be approximated by the function
+            \[ f(t) = \frac{22.8 }{3.5 + 7(t-1.25)^4} , \]
+            where $t=0$ at 4pm, and is measured in hours, and $f(t)$ is measured in cars
+            per minute.  Estimate the total number of
+            cars that cross the bridge between 4 and 6pm.  Make sure that your estimate has
             an error less than 5\% and provide sufficient mathematical evidence of your
             error estimate.
     \end{enumerate}

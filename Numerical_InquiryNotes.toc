@@ -41,60 +41,62 @@
 \contentsline {section}{\numberline {4.8}Multi-Dimensional Newton's Method}{99}{section.4.8}
 \contentsline {section}{\numberline {4.9}Exercises}{104}{section.4.9}
 \contentsline {chapter}{\numberline {5}Numerical Ordinary Differential Equations}{110}{chapter.5}
-\contentsline {section}{\numberline {5.1}Euler, Runge-Kutta, and Friends}{110}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implicit Methods and Shooting Methods}{117}{section.5.2}
-\contentsline {section}{\numberline {5.3}ODE Modeling Exercises}{118}{section.5.3}
-\contentsline {section}{\numberline {5.4}Additional ODE Exercises}{127}{section.5.4}
-\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{128}{chapter.6}
-\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{128}{section.6.1}
-\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{130}{section.6.2}
-\contentsline {section}{\numberline {6.3}Analytic Solutions to Linear PDEs}{135}{section.6.3}
-\contentsline {section}{\numberline {6.4}Boundary Conditions}{140}{section.6.4}
-\contentsline {section}{\numberline {6.5}Numerical Solutions of The Heat Equation}{143}{section.6.5}
-\contentsline {subsection}{\numberline {6.5.1}1D Heat Equation}{143}{subsection.6.5.1}
-\contentsline {subsection}{\numberline {6.5.2}Stabilized 1D Heat Equation -- The Crank Nicolson Method}{144}{subsection.6.5.2}
-\contentsline {subsection}{\numberline {6.5.3}2D Heat Equation}{146}{subsection.6.5.3}
-\contentsline {section}{\numberline {6.6}Numerical Solutions of The Wave Equation}{148}{section.6.6}
-\contentsline {section}{\numberline {6.7}Traveling Waves}{149}{section.6.7}
-\contentsline {section}{\numberline {6.8}The Laplace and Poisson Equations -- Steady State PDEs}{150}{section.6.8}
-\contentsline {section}{\numberline {6.9}Exercises}{152}{section.6.9}
-\contentsline {chapter}{\numberline {A}Writing and Projects}{155}{appendix.A}
-\contentsline {section}{\numberline {A.1}The Paper}{155}{section.A.1}
-\contentsline {section}{\numberline {A.2}Figures and Tables}{155}{section.A.2}
-\contentsline {section}{\numberline {A.3}Writing Style}{156}{section.A.3}
-\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{156}{section.A.4}
-\contentsline {subsection}{\numberline {A.4.1}Audience}{156}{subsection.A.4.1}
-\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{157}{subsection.A.4.2}
-\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{157}{subsection.A.4.3}
-\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{161}{subsection.A.4.4}
-\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{162}{section.A.5}
-\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{163}{section.A.6}
-\contentsline {chapter}{\numberline {B}MATLAB Basics}{165}{appendix.B}
-\contentsline {section}{\numberline {B.1}Vectors and Matrices}{165}{section.B.1}
-\contentsline {section}{\numberline {B.2}Looping}{167}{section.B.2}
-\contentsline {subsection}{\numberline {B.2.1}For Loops}{167}{subsection.B.2.1}
-\contentsline {subsection}{\numberline {B.2.2}The While Loop}{168}{subsection.B.2.2}
-\contentsline {section}{\numberline {B.3}Conditional Statements}{169}{section.B.3}
-\contentsline {subsection}{\numberline {B.3.1}If Statements}{169}{subsection.B.3.1}
-\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{170}{subsection.B.3.2}
-\contentsline {section}{\numberline {B.4}Functions}{170}{section.B.4}
-\contentsline {section}{\numberline {B.5}Plotting}{171}{section.B.5}
-\contentsline {section}{\numberline {B.6}Animations}{172}{section.B.6}
-\contentsline {chapter}{\numberline {C}\LaTeX }{174}{appendix.C}
-\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{174}{section.C.1}
-\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{177}{section.C.2}
-\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{177}{subsection.C.2.1}
-\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{178}{subsection.C.2.2}
-\contentsline {subsection}{\numberline {C.2.3}Figures}{178}{subsection.C.2.3}
-\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{178}{subsection.C.2.4}
-\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{181}{section.C.3}
-\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{181}{subsection.C.3.1}
-\contentsline {section}{\numberline {C.4}Bibliography Management}{184}{section.C.4}
-\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{185}{subsection.C.4.1}
-\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{185}{subsection.C.4.2}
-\contentsline {chapter}{\numberline {D}Optional Material}{186}{appendix.D}
-\contentsline {section}{\numberline {D.1}Low Rank Approximations of Matrices}{187}{section.D.1}
-\contentsline {section}{\numberline {D.2}The Google Page Rank Algorithm}{188}{section.D.2}
-\contentsline {section}{\numberline {D.3}Principal Component Analysis (Incomplete)}{193}{section.D.3}
-\contentsline {section}{\numberline {D.4}Building PDE's From Conservation Laws}{194}{section.D.4}
-\contentsline {chapter}{Bibliography}{197}{equation.D.4.15}
+\contentsline {section}{\numberline {5.1}Recalling the Basics of Differential Equations}{111}{section.5.1}
+\contentsline {section}{\numberline {5.2}Euler and Midpoint Methods}{114}{section.5.2}
+\contentsline {section}{\numberline {5.3}The Runge-Kutta Method}{119}{section.5.3}
+\contentsline {section}{\numberline {5.4}Implicit Methods and Shooting Methods}{122}{section.5.4}
+\contentsline {section}{\numberline {5.5}ODE Modeling Exercises}{125}{section.5.5}
+\contentsline {section}{\numberline {5.6}Additional ODE Exercises}{135}{section.5.6}
+\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{136}{chapter.6}
+\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{136}{section.6.1}
+\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{138}{section.6.2}
+\contentsline {section}{\numberline {6.3}Analytic Solutions to Linear PDEs}{143}{section.6.3}
+\contentsline {section}{\numberline {6.4}Boundary Conditions}{148}{section.6.4}
+\contentsline {section}{\numberline {6.5}Numerical Solutions of The Heat Equation}{151}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}1D Heat Equation}{151}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Stabilized 1D Heat Equation -- The Crank Nicolson Method}{152}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.3}2D Heat Equation}{154}{subsection.6.5.3}
+\contentsline {section}{\numberline {6.6}Numerical Solutions of The Wave Equation}{156}{section.6.6}
+\contentsline {section}{\numberline {6.7}Traveling Waves}{157}{section.6.7}
+\contentsline {section}{\numberline {6.8}The Laplace and Poisson Equations -- Steady State PDEs}{158}{section.6.8}
+\contentsline {section}{\numberline {6.9}Exercises}{160}{section.6.9}
+\contentsline {chapter}{\numberline {A}Writing and Projects}{163}{appendix.A}
+\contentsline {section}{\numberline {A.1}The Paper}{163}{section.A.1}
+\contentsline {section}{\numberline {A.2}Figures and Tables}{163}{section.A.2}
+\contentsline {section}{\numberline {A.3}Writing Style}{164}{section.A.3}
+\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{164}{section.A.4}
+\contentsline {subsection}{\numberline {A.4.1}Audience}{164}{subsection.A.4.1}
+\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{165}{subsection.A.4.2}
+\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{165}{subsection.A.4.3}
+\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{169}{subsection.A.4.4}
+\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{170}{section.A.5}
+\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{172}{section.A.6}
+\contentsline {chapter}{\numberline {B}MATLAB Basics}{174}{appendix.B}
+\contentsline {section}{\numberline {B.1}Vectors and Matrices}{174}{section.B.1}
+\contentsline {section}{\numberline {B.2}Looping}{176}{section.B.2}
+\contentsline {subsection}{\numberline {B.2.1}For Loops}{176}{subsection.B.2.1}
+\contentsline {subsection}{\numberline {B.2.2}The While Loop}{177}{subsection.B.2.2}
+\contentsline {section}{\numberline {B.3}Conditional Statements}{178}{section.B.3}
+\contentsline {subsection}{\numberline {B.3.1}If Statements}{178}{subsection.B.3.1}
+\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{179}{subsection.B.3.2}
+\contentsline {section}{\numberline {B.4}Functions}{179}{section.B.4}
+\contentsline {section}{\numberline {B.5}Plotting}{180}{section.B.5}
+\contentsline {section}{\numberline {B.6}Animations}{181}{section.B.6}
+\contentsline {chapter}{\numberline {C}\LaTeX }{183}{appendix.C}
+\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{183}{section.C.1}
+\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{186}{section.C.2}
+\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{186}{subsection.C.2.1}
+\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{187}{subsection.C.2.2}
+\contentsline {subsection}{\numberline {C.2.3}Figures}{187}{subsection.C.2.3}
+\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{187}{subsection.C.2.4}
+\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{190}{section.C.3}
+\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{190}{subsection.C.3.1}
+\contentsline {section}{\numberline {C.4}Bibliography Management}{193}{section.C.4}
+\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{194}{subsection.C.4.1}
+\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{194}{subsection.C.4.2}
+\contentsline {chapter}{\numberline {D}Optional Material}{195}{appendix.D}
+\contentsline {section}{\numberline {D.1}Low Rank Approximations of Matrices}{196}{section.D.1}
+\contentsline {section}{\numberline {D.2}The Google Page Rank Algorithm}{197}{section.D.2}
+\contentsline {section}{\numberline {D.3}Principal Component Analysis (Incomplete)}{202}{section.D.3}
+\contentsline {section}{\numberline {D.4}Building PDE's From Conservation Laws}{203}{section.D.4}
+\contentsline {chapter}{Bibliography}{206}{equation.D.4.15}

@@ -51,8 +51,9 @@
 \usepackage[table]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata,positioning}
-\usetikzlibrary{patterns,snakes}
+\usetikzlibrary{patterns,decorations}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
 \usepackage{rotating}
 \usepackage[notextcomp]{kpfonts} 
 \usepackage{graphicx}
@@ -65,6 +66,7 @@
 \usepackage{wasysym}
 \usepackage{amsthm}
 \usepackage[margin=1in]{geometry}
+\geometry{headheight=12pt}
 \usepackage[hang,flushmargin,symbol*]{footmisc}
 \usepackage{color}
 \definecolor{darkblue}{rgb}{0, 0, .6}
@@ -76,7 +78,6 @@
 	linkcolor=darkblue,
 	anchorcolor=darkblue,
 	citecolor=darkblue,
-	pagecolor=darkblue,
 	urlcolor=darkblue,
 	pdftitle={},
 	pdfauthor={}
@@ -98,7 +99,7 @@ axis/.style={thick, draw=black!65, stealth-stealth}
 \lfoot{\includegraphics[width=1.5cm]{CreativeCommons.png}}
 \cfoot{}
 \rfoot{}
-
+% \setlength{\headheight}{12pt}
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{acknowledgement}[theorem]{Acknowledgement}
@@ -130,7 +131,11 @@ axis/.style={thick, draw=black!65, stealth-stealth}
 \newenvironment{problem}{\begin{prob}}{\hfill$\blacktriangle$\end{prob}}
 \newenvironment{challenge}{\begin{chal}}{\hfill$\blacktriangle$\end{chal}}
 
+\usepackage{silence}
 \usepackage{mdframed}
+\WarningFilter{mdframed}{You got a bad break}
+\WarningFilter{Fancyhdr}{\headheight is too small (12.0pt)}
+
 \newtheorem{defn}[theorem]{Definition}
 \newenvironment{definition}
 {\begin{mdframed}[backgroundcolor=blue!15]\begin{defn}}
