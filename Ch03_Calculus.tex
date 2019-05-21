@@ -577,10 +577,40 @@ algebra and differentiation.
     \end{enumerate}
 \end{problem}
 
-% \subsection{Single Variable Numerical Optimization}
+\newpage\subsection{Single Variable Numerical Optimization}
 
 Now we'll propose a few numerical techniques that can approximate the solution to these
-types of problems.
+types of problems.  The basic ideas are simple!
+
+\begin{problem}\label{prob:intuitive_max}
+    If you were blind folded and standing on a hill could you find the top of the hill?
+    (assume no trees and no cliffs \ldots this isn't supposed to be dangerous)  How would
+    you do it?  Explain your technique clearly.
+\end{problem}
+
+\begin{problem}
+    If you were blind folded and standing on a crater on the moon could you find the
+    lowest point?  How would you do it?  Remember that you can hop as far as you like
+    \ldots because gravity \ldots but sometimes that's not a great thing because you could
+    hop too far.
+\end{problem}
+
+The intuition of numerical optimization schemes is typically to visualize the function that
+you're trying to minimize or maximize and think about either climbing the hill to the top
+(maximization) or descending the hill to the bottom (minimization).  
+
+\begin{problem}
+    Let's turn your intuition into an algorithm.  If $f(x)$ is the function that you are
+    trying to maximize then turn your algorithm from Problem \ref{prob:intuitive_max} into
+    a step-by-step algorithm which could be coded. Then try out your code on the function 
+    \[ f(x) = e^{-x^2} + \sin(x^2) \]
+    to see if your algorithm can find the local maximum near $x \approx 1.14$.
+\end{problem}
+
+Some of the most common algorithms are listed below.  Read through them and see which
+one(s) you ended up recreating?  The intuition for these algorithms is pretty darn simple
+-- travel uphill if you want to maximize -- travel downhill if you want to minimize.
+
 \begin{algorithm}[Derivative Free Optimization]
     Let $f(x)$ be the objective function which you are seeking to maximize (or minimize).
     \begin{itemize}
@@ -693,61 +723,134 @@ types of problems.
     way to go.  Use an appropriate numerical technique to solve this problem.
 \end{problem}
 
-% \subsection{Multivariable Numerical Optimization}
-% Now let's look at multivariable optimization.  The process for finding optimal solutions is
-% essentially the same as for single variable.
-% \begin{itemize}
-%     \item Write a function that models a scenario in multiple variables,
-%     \item find the gradient vector (presuming that the function is differentiable),
-%     \item set the gradient vector equal to the zero vector and solve for the critical point(s), and
-%     \item interpret your answer in the context of the problem.
-% \end{itemize}
-% The trouble with unconstrained multivariable optimization is that finding the critical
-% points is now equivalent to solving a system of nonlinear equations; a task that is likely
-% impossible even with a computer algebra system.  (In Section \ref{sec:mv_newton} we will
-% build a multivariable version of Newton's method if you want to look ahead.)
-% 
-% The derivative free, gradient ascent/descent, and monte carlo techniques still have good
-% analogues in higher dimensions.  We just need to be a bit careful since in higher
-% dimensions there is much more room to move.
-% 
-% \begin{algorithm}[Gradient Descent]
-%     We want to solve the problem 
-%     \[ \text{minimize } f(x_1, x_2, \ldots, x_n) \text{ subject to }(x_1, x_2, \ldots, x_n) \in S. \]
-%     \begin{enumerate}
-%         \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
-%         \item We are going to define a difference equation that gives successive guesses
-%             for the optimal value:
-%             \[ \bx_{n+1} = \bx_n - \alpha \nabla f(\bx_n). \]
-%             The difference equation says to follow the negative gradient a certain
-%             distance from your present point (why are we doing this).  Note that the value
-%             of $\alpha$ is up to you so experiment with a few values (you should probably
-%             take $\alpha \le 1$ \ldots why?).
-%         \item Repeat the iterative process in step 2 until two successive points are {\it
-%             close enough} to each other.
-%     \end{enumerate}
-% \end{algorithm}
-% Note: If you are looking to maximize your objective function then in the Monte-Carlo
-% search you should examine if $z$ is greater than your current largest value.  For gradient
-% descent you should actually do a gradient {\it
-% ascent} and follow the positive gradient instead of the negative gradient.
-% 
-% \begin{problem}
-%     Write code to implement the Gradient Descent method and test your code on a
-%     multivariable function where you know the location and value of a local minimum.
-% \end{problem}
-% 
-% \begin{problem}
-%     The functions like $f(x,y) = \sin(x)\cos(y)$ have many local extreme values which makes
-%     optimization challenging.  Impelement your Gradient Descent code on this function to
-%     find the local minimum $(0,0)$.  Start somewhere near $(0,0)$ and show by way of
-%     example that your gradient descent code may not converge to this particular local
-%     minimum. 
-% \end{problem}
-% 
+
+
+\begin{problem}
+    Numerical optimization is often seen as quite challenging since the algorithms that
+    we have introduced here could all get ``stuck'' at local extrema.  To illustrate this
+    see the function shown in Figure \ref{fig:num_opt_challenging}.  How will derivative
+    free optimization methods have trouble finding the red point starting at the black
+    point with this function?  How will gradient
+    descent/ascent methods have trouble?  Why?
+\end{problem}
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid]
+                \addplot[smooth, blue, very thick, domain=0:5, samples=100] {exp(-x^2) +
+                sin(deg(x)^2) + 0.1*x^3};
+                \addplot[black, only marks, mark=*] coordinates{(1,1.4)};
+                \addplot[red, only marks, mark=*] coordinates{(4.1,5.8)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A challenging numerical optimization problem. If we start at the black point
+    then how will any of our algorithms find the local minimum at the red point?}
+    \label{fig:num_opt_challenging}
+\end{figure}
+
+
+\newpage\subsection{Multivariable Numerical Optimization}
+Now let's look at multivariable optimization.  The analytic process for finding optimal
+solutions is essentially the same as for single variable.
+\begin{itemize}
+    \item Write a function that models a scenario in multiple variables,
+    \item find the gradient vector (presuming that the function is differentiable),
+    \item set the gradient vector equal to the zero vector and solve for the critical point(s), and
+    \item interpret your answer in the context of the problem.
+\end{itemize}
+The trouble with unconstrained multivariable optimization is that finding the critical
+points is now equivalent to solving a system of nonlinear equations; a task that is likely
+impossible even with a computer algebra system.  (In Section \ref{sec:mv_newton} we will
+build a multivariable version of Newton's method if you want to look ahead.)
+
+Let's see if you can extend your intuition from single variable to multivariable.
+\begin{problem}
+    The derivative free optimization method discussed in the single variable optimization
+    section just said that you should pick two points and pick the one that takes you
+    furthest uphill.  
+    \begin{enumerate}
+        \item[(a)] Why is it insufficient to choose just two points if we are dealing with a
+            function of two variables?  Hint: think about contour line.
+        \item[(b)] For a function of two variables, how many points should you use to
+            compare and determine the direction of ``uphill''?
+        \item[(c)] Extend your answer from part (b) to $n$ dimensions.  How many points
+            should we compare if we are in $n$ dimensions and need to determine which
+            direction is ``uphill''?
+        \item[(d)] Back in the case of a two-variable function, you should have decided
+            that three points was best.  Explain an algorithm for moving one point at a
+            time so that your three points eventually converge to a nearby local maximum.
+            It may be helpful to make a surface plot or a contour plot of a well-known
+            function just as a visual.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Now let's tackle the gradient ascent/descent algorithm.  You should recall that the gradient
+    vector points in the direction of maximum change.  How can you use this fact to modify
+    the gradient ascent/descent algorithm given previously?  Clearly write your algorithm
+    so that a classmate could turn it into code.
+\end{problem}
+
+\begin{problem}
+    How does the Monte Carlo algorithm extend to a two-variable optimization problem?
+    Clearly write your algorithm.
+\end{problem}
+
+\begin{problem}
+    Try out the three algorithms that you just wrote on the function $f(x,y) =
+    \sin(x)\cos(y) + 0.1 x^2$ which has many local extrema and no global maximum.
+\end{problem}
+
+
+The derivative free, gradient ascent/descent, and monte carlo techniques still have good
+analogues in higher dimensions.  We just need to be a bit careful since in higher
+dimensions there is much more room to move.  Below we'll give the full description of the
+gradient ascent/descent algorithm.  We don't give the full description of the derivative
+free or Monte Carlo algorithms since there are many ways to implement them.  The
+interested reader should see a course in mathematical optimization or machine learning.
+
+\begin{algorithm}[Gradient Descent]
+    We want to solve the problem 
+    \[ \text{minimize } f(x_1, x_2, \ldots, x_n) \text{ subject to }(x_1, x_2, \ldots, x_n) \in S. \]
+    \begin{enumerate}
+        \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
+        \item We are going to define a difference equation that gives successive guesses
+            for the optimal value:
+            \[ \bx_{n+1} = \bx_n - \alpha \nabla f(\bx_n). \]
+            The difference equation says to follow the negative gradient a certain
+            distance from your present point (why are we doing this).  Note that the value
+            of $\alpha$ is up to you so experiment with a few values (you should probably
+            take $\alpha \le 1$ \ldots why?).
+        \item Repeat the iterative process in step 2 until two successive points are {\it
+            close enough} to each other.
+    \end{enumerate}
+\end{algorithm}
+Note: If you are looking to maximize your objective function then in the Monte-Carlo
+search you should examine if $z$ is greater than your current largest value.  For gradient
+descent you should actually do a gradient {\it
+ascent} and follow the positive gradient instead of the negative gradient.
+
+\begin{problem}
+    Write generic code to implement the Gradient Descent algorithm in as many dimensions
+    as necessary and test your code on a multivariable function where you know the
+    location and value of a local minimum.
+\end{problem}
+
+\begin{problem}
+    The functions like $f(x,y) = \sin(x)\cos(y)$ have many local extreme values which makes
+    optimization challenging.  Impelement your Gradient Descent code on this function to
+    find the local minimum $(0,0)$.  Start somewhere near $(0,0)$ and show by way of
+    example that your gradient descent code may not converge to this particular local
+    minimum. Why is this important?
+\end{problem}
+
+
 
 \newpage\section{Numerical Curve Fitting}
-In this section we'll change our focus a bit to look at a different question from algebra.
+In this section we'll change our focus a bit to look at a different question from algebra
+\ldots and reveal a hidden numerical optimization problem.
 Instead of finding the roots of an algebraic equation, what if we have a few data points
 and a reasonable guess for the type of function fitting the points, how would we determine
 the actual function?  
