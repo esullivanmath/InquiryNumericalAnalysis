@@ -70,13 +70,15 @@ Furthermore, the Taylor series technique suggests an infinite family of other te
     What do we get if we replace $x$ with $x+h$ and $a$ with $x$?  In other words, in
     Figure \ref{fig:differentiation_partition} we want to center the Taylor series at $x$
     and evaluate the resulting series at the point $x+h$.
+    \[ f(x+h) = \underline{\hspace{3in}} \]
 \end{problem}
 
 
 \begin{problem}\label{prob:num_diff_first_order}
     Solve the result from the previous problem for $f'(x)$ to create an approximation for
-    $f'(x)$ using $f(x+h)$, $f(x)$, and some higher order terms.  How can we use Taylor's
-    Theorem to quantify the error of this approximation?
+    $f'(x)$ using $f(x+h)$, $f(x)$, and some higher order terms. (fill in the blanks and
+    the question marks)
+    \[ f'(x) = \frac{f(x+h) - ???}{??} + \underline{\hspace{1in}} \]
 \end{problem}
 \solution{
     \begin{flalign*}
@@ -86,6 +88,12 @@ Furthermore, the Taylor series technique suggests an infinite family of other te
     \end{flalign*}
     The error is on the order of $h$.
 }
+
+\begin{problem}
+    If we were to drop everything after the fraction in the previous problem we know that
+    we would be introducing error into our derivative computation.  According to Taylor's
+    Theorem, how can we quantify the error of the approximation?
+\end{problem}
 
 \begin{definition}[Order of a Numerical Derivative]
     The {\bf order} of a numerical derivative is the power of the step size in the
@@ -121,6 +129,69 @@ have the following definition.
     into your own words.  
 \end{problem}
 
+
+\begin{problem}\label{prob:deriv_error_analysis_ex}
+   Consider the function $f(x) = \sin(x) - x\sin(x)$.  The goal of this problem is to make
+   sense of the discussion of the ``order'' of the derivative approximation.  You may want
+   to pause first and reread the previous couple of pages.
+   \begin{enumerate}
+       \item[(a)] Find $f'(x)$ by hand.
+       \item[(b)] Use your answer to part (a) to verify that $f'(1) = -\sin(1) \approx
+           -0.8414709848$.  
+       \item[(c)] To approximate the first derivative at $x=1$ numerically we calculate 
+           \[ f'(1) \approx \frac{f(1+h) - f(1)}{h}. \]
+           Fill in the table below with the derivative approximation and the absolute
+           error associated with each given $h$.  You may want to use a spreadsheet to
+           organize your data (be sure that you're working in radians!).
+           \begin{center}
+               \begin{tabular}{|c|c|c|c|}
+                   \hline 
+                   $h$ & Approx. of $f'(1)$ & Exact value of $f'(1)$ & Abs.
+                   \% Error \\ \hline \hline
+                   $2^{-3} = 0.125$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-4}=0.0625$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-5}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-6}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-7}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-8}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-9}$ & & $-\sin(1)$ & \\ \hline
+               \end{tabular}
+           \end{center}
+       \item[(d)] There was nothing really special in part (c) about powers of 2.  Use
+           your spreadsheet to build similar tables for the following sequences of $h$:
+       \begin{flalign*}
+           h &= 3^{-1}, \, 3^{-2}, \, 3^{-3}, \, \ldots \\
+           h &= 5^{-1}, \, 5^{-2}, \, 5^{-3}, \, \ldots \\
+           h &= 10^{-1}, \, 10^{-2}, \, 10^{-3}, \, \ldots \\
+           h &= \pi^{-1}, \, \pi^{-2}, \, \pi^{-3}, \, \ldots \\
+        \end{flalign*}
+       \item[(e)] Observation: If you calculate a numerical derivative with a forward
+           difference and then calculate the absolute percent error with a fixed value of
+           $h$, then what do you expect to happen to the absolute error if you divide the
+           value of $h$ by some positive contant $M$?
+       \item[(f)] What does your answer to part (e) have to do with the approximation
+           order of the numerical derivative method that you used?
+   \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Assume that $f(x)$ is some differentiable function and that we have calculated the
+    value of $f'(c)$ using the forward difference formula
+    \[ f'(c) \approx \frac{f(c+h) - f(c)}{h}. \]
+    Using what you learned from the previous problem to fill in the following table.
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline 
+            My $h$ & Absolute Percent Error \\ \hline \hline
+            $0.2$ & $2.83\%$ \\ \hline
+            $0.1$ & \\ \hline
+            $0.05$ & \\ \hline
+            $0.02$ & \\ \hline
+            $0.002$ & \\ \hline
+        \end{tabular}
+    \end{center}
+\end{problem}
+
 \begin{problem}
     Write MATLAB code that takes a function and a domain $(xmin,xmax)$ and
     returns a numerical approximation to the derivative on the interval
@@ -132,7 +203,7 @@ have the following definition.
     \mcode{function [new_x,dfdx]=FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)} 
 \end{problem}
 
-The only two ways to really check a numerical derivative is to plot the numerical
+The only two ways to really check a numerical derivative are to plot the numerical
 approximation and to do the derivative by hand and to plot the error. Be warned, however,
 that the numerical derivative that we have built from Theorem
 \ref{thm:first_order_first_deriv} should have one less value than the
@@ -169,48 +240,50 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
     you figure out which one makes the most sense.
 \end{problem}
 
-
-% \begin{problem}\label{prob:numdiff2}
-%     Write Excel and MATLAB code that takes a data set from an
-%     unknown function and returns a first-order accurate numerical approximation of the
-%     first derivative of the function. Test your code on data gerenated from the function
-%     \[ f(x) = \sin(x) - x\sin(x) \quad \text{on} \quad x \in (0,15) \]
-%     with various step sizes. Provide a plot of the error between the analytic derivative
-%     and the numerical derivative using a semi-logy scale.
-%     \\Note: You will lose some information along the way (why?).
-% 
-%     Your MATLAB code should accept the 
-% \end{problem}
+Next we'll build a more accurate numerical first derivative scheme.  The derivation
+technique is the same: play a little algebra game with the Taylor series and see if you
+can get the first derivative to simplify out.  This time we'll be hoping to have a better
+error approximation.
 
 \begin{problem}\label{prob:numdiff3}
     Consider again the Taylor series for an infinitely differentiable function $f(x)$:
     \[ f(x) = f(a) + \frac{f'(a)}{1!} (x-a)^1 + \frac{f''(a)}{2!}(x-a)^2 +
         \frac{f^{(3)}(a)}{3!}(x-a)^3 + \frac{f^{(4)}(a)}{4!}(x-a)^4 + \cdots \] 
-    This time, replace $x$ with $x-h$ and $a$ with $x$ and simplify.  Once you have the
-    Taylor series centered at $x$ and evaluated at $x-h$ form the linear combination
-    \[ f(x+h) - f(x-h) \]
-    using your result from \ref{prob:numdiff1} and solve for $f'(x)$.  Your result should
-    be a second-order accurate approximation for the first derivative of $f$.  Simplify
-    your approximation formula and verify that it is indeed second order.
+    \begin{enumerate}
+        \item[(a)] This time, replace $x$ with $x-h$ and $a$ with $x$ and simplify.  
+            \[ f(x-h) = \underline{\hspace{3in}} \]
+        \item[(b)] You should already have the Taylor series for $f(x+h)$.  Subtract
+            $f(x+h)$ and $f(x-h)$ and simplify.  Be very careful of you signs.  
+            \[ f(x+h) - f(x-h) = \underline{\hspace{3in}} \]
+        \item[(c)] Solve for $f'(x)$ in your result from part (b).  Fill in the question
+            marks and blanks below once you have finished simplifying.
+            \[ f'(x) = \frac{(???) - (???)}{2h} + \underline{\hspace{1in}}. \]
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    If we were to drop the terms after the fraction in the last result then we would be
+    making an error in the derivative computation.  According to Taylor's Theorem quantify
+    the error that is being made.
 \end{problem}
 
 \begin{thm}[Second Order Approximation of the First Derivative]
     \[ f'(x) = \underline{\hspace{2in}} + \mathcal{O}(h^2) \]
 \end{thm}
-\solution{
-    Subtract the two Taylor representations to get the second order approximation.
-    \begin{flalign*}
-        f(x+h) &= f(x) + \frac{f'(x)}{1!}h + \frac{f''(x)}{2!}h^2 +
-        \frac{f'''(x)}{3!} h^3 + \cdots \\
-        f(x-h) &= f(x) - \frac{f'(x)}{1!}h + \frac{f''(x)}{2!}h^2 - \frac{f'''(x)}{3!}h^3 \cdots \\
-        f(x+h)-f(x-h) &= 2 h f'(x) + \frac{h^3}{6} (f'''(\xi)+f'''(\nu)) \quad \text{for} \quad \xi
-        \in (x,x+h) \quad \text{and} \quad \xi \in (x-h,x) \\
-        \implies f'(x) &= \frac{f(x+h)-f(x-h)}{2h} + \frac{h^2}{12} (f'''(\xi)+f'''(\nu)) \quad \text{for} \quad \xi
-        \in (x,x+h) \quad \text{and} \quad \xi \in (x-h,x) 
-    \end{flalign*}
-    Hence, 
-    \[ f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} + \mathcal{O}(h^2). \]
-}
+% \solution{
+%     Subtract the two Taylor representations to get the second order approximation.
+%     \begin{flalign*}
+%         f(x+h) &= f(x) + \frac{f'(x)}{1!}h + \frac{f''(x)}{2!}h^2 +
+%         \frac{f'''(x)}{3!} h^3 + \cdots \\
+%         f(x-h) &= f(x) - \frac{f'(x)}{1!}h + \frac{f''(x)}{2!}h^2 - \frac{f'''(x)}{3!}h^3 \cdots \\
+%         f(x+h)-f(x-h) &= 2 h f'(x) + \frac{h^3}{6} (f'''(\xi)+f'''(\nu)) \quad \text{for} \quad \xi
+%         \in (x,x+h) \quad \text{and} \quad \xi \in (x-h,x) \\
+%         \implies f'(x) &= \frac{f(x+h)-f(x-h)}{2h} + \frac{h^2}{12} (f'''(\xi)+f'''(\nu)) \quad \text{for} \quad \xi
+%         \in (x,x+h) \quad \text{and} \quad \xi \in (x-h,x) 
+%     \end{flalign*}
+%     Hence, 
+%     \[ f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} + \mathcal{O}(h^2). \]
+% }
 
 % \begin{problem}
 %     Write Excel and MATLAB code that takes a data set from an unknown function and returns
@@ -233,6 +306,67 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 % }
 
 \begin{problem}
+    Let's return to the function $f(x) = \sin(x) - x\sin(x)$ but this time we will
+    approximate the first derivative at $x=1$ using the formula
+    \[ f'(1) \approx \frac{f(1+h) - f(1-h)}{2h}. \]
+    You should already have the first derivative and the exact answer from Problem
+    \ref{prob:deriv_error_analysis_ex} (if not, then go get them by hand again).  
+    \begin{enumerate}
+        \item[(a)] Fill in the table below with the derivative approximation and the absolute
+           error associated with each given $h$.  You may want to use a spreadsheet to
+           organize your data (be sure that you're working in radians!).
+           \begin{center}
+               \begin{tabular}{|c|c|c|c|}
+                   \hline 
+                   $h$ & Approx. of $f'(1)$ & Exact value of $f'(1)$ & Abs.
+                   \% Error \\ \hline \hline
+                   $2^{-3} = 0.125$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-4}=0.0625$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-5}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-6}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-7}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-8}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-9}$ & & $-\sin(1)$ & \\ \hline
+               \end{tabular}
+           \end{center}
+       \item[(b)] There was nothing really special in part (c) about powers of 2.  Use
+           your spreadsheet to build similar tables for the following sequences of $h$:
+       \begin{flalign*}
+           h &= 3^{-1}, \, 3^{-2}, \, 3^{-3}, \, \ldots \\
+           h &= 5^{-1}, \, 5^{-2}, \, 5^{-3}, \, \ldots \\
+           h &= 10^{-1}, \, 10^{-2}, \, 10^{-3}, \, \ldots \\
+           h &= \pi^{-1}, \, \pi^{-2}, \, \pi^{-3}, \, \ldots 
+        \end{flalign*}
+       \item[(c)] Observation: If you calculate a numerical derivative with a centered
+           difference and calculate the resulting absolute percent error with a fixed
+           value of $h$, then what do you expect to happen to the absolute percent error
+           if you divide the value of $h$ by some positive contant $M$?
+       \item[(d)] What does your answer to part (e) have to do with the approximation
+           order of the numerical derivative method that you used?
+    \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+    Assume that $f(x)$ is some differentiable function and that we have calculated the
+    value of $f'(c)$ using the centered difference formula
+    \[ f'(c) \approx \frac{f(c+h) - f(c-h)}{2h}. \]
+    Using what you learned from the previous problem to fill in the following table.
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline 
+            My $h$ & Absolute Percent Error \\ \hline \hline
+            $0.2$ & $2.83\%$ \\ \hline
+            $0.1$ & \\ \hline
+            $0.05$ & \\ \hline
+            $0.02$ & \\ \hline
+            $0.002$ & \\ \hline
+        \end{tabular}
+    \end{center}
+\end{problem}
+
+
+\begin{problem}
     Write a MATLAB function that takes a function and a domain and returns a second order
     numerical approximation to the first derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
     MATLAB file.    Your function should
@@ -242,11 +376,54 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
     \mcode{function [new_x,dfdx]=FirstDerivSecondOrder(f,xmin,xmax,num_interior_pts)}
 \end{problem}
 
+Now we'll search for an approximation of the second derivative.  Again, the game will be
+the same: play with the Taylor series and some algebra and hope that the second derivative
+pops out.  This time we'll do the algebra in such a way that the first derivative cancels.
+
+From the previous problems you already have Taylor expansions of the form $f(x+h)$ and
+$f(x-h)$.  Let's summarize them here since you're going to need them for future
+computations.
+\begin{flalign*}
+    f(x+h) &= f(x) + \frac{f'(x)}{1!} h + \frac{f''(x)}{2!} h^2 + \frac{f^{(3)}(x)}{3!}
+    h^3 + \cdots \\
+    f(x-h) &= f(x) - \frac{f'(x)}{1!} h + \frac{f''(x)}{2!} h^2 - \frac{f^{(3)}(x)}{3!}
+    h^3 + \cdots 
+\end{flalign*}
 
 \begin{problem}\label{prob:numdiff4}
-    Add the Taylor series for $f(x+h)$ and $f(x-h)$ to arrive at an approximation of the
-    second derivative. What is the order of the error?  
+    The goal of this problem is to use the Taylor series for $f(x+h)$ and $f(x-h)$ to arrive at an approximation of the
+    \underline{ {\bf second derivative}}. 
+    \begin{enumerate}
+        \item[(a)] Add the Taylor series for $f(x+h)$ and $f(x-h)$ and combine all like
+            terms.  You should notice that several terms cancel.
+            \[ f(x+h) + f(x-h) = \underline{\hspace{3in}}. \]
+        \item[(b)] Solve your answer in part (a) for $f''(x)$.
+            \[ f''(x) = \frac{(??) - 2 (??) + (??)}{h^2} + \underline{\hspace{1in}}. \]
+    \end{enumerate}
 \end{problem}
+
+\begin{problem}
+    If we were to drop all of the terms after the fraction on the right-hand side of the
+    previous result we would be introducing some error into the derivative computation.
+    According to Taylor's Theorem, how can we quantify the order of the error?  
+\end{problem}
+
+\begin{problem}
+    Again consider the function $f(x) = \sin(x) - x\sin(x)$. 
+    \begin{enumerate}
+        \item[(a)] Calculate the \underline{second} derivative of this function and
+            calculate the exact value of $f''(1)$.
+        \item[(b)] If we calcuate the second derivative with the central difference scheme
+            that you built in the Problem \ref{prob:numdiff4} using $h = 0.5$ then we get
+            a 4.115\% error.  Stop now and verify this percent error calculation.  
+        \item[(c)] Based on our previous work with the order of the error in a numerical
+            differentiation scheme, what do you predict the error will be if we calculate
+            $f''(1)$ with $h = 0.25$?  With $h = 0.05$?  With $h = 0.005$?  Be able to
+            defend your answers.
+    \end{enumerate}
+\end{problem}
+
+
 
 \begin{problem}
     Write a MATLAB function that takes a function and a domain and returns a second order
@@ -299,6 +476,35 @@ differential equations in Chapter \ref{ch:odes}.
     \caption{First and second derivatives.}
     \label{tab:first_and_second_derivatives}
 \end{table}
+
+
+\begin{problem}
+    Let $f(x)$ be a twice differentiable function.  We are interested in the first and
+    second derivative of the function $f$ at the point $x = 1.74$.  Use what you have
+    learned in this section to answer the following questions. (For clarity, you can think
+    of ``$f$'' as a different function in each of the following questions \ldots it
+    doesn't really matter exactly what function $f$ is.)
+    \begin{enumerate}
+        \item[(a)] Johnny used a numerical first derivative scheme with $h = 0.1$ to
+            approximate $f'(1.74)$ and found an abolute percent error of 3.28\%.  He then
+            used $h=0.01$ and found an absolute percent error of 0.328\%.  What was the
+            order of the error in his first derivative scheme? How can you tell?
+        \item[(b)] Betty used a numerical first derivative scheme with $h = 0.2$ to
+            approximate $f'(1.74)$ and found an abolute percent error of 4.32\%.  She then used
+            $h=0.1$ and found an absolute percent error of 1.08\%.  What numerical first
+            derivative scheme did she likely use?
+        \item[(c)] Shelby did the computation 
+            \[ f'(1.74) \approx \frac{f(1.78) - f(1.74)}{0.04} \]
+            and found an absolute percent error of 2.93\%.  If she now computes 
+            \[ f'(1.74) \approx \frac{f(1.75) - f(1.74)}{0.01} \]
+            what will the new absolute percent error be?
+        \item[(d)] Harry wants to compute $f''(1.74)$ to within 1\% using a central
+            differnce scheme.  He tries $h=0.25$
+            and gets an absolute percent error of 3.71\%.  What $h$ should he try next so
+            that his absolute percent error is less than (but close to) 1\%?
+    \end{enumerate}
+\end{problem}
+
 
 
 
@@ -367,6 +573,71 @@ Clearly, the more rectangles we choose the closer the sum of the areas of the re
     Test your code on several functions for which you know the integral.
 \end{problem}
 
+\begin{problem}\label{prob:left_riemann_error}
+    Consider the function $f(x) = \sin(x)$.  We know the antiderivative for this function,
+    $F(x) = -\cos(x) + C$, but in this question we are going to get a sense of the order
+    of the error when doing Riemann Sum integration. 
+    \begin{enumerate}
+        \item[(a)] Find the exact value of 
+            \[ \int_0^{1} f(x) dx. \]
+        \item[(b)] Now build a Riemann Sum approximation (using your code) with various
+            values of $\Delta x$.  For all of your approximation use left-justified
+            rectangles.  Fill in the table with your results. 
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    $\Delta x$ & Approx. Integral & Exact Integral & Abs. Percent Error \\
+                    \hline \hline
+                    $2^{-2} = 0.25$ & & & \\ \hline
+                    $2^{-3} = 0.125$ & & & \\ \hline
+                    $2^{-4}$ & & & \\ \hline
+                    $2^{-5}$ & & & \\ \hline
+                    $2^{-6}$ & & & \\\hline
+                    $2^{-7}$ & & & \\\hline
+                    $2^{-8}$ & & & \\\hline
+                    $2^{-9}$ & & & \\ \hline
+                \end{tabular}
+            \end{center}
+        \item[(c)] There was nothing really special about powers of 2 in part (b) of this
+            problem.  Examine other sequences of $\Delta x$ with a goal toward answering
+            the question: \\
+            If we find an approximation of the integral with a fixed $\Delta x$ and find
+            an absolute percent error, then what would happen to the absolute percent
+            error if we divide $\Delta x$ by some positive constant $M$?
+        \item[(d)] What is the apparent approximation error of the Riemann Sum method
+            using left-justified rectangles.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Repeat Problem \ref{prob:left_riemann_error} using right-justified rectangles.  
+\end{problem}
+
+
+\begin{thm}
+    In approximating the integral $\int_a^b f(x) dx$ with a fixed interval width $\Delta
+    x$ we find an absolute percent error $P$.
+    \begin{itemize}
+    \item If we use left rectangles and an interval width of $\frac{\Delta x}{M}$ then the
+        absolute percent error will be approximately \underline{\hspace{1in}}.
+    \item If we use right rectangles and an interval width of $\frac{\Delta x}{M}$ then the
+        absolute percent error will be approximately \underline{\hspace{1in}}.
+    \end{itemize}
+\end{thm}
+
+The previous theorem could be stated in an equivalent way.
+
+\begin{thm}
+    In approximating the integral $\int_a^b f(x) dx$ with a fixed interval number of
+    subintervals we find an absolute percent error $P$.
+    \begin{itemize}
+    \item If we use left rectangles and $M$ times as many subintervals then the
+        absolute percent error will be approximately \underline{\hspace{1in}}.
+    \item If we use right rectangles and $M$ times as many subintervals then the
+        absolute percent error will be approximately \underline{\hspace{1in}}.
+    \end{itemize}
+\end{thm}
+
 \begin{problem}
     Create a plot with the width of the subintervals on the horizontal axis and the
     absolute error between your (left) Riemann sum calculation and the exact integral for
@@ -374,7 +645,117 @@ Clearly, the more rectangles we choose the closer the sum of the areas of the re
     plot, what is the approximate order of the error in the Riemann sum approximation?
 \end{problem}
 
+Now let's turn our attention to some slightly better algorithms for calculating the value
+of a definite integral: The Trapezoidal Rule and Simpson's Rule.  There are many others,
+but in practice these two are relatively easy to implement and have reasonably good error
+approximations.  To motivate the idea of the Trapezoid rule consider Figure
+\ref{fig:trap_motivation}.  It is plain to see that trapezoids will make better
+approximations than rectangles at least in this particular case.  Another way to think
+about using trapezoids, however, is to see the top side of the trapezoid as a secant line
+connecting two points on the curve.  As $\Delta x$ gets arbitrarily small, the secant
+lines become better and better approximations for tangent lines and are hence arbitrarily
+good approximations for the curve.  For these reasons it seems like we should investigate
+how to systematically approximate definite integrals via trapezoids.
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.6]
+            \begin{axis}[axis lines=center, xmin=0, xmax=4, ymin=0, ymax=4, domain=0:4,
+                title={Left Rectangles}]
+                \addplot[smooth, very thick, black] {(1/5)*x^2*(5-x)};
+                \draw[fill=blue!30, fill opacity=0.4] (axis cs:1,0) -- (axis cs:2,0) -- (axis cs:2,0.8) --
+                (axis cs:1,0.8) -- (axis cs:1,0);
+                \draw[fill=blue!30, fill opacity=0.4] (axis cs:2,0) -- (axis cs:3,0) --
+                (axis cs:3,2.4) -- (axis cs:2,2.4) -- (axis cs:2,0);
+                \draw[fill=blue!30, fill opacity=0.4] (axis cs:3,0) -- (axis cs:4,0) --
+                (axis cs:4,3.6) -- (axis cs:3,3.6) -- (axis cs:3,0);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.6]
+            \begin{axis}[axis lines=center, xmin=0, xmax=4, ymin=0, ymax=4, domain=0:4,
+                title={Right Rectangles}]
+                \addplot[smooth, very thick, black] {(1/5)*x^2*(5-x)};
+                \draw[fill=red!30, fill opacity = 0.4] (axis cs:1,0) -- (axis cs:2,0) --
+                (axis cs:2,2.4) -- (axis cs:1,2.4) -- (axis cs:1,0);
+                \draw[fill=red!30, fill opacity = 0.4] (axis cs:2,0) -- (axis cs:3,0) --
+                (axis cs:3,3.6) -- (axis cs:2,3.6) -- (axis cs:2,0);
+                \draw[fill=red!30, fill opacity = 0.4] (axis cs:3,0) -- (axis cs:4,0) --
+                (axis cs:4,3.2) -- (axis cs:3,3.2) -- (axis cs:3,0);
+            \end{axis}
+        \end{tikzpicture}
+        \begin{tikzpicture}[scale=0.6]
+            \begin{axis}[axis lines=center, xmin=0, xmax=4, ymin=0, ymax=4, domain=0:4,
+                title={Trapezoids}]
+                \addplot[smooth, very thick, black] {(1/5)*x^2*(5-x)};
+                \draw[fill=green!30, fill opacity = 0.4] (axis cs:1,0) -- (axis cs:2,0) --
+                (axis cs:2,2.4) -- (axis cs:1,0.8) -- (axis cs:1,0);
+                \draw[fill=green!30, fill opacity = 0.4] (axis cs:2,0) -- (axis cs:3,0) --
+                (axis cs:3,3.6) -- (axis cs:2,2.4) -- (axis cs:2,0);
+                \draw[fill=green!30, fill opacity = 0.4] (axis cs:3,0) -- (axis cs:4,0) --
+                (axis cs:4,3.2) -- (axis cs:3,3.6) -- (axis cs:3,0);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Using rectangles and trapezoids with $\Delta x = 1$ for approximating
+    the integral $\int_1^4 f(x)dx$.}
+    \label{fig:trap_motivation}
+\end{figure}
+
 \begin{problem}
+    Consider a single trapezoid approximating the area under a curve.  From geometry we
+    recall that the area of a trapezoid is 
+    \[ A = \frac{1}{2}\left( b_1 + b_2 \right) h \]
+    where $b_1, b_2$ and $h$ are marked on the picture below.  The function shown in the
+    picture is $f(x) = \frac{1}{5} x^2 (5-x)$.  Find the area of the shaded region as an
+    approximation to
+    \[ \int_1^4 \left( \frac{1}{5} x^2 (5-x) \right) dx. \]
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9]
+            \begin{axis}[axis lines=center, grid, xmin=0, xmax=4, ymin=0, ymax=4, domain=0:4,
+                title={Trapezoids}]
+                \addplot[smooth, very thick, black] {(1/5)*x^2*(5-x)};
+                \draw[fill=green!30, fill opacity = 0.4] (axis cs:1,0) -- (axis cs:4,0) --
+                (axis cs:4,3.2) -- (axis cs:1,0.8) -- (axis cs:1,0);
+                \draw (axis cs:1,0.2) node[anchor=east]{$b_1$};
+                \draw (axis cs:4,1.6) node[anchor=west]{$b_2$};
+                \draw (axis cs:2.5,0.1) node[anchor=east]{$h$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+\begin{problem}
+    Now use the same idea with $h = \Delta x = 1$ from figure \ref{fig:trap_motivation} to
+    approximate the area under the function $f(x) = (1/5)x^2(5-x)$ between $x=1$ and $x=4$
+    using three trapezoids.
+\end{problem}
+
+\begin{problem}
+    Consider the function $f(x) = \frac{1}{5}x^2(5-x)$ again.
+    \begin{enumerate}
+        \item[(a)] Work out the exact value of the definite integral by hand.
+        \item[(b)] Summarize your answers to the previous problems in the following table
+            then extend the data that you have for smaller and smaller values of $\Delta
+            x$.
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    $\Delta x$ & Approx. Integral & Exact Integral & Abs. \% Error \\
+                    \hline \hline
+                    3 & & & \\ \hline
+                    1 & & & \\ \hline
+                    $1/3$ & & & \\ \hline
+                    $1/9$ & & & \\ \hline
+                    $\vdots$ & $\vdots$& $\vdots$& $\vdots$\\ \hline
+                \end{tabular}
+            \end{center}
+        \item[(c)] From the table that you built in part (b), what do you conjecture is
+            the order of the approximation error for the trapezoid method?
+    \end{enumerate}
+\end{problem}
+
+
+\begin{technique}
     We want to approximate $\displaystyle \int_a^b f(x) dx$.  One of the simplest ways is
     to approximate the area under the function with a trapezoid.  Recall from basic
     geometry that area of a
@@ -389,7 +770,25 @@ Clearly, the more rectangles we choose the closer the sum of the areas of the re
         \item Approximate the integral as
             \[ \int_a^b f(x) dx = \sum_{j=1}^n A_j \]
     \end{enumerate}
-    Draw a picture depicting how the trapezoidal rule works.
+%     Draw a picture depicting how the trapezoidal rule works.
+\end{technique}
+
+\begin{problem}
+    Write code to give the trapezoidal rule approximation for the definite integral
+    $\int_a^b f(x) dx$.  Test your code on functions where you know the definite area.
+    Then test your code on functions where you have approximated the area by examining a
+    plot (i.e. you have a visual estimate of the area).
+\end{problem}
+
+\begin{problem}
+    Use the code that you wrote in the previous problem to test your conjecture about the
+    order of the approximation error for the trapezoid rule.  Integrate the function $f(x)
+    = \sin(x)$ from $x=0$ to $x=1$ with more and more trapezoids.  In each case compare to
+    the exact answer and find the absolute percent error.  The goal is to answer the
+    question: \\
+    If I calculate the definite integral with a fixed $\Delta x$ and get an absolute
+    percent error, $P$, then what absolute percent error will I get if I use a width of
+    $\Delta x / M$ for some positive number $M$?
 \end{problem}
 
 The trapezoidal rule does a decent job approximating integrals, but ultimately you are
@@ -423,13 +822,46 @@ At this point we can see that the integral can be approximated as
 \[ \int_a^b f(x) dx \approx \left( \frac{b-a}{6} \right) \left( f(a) + 4f\left(
     \frac{a+b}{2}
 \right) + f(b) \right) \]
-and the technique will give an exact answer for any polynomial of order 2 or below.  To
-improve upon this idea we now examine the problem of partitioning the interval $[a,b]$
-into small pieces and running this process on each piece.
-
-
+and the technique will give an exact answer for any polynomial of order 2 or below.  
 
 \begin{problem}
+    \begin{enumerate}
+        \item[(a)] Use the method described above to find approximate the area under the
+            curve $f(x) = (1/5) x^2 (5-x)$ on the interval $[1,4]$.  To be clear, you will
+            be using the points $a=1, m=2.5$, and $b=4$ in the above derivation.  
+        \item[(b)] Next find the exact area under the curve $g(x) = (-1/2)x^2 +3.3x -2$ on
+            the interval $[1,4]$.  
+        \item[(c)] What do you notice about the two areas?  What does this sample problem
+            tell you about the formula that we derived above?
+    \end{enumerate}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xmin=0, xmax=4, ymin=0, ymax=4,
+                domain=0:4]
+                \addplot[smooth, black, very thick] {0.2*x^2*(5-x)};
+                \addplot[smooth, red, dashed, very thick] {-0.5*x^2+3.3*x-2};
+                \draw[fill=red] (axis cs:1,0.8) circle(0.08cm) node[anchor=west]{$a$};
+                \draw[fill=red] (axis cs:2.5,3.125) circle(0.08cm) node[anchor=north]{$m$};
+                \draw[fill=red] (axis cs:4,3.2) circle(0.08cm) node[anchor=east]{$b$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+To make the punchline of the previous problem a bit more clear, using the formula 
+\[ \int_a^b f(x) dx \approx \left( \frac{a-b}{6} \right) \left( f(a) + 4 f(m) + f(b)
+\right) \]
+is the same as fitting a parabola to the three points $(a,f(a))$, $(m,f(m))$, and
+$(b,f(b))$ and finding the area under the parabola exactly.  That is exactly the step up
+from the trapezoid rule and Riemann sums that we were after: Riemann sums approxmiate the
+function with constant functions, the trapezoid rule uses linear functions, and now we
+have a method for approximating with parabolas.  
+
+To improve upon this idea we now examine the problem of partitioning the interval $[a,b]$
+into small pieces and running this process on each piece.  This is called Simpson's Rule
+for integration.
+
+\begin{technique}[Simpson's Rule]
     Now we put the process explained above into a form that can be coded to approximate
     integrals. We call this method Simpson's Rule after Thomas Simpson (1710-1761) who, by
     the way, was a basket weaver in his day job so he could pay the bills and keep doing
@@ -443,7 +875,19 @@ into small pieces and running this process on each piece.
         \item Approximate the integral as
             \[ \int_a^b f(x) dx = \sum_{j=1}^n A_j \]
     \end{enumerate}
-    Draw a picture depicting how Simpson's rule works.
+%     Draw a picture depicting how Simpson's rule works.
+\end{technique}
+
+\begin{problem}
+    We have spend a lot of time over the past many pages building approximations of the
+    order of the error for numerical integration and differentiation schemes.  It is now
+    up to you.  \\
+    Build a numerical experiment that allows you to conjecture the order of the
+    approximation error for Simpson's rule.  Remember that the goal is the answer the
+    question: \\
+    If I approximate the integral with a fixed $\Delta x$ and find an absolute percent
+    error of $P$, then what will the absolute percent error be using a width of $\Delta x
+    / M$?
 \end{problem}
 
 \begin{problem}
