@@ -615,6 +615,27 @@ approximation is called a {\bf Quasi-Newton Method}.
     performed faster.
 \end{problem}
 
+\begin{problem}
+    An object falling vertically through the air is subject to friction due to air
+    resistance as well as gravity.  The function describing the position of such a
+    function is 
+    \[ s(t) = s_0 - \frac{mg}{k} t + \frac{m^2 g}{k^2}\left( 1- e^{-kt/m} \right), \]
+    where $m$ is the mass measured in kg, $g$ is gravity measured in meters per second per
+    second, $s_0$ is the
+    initial position measured in meters, and $k$ is the
+    coefficient of air resistance.
+    \begin{enumerate}
+        \item[(a)] What are the units of the parameter $k$?
+        \item[(b)] If $m = 1$kg, $g=9.8$m/s$^2$, $k=0.1$, and $s_0 = 100$m how long will it take
+            for the object to hit the ground?  Find your answer to within 0.01 seconds.
+        \item[(c)] The value of $k$ depends on the aerodynamics of the object and might be
+            challenging to measure.  We want to perform a sensitivity analysis on your
+            answer to part (b) subject to small measurement errors in $k$.  If the value
+            of $k$ is only known to within 10\% then what are your estimates of when the
+            object will hit the ground?
+    \end{enumerate}
+\end{problem}
+
 
 \begin{problem}[Modified from \cite{Chartier}]
     An artillery officer wishes to fire his cannon on an enemy brigade.  He wants to know
@@ -728,6 +749,8 @@ approximation is called a {\bf Quasi-Newton Method}.
     has a possible local extrema.  In this problem it is likely best to find the first and
     second derivatives on paper before writing any code.
 }
+
+
 
 
 

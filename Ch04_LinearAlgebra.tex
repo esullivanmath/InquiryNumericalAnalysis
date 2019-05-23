@@ -1532,114 +1532,114 @@ zero and solve the resulting equation.
 \end{problem}
 
 
-\begin{problem}
-    In this exercise we will use numerical linear algebra to do some handwriting
-    recognition on the classical data set \mcode{mnist}.  The \mcode{mnist} data set
-    contains a training set of 60,000 numbers and a test set of 10,000 numbers.  Each
-    digit in the database was placed in a 28 by 29 grayscale image such that the center of
-    mass of its pixels is at the center of the picture.  While our primary goal for this
-    problem is to use numerical linear algebra, our secondary goal is to get some
-    experience with the logic of machine learning.  In machine learning problems we often
-    follow the following logic:
-    \begin{itemize}
-        \item First use a set of data for which we know the {\it answer} (in this case the
-            {\it answer} is the numerical value of the digit that was written).  We call
-            this the training data set in the sense that we train the numerical method
-            with the correct answers in mind.
-        \item Next we compare data with hidden answers to our training set and build a
-            method for using the training set to make a prediction for the answer.  This
-            is called the testing phase of a machine learning algorithm.  In the testing
-            phase we know the {\it answer} but keep it hidden from the algorithm.  We let
-            our algorithm predict the {\it answer} and then compare to the hidden truth.
-            At the end of this step we can give a percent effectiveness for our algorithm.
-        \item In the final step of a machine learning process we give the numerical
-            algorithm data where we don't know the {\it answer} and use the algorithm to
-            predict for us.  
-    \end{itemize}
-
-    Let's be more specific.  Let's say that we want to determine if a handwritten digit is
-    the number ``0''.  From the training set we average all of the zeros together to get a
-    best estimate of what a ``0'' looks like.  Then we build a mathematical technique for
-    doing the comparison between our new digit and the averaged training 0.  If the
-    comparison technique tells us that our new digit is {\it close enough} then we call
-    that new digit a zero. We can do this for all of the \mcode{test} 0's and determine
-    the percent effectiveness for our comparison technique. 
-
-    {\bf Your Tasks:}
-    \begin{enumerate}
-        \item[(a)] Start by going to
-            \href{http://www.cs.nyu.edu/~roweis/data.html}{www.cs.nyu.edu/$\sim$roweis/data.html}
-            to download the data set.  Download the file titled \mcode{mnist_all.mat}.
-            This file is a MATLAB file that needs to be read into your working session of
-            MATLAB.  
-        \item[(b)] To read the \mcode{mnist_all.mat} data into MATLAB \\
-            \mcode{load mnist_all.mat}\\
-            Then type \mcode{whos} to see the variables containing training digits
-            (\texttt{train0, ..., train9}) and test digits (\texttt{test0, ...,
-            test9}).
-        \item[(c)] To visualize the first image in the matrix \texttt{train0} use 
-\begin{lstlisting}
-digit = train0(1,:); % read the first row all columns out of train0
-digitImage = reshape(digit,28,28); % turn into a 28x28 matrix
-image(rot90(flipup(digitImage),-1))
-colormap(gray(256))
-axis square tight off
-\end{lstlisting}
-        \item[(d)] Create a 10 by 784 matrix $T$ whose $i^{th}$ row contains the average
-            pixel values over all of the training images of the number $i-1$.  For
-            instance, the first row of $T$ can be formed by typing \\
-            \mcode{T(1,:) = mean(train0);} \\
-            Visualize these average digits using the \mcode{subplot} command creating a
-            $2 \times 5$ matrix of plots with the average 0 in the upper left and the
-            average 9 in the lower right.  Check yourself by making sure that your image
-            is identical to Figure \ref{fig:mnist_average}.
-        \item[(e)] We are going to try two methods for handwriting recognition.  There are
-            10,000 test numbers that are not in the training set and we want to try two
-            different ways of determining which digit is in the test image.  Your job is
-            to implement both of these methods.  You need to test all 10,000 test images and
-            gather statistics on how often the method identifies the test image.  Report
-            your answers by stating the proportion of correct identifications for each of
-            the 10 numerals.
-            \begin{description}
-                \item[Method \#1 (Min Norm):] Compare pixels in the test digit to each row of the
-                    training matrix $T$ and determine which row most closely resembles the
-                    test digit.  Pseudo code for this method is:
-                    \begin{itemize}
-                        \item Let $D$ be the first test digit in \texttt{test0} using \\
-                            \mcode{D = double(test0(1,:));}
-                        \item For each row $i=1, 2, \cdots, 10$ compute \\
-                            \mcode{norm(T(i,:) - D)} \\
-                            and determine which value of $i$ this is smallest
-                        \item $D$ is probably the digit $i-1$.
-                        \item repeat for all of the test digits in \texttt{test0},
-                            \texttt{test1}, \ldots.
-                    \end{itemize}
-                    Be sure to write code to test all of the 10,000 test digits.  There
-                    are elegant ways to code this but you can also complete this task with
-                    a bunch of copy and paste.
-                \item[Method \#2 (Min Projections):] Project the test image vector $D$
-                    onto the mean training image $T(i,:)$ and find the error in the
-                    projection.  In this method we seek to minimize the size of the error.
-                    Recall that the projection of $D$ onto $T(i,:)$ is 
-                    \[ \frac{D \cdot T(i,:)}{T(i,:) \cdot T(i,:)} \]
-                    and the error in the projection is 
-                    \[ \left\| D - \left( \frac{D \cdot T(i,:)}{T(i,:) \cdot T(i,:)} \right)
-                    T(i,:) \right\| \]
-            \end{description}
-    \end{enumerate}
-\end{problem}
-
-\begin{figure}
-    \begin{center}
-        \includegraphics[width=0.9\columnwidth]{mnist_average_training_image.eps}
-    \end{center}
-    \caption{The 10 images are the averages of all of the training images for each digit.
-        They represent what a {\it typical} digit should look like for each of the 10
-    digits.}
-    \label{fig:mnist_average}
-\end{figure}
-
-
+% \begin{problem}
+%     In this exercise we will use numerical linear algebra to do some handwriting
+%     recognition on the classical data set \mcode{mnist}.  The \mcode{mnist} data set
+%     contains a training set of 60,000 numbers and a test set of 10,000 numbers.  Each
+%     digit in the database was placed in a 28 by 29 grayscale image such that the center of
+%     mass of its pixels is at the center of the picture.  While our primary goal for this
+%     problem is to use numerical linear algebra, our secondary goal is to get some
+%     experience with the logic of machine learning.  In machine learning problems we often
+%     follow the following logic:
+%     \begin{itemize}
+%         \item First use a set of data for which we know the {\it answer} (in this case the
+%             {\it answer} is the numerical value of the digit that was written).  We call
+%             this the training data set in the sense that we train the numerical method
+%             with the correct answers in mind.
+%         \item Next we compare data with hidden answers to our training set and build a
+%             method for using the training set to make a prediction for the answer.  This
+%             is called the testing phase of a machine learning algorithm.  In the testing
+%             phase we know the {\it answer} but keep it hidden from the algorithm.  We let
+%             our algorithm predict the {\it answer} and then compare to the hidden truth.
+%             At the end of this step we can give a percent effectiveness for our algorithm.
+%         \item In the final step of a machine learning process we give the numerical
+%             algorithm data where we don't know the {\it answer} and use the algorithm to
+%             predict for us.  
+%     \end{itemize}
+% 
+%     Let's be more specific.  Let's say that we want to determine if a handwritten digit is
+%     the number ``0''.  From the training set we average all of the zeros together to get a
+%     best estimate of what a ``0'' looks like.  Then we build a mathematical technique for
+%     doing the comparison between our new digit and the averaged training 0.  If the
+%     comparison technique tells us that our new digit is {\it close enough} then we call
+%     that new digit a zero. We can do this for all of the \mcode{test} 0's and determine
+%     the percent effectiveness for our comparison technique. 
+% 
+%     {\bf Your Tasks:}
+%     \begin{enumerate}
+%         \item[(a)] Start by going to
+%             \href{http://www.cs.nyu.edu/~roweis/data.html}{www.cs.nyu.edu/$\sim$roweis/data.html}
+%             to download the data set.  Download the file titled \mcode{mnist_all.mat}.
+%             This file is a MATLAB file that needs to be read into your working session of
+%             MATLAB.  
+%         \item[(b)] To read the \mcode{mnist_all.mat} data into MATLAB \\
+%             \mcode{load mnist_all.mat}\\
+%             Then type \mcode{whos} to see the variables containing training digits
+%             (\texttt{train0, ..., train9}) and test digits (\texttt{test0, ...,
+%             test9}).
+%         \item[(c)] To visualize the first image in the matrix \texttt{train0} use 
+% \begin{lstlisting}
+% digit = train0(1,:); % read the first row all columns out of train0
+% digitImage = reshape(digit,28,28); % turn into a 28x28 matrix
+% image(rot90(flipup(digitImage),-1))
+% colormap(gray(256))
+% axis square tight off
+% \end{lstlisting}
+%         \item[(d)] Create a 10 by 784 matrix $T$ whose $i^{th}$ row contains the average
+%             pixel values over all of the training images of the number $i-1$.  For
+%             instance, the first row of $T$ can be formed by typing \\
+%             \mcode{T(1,:) = mean(train0);} \\
+%             Visualize these average digits using the \mcode{subplot} command creating a
+%             $2 \times 5$ matrix of plots with the average 0 in the upper left and the
+%             average 9 in the lower right.  Check yourself by making sure that your image
+%             is identical to Figure \ref{fig:mnist_average}.
+%         \item[(e)] We are going to try two methods for handwriting recognition.  There are
+%             10,000 test numbers that are not in the training set and we want to try two
+%             different ways of determining which digit is in the test image.  Your job is
+%             to implement both of these methods.  You need to test all 10,000 test images and
+%             gather statistics on how often the method identifies the test image.  Report
+%             your answers by stating the proportion of correct identifications for each of
+%             the 10 numerals.
+%             \begin{description}
+%                 \item[Method \#1 (Min Norm):] Compare pixels in the test digit to each row of the
+%                     training matrix $T$ and determine which row most closely resembles the
+%                     test digit.  Pseudo code for this method is:
+%                     \begin{itemize}
+%                         \item Let $D$ be the first test digit in \texttt{test0} using \\
+%                             \mcode{D = double(test0(1,:));}
+%                         \item For each row $i=1, 2, \cdots, 10$ compute \\
+%                             \mcode{norm(T(i,:) - D)} \\
+%                             and determine which value of $i$ this is smallest
+%                         \item $D$ is probably the digit $i-1$.
+%                         \item repeat for all of the test digits in \texttt{test0},
+%                             \texttt{test1}, \ldots.
+%                     \end{itemize}
+%                     Be sure to write code to test all of the 10,000 test digits.  There
+%                     are elegant ways to code this but you can also complete this task with
+%                     a bunch of copy and paste.
+%                 \item[Method \#2 (Min Projections):] Project the test image vector $D$
+%                     onto the mean training image $T(i,:)$ and find the error in the
+%                     projection.  In this method we seek to minimize the size of the error.
+%                     Recall that the projection of $D$ onto $T(i,:)$ is 
+%                     \[ \frac{D \cdot T(i,:)}{T(i,:) \cdot T(i,:)} \]
+%                     and the error in the projection is 
+%                     \[ \left\| D - \left( \frac{D \cdot T(i,:)}{T(i,:) \cdot T(i,:)} \right)
+%                     T(i,:) \right\| \]
+%             \end{description}
+%     \end{enumerate}
+% \end{problem}
+% 
+% \begin{figure}
+%     \begin{center}
+%         \includegraphics[width=0.9\columnwidth]{mnist_average_training_image.eps}
+%     \end{center}
+%     \caption{The 10 images are the averages of all of the training images for each digit.
+%         They represent what a {\it typical} digit should look like for each of the 10
+%     digits.}
+%     \label{fig:mnist_average}
+% \end{figure}
+% 
+% 
 
 
 \begin{problem}
