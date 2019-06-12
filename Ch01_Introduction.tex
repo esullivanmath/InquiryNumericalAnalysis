@@ -64,27 +64,63 @@ The simplest answer is that $1/10$ is not computer representable.
     initial condition work better?
 \end{problem}
 
-A computer stores numbers using base 2, called a binary number system.  Let's first
-discuss our more familiar base 10 system.  What do the digits in the number ``$135$'' really
-mean?  A moment's reflection likely reveals that 
-\[ 135 = 100 + 30 + 5 =  1 \times 10^2 + 3 \times 10^1 + 5 \times 10^0. \]
-We use what is commonly called a {\it positional number system}.  In such a system, the
+A computer circuit knows two states: on and off.  As such, anything saved in computer
+memory is stored using base-2 numbers.  This is called a binary number system.  To fully
+understand a binary number system it is worth while to pause and reflect on our base-10
+number system for a few moments. 
+
+What do the digits in the number ``$735$'' really mean?  The position of each digit tells
+us something particular about the magnitude of the overall number.  The number $735$ can
+be represented as a sum of powers of $10$ as
+\[ 735 = 700 + 30 + 5 =  7 \times 10^2 + 3 \times 10^1 + 5 \times 10^0 \]
+and we can read this number as $7$ hundreds, $3$ tens, and $5$ ones.
+As you can see, in a ``positional number system'' such as our base-10 system, the
 position of the number indicates the power of the base, and the value of the digit itself
-tells you the multiplier of that power.
+tells you the multiplier of that power.  This is contrary to number systems like Roman
+Numerals where the symbols themselves give us the number, and meaning of the position is
+somewhat flexible.
 % In other words, the location of the digit (as read from the right-hand side of the number
 % starting at 0) is the power on the base, 10.  Similarly
-The number ``48329'' can therefore be interpreted as
-\[ 48329 = 40000 + 8000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 2
-\times 10^1 + 9 \times 10^0. \]
+The number ``48,329'' can therefore be interpreted as
+\[ 48,329 = 40,000 + 8,000 + 300 + 20 + 9 = 4 \times 10^4 + 8 \times 10^3 + 3 \times 10^2 + 2
+\times 10^1 + 9 \times 10^0, \]
+Four ten thousands, eight thousands, three hundreds, two tens, and nine ones.
 
-Now let's switch to the number system used by computers: the binary number system.  In a binary number system the base is 2 so the only allowable
-digits are 0 and 1.  In binary (base-2), the number ``$101101$'' can be interpreted
-as
-\[ 101101_2 = 1 \times 2^5 + 0 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1
+Now let's switch to the number system used by computers: the binary number system.  In a
+binary number system the base is 2 so the only allowable digits are 0 and 1 (just like in
+base-10 the allowable digits were 0 through 9).  In binary (base-2), the number
+``$101,101$'' can be interpreted as
+\[ 101,101_2 = 1 \times 2^5 + 0 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1
 \times 2^0 \]
 (where the subscript ``2'' indicates the based to the reader).
-If we put this back into base 10 (so that we can read it more comfortably) we get
-\[ 101101_2 = 32 + 0 + 8 + 4 + 0 + 1 = 45_{10}. \] 
+If we put this back into base 10, so that we can read it more comfortably, we get
+\[ 101,101_2 = 32 + 0 + 8 + 4 + 0 + 1 = 45_{10}. \] 
+The reader should take note that the commas in the numbers are only to allow for greater
+readability -- we can easily see groups of three digits and mentally keep track of what
+we're reading.
+
+\begin{problem}
+    Express the following binary numbers in base-10.
+    \begin{enumerate}
+        \item[(a)] $111_2$
+        \item[(b)] $10,101_2$
+        \item[(c)] $1,111,111,111_2$
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Explain the joke:
+    \begin{center}
+        {\it There are 10 types of people.  Those who understand binary and those who
+        don't.}
+    \end{center}
+\end{problem}
+
+\begin{problem}
+    Discussion: With your group discuss how you would convert a base-10 number into its
+    binary representation.  Once you have a proposed method put it into action on the
+    number $237_{10}$ who's base-2 expression is $11,101,101_2$
+\end{problem}
 
 \begin{problem}
 Convert to following numbers from base 10 to base 2 or visa versa.
@@ -116,15 +152,24 @@ Convert to following numbers from base 10 to base 2 or visa versa.
 \end{problem}
 
 \begin{problem}
-    Converting base 2 numbers to base 10 is relatively easy -- expand in powers of 2 and add
-    up the results.  Converting base 10 numbers to base 2 is a little bit more
-    interesting.  Describe the technique that you used to convert the numbers $12$, $11$,
-    and $23$ into base 2 in the previous problem.  
+    Now that you have converted several base-10 numbers to base-2, summarize an efficient
+    technique to do the conversion.
 \end{problem}
 
+% \begin{problem}
+%     Converting base 2 numbers to base 10 is relatively easy -- expand in powers of 2 and add
+%     up the results.  Converting base 10 numbers to base 2 is a little bit more
+%     interesting.  Describe the technique that you used to convert the numbers $12$, $11$,
+%     and $23$ into base 2 in the previous problem.  
+% \end{problem}
+% 
 
 \begin{example}
-    Convert the number 137 from base 10 to base 2. \\{\bf Solution:} 
+    Convert the number 137 from base 10 to base 2. \\{\bf Solution:} One way to do the
+    conversion is to first look for the largest power of 2 less than or equal to your
+    number.  In this case, $128=2^7$ is the largest power of 2 that is less than 137.
+    Then looking at the remainder, 9, look for the largest power of 2 that is less than
+    this remainder.  Repeat until you have the number.  
     \begin{flalign*}
         137_{10} &= 128 + 8 + 1 \\
         &= 2^7 + 2^3 + 2^0 \\
@@ -138,7 +183,35 @@ Next we'll work with fractions and decimals.  For example, let's take the base 1
 $5.341_{10}$ and expand it out to get
 \[ 5.341_{10} = 5 + \frac{3}{10} + \frac{4}{100} + \frac{1}{1000} = 5 \times 10^0 + 3 \times
 10^{-1} + 4 \times 10^{-2} + 1 \times 10^{-3}. \] 
+The position to the right of the decimal point is the negative power of 10 for the given
+position.  
 We can do a similar thing with binary decimals.
+
+\begin{problem}
+    The base-2 number $1,101.01_2$ can be expanded in powers of 2.  Fill in the question
+    marks below and observe the pattern in the powers.
+    \[ 1,101.01_2 = ? \times 2^3 + 1 \times 2^2 + 0 \times 2^1 +
+    ? \times 2^0 + 0 \times 2^{?} + 1 \times 2^{-1}. \]
+\end{problem}
+
+\begin{problem}
+    Repeating digits in binary numbers are rather intriguing.  The number
+    $0.\overline{0111} = 0.01110111011101110111\ldots$ surely also has a decimal
+    representation.  I'll get you started:
+    \begin{flalign*}
+        0.0_2 &= 0 \times 2^0 + 0 \times 2^{-1} = 0.0_{10} \\
+        0.01_2 &= 0.0_{10} + 1 \times 2^{-2} = 0.25_{10} \\
+        0.011_2 &= 0.25_{10} + 1 \times 2^{-3} = 0.25_{10} + 0.125_{10} = 0.375_{10} \\
+        0.0111_2 &= 0.375_{10} + 1 \times 2^{-4} = 0.4375_{10} \\
+        0.01110_2 &= 0.4375_{10} + 0 \times 2^{-5} = 0.4375_{10} \\
+        0.011101_2 &= 0.4375_{10} + 1 \times 2^{-6} = 0.453125_{10} \\
+        \vdots & \qquad \qquad \vdots \qquad \qquad \qquad \vdots
+    \end{flalign*}
+    We want to know what this series converges to in base 10.  Work with your partners
+    to approximate the base-10 number.
+\end{problem}
+
+
 \begin{example}
     Convert $11.01011_2$ to base 10. \\ {\bf Solution:}
     \begin{flalign*}
@@ -183,34 +256,34 @@ We can do a similar thing with binary decimals.
 \end{problem}
 
 
-\begin{problem}
-    Use the ``\mcode{=if( )}'' command in Excel to create a spreadsheet that uses the process from the
-    previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
-\end{problem}
-
-\begin{problem}
-    Use a \texttt{for loop} and \texttt{if-else} statements in MATLAB to write a script
-    that converts a base 10 decimal (less than 1) into a binary decimal.
-\end{problem}
-\solution{
-% \begin{lstlisting}
-x = 0.635\\
-b = []\\
-for n=1:20 \\ % first 20 binary digits
-    if $x \ge 1$ \\
-        x = (x-1)*2; \\
-    else \\
-        $x = 2*x$;\\
-    end \\
-    if $x \ge 1$ \\
-        b = [b,1]; \\
-    else \\
-        b = [b,0];\\
-    end \\
-end \\
-b
-% \end{lstlisting}
-}
+% \begin{problem}
+%     Use the ``\mcode{=if( )}'' command in Excel to create a spreadsheet that uses the process from the
+%     previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
+% \end{problem}
+% 
+% \begin{problem}
+%     Use a \texttt{for loop} and \texttt{if-else} statements in MATLAB to write a script
+%     that converts a base 10 decimal (less than 1) into a binary decimal.
+% \end{problem}
+% \solution{
+% % \begin{lstlisting}
+% x = 0.635\\
+% b = []\\
+% for n=1:20 \\ % first 20 binary digits
+%     if $x \ge 1$ \\
+%         x = (x-1)*2; \\
+%     else \\
+%         $x = 2*x$;\\
+%     end \\
+%     if $x \ge 1$ \\
+%         b = [b,1]; \\
+%     else \\
+%         b = [b,0];\\
+%     end \\
+% end \\
+% b
+% % \end{lstlisting}
+% }
 
 \begin{problem}
     Convert the base 10 fraction $1/10$ into binary.  Use your solution to fully describe
@@ -242,7 +315,7 @@ computer.
             \solution{
                 \[ -1.11101100101 \times 2^{6} \]
                 }
-        \item[(b)] Based on the fact that every binary number (other than 0) can be
+        \item[(b)] Based on the fact that every binary number, other than 0, can be
             written in this way, what three things do you suppose a computer needs to
             store for any given number? \solution{The sign, the digits after the decimal
             place, and the exponent}
@@ -251,7 +324,7 @@ computer.
     \end{enumerate}
 \end{problem}
 
-For any number $x$ we can write
+For any base-2 number $x$ we can write
 \[ x = (-1)^{s} \times (1+ m) \times 2^E \]
 where $s \in \{0,1\}$ is called the {\it sign bit} and $m$ is a binary number such that $0
 \le m < 1$.
@@ -296,7 +369,7 @@ precision standard is what most of our modern computers use.
 
 \begin{definition}
     {\bf Machine precision} is the gap between the number 1 and the next larger floating
-    point number. Often it is represented by $\epsilon$. To clarify, the number 1 can
+    point number. Often it is represented by the symbol $\epsilon$. To clarify, the number 1 can
     always be stored in a computer system exactly and if $\epsilon$ is machine
     precision for that computer then $1+\epsilon$ is the next largest number that can
     be stored with that machine. 
@@ -319,7 +392,7 @@ command line.
             $s$ & E & $b_1b_2b_3$ \\ \hline
         \end{tabular}
     \end{center}
-    The first entry is a bit for the sign (0$=+$ and $1=-$). The second entry, $b_e$ is for the
+    The first entry is a bit for the sign (0$=+$ and $1=-$). The second entry, $E$ is for the
     exponent, and we'll assume in this example that the exponent can be 0, 1, or $-1$.  The
     three bits on the right represent the significand of the number.  Hence, every number in
     this number system takes the form
@@ -333,7 +406,7 @@ command line.
             precision is the gap between 1 and the next largest number.  In this number
         system, the next largest number is $1.001 \times 2^0$ so the gap is $0.001_2$
         which means that $\epsilon = 2^{-3} = 1/8$}
-        \item What would change if we allowed $b_e \in \{-2,-1,0,1,2\}$?\\\solution{The
+        \item What would change if we allowed $E \in \{-2,-1,0,1,2\}$?\\\solution{The
                 smallest number would be $1.000\times 2^{-2} = 0.01_2 = 1/4$ and the largest
                 would be $1.111 \times 2^2 = 111.1_2 = 4+2+1+(1/2) = 7.5$.  Machine precision
             would remain the same.}
@@ -378,10 +451,11 @@ this number is
     do you expect it to take until the truncation error creeps into the computation?
 \end{problem}
 
-More can be said about floating point numbers such as how we store infinity, how we store
+Much more can be said about floating point numbers such as how we store infinity, how we store
 NaN, and how we store 0.  The
 \href{https://en.wikipedia.org/wiki/Floating-point_arithmetic}{Wikipedia page for floating
-point arithmetic} might be an interesting read for the curious student.
+point arithmetic} might be of interest for the curious reader.  It is beyond the scope of
+this class and this book to go into all of those details here.
 
 
 
@@ -412,19 +486,21 @@ properties to {\it match} the exponential function.
     Let $f(x) = e^x$.
     \begin{enumerate}
         \item[(a)] Find a linear function of the form $g(x) = a_0 + a_1 x$ such that $g(0)
-            = f(0)$ and $g'(0) = f'(0)$. \solution{
+            = f(0)$ and $g'(0) = f'(0)$.  Plot both $f(x)$ and $g(x)$ on the same axes. \solution{
                 We know that $f(x) = e^x = f'(x)$ so $f(0) = f'(0) = 1$.  Hence $a_0 = 1$
                 and $a_1 = 1$. Therefore the function $g(x) = 1+x$ matches the function
                 $f(x) = e^x$ in both funtion value and in first derivative at $x=0$.
             }
         \item[(b)] Find a quadratic function of the form $g(x) = a_0 + a_1 x + a_2 x^2$
-            such that $g(0) = f(0)$, $g'(0) = f'(0)$, and $g''(0) = f''(0)$. \solution{
+            such that $g(0) = f(0)$, $g'(0) = f'(0)$, and $g''(0) = f''(0)$.  Plot both $f(x)$ and $g(x)$ on the same axes. \solution{
                 Again we see that $a_0 = a_1 = 1$ from the previous part.  For the second
                 derivative we see that $g''(0) = 2a_2$ and $f''(0) = 1$ so $a_2 = 1/2$.
                 Therefore, $g(x) = 1 + x + \frac{1}{2} x^2$.
             }
         \item[(c)] Find a polynomial of order $n$ that matches the function $f(x) = e^x$
-            such that $g^{(k)}(0) = f^{(k)}(0)$ for all $k \le n$. \solution{
+            such that $g^{(k)}(0) = f^{(k)}(0)$ for all $k \le n$.  Plot both $f(x)$ and
+            $g(x)$ on the same axes for several values of $n$.  What do you observe about
+            the function $f(x)$ and the function $g(x)$? \solution{
                 \[ g(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots
                     + \frac{x^n}{n!}. \]
             }
