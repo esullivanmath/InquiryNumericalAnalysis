@@ -165,33 +165,88 @@ equation $f(x) = 0$.
 Theorem \ref{thm:IVT} and its corollary are {\it existence theorems} in the sense that
 they tell us that some point exists.  The annoying thing about mathematical existence
 theorems is that they typically don't tell us {\it how} to find the point that is guaranteed to
-exist -- annoying.
-The following algorithm, known as the Bisection Method, uses the Intermediate
-Value Theorem to systematically approximate the point $x_*$ to solve the algebraic
-equation $f(x_*) =
-0$.
+exist -- annoying.  Let's play a game that might at least tell us how to find the root.
+% The following algorithm, known as the Bisection Method, uses the Intermediate
+% Value Theorem to systematically approximate the point $x_*$ to solve the algebraic
+% equation $f(x_*) =
+% 0$.
+
+% \begin{problem}
+%     Discussion: What does the game from Problem \ref{prob:bisection_game} have in common
+%     with the Intermediate Value Theorem and its corollary?  Use your optimal strategy from
+%     the game along with the corollary to the IVT to propose a strategy to find roots of a
+%     continuous function.  Write psuedo-code for your solution strategy.
+% \end{problem}
 
 \begin{problem}
-    Discussion: What does the game from Problem \ref{prob:bisection_game} have in common
-    with the Intermediate Value Theorem
-    and its corollary?  Use your optimal strategy from the game along with
-    the corollary to the IVT to propose a strategy to find roots of a continuous function.
-    Write psuedo-code for your solution strategy.
+    Let's make a modification to the game from Problem \ref{prob:bisection_game}.  In
+    groups of 2 follow these rules to play a root-finding game.
+    \begin{description}
+        \item[Step \#1:] Player 1 chooses a \underline{continuous} function $f(x)$ that
+            has a root somewhere on the real line.  
+        \item[Step \#2:] Player 1 chooses real numbers $x=a$ and $x=b$ so that the root of
+            $f(x)$ is between those values.
+        \item[Step \#3:] Player 1 tells Player 2 {\it ``the root of my function is between
+            $a$ and $b$''}.
+        \item[Step \#4:] Player 2 makes a guess of the root.  We'll call that number $m$.
+        \item[Step \#5:] Player 1 reponds with one of the following three responses.
+            \begin{itemize}
+                \item If $m$ is within $0.01$ of the root of $f(x)$ then say \\ {\it ``you
+                    win!''}
+                \item If the root of $f(x)$ is between $a$ and $m$ then say \\ {\it ``the
+                    root is between $a$ and $m$''}
+                \item If the root of $f(x)$ is between $m$ and $b$ then say \\ {\it ``the
+                    root is between $m$ and $b$''}
+            \end{itemize}
+        \item[Step \#6:] Repeat steps 4 and 5 until Player 2 has a reasonable guess of the
+            root or until you have repeated these steps more than 20 times.
+    \end{description}
 \end{problem}
 
+\begin{problem}
+    Consider the game that you played in the previous problem.
+    \begin{enumerate}
+        \item[(a)] Where was the Intermediate Value Theorem used in the game?  Which
+            player was using it and why were they using it?
+        \item[(b)] Why was it important that the function $f(x)$ was continuous in this
+            game?
+        \item[(c)] Propose an optimal strategy for finding the root with the information
+            given.
+        \item[(d)] Write an outline of computer code (called pseudo-code) that will play
+            this game with a given function and given initial values of $a$ and $b$.
+    \end{enumerate}
+\end{problem}
+
+The pseudo-code that you wrote in the previous problem is likely very similar to the
+``bisection method'' for finding roots of an algebraic function.  In the following
+algorithm there are several questions you need to answer.
 \begin{algorithm}[The Bisection Method]
     Assume that $f(x)$ is continuous on the closed interval $[a,b]$. To make approximations of
     the solutions to the equation $f(x) = 0$, do the following:
     \begin{enumerate}
-        \item Check to see if $f(a)$ and $f(b)$ have opposite signs
-            (why is this important?).\solution{In order for the IVT to apply you must have
-            $0$ in between $f(a)$ and $f(b)$.}
-        \item Compute the midpoint of the closed interval, $m=\frac{a+b}{2}$, and evaluate $f(m)$.
-        \item Compare the signs of $f(a)$ vs $f(m)$ and $f(b)$ vs $f(m)$.  Replace one of
-            the endpoints of the closed interval $[a,b]$ with $m=(a+b)/2$. (Which one do
-            you replace and why?)
-            \solution{Replace the endpoint where the function has the same sign as
-                $f(m)$}
+        \item Check to see if $f(a)$ and $f(b)$ have opposite signs.  You can do this
+            taking the product of $f(a)$ and $f(b)$.
+            \begin{itemize}
+                \item If $f(a)$ and $f(b)$ have different signs then what does the IVT
+                    tell you?
+                \item If $f(a)$ and $f(b)$ have the same sign then what does the IVT not
+                    tell you? What should you do in this case?
+                \item Why does the product of $f(a)$ and $f(b)$ tell us something about
+                    the signs of the two numbers?
+            \end{itemize}
+            
+        \item Compute the midpoint of the closed interval, $m=\frac{a+b}{2}$, and evaluate
+            $f(m)$. 
+            \begin{itemize}
+                \item Will $m$ always be a better guess of the root than $a$ or $b$?  Why?
+                \item What should you do here if $f(m)$ is really close to zero?
+            \end{itemize}
+        \item Compare the signs of $f(a)$ vs $f(m)$ and $f(b)$ vs $f(m)$.  
+            \begin{itemize}
+                \item What do you do if $f(a)$ and $f(m)$ have opposite signs?
+                \item What do you do if $f(m)$ and $f(b)$ have opposite signs?
+            \end{itemize}
+
         \item Repeat steps 2 and 3 and stop when $f(m)$ is {\it close enough} to zero.
     \end{enumerate}
 \end{algorithm}
@@ -258,9 +313,41 @@ function root = Bisection(f , a , b , tol)
 
 \begin{problem}
     Let $f(x)$ be a continuous function on the interval $[a,b]$ and assume that $f(a)
-    \cdot f(b) <0$.  If we want to approximate the solution to the equation $f(x)=0$ to
-    within $\delta$ how many iterations will the bisection method need? \\ Hint: If we
-    want an approximation within $\delta$ then the width of the interval is $2\delta$.
+    \cdot f(b) <0$.  A reoccurring theme in Numerical Analysis is to approximate some
+    mathematical thing to within some tolerance.  For example, if we want to approximate the solution to the equation $f(x)=0$ to
+    within $\delta$ with the bisection method, we should be able to figure out how many
+    steps it will take to achieve that goal.
+    \begin{enumerate}
+        \item[(a)] Let's say that $a = 3$ and $b = 8$ and $f(a) \cdot f(b) < 0$ for some
+            continuous function $f(x)$.  The width of this interval is 5, so if we guess
+            that the root is $m=(3+8)/2 = 5.5$ then our error is less than $5/2$.  In the more
+            general setting, if there is a root of a continuous function in the interval
+            $[a,b]$ then how far off could the midpoint approximation of the root be?  In
+            other words, what is the error in using $m=(a+b)/2$ as the approximation of
+            the root?
+        \item[(b)] The bisection method cuts the width of the interval down to
+            a smaller size at every step. As such, the approximation error gets smaller at
+            every step.  Fill in the blanks in the following table to see the pattern in
+            how the approximation error changes with each iteration.
+            \begin{center}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Iteration & Width of Interval & Approximation Error \\ \hline \hline
+                    0 & $|b-a|$ & $\frac{|b-a|}{2}$ \\\hline
+                    1 & $\frac{|b-a|}{2}$ &  \\\hline
+                    2 & $\frac{|b-a|}{2^2}$ &  \\\hline
+                    \vdots & \vdots & \vdots \\\hline
+                    $n$ & $\frac{|b-a|}{2^n}$ &  \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \item[(c)] Now to the key question: \\
+            If we want to approximate the solution to the equation $f(x)=0$ to within some
+            tolerance $\delta$ then how many iterations of the bisection method do we need
+            to take? \\
+            Hint: Set the $n^{th}$ approximation error from the table equal to $\delta$.
+            What should you solve for from there?
+    \end{enumerate}
 \end{problem}
 \solution{
     The width of the interval will always be half as large at each iteration.
@@ -283,6 +370,19 @@ function root = Bisection(f , a , b , tol)
         \frac{|a-b|}{\delta} \right) - 1 \]
 }
 
+\begin{problem}
+    Is it possible for a given function and a given interval that the Bisection Method
+    converges to the root in fewer steps than what you just found in the previous problem?
+    Explain.
+\end{problem}
+
+\begin{problem}
+    Create a second version of you Bisection Method function that uses a \mcode{for} loop
+    that takes the optimal number of steps to approximate the root to within some
+    tolerance.  This should be in contrast to your first version which likely used a
+    \mcode{while} loop to decide when to stop.  Is there an advantage to using one of
+    these version of the Bisection Method over the other?
+\end{problem}
 
 \begin{problem}
     How many iterations of the bisection method are necessary to approximate $\sqrt{3}$ to
@@ -317,22 +417,117 @@ function root = Bisection(f , a , b , tol)
 The bisection method is one of many methods for performing root finding on a continuous
 function.  The next algorithm takes a slightly different approach.
 
+\begin{problem}
+    In the Bisection Method, we always used the midpoint of the interval as the next
+    approximation of the root of the function $f(x)$ on the interval $[a,b]$.  The
+    following three pictures show the same function with three different choices for $a$
+    and $b$.  Which one will take fewer Bisection-steps to find the root?  Which one will
+    take more steps?
+\end{problem}
+\begin{center}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=0$ and $b=2$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:0,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:2,0) circle(0.1cm);
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=1$ and $b=2$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:1,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:2,0) circle(0.1cm);
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=0$ and $b=1.5$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:0,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:1.5,0) circle(0.1cm);
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
+
+\begin{problem}
+    Now let's modify the Bisection Method approach.  Instead of always using the midpoint
+    (which as you saw in the previous problem could take a little while to converge) let's
+    draw a line between the endpoints and use the $x$-intercept as the updated guess.
+    If we use this method can we improve the speed of convergence on any of the choices of
+    $a$ and $b$ for this function?  Which one will now likely take the fewest steps to converge?
+\begin{center}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=0$ and $b=2$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:0,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:0,-2) circle(0.1cm);
+            \draw[fill=red] (axis cs:2,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:2,2) circle(0.1cm);
+            \draw[black, thick, dashed] (axis cs:0,-2) -- (axis cs:2,2);
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=1$ and $b=2$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:1,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:1,-1) circle(0.1cm);
+            \draw[fill=red] (axis cs:2,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:2,2) circle(0.1cm);
+            \draw[black, thick, dashed] (axis cs:1,-1) -- (axis cs:2,2);
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2.5, ymin=-2,
+            ymax=2, title={$a=0$ and $b=1.5$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:0,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:0,-2) circle(0.1cm);
+            \draw[fill=red] (axis cs:1.5,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:1.5,0.25) circle(0.1cm);
+            \draw[black, thick, dashed] (axis cs:0,-2) -- (axis cs:1.5,0.25);
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+\end{problem}
+
+The algorithm that you played with graphically in the previous problem is known as the
+Regula Falsi (false position) algorithm.  It is really just a minor tweak on the Bisection
+method.  After all, the algorithm is still designed to use the Intermediate Value Theorem
+and to iteratively zero in on the root of the function on the given interval.
+
 \begin{algorithm}[The Regula Falsi Method]
     Assume that $f(x)$ is continuous on the interval $[a,b]$. To make approximations of
     the solutions to the equation $f(x) = 0$, do the following:
     \begin{enumerate}
         \item Check to see if $f(a)$ and $f(b)$ have opposite signs so that the
             intermediate value theorem guarantees a root on the interval.
-        \item Write the equation of the line connecting the points $(a,f(a))$ and
-            $(b,f(b))$. Fill in the blanks in the point slope form.
-            \[ y - \underline{\hspace{0.4in}} = \underline{\hspace{0.4in}} \cdot \left(
-                x - \underline{\hspace{0.4in}} \right) \]
+        \item We want to write the equation of the line connecting the points $(a,f(a))$ and
+            $(b,f(b))$.
+            \begin{itemize}
+                \item What is the slope of this line?
+                    \[ m = \underline{\hspace{1in}} \]
+                \item Using the point-slope form of a line, $y-y_1 = m(x-x_1)$, what is
+                    the equation of the line?
+                    \[ y - \underline{\hspace{0.4in}} = \underline{\hspace{0.4in}} \cdot
+                    \left( x - \underline{\hspace{0.4in}} \right) \]
+            \end{itemize}
             \solution{
                 \[ y - f(a) = \left( \frac{f(b) - f(a)}{b-a} \right) \left( x-a
                     \right) \]
             }
         \item Find the $x$ intercept of the linear function that you wrote in the previous
-            step.  Call this point $x=c$.
+            step by setting the $y$ to zero and solving for $x$.  Call this point $x=c$.
             \[ c = \underline{\hspace{2in}} \]
             \solution{
                 \[ 0 - f(a) = \left( \frac{f(b) - f(a)}{b-a} \right) \left( x-a
@@ -380,25 +575,97 @@ function.  The next algorithm takes a slightly different approach.
 
 
 \newpage\section{Newton's Method}
-We now investigate a calculus-based method (originally proposed by Isaac Newton and later
-modified by Joseph Raphson) for solving the algebraic equation $f(x)=0$. In very basic
-terms, this method involves iteratively finding tangent lines to a differentiable curve
-and locating where those tangent lines intersect the horizontal axis.
+
+\begin{problem}
+    We are still interested in solving the equation $f(x) = 0$, but now let's leverage
+    some Calculus.  In the following sequence of plots we do the following algorithm:
+    \begin{itemize}
+        \item Given a value of $x$ that is a decent approximation of the root, draw a
+            tangent line to $f(x)$ at that point.
+        \item Find where the tangent line intersects the $x$ axis.
+        \item Use this intersection as the new $x$ value and repeat.
+    \end{itemize}
+    The first step has been shown for you.  Take a couple more steps graphically.  Does
+    the algorithm appear to converge to the root?  Do you think that this will generally
+    take more or fewer steps than the Bisection Method?
+\begin{center}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2, ymin=-2,
+            ymax=1, title={Root is approximately $x=1$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:1,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:1,-1) circle(0.1cm);
+            \addplot[black, thick, dashed] {2*(x-1)-1};
+            \addplot[mark=o, only marks] coordinates{(1.5,0)};
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2, ymin=-2,
+            ymax=1, title={Root is approximately $x = 1.5$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+            \draw[fill=red] (axis cs:1.5,0) circle(0.1cm);
+            \draw[fill=blue] (axis cs:1.5,0.25) circle(0.1cm);
+%             \addplot[black, dashed] {2*(x-1)-1};
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.65]
+        \begin{axis}[axis lines=center, grid, domain=0:2, xmin=-0.1, xmax=2, ymin=-2,
+            ymax=1, title={Root is approximately $x = \underline{\hspace{0.2in}}$}]
+            \addplot[smooth, very thick, blue] {x^2-2};
+            \draw[thick, green!50!black, fill=green!50!black] (axis cs:1.414,0) circle(0.1cm);
+%             \draw[fill=red] (axis cs:1.5,0) circle(0.1cm);
+%             \draw[fill=green] (axis cs:1.5,0.25) circle(0.1cm);
+%             \addplot[black, dashed] {2*(x-1)-1};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+\end{problem}
+
+\begin{problem}
+    If we had started at $x=0$ in the previous problem what would have happened?  Would
+    this initial guess have worked to eventually approximate the root?
+\end{problem}
+
+\begin{problem}
+    Make a complete list of what you must know about the function $f(x)$ for the previous
+    algorithm to work?
+\end{problem}
+
+The algorithm that we just played with is known as Newton's Method.  The method was
+originally proposed by Isaac Newton, and later
+modified by Joseph Raphson, for solving the algebraic equation $f(x)=0$. It should be
+clear that Newton's method requires the existence of the first derivative so we are asking
+a bit more of our functions than we were before: In Bisection and Regula Falsi we only
+asked that the functions be continuous, now we're asking that they be differentiable.  
+
+% In very basic
+% terms, this method involves iteratively finding tangent lines to a differentiable curve
+% and locating where those tangent lines intersect the horizontal axis.
 \begin{algorithm}[Newton's Method]
     The Newton-Raphson method for solving algebraic equations can be described as follows:
     \begin{enumerate}
-        \item Check that $f$ is a twice differentiable function on a given domain and find
+        \item Check that $f$ is differentiable on a given domain and find
             a way to guarantee that $f$ has a root on that domain (this step happens by
             hand, not on the computer).
         \item Pick a starting point $x_0$ in the domain
-        \item Write the equation of a tangent line to $f$ at $x_0$.  Fill in the blanks in
-            the point-slope form.
+        \item We want to write the equation of a tangent line to $f$ at the point $(x_0,
+            f(x_0))$.  
+            \begin{itemize}
+                \item What is the slope of the tangent line to the function $f(x)$ at the
+                    point $(x_0, f(x_0))$?
+                    \[ m_{tangent} = \underline{\hspace{0.5in}} \]
+                \item Using the point-slope form of a line, $y-y_1 = m(x-x_1)$, write the
+                    equation of the tangent line to $f(x)$ at the point $(x_0, f(x_0))$.
             \[ y - \underline{\hspace{0.4in}} = \underline{\hspace{0.4in}} \cdot \left(
                 x - \underline{\hspace{0.4in}} \right) \]
+            \end{itemize}
             \solution{
                 \[ y - f(x_0) = f'(x_0) \left( x-x_0 \right) \]
             }
-        \item Find the $x$ intercept of the equation of the tangent line and call this new
+        \item Find the $x$ intercept of the equation of the tangent line by setting $y=0$
+            and solving for $x$.  Call this new
             point $x_1$.  
             \[ x_1 = \underline{\hspace{2in}} \]
             \solution{
@@ -508,16 +775,20 @@ Recall that Newton's method is
 If we replace $f'(x_n)$ with an approximation of the derivative then we may have a method
 that is {\it close} to Newton's method in terms of convergence rate but is less
 troublesome to compute. Any method that replaces the derivative in Newton's method with an
-approximation is called a {\bf Quasi-Newton Method}.
+approximation is called a {\bf Quasi-Newton Method}.  The first obvious way to approximate
+the derivative is just to use a secant line instead of a tangent line in the Newton
+iteration.  If we choose two starting points that are quite close to each other then the
+slope of the secant line through those points will be approximately the same as the slope
+of the tangent line.  
 
 \begin{algorithm}[Secant Method]
-    To solve $f(x) = 0$:
+    Assume that $f(x)$ is continuous and we wish to solve $f(x) = 0$ for $x$.
     \begin{enumerate}
         \item Determine if there is a root {\it near} an arbitrary starting point $x_0$.
         \item Pick a second starting point {\it near} $x_0$.  Call this second starting
             point $x_1$. Note well that the points $x_0$ and
             $x_1$ should be close to each other. (Why?)\\ (The choice here is different than for
-            the bisection method)
+            the Bisection  and Regula Falsi methods.)
         \item Use the backward difference 
             \[ f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}} \]
             to approximate the derivative of $f$ at $x_n$.
@@ -590,7 +861,36 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 \newpage\section{Exercises}
 
+\subsection{Algorithm Summaries}
+The following four problems are meant to have you re-build each of the algorithms that
+we developed in this chapter.  Write all of the mathematical details completely and
+clearly.  Don't just write ``how'' them method works, but give all of the mathematical
+details for ``why'' it works.
+\begin{problem}
+    Let $f(x)$ be a continuous function on the interval $[a,b]$ where $f(a) \cdot f(b) <
+    0$.  Clearly give all of the mathematical details for how the Bisection Method
+    approximates the root of the function $f(x)$ in the interval $[a,b]$.  
+\end{problem}
 
+\begin{problem}
+    Let $f(x)$ be a continuous function on the interval $[a,b]$ where $f(a) \cdot f(b) <
+    0$.  Clearly give all of the mathematical details for how the Regula Falsi Method
+    approximates the root of the function $f(x)$ in the interval $[a,b]$. 
+\end{problem}
+
+\begin{problem}
+    Let $f(x)$ be a differentiable function with a root {\it near} $x=x_0$.  Clearly give
+    all of the mathematical details for how Newton's Method approximates the root of the
+    function $f(x)$.
+\end{problem}
+
+\begin{problem}
+    Let $f(x)$ be a continuous function with a root {\it near} $x=x_0$.  Clearly give
+    all of the mathematical details for how the Secant Method approximates the root of the
+    function $f(x)$.
+\end{problem}
+
+\subsection{Applying What You've Learned}
 
 \begin{problem}
     In this problem you will demonstrate that all of your root finding codes work.
@@ -693,7 +993,7 @@ approximation is called a {\bf Quasi-Newton Method}.
 
 
 \begin{problem}
-    Consider our three primary root finding methods: Bisection, Newton's method, and the
+    Consider our four primary root finding methods: Bisection, Regula Falsi, Newton's method, and the
     Secant method.  
     \begin{enumerate}
         \item[(a)] For each method give a mathematical situation where you might want to
