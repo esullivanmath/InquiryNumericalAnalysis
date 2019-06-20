@@ -685,7 +685,11 @@ asked that the functions be continuous, now we're asking that they be differenti
     Draw a picture of what Newton's method does graphically.
 \end{problem}
 
-\begin{problem}\label{prob:newton_fail}
+
+There are several ways in which Newton's Method will behave unexpectedly -- or downright
+fail.  Some of these issues can be foreseen by examining the iteration formula 
+\[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}. \]
+\begin{problem}[Failings of Newton's Method]\label{prob:newton_fail}
     There are several reasons why Newton's method could fail.  Work with your partners to
     come up with a list of all of the reasons.  Support each of your reasons with a
     sketch or an algebraic example.
@@ -700,6 +704,91 @@ asked that the functions be continuous, now we're asking that they be differenti
     \end{itemize}
 }
 
+\begin{problem}[An Unexpected Newton Failure]
+    An interesting failure can occur with Newton's Method that you might not initially
+    expect.  Consider the function $f(x) = x^3 - 2x + 2$.  This function has a root near
+    $x=-1.77$.  Fill in the table below and draw the tangent lines on the figure for
+    approximating the solution to $f(x) = 0$ with a starting point of $x=0$. 
+
+    \begin{minipage}{0.5\columnwidth}
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                $n$ & $x_n$ & $f(x_n)$ \\ \hline \hline
+                $0$ & $0$   & $f(0) = 2$ \\ \hline
+                $1$ & $0 - \frac{f(0)}{f'(0)} = 1$ & $f(1) = 1$ \\ \hline
+                $2$ & $1 - \frac{f(1)}{f'(1)} =  $ & \\\hline
+                $3$ & & \\\hline
+                $4$ & & \\\hline
+            \end{tabular}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\columnwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.8]
+                \begin{axis}[axis lines=center, grid, xmin=-2, xmax=2, ymin=-1, ymax=4,
+                    domain=-2:2, title={$f(x) = x^3 - 2x + 2$}]
+                    \addplot[smooth, very thick, blue] {x^3 - 2*x + 2};
+                    \draw[fill=red] (axis cs:0,0) circle(0.1cm);
+                    \draw[fill=blue] (axis cs:0,2) circle(0.1cm);
+                    \draw[fill=green!50!black] (axis cs:-1.77,0) circle(0.1cm);
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{minipage}
+\end{problem}
+
+\begin{problem}[Another Unexpected Failure of Newton's Method]
+    Now let's consider the function $f(x) = \sqrt[3]{x}$.  This function has a root $x=0$.
+    Furthermore, it is differentiable everywhere except at $x=0$ since 
+    \[ f'(x) = \frac{1}{3} x^{-2/3} = \frac{1}{3x^{2/3}}. \]
+    The point of this problem is to show what can happen when the point of
+    non-differentiability is precisely the point that you're looking for.  
+    
+    \begin{enumerate}
+        \item[(a)] Fill in the
+    table of iterations starting at $x=-1$, draw the tangent lines on the plot, and make a
+    general observation of what is happening with the Newton iterations.
+
+    \begin{minipage}{0.5\columnwidth}
+        \begin{center}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                $n$ & $x_n$ & $f(x_n)$ \\ \hline \hline
+                $0$ & $-1$   & $f(-1) = -1$ \\ \hline
+                $1$ & $-1 - \frac{f(-1)}{f'(-1)} = $ &  \\ \hline
+                $2$ &  & \\\hline
+                $3$ & & \\\hline
+                $4$ & & \\\hline
+            \end{tabular}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\columnwidth}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.8]
+                \begin{axis}[axis lines=center, grid, xmin=-4, xmax=4, ymin=-2, ymax=2,
+                    domain=-2:2, title={$f(x) = x^3 - 2x + 2$}]
+                    \addplot[smooth, very thick, blue, domain=0:4, samples=100] {x^(1/3)};
+                    \addplot[smooth, very thick, blue, domain=-4:0, samples=100] {-abs(x)^(1/3)};
+                    \draw[fill=red] (axis cs:-1,0) circle(0.1cm);
+                    \draw[fill=blue] (axis cs:-1,-1) circle(0.1cm);
+                    \draw[fill=green!50!black] (axis cs:0,0) circle(0.1cm);
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+    \end{minipage}
+
+\item[(b)] Now let's look at the Newton iteration in a bit more detail.  Since $f(x) =
+    x^{1/3}$ and $f'(x) = \frac{1}{3} x^{-2/3}$ the Newton iteration can be simplified as 
+    \[ x_{n+1} = x_n - \frac{x^{1/3}}{ \left( \frac{1}{3} x^{-2/3} \right)} = x_n - 3 \frac{x^{1/3}}{x^{-2/3}} =
+    x_n - 3x_n = -2x_n. \]
+    What does this tell us about the Newton iterations?  \\ Hint: You should have found
+    the exact same thing in the numerical experiment in part (a).
+\item[(c)] Was there anything special about the starting point $x_0=-1$?  Will this
+    problem exist for every starting point?
+    \end{enumerate}
+\end{problem}
+
 \begin{problem}
     Create a new MATLAB function called \mcode{Newton} and write comments giving
     pseudo-code for Newton's method.  This version of Newton's method will accept the
@@ -709,10 +798,10 @@ asked that the functions be continuous, now we're asking that they be differenti
 
 \begin{problem}
     Write a MATLAB function for Newton's method.  Your function needs to accept an
-    anonymous function handle, the derivative of $f(x)$ as an anonymous function handle, an initial
-    guess, and an optional error
-    tolerance. The only output should be the solution to the equation that you are
-    solving.  Write a test script to verify that your Newton's method code indeed works.
+    anonymous function handle, the derivative of $f(x)$ as an anonymous function handle,
+    an initial guess, and an optional error tolerance. The only output should be the
+    solution to the equation that you are solving.  Write a test script to verify that
+    your Newton's method code indeed works.
     \\
     \mcode{function soln = Newton(f , df , x0 , tol)}
 \end{problem}
@@ -1014,6 +1103,38 @@ details for ``why'' it works.
 \end{problem}
 
 
+\begin{problem}[Basins of Attraction]
+    Let $f(x)$ be a differentiable function with several roots.  Given a starting $x$
+    value we should be able to apply Newton's Method to that starting point and we will
+    converge to one of the roots (so long as you aren't in one of the special cases
+    discussed earlier in the chapter).  It stands to reason that starting points {\it
+    near} each other should all end up at the same root, and for some functions this is
+    true.  However, it is not true in general.  
+
+    A {\bf basin of attraction} for a root is the set of $x$ values that converges to that
+    root under Newton iterations.  In this problem you will produce colored plots showing
+    the basins of attraction for all of the following functions.  Do this as follows:
+    \begin{itemize}
+        \item Find the actual roots of the function by hand (this should be easy on the
+            functions below).  
+        \item Assign each of the roots a different color.
+        \item Pick a starting point on the $x$ axis and use it to start Newton's Method.
+        \item Color the starting point according to the root that it converges to.
+        \item Repeat this process for many many starting points so you get a colored
+            picture of the $x$ axis showing where the starting points converge to.
+    \end{itemize}
+    The set of points that are all the same color are called the {\bf basin of attraction}
+    for the root associated with that color.
+
+    \begin{enumerate}
+        \item[(a)] $f(x) = (x-4)(x+1)$
+        \item[(b)] $g(x) = (x-1)(x+3)$
+        \item[(c)] $h(x) = (x-4)(x-1)(x+3)$
+        \item[(d)] Find a function of your own that has an interesting picture of the
+            basins of attraction.
+    \end{enumerate}
+
+\end{problem}
 
 
 \begin{problem}
