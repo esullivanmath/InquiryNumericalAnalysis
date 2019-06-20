@@ -11,6 +11,9 @@
 % derivatives.  Given that we are solving the problem with given initial information these
 % are also called initial value problems.  
 
+
+\section{Recalling the Basics of Ordinary Differential Equations}
+
 \begin{problem}
     Sketch a plot of the function that would model each of the following scenarios.
     \begin{enumerate}
@@ -54,10 +57,9 @@ what is a differential equation?
     gives a point-wise approximation to the actual solution.
     \label{def:num_soln_diff_eq}
 \end{definition}
-These ideas should be familiar to you from previous classes, but just in case, the next
+These ideas should be familiar to you from previous classes, but just in case, this
 section gives a very brief review of some of the basics.
 
-\section{Recalling the Basics of Differential Equations}
 Solving differential equations analytically is a subject unto itself, but it is worth our
 time here to revisit some of the basic techniques for solving differential equations.  It
 should be noted that if an analytic solution exits then there is no reason to do any of
@@ -604,7 +606,7 @@ legend('y_1''(t)' , 'y_2''(t)' , 'y_3''(t)')
 
 
 
-\newpage\section{Implicit Methods and Shooting Methods}
+\newpage\section{The Backwards Euler Method}
 \begin{problem}
     The major trouble with the RK (and midpoint) methods is that they take many more
     function evaluations than Euler's method.  We can improve upon Euler's method in the
@@ -707,18 +709,8 @@ method you need to solve and still maintain some accuracy in your method.
     rates of the four methods.
 \end{problem}
 
-\begin{problem}
-    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
-    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
-    initial position and initial velocity as you normally would with a second order
-    differential equation.  Devise a method for finding a numerical solution to this
-    problem. \\
-    Hint: First write the problem as a system of first order differential equations.  Then
-    think about how your bisection method code might help you.
-\end{problem}
 
-
-\newpage\section{ODE Modeling Exercises}
+\newpage\section{Mathematical Modeling with ODE's}
 In this section we give several problems which model real-world scenarios with ordinary
 differential equations.  For every one of these problems you will need to use a numerical
 method to solve the differential equation(s).
@@ -1192,7 +1184,43 @@ method to solve the differential equation(s).
 \end{problem}
 
 
-\newpage\section{Additional ODE Exercises}
+\newpage\section{Exercises}
+
+\subsection{Algorithm Summaries}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is Euler's method
+    for approximating the solution to this differential equation?  What is the order of
+    accuracy of Euler's method?  Explain the meaning of the order of the method in the
+    context of solving a differential equation.
+\end{problem}
+
+\begin{problem}
+    Explain in clear language what Euler's method does geometrically.
+\end{problem}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is the Midpoint method
+    for approximating the solution to this differential equation?  What is the order of
+    accuracy of the Midpoint method?  Explain the meaning of the order of the method in the
+    context of solving a differential equation.
+\end{problem}
+\begin{problem}
+    Explain in clear language what the Midpoint method does geometrically.
+\end{problem}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is the Runge Kutta
+    method for approximating the solution to this differential equation?  What is the
+    order of accuracy of the Runge Kutta method?  Explain the meaning of the order of the
+    method in the context of solving a differential equation.
+\end{problem}
+
+\begin{problem}
+    Explain in clear language what the Runge Kutta method does geometrically.
+\end{problem}
+
+\subsection{Applying What You've Learned}
 \begin{problem}
     Test the Euler, Midpoint, and Runge Kutta methods on the differential
     equation
@@ -1207,6 +1235,18 @@ method to solve the differential equation(s).
 \hint{
     Let the maximum time be small and take a large number of time steps.
 }
+
+
+\begin{problem}
+    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
+    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
+    initial position and initial velocity as you normally would with a second order
+    differential equation.  Devise a method for finding a numerical solution to this
+    problem. \\
+    Hint: First write the problem as a system of first order differential equations.  Then
+    think about how your bisection method code might help you.
+\end{problem}
+
 
 \begin{problem}
     Write code to solve the boundary valued differential equation

@@ -4,103 +4,111 @@
 \BOOKMARK [1][-]{section.0.3}{To the Instructor}{chapter.0}% 4
 \BOOKMARK [1][-]{section.0.4}{Special Thanks}{chapter.0}% 5
 \BOOKMARK [0][-]{chapter.1}{Introductory Topics}{}% 6
-\BOOKMARK [1][-]{section.1.1}{Base 2 and Binary Arithmetic}{chapter.1}% 7
-\BOOKMARK [1][-]{section.1.2}{Floating Point Arithmetic}{chapter.1}% 8
-\BOOKMARK [1][-]{section.1.3}{The Taylor Series}{chapter.1}% 9
-\BOOKMARK [2][-]{subsection.1.3.1}{Polynomial Approximation}{section.1.3}% 10
-\BOOKMARK [2][-]{subsection.1.3.2}{Truncation Error in Taylor Series}{section.1.3}% 11
-\BOOKMARK [1][-]{section.1.4}{Exercises}{chapter.1}% 12
-\BOOKMARK [0][-]{chapter.2}{Numerical Algebra}{}% 13
-\BOOKMARK [1][-]{section.2.1}{Introduction to Root Finding}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.2}{The Bisection Method}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.3}{The Regula Falsi Method}{chapter.2}% 16
-\BOOKMARK [1][-]{section.2.4}{Newton's Method}{chapter.2}% 17
-\BOOKMARK [1][-]{section.2.5}{Quasi-Newton Methods}{chapter.2}% 18
-\BOOKMARK [1][-]{section.2.6}{Exercises}{chapter.2}% 19
-\BOOKMARK [2][-]{subsection.2.6.1}{Algorithm Summaries}{section.2.6}% 20
-\BOOKMARK [2][-]{subsection.2.6.2}{Applying What You've Learned}{section.2.6}% 21
-\BOOKMARK [0][-]{chapter.3}{Numerical Calculus}{}% 22
-\BOOKMARK [1][-]{section.3.1}{Numerical Differentiation}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.2}{Numerical Integration}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.3}{Numerical Optimization}{chapter.3}% 25
-\BOOKMARK [2][-]{subsection.3.3.1}{Single Variable Numerical Optimization}{section.3.3}% 26
-\BOOKMARK [2][-]{subsection.3.3.2}{Multivariable Numerical Optimization}{section.3.3}% 27
-\BOOKMARK [1][-]{section.3.4}{Numerical Curve Fitting}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.5}{Exercises}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.5.1}{Algorithm Summaries}{section.3.5}% 30
-\BOOKMARK [2][-]{subsection.3.5.2}{Applying What You've Learned}{section.3.5}% 31
-\BOOKMARK [0][-]{chapter.4}{Numerical Linear Algebra}{}% 32
-\BOOKMARK [1][-]{section.4.1}{Matrix Operations}{chapter.4}% 33
-\BOOKMARK [1][-]{section.4.2}{Solving Systems of Linear Equations}{chapter.4}% 34
-\BOOKMARK [2][-]{subsection.4.2.1}{Upper and Lower Triangular Systems}{section.4.2}% 35
-\BOOKMARK [2][-]{subsection.4.2.2}{The LU Factorization}{section.4.2}% 36
-\BOOKMARK [1][-]{section.4.3}{The Least Squares Problems}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.4}{The QR Factorization}{chapter.4}% 38
-\BOOKMARK [1][-]{section.4.5}{Interpolation}{chapter.4}% 39
-\BOOKMARK [2][-]{subsection.4.5.1}{Vandemonde Interpolation}{section.4.5}% 40
-\BOOKMARK [2][-]{subsection.4.5.2}{Lagrange Interpolation}{section.4.5}% 41
-\BOOKMARK [2][-]{subsection.4.5.3}{Interpolation at Chebyshev Points}{section.4.5}% 42
-\BOOKMARK [1][-]{section.4.6}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 43
-\BOOKMARK [1][-]{section.4.7}{The Singular Value Decomposition}{chapter.4}% 44
-\BOOKMARK [1][-]{section.4.8}{Multi-Dimensional Newton's Method}{chapter.4}% 45
-\BOOKMARK [1][-]{section.4.9}{Exercises}{chapter.4}% 46
+\BOOKMARK [1][-]{section.1.1}{An Introduction to Numerical Analysis}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.2}{Base 2 and Binary Arithmetic}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.3}{Floating Point Arithmetic}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.4}{The Taylor Series}{chapter.1}% 10
+\BOOKMARK [2][-]{subsection.1.4.1}{Polynomial Approximation}{section.1.4}% 11
+\BOOKMARK [2][-]{subsection.1.4.2}{Truncation Error in Taylor Series}{section.1.4}% 12
+\BOOKMARK [1][-]{section.1.5}{Exercises}{chapter.1}% 13
+\BOOKMARK [0][-]{chapter.2}{Numerical Algebra}{}% 14
+\BOOKMARK [1][-]{section.2.1}{A Root Finding Game}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.2}{Introduction to Root Finding}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.3}{The Bisection Method}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.4}{The Regula Falsi Method}{chapter.2}% 18
+\BOOKMARK [1][-]{section.2.5}{Newton's Method}{chapter.2}% 19
+\BOOKMARK [1][-]{section.2.6}{Quasi-Newton Methods}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.7}{Exercises}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.7.1}{Algorithm Summaries}{section.2.7}% 22
+\BOOKMARK [2][-]{subsection.2.7.2}{Applying What You've Learned}{section.2.7}% 23
+\BOOKMARK [0][-]{chapter.3}{Numerical Calculus}{}% 24
+\BOOKMARK [1][-]{section.3.1}{Numerical Differentiation}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.2}{Numerical Integration}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.3}{Numerical Optimization}{chapter.3}% 27
+\BOOKMARK [2][-]{subsection.3.3.1}{Single Variable Numerical Optimization}{section.3.3}% 28
+\BOOKMARK [2][-]{subsection.3.3.2}{Multivariable Numerical Optimization}{section.3.3}% 29
+\BOOKMARK [1][-]{section.3.4}{Numerical Curve Fitting}{chapter.3}% 30
+\BOOKMARK [1][-]{section.3.5}{Exercises}{chapter.3}% 31
+\BOOKMARK [2][-]{subsection.3.5.1}{Algorithm Summaries}{section.3.5}% 32
+\BOOKMARK [2][-]{subsection.3.5.2}{Applying What You've Learned}{section.3.5}% 33
+\BOOKMARK [0][-]{chapter.4}{Numerical Linear Algebra}{}% 34
+\BOOKMARK [1][-]{section.4.1}{Matrix Operations}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.2}{Solving Systems of Linear Equations}{chapter.4}% 36
+\BOOKMARK [2][-]{subsection.4.2.1}{Upper and Lower Triangular Systems}{section.4.2}% 37
+\BOOKMARK [2][-]{subsection.4.2.2}{The LU Factorization}{section.4.2}% 38
+\BOOKMARK [1][-]{section.4.3}{Curve Fitting with Linear Algebra \205 The Least Squares Problem}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.4}{The QR Factorization}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.5}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 41
+\BOOKMARK [1][-]{section.4.6}{The Singular Value Decomposition}{chapter.4}% 42
+\BOOKMARK [1][-]{section.4.7}{Multi-Dimensional Newton's Method}{chapter.4}% 43
+\BOOKMARK [1][-]{section.4.8}{Exercises}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.8.1}{Algorithm Summaries}{section.4.8}% 45
+\BOOKMARK [2][-]{subsection.4.8.2}{Applying What You've Learned}{section.4.8}% 46
 \BOOKMARK [0][-]{chapter.5}{Numerical Ordinary Differential Equations}{}% 47
-\BOOKMARK [1][-]{section.5.1}{Recalling the Basics of Differential Equations}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.1}{Recalling the Basics of Ordinary Differential Equations}{chapter.5}% 48
 \BOOKMARK [1][-]{section.5.2}{Euler and Midpoint Methods}{chapter.5}% 49
 \BOOKMARK [1][-]{section.5.3}{The Runge-Kutta Method}{chapter.5}% 50
-\BOOKMARK [1][-]{section.5.4}{Implicit Methods and Shooting Methods}{chapter.5}% 51
-\BOOKMARK [1][-]{section.5.5}{ODE Modeling Exercises}{chapter.5}% 52
-\BOOKMARK [1][-]{section.5.6}{Additional ODE Exercises}{chapter.5}% 53
-\BOOKMARK [0][-]{chapter.6}{Numerical Partial Differential Equations}{}% 54
-\BOOKMARK [1][-]{section.6.1}{Quick Review \205 Main Ideas from Vector Calculus}{chapter.6}% 55
-\BOOKMARK [1][-]{section.6.2}{An Intuitive Introduction to some Common PDEs}{chapter.6}% 56
-\BOOKMARK [1][-]{section.6.3}{Analytic Solutions to Linear PDEs}{chapter.6}% 57
-\BOOKMARK [1][-]{section.6.4}{Boundary Conditions}{chapter.6}% 58
-\BOOKMARK [1][-]{section.6.5}{Numerical Solutions of The Heat Equation}{chapter.6}% 59
-\BOOKMARK [2][-]{subsection.6.5.1}{1D Heat Equation}{section.6.5}% 60
-\BOOKMARK [2][-]{subsection.6.5.2}{Stabilized 1D Heat Equation \205 The Crank Nicolson Method}{section.6.5}% 61
-\BOOKMARK [2][-]{subsection.6.5.3}{2D Heat Equation}{section.6.5}% 62
-\BOOKMARK [1][-]{section.6.6}{Numerical Solutions of The Wave Equation}{chapter.6}% 63
-\BOOKMARK [1][-]{section.6.7}{Traveling Waves}{chapter.6}% 64
-\BOOKMARK [1][-]{section.6.8}{The Laplace and Poisson Equations \205 Steady State PDEs}{chapter.6}% 65
-\BOOKMARK [1][-]{section.6.9}{Exercises}{chapter.6}% 66
-\BOOKMARK [0][-]{appendix.A}{Writing and Projects}{}% 67
-\BOOKMARK [1][-]{section.A.1}{The Paper}{appendix.A}% 68
-\BOOKMARK [1][-]{section.A.2}{Figures and Tables}{appendix.A}% 69
-\BOOKMARK [1][-]{section.A.3}{Writing Style}{appendix.A}% 70
-\BOOKMARK [1][-]{section.A.4}{Tips For Writing Clear Mathematics}{appendix.A}% 71
-\BOOKMARK [2][-]{subsection.A.4.1}{Audience}{section.A.4}% 72
-\BOOKMARK [2][-]{subsection.A.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.A.4}% 73
-\BOOKMARK [2][-]{subsection.A.4.3}{Some Writing Tips}{section.A.4}% 74
-\BOOKMARK [2][-]{subsection.A.4.4}{Mathematical Vocabulary}{section.A.4}% 75
-\BOOKMARK [1][-]{section.A.5}{Sensitivity Analysis}{appendix.A}% 76
-\BOOKMARK [1][-]{section.A.6}{Example of Sensitivity Analysis:}{appendix.A}% 77
-\BOOKMARK [0][-]{appendix.B}{MATLAB Basics}{}% 78
-\BOOKMARK [1][-]{section.B.1}{Vectors and Matrices}{appendix.B}% 79
-\BOOKMARK [1][-]{section.B.2}{Looping}{appendix.B}% 80
-\BOOKMARK [2][-]{subsection.B.2.1}{For Loops}{section.B.2}% 81
-\BOOKMARK [2][-]{subsection.B.2.2}{The While Loop}{section.B.2}% 82
-\BOOKMARK [1][-]{section.B.3}{Conditional Statements}{appendix.B}% 83
-\BOOKMARK [2][-]{subsection.B.3.1}{If Statements}{section.B.3}% 84
-\BOOKMARK [2][-]{subsection.B.3.2}{Case-Switch Statements}{section.B.3}% 85
-\BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 86
-\BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 87
-\BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 88
-\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 89
-\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 90
-\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 91
-\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 92
-\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 93
-\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 94
-\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 95
-\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 96
-\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 97
-\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 98
-\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 99
-\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 100
-\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 101
-\BOOKMARK [1][-]{section.D.1}{Low Rank Approximations of Matrices}{appendix.D}% 102
-\BOOKMARK [1][-]{section.D.2}{The Google Page Rank Algorithm}{appendix.D}% 103
-\BOOKMARK [1][-]{section.D.3}{Principal Component Analysis \(Incomplete\)}{appendix.D}% 104
-\BOOKMARK [1][-]{section.D.4}{Building PDE's From Conservation Laws}{appendix.D}% 105
-\BOOKMARK [0][-]{equation.D.4.15}{Bibliography}{}% 106
+\BOOKMARK [1][-]{section.5.4}{The Backwards Euler Method}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.5}{Mathematical Modeling with ODE's}{chapter.5}% 52
+\BOOKMARK [1][-]{section.5.6}{Exercises}{chapter.5}% 53
+\BOOKMARK [2][-]{subsection.5.6.1}{Algorithm Summaries}{section.5.6}% 54
+\BOOKMARK [2][-]{subsection.5.6.2}{Applying What You've Learned}{section.5.6}% 55
+\BOOKMARK [0][-]{chapter.6}{Numerical Partial Differential Equations}{}% 56
+\BOOKMARK [1][-]{section.6.1}{Quick Review \205 Main Ideas from Vector Calculus}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.2}{An Intuitive Introduction to some Common PDEs}{chapter.6}% 58
+\BOOKMARK [1][-]{section.6.3}{Analytic Solutions to Linear PDEs}{chapter.6}% 59
+\BOOKMARK [1][-]{section.6.4}{Boundary Conditions}{chapter.6}% 60
+\BOOKMARK [1][-]{section.6.5}{Numerical Solutions of The Heat Equation}{chapter.6}% 61
+\BOOKMARK [2][-]{subsection.6.5.1}{1D Heat Equation}{section.6.5}% 62
+\BOOKMARK [2][-]{subsection.6.5.2}{Stabilized 1D Heat Equation \205 The Crank Nicolson Method}{section.6.5}% 63
+\BOOKMARK [2][-]{subsection.6.5.3}{2D Heat Equation}{section.6.5}% 64
+\BOOKMARK [1][-]{section.6.6}{Numerical Solutions of The Wave Equation}{chapter.6}% 65
+\BOOKMARK [1][-]{section.6.7}{Traveling Waves}{chapter.6}% 66
+\BOOKMARK [1][-]{section.6.8}{The Laplace and Poisson Equations \205 Steady State PDEs}{chapter.6}% 67
+\BOOKMARK [1][-]{section.6.9}{Exercises}{chapter.6}% 68
+\BOOKMARK [2][-]{subsection.6.9.1}{Algorithm Summaries}{section.6.9}% 69
+\BOOKMARK [2][-]{subsection.6.9.2}{Applying What You've Learned}{section.6.9}% 70
+\BOOKMARK [0][-]{appendix.A}{Writing and Projects}{}% 71
+\BOOKMARK [1][-]{section.A.1}{The Paper}{appendix.A}% 72
+\BOOKMARK [1][-]{section.A.2}{Figures and Tables}{appendix.A}% 73
+\BOOKMARK [1][-]{section.A.3}{Writing Style}{appendix.A}% 74
+\BOOKMARK [1][-]{section.A.4}{Tips For Writing Clear Mathematics}{appendix.A}% 75
+\BOOKMARK [2][-]{subsection.A.4.1}{Audience}{section.A.4}% 76
+\BOOKMARK [2][-]{subsection.A.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.A.4}% 77
+\BOOKMARK [2][-]{subsection.A.4.3}{Some Writing Tips}{section.A.4}% 78
+\BOOKMARK [2][-]{subsection.A.4.4}{Mathematical Vocabulary}{section.A.4}% 79
+\BOOKMARK [1][-]{section.A.5}{Sensitivity Analysis}{appendix.A}% 80
+\BOOKMARK [1][-]{section.A.6}{Example of Sensitivity Analysis:}{appendix.A}% 81
+\BOOKMARK [0][-]{appendix.B}{MATLAB Basics}{}% 82
+\BOOKMARK [1][-]{section.B.1}{Vectors and Matrices}{appendix.B}% 83
+\BOOKMARK [1][-]{section.B.2}{Looping}{appendix.B}% 84
+\BOOKMARK [2][-]{subsection.B.2.1}{For Loops}{section.B.2}% 85
+\BOOKMARK [2][-]{subsection.B.2.2}{The While Loop}{section.B.2}% 86
+\BOOKMARK [1][-]{section.B.3}{Conditional Statements}{appendix.B}% 87
+\BOOKMARK [2][-]{subsection.B.3.1}{If Statements}{section.B.3}% 88
+\BOOKMARK [2][-]{subsection.B.3.2}{Case-Switch Statements}{section.B.3}% 89
+\BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 90
+\BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 91
+\BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 92
+\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 93
+\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 94
+\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 95
+\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 96
+\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 97
+\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 98
+\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 99
+\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 100
+\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 101
+\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 102
+\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 103
+\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 104
+\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 105
+\BOOKMARK [1][-]{section.D.1}{Interpolation}{appendix.D}% 106
+\BOOKMARK [2][-]{subsection.D.1.1}{Vandemonde Interpolation}{section.D.1}% 107
+\BOOKMARK [2][-]{subsection.D.1.2}{Lagrange Interpolation}{section.D.1}% 108
+\BOOKMARK [2][-]{subsection.D.1.3}{Interpolation at Chebyshev Points}{section.D.1}% 109
+\BOOKMARK [1][-]{section.D.2}{Low Rank Approximations of Matrices}{appendix.D}% 110
+\BOOKMARK [1][-]{section.D.3}{The Google Page Rank Algorithm}{appendix.D}% 111
+\BOOKMARK [1][-]{section.D.4}{Principal Component Analysis \(Incomplete\)}{appendix.D}% 112
+\BOOKMARK [1][-]{section.D.5}{Building PDE's From Conservation Laws}{appendix.D}% 113
+\BOOKMARK [0][-]{equation.D.5.17}{Bibliography}{}% 114
