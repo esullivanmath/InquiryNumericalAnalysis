@@ -152,7 +152,7 @@ chapter we will focus on finding {\it approximate} solutions to differential equ
 It will be handy, however, to be able to check our work on problems where an analytic
 solution is available.
 
-\newpage\section{Euler and Midpoint Methods}
+\newpage\section{Euler's Method}
 
 \begin{problem}\label{prob:euler_motivation}
     Consider the differential equation $y' = -0.5y$ with the initial condition $y(0) = 6$.  
@@ -200,12 +200,12 @@ approximating derivatives, and that is exactly where we'll start.
     a differential equation. We want to approximate a solution to $y'(t) = f(t,y(t))$.
     Recall from Problem \ref{prob:num_diff_first_order} that 
     \[ y'(t) = \frac{y(t+h) - y(t)}{h} + \mathcal{O}(h) \]
-    so the differential equation $y'(t) = f(t,y(t))$ becomes
-    \[ \frac{y(t+h) - y(t)}{h} \approx f(t,y(t)). \]
+    so the differential equation $y'(t) = f(y(t),t)$ becomes
+    \[ \frac{y(t+h) - y(t)}{h} \approx f(y(t),t). \]
     Rewriting as a difference equation, letting $y_{n+1} = y(t_n+h)$ and $y_n = y(t_n)$,
     we get
     \begin{flalign}
-        y_{n+1} = y_n + h f(t_n , y_n)
+        y_{n+1} = y_n + h f(y_n, t_n)
         \label{eqn:Eulers_method}
     \end{flalign}
 %     \begin{enumerate}
@@ -265,7 +265,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 
 \begin{problem}
     Write code to implement Euler's method for initial value problems.  Your MATLAB
-    function should accept as input: $f(t,y)$, \mcode{tmin}, \mcode{tmax}, the number of
+    function should accept as input: $f(y,t)$, \mcode{tmin}, \mcode{tmax}, the number of
     grid points (the value of $h = \Delta t$ should be calculated within your code), and
     an initial condition.  The output should be vectors for $t$ and $y$.\\
     \mcode{function [t,y] = MyEuler1D(f,tmin,tmax,num_pts,IC)} \\
@@ -296,6 +296,53 @@ gives the exact solution at the tradeoff of needing infinite computational resou
 \end{problem}
 
 
+We can solve differential equations with multiple unknowns.  For example: the populations
+of two competing species modeled over time.  These problems are typically very challenging
+to solve by hand, but numerically the idea is exactly the same as with one-dimensional
+Euler's method.  The problem is to simultaneously solve the equations
+\begin{flalign*}
+    x' = f(x,y,t) \\ 
+    y' = g(x,y,t)
+\end{flalign*}
+where $x(t)$ and $y(t)$ are the functions we want to know, and $f$ and $g$ are functions
+that model the system of interest.  Consider the following example of a system of
+differential equations
+\begin{flalign*}
+    x' &= 0.5 xy - y \\ 
+    y' &= 2y - 0.1xy^2 - t.
+\end{flalign*}
+In this example, $f(x,y,t) = 0.5xy - y$ and $g(x,y,t) = 2y - 0.1xy^2 - t$.  The changes in
+the functions $x(t)$ and $y(t)$ are coupled together -- as one changes then so must the
+other.  While this system of equations
+might be impossible to solve analytically, we can approximate both of the derivatives in
+the same way that we did with Euler's method in 1D and get a reasonable way to step this
+differential equation forward in time.  Indeed,
+\begin{flalign*}
+    x' \approx \frac{x_{n+1} - x_n}{\Delta t} &= 0.5 x_n y_n - y_n \\ 
+    y' \approx \frac{y_{n+1} - y_n}{\Delta t} &= 2 y_n - 0.1 x_n y_n^2 - t_n.
+\end{flalign*}
+After simplifying a bit we get
+\begin{flalign*}
+    x_{n+1} &= x_n + \Delta t \left( 0.5 x_n y_n - y_n \right) \\ 
+    y_{n+1} &= y_n + \Delta t \left( 2 y_n - 0.1 x_n y_n^2 - t_n \right).
+\end{flalign*}
+As you can see, this is now a system of difference equations that can be coded with
+relative ease.
+
+\begin{technique}[2D Euler's Method]
+    If 
+    \begin{flalign*}
+        x' &= f(x,y,t) \\
+        y' &= g(x,y,t)
+    \end{flalign*}
+    then we can build a system of difference equations to approximate the solution by
+    taking a first-order approximation of the derivatives and rewriting the system as 
+    \begin{flalign*}
+        x_{n+1} &= x_n + \underline{\hspace{1in}} \\
+        y_{n+1} &= y_n + \underline{\hspace{1in}}.
+    \end{flalign*}
+\end{technique}
+
 
 
 \begin{problem}\label{prob:2dPredPrey}
@@ -316,6 +363,14 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     of the components of the model.
 \end{problem}
 
+
+\begin{problem}
+    Write a MATLAB function for 2D Euler's method.  Test your code on a problem where you
+    know the qualitative solution and can easily graphically check the answer.
+\end{problem}
+
+\newpage\section{The Midpoint Method}
+
 \begin{problem}
     Let's return to the simple differential equation $y' = -0.5y$ with $y(0) = 6$ that we
     saw in Problem \ref{prob:euler_motivation}.  Now we'll propose a slightly different
@@ -330,7 +385,7 @@ gives the exact solution at the tradeoff of needing infinite computational resou
                 \item Then use the slope from the half way point to go a full step forward
                     from time $t=0$.  
             \end{itemize} 
-            Perhaps a bit confusion \ldots let's build this idea together:
+            Perhaps a bit confusing \ldots let's build this idea together:
             \begin{itemize}
                 \item What is the slope at time $t=0$? $y'(0) =
                     \underline{\hspace{0.5in}}$
@@ -368,14 +423,14 @@ gives the exact solution at the tradeoff of needing infinite computational resou
     at time $t_{n+1/2} \equiv (t_n + t_{n+1})/2$ and then taking a full step using the
     value of $f$ at $t_{n+1/2}$ and the approximate $y_{n+1/2}$.
     \begin{flalign*}
-        y_{n+1/2} &= y_n + \frac{h}{2} f(t_n, y_n) \\
-        y_{n+1} &= y_n + h f(t_{n+1/2}, y_{n+1/2})
+        y_{n+1/2} &= y_n + \frac{h}{2} f(y_n, t_n) \\
+        y_{n+1} &= y_n + h f(y_{n+1/2}, t_{n+1/2})
     \end{flalign*}
     Note: Indexing by $1/2$ in a computer is nonsense.  Instead, we implement the midpoint
     method with:
     \begin{flalign*}
-        y_{temp} &= y_n + \frac{h}{2} f(t_n, y_n) \\
-        y_{n+1} &= y_n + h f\left( \frac{t_n+t_{n+1}}{2}, y_{temp}\right)
+        y_{temp} &= y_n + \frac{h}{2} f(y_n, t_n) \\
+        y_{n+1} &= y_n + h f\left( y_{temp}, \frac{t_n+t_{n+1}}{2}\right)
     \end{flalign*}
 
 \end{technique}
@@ -464,10 +519,10 @@ $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$.  The exact solution is shown in red
     method is one (of many) such methods.  In this method, each $k_j$ is an approximation
     of the slope and we combine them in as a weighted average in the end.
     \begin{flalign*}
-        k_1 &= f(t_n, y_n) \\
-        k_2 &= f(t_n + \frac{h}{2} , y_n + \frac{h}{2} k_1) \\
-        k_3 &= f(t_n + \frac{h}{2} , y_n + \frac{h}{2} k_2) \\
-        k_4 &= f(t_n + h , y_n + h k_3) \\
+        k_1 &= f(y_n,\, t_n) \\
+        k_2 &= f(y_n + \frac{h}{2} k_1,\, t_n + \frac{h}{2}) \\
+        k_3 &= f(y_n + \frac{h}{2} k_2,\, t_n + \frac{h}{2}) \\
+        k_4 &= f(y_n + h k_3,\, t_n + h) \\
         y_{n+1} &= y_n + \frac{h}{6} \left( k_1 + 2 k_2 + 2 k_3 + k_4 \right)
     \end{flalign*}
 \end{technique}
@@ -545,13 +600,13 @@ solid black line gives the final projection.}
 \begin{problem}
     Modify your Runge-Kutta 4 code to work for two dependent variables.  I'll get you
     started:\\We want to solve
-    \[ \left\{ \begin{array}{ll} x' &= f(t,x,y) \\ y' &= g(t,x,y) \end{array} \right. \]
+    \[ \left\{ \begin{array}{ll} x' &= f(x,y,t) \\ y' &= g(x,y,t) \end{array} \right. \]
     and to do so we extend the Runge Kutta method as
     \begin{flalign*}
-        k_1 &= f(t_n,x_n, y_n) \\
-        q_1 &= g(t_n,x_n, y_n) \\
-        k_2 &= f(t_n + \frac{h}{2} ,x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1) \\
-        q_2 &= g(t_n + \frac{h}{2} ,x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1) \\
+        k_1 &= f(x_n, y_n,t_n) \\
+        q_1 &= g(x_n, y_n, t_n,) \\
+        k_2 &= f(x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1, t_n + \frac{h}{2}) \\
+        q_2 &= g(x_n+\frac{h}{2} k_1, y_n + \frac{h}{2} q_1,t_n + \frac{h}{2}) \\
         k_3 &= \dots \\
         q_3 &= \dots \\
         k_4 &= \dots \\
@@ -614,9 +669,9 @@ legend('y_1''(t)' , 'y_2''(t)' , 'y_3''(t)')
     We want to solve $y' = f(t,y)$ so:
     \begin{enumerate}
         \item Approximate the derivative by looking forward in time(!)
-            \[ \frac{y_{n+1} - y_n}{h} \approx f(t_{n+1} , y_{n+1}) \]
+            \[ \frac{y_{n+1} - y_n}{h} \approx f(y_{n+1}, t_{n+1}) \]
         \item Rearrange to get the difference equation
-            \[ y_{n+1} = y_n + h f(t_{n+1},y_{n+1}). \]
+            \[ y_{n+1} = y_n + h f(y_{n+1},t_{n+1}). \]
         \item Notice that we \underline{will} have $t_{n+1}$ but we \underline{do not
             have} $y_{n+1}$.  The major trouble is that $y_{n+1}$ shows up on both sides
             of the equation.  Can you think of a way to solve for it? \dots you have code
@@ -660,7 +715,7 @@ legend('y_1''(t)' , 'y_2''(t)' , 'y_3''(t)')
     \[ y' = -\frac{1}{2} y^2 \quad \text{with} \quad y(0) = 0. \]
     \begin{enumerate}
         \item[(a)] Recall that the backward Euler approximation is 
-            \[ y_{n+1} = y_n + h f(t_{n+1},y_{n+1}). \]
+            \[ y_{n+1} = y_n + h f(y_{n+1},t_{n+1}). \]
             Let's take $h=1$ for simplicity (we'll make it smaller later).  What is the
             backward Euler formula for this particular differential equation?
         \item[(b)] You should notice that your backward Euler formula is now a quadratic
@@ -682,9 +737,9 @@ legend('y_1''(t)' , 'y_2''(t)' , 'y_3''(t)')
 
 The complications with the backward Euler's method are that you have a nonlinear equation
 to solve at every time step
-\[ y_{n+1} = y_n + h f(t_{n+1}, y_{n+1}). \]
+\[ y_{n+1} = y_n + h f(y_{n+1},t_{n+1}). \]
 Notice that this is the same as solving the equation
-\[ y_{n+1} - hf(t_{n+1},y_{n+1}) - y_n = 0. \]
+\[ y_{n+1} - hf(y_{n+1},t_{n+1}) - y_n = 0. \]
 You know the values of $h$, $t_{n+1}$ and $y_n$, and you know the function $f$, so, in a practical sense, you should use some sort of Newton's
 method iteration to solve that equation -- at each time step.  One seed for your Newton's method could be the
 value from the previous time step since you likely don't expect your solution to change
