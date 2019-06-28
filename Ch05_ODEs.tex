@@ -513,11 +513,73 @@ $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$.  The exact solution is shown in red
 
 \newpage\section{The Runge-Kutta Method}
 
+\begin{problem}
+    Again we return to the differential equation $y' = -0.5y$ with $y(0) = 6$ that we saw
+    in Problem \ref{prob:euler_motivation}.  This time we'll walk through a slightly more
+    challenging algorithm for approximating the slope solution to the differential
+    equation.  In this algorithm we will make four approximations of the slope at a point
+    and then use a weighted average of these four to take a full step forward.  The four
+    approximations will be called $k_1, k_2, k_3$, and $k_4$.
+    \begin{enumerate}
+        \item[(a)] At $t=0$ we know that $y(0) = 6$.  Therefore, what is the slope at
+            $t=0$?  $y'(0) = \underline{\hspace{0.5in}}$.  We will call this value $k_1$.
+        \item[(b)] To calculate $k_2$ we take a half-step forward using the slope $k_1$.
+            Using this slope, at time $t=0.5$ we find that $y'(0.5) =
+            \underline{\hspace{0.5in}}$.  We will call this value $k_2$.
+        \item[(c)] To calculate $k_3$ we take another half-step forward from the starting
+            point but this time using the slope $k_2$.  Using this slope, at the $t = 0.5$
+            we find that $y'(0.5) = \underline{\hspace{0.5in}}$.  We will call this value
+            $k_3$.
+        \item[(d)] To calculate $k_4$ we now take a full step forward using the slope
+            $k_3$.  Using this slope we find that at $t=1$ we have $y'(1) =
+            \underline{\hspace{0.5in}}$.  Call this slope $k_4$.
+        \item[(e)] To check your work you should now verify that 
+            \begin{flalign*}
+                y(0) = 6 \quad \implies  y'(0) = -0.5 \cdot 6 = -3 \quad \implies 
+                k_1 &= -3 \\
+                y(0.5) \approx 6 - \frac{1}{2} \cdot 3 = 4.5 \quad \implies  y'(0.5) = -0.5 \cdot 4.5 = -2.25
+                \quad \implies  k_2 &= -2.25 \\
+                y(0.5) \approx 6 - \frac{1}{2} \cdot 2.25 = 4.875 \quad \implies 
+                y'(0.5) = -0.5 \cdot 4.875 = -2.4375 \quad \implies  k_3 &= -2.4375 \\
+                y(1) \approx 6 - 2.4375 = 3.5625 \quad \implies y'(1) = -0.5 \cdot 3.5625
+                = -1.78125 \quad \implies k_4 &= -1.78125
+            \end{flalign*}
+            If your answers don't match then go back to parts (a) - (d) and check your
+            thinking and arithmetic.
+        \item[(f)]  We now have four approximations of the slope at the point $t=0$.  To
+            move forward take a weighted average of these four approximations
+            \[ \text{slope} \approx \frac{1 k_1 + 2 k_2 + 2 k_3 + 1k_4}{6}. \]
+            Calculate this new slope and step forward one full step.  You should find that
+            your approximate slope is $-2.359375$ and this gives an approximate value of
+            $y(1)$ as $y(1) \approx 6 - -2.359375 = 3.640625$.  Compare this to the exact
+            value of the solution to the differential equation at $t=1$.  You should see
+            that you have some pretty amazing accuracy!!
+        \item[(g)] Push this process forward one more step by hand.  Use the table below
+            to summarize your results.
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    $t$ & $0$ & $1$ & $2$ \\ \hline
+                    $k_1$ & $-3$ & & $\times$ \\ \hline
+                    $k_2$ & $-2.25$ & & $\times$ \\ \hline
+                    $k_3$ & $-2.4375$ & & $\times$ \\ \hline
+                    $k_4$ & $-1.78125$ & & $\times$ \\ \hline
+                    Approximation of slope & $-2.359375$ & & $\times$ \\ \hline
+                    Approximation of $y$ & $6$ & $3.640625$ & \\ \hline
+                    Exact Value of $y$ & $6$ & $3.639184$ & \phantom{2.2072766} \\ \hline
+                \end{tabular}
+            \end{center}
+    \end{enumerate}
+\end{problem}
+
+The method that you stepped through in the previous problem is called the Runge-Kutta 4
+method for approximating the solution to an ordinary differential equation. It is one of a
+family of many different approximation methods.  The ``4'' in the name is
+not simply the fact that we are making four approximations of the slope, but in that it
+enjoys fourth-order accuracy -- far better than both the Euler and Midpoint methods.
 \begin{technique}[The Runge-Kutta 4 (RK4) Method]
-    Another method for approximating the solution to a first order initial value problem
-    is to take several approximations and average them in a smart way.  The Runge-Kutta 4
-    method is one (of many) such methods.  In this method, each $k_j$ is an approximation
-    of the slope and we combine them in as a weighted average in the end.
+    The Runge-Kutta 4 method is one (of many) such methods.  In this method, each $k_j$ is
+    an approximation of the slope and we combine them in as a weighted average in the end.
     \begin{flalign*}
         k_1 &= f(y_n,\, t_n) \\
         k_2 &= f(y_n + \frac{h}{2} k_1,\, t_n + \frac{h}{2}) \\
@@ -765,10 +827,82 @@ method you need to solve and still maintain some accuracy in your method.
 \end{problem}
 
 
-\newpage\section{Mathematical Modeling with ODE's}
-In this section we give several problems which model real-world scenarios with ordinary
-differential equations.  For every one of these problems you will need to use a numerical
-method to solve the differential equation(s).
+
+\newpage\section{Exercises}
+
+\subsection{Algorithm Summaries}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is Euler's method
+    for approximating the solution to this differential equation?  What is the order of
+    accuracy of Euler's method?  Explain the meaning of the order of the method in the
+    context of solving a differential equation.
+\end{problem}
+
+\begin{problem}
+    Explain in clear language what Euler's method does geometrically.
+\end{problem}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is the Midpoint method
+    for approximating the solution to this differential equation?  What is the order of
+    accuracy of the Midpoint method?  Explain the meaning of the order of the method in the
+    context of solving a differential equation.
+\end{problem}
+\begin{problem}
+    Explain in clear language what the Midpoint method does geometrically.
+\end{problem}
+
+\begin{problem}
+    Consider the first-order differential equation $y' = f(y,t)$.  What is the Runge Kutta
+    method for approximating the solution to this differential equation?  What is the
+    order of accuracy of the Runge Kutta method?  Explain the meaning of the order of the
+    method in the context of solving a differential equation.
+\end{problem}
+
+\begin{problem}
+    Explain in clear language what the Runge Kutta method does geometrically.
+\end{problem}
+
+\subsection{Applying What You've Learned}
+\begin{problem}
+    Test the Euler, Midpoint, and Runge Kutta methods on the differential
+    equation
+    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} \quad y(0) = 1.5. \]
+    Find the exact solution by hand using the method of undetermined coefficients and note
+    that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
+    for the error between your numerical solution and the exact solution for $\lambda =
+    -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
+    create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
+    that value of $\lambda$ at different values for $\Delta t$.
+\end{problem}
+\hint{
+    Let the maximum time be small and take a large number of time steps.
+}
+
+
+\begin{problem}
+    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
+    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
+    initial position and initial velocity as you normally would with a second order
+    differential equation.  Devise a method for finding a numerical solution to this
+    problem. \\
+    Hint: First write the problem as a system of first order differential equations.  Then
+    think about how your bisection method code might help you.
+\end{problem}
+
+
+\begin{problem}
+    Write code to solve the boundary valued differential equation
+    \[ y'' = \cos(t) y' + \sin(t) y \quad \text{with} \quad y(0) = 0 \quad \text{and}
+        \quad y(1) = 1. \]
+\end{problem}
+\hint{
+    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
+    equations.
+}
+
+
 
 \begin{problem}
     In this model there are two characters, Romeo and Juliet, whose affection is
@@ -972,113 +1106,56 @@ method to solve the differential equation(s).
 
 
 
-\begin{problem}[The Combustion Problem]
-    Let $T$ be the temperature of a combustible material (e.g. oily rags, dry hay, etc.).
-    The conservation of energy equation states that 
-    \[ \rho c_p \frac{dT}{dt} = A_1 e^{-B/(T-T_0)} - h\left( T - T_a \right) \]
-    where 
-    \begin{itemize}
-        \item $T$ is temperature in Kelvin,
-        \item $T_0$ is a reference temperature above which the fuel starts oxidizing,
-        \item $T_a$ is the ambient temperature of the surrounding air,
-        \item $\rho$ is the density of the fuel,
-        \item $c_p$ is the specific heat of the fuel source, 
-        \item $h$ is a measure of the power per volume per degree Kelvin,
-        \item $A_1$ is a measure of the power per unit volume, and
-        \item $B$ is a rate constant measured in degrees Kelvin.
-    \end{itemize}
-    If we divide both sides of the differential equation by $\rho c_p$ we arrive at the
-    first order non-homogeneous differential equation
-    \[ \frac{dT}{dt} = A e^{-B/(T-T_0)} - C \left( T - T_a \right). \]  
-    Assume that $A, B,$ and $C$ are all positive coefficients.
-    \\{\bf Your Tasks:}
-    \begin{enumerate}
-        \item[(a)] Why must $T > T_0$ in order for the equation to make sense physically?
-        \item[(b)] Let's suppose that $T_a = 300^\circ K$ and that $T_0$ is also at the
-            ambient temperature.  Let $A = 20$, $B = 600$, and $C = 0.01$.  Analyze the
-            differential equation graphically plotting the phase portrait, identifying
-            equilibrium points, and discussing stability of each point.
-        \item[(c)] Discuss the physical interpretation of each equilibrium point.
-        \item[(d)] Suppose we don't know what $A$, $B$, and $C$a re, but we do know from
-            experiments that the three fixed points are $T_1 = T_a = 300^\circ K$, $T_2 =
-            670^\circ K$, and $T_3 = 1200^\circ K$.  What can you say about the
-            coefficients $A$, $B$, and $C$?
-        \item[(e)] Write a script that solves the problem numerically for several
-            different initial conditions.
-    \end{enumerate}
-\end{problem}
-\hint{
-    \begin{center}
-        \begin{tikzpicture}
-            \begin{axis}[axis lines=center, grid, xmin=0, xmax=2000, ymin=-3, ymax=3,
-                domain=300:2000, xlabel={$T$}, ylabel={$T'$}]
-                \addplot[smooth, very thick, blue, samples=100] {20*exp(-600/(x-300)) - 0.01*(x-300)};
-            \end{axis}
-        \end{tikzpicture}
-    \end{center}
-%     The fixed points are $T_1 = 300^\circ K$, $T_2 \approx 636.8^\circ K$, and $T_3
-%     \approx 1526^\circ K$.  $T_1$ is stable from the right, $T_2$ is unstable (above which
-%     a combustion occurs), and $T_3$ is stable (stable combustion).
-}
+% \begin{problem}[The Combustion Problem]
+%     Let $T$ be the temperature of a combustible material (e.g. oily rags, dry hay, etc.).
+%     The conservation of energy equation states that 
+%     \[ \rho c_p \frac{dT}{dt} = A_1 e^{-B/(T-T_0)} - h\left( T - T_a \right) \]
+%     where 
+%     \begin{itemize}
+%         \item $T$ is temperature in Kelvin,
+%         \item $T_0$ is a reference temperature above which the fuel starts oxidizing,
+%         \item $T_a$ is the ambient temperature of the surrounding air,
+%         \item $\rho$ is the density of the fuel,
+%         \item $c_p$ is the specific heat of the fuel source, 
+%         \item $h$ is a measure of the power per volume per degree Kelvin,
+%         \item $A_1$ is a measure of the power per unit volume, and
+%         \item $B$ is a rate constant measured in degrees Kelvin.
+%     \end{itemize}
+%     If we divide both sides of the differential equation by $\rho c_p$ we arrive at the
+%     first order non-homogeneous differential equation
+%     \[ \frac{dT}{dt} = A e^{-B/(T-T_0)} - C \left( T - T_a \right). \]  
+%     Assume that $A, B,$ and $C$ are all positive coefficients.
+%     \\{\bf Your Tasks:}
+%     \begin{enumerate}
+%         \item[(a)] Why must $T > T_0$ in order for the equation to make sense physically?
+%         \item[(b)] Let's suppose that $T_a = 300^\circ K$ and that $T_0$ is also at the
+%             ambient temperature.  Let $A = 20$, $B = 600$, and $C = 0.01$.  Analyze the
+%             differential equation graphically plotting the phase portrait, identifying
+%             equilibrium points, and discussing stability of each point.
+%         \item[(c)] Discuss the physical interpretation of each equilibrium point.
+%         \item[(d)] Suppose we don't know what $A$, $B$, and $C$a re, but we do know from
+%             experiments that the three fixed points are $T_1 = T_a = 300^\circ K$, $T_2 =
+%             670^\circ K$, and $T_3 = 1200^\circ K$.  What can you say about the
+%             coefficients $A$, $B$, and $C$?
+%         \item[(e)] Write a script that solves the problem numerically for several
+%             different initial conditions.
+%     \end{enumerate}
+% \end{problem}
+% \hint{
+%     \begin{center}
+%         \begin{tikzpicture}
+%             \begin{axis}[axis lines=center, grid, xmin=0, xmax=2000, ymin=-3, ymax=3,
+%                 domain=300:2000, xlabel={$T$}, ylabel={$T'$}]
+%                 \addplot[smooth, very thick, blue, samples=100] {20*exp(-600/(x-300)) - 0.01*(x-300)};
+%             \end{axis}
+%         \end{tikzpicture}
+%     \end{center}
+% %     The fixed points are $T_1 = 300^\circ K$, $T_2 \approx 636.8^\circ K$, and $T_3
+% %     \approx 1526^\circ K$.  $T_1$ is stable from the right, $T_2$ is unstable (above which
+% %     a combustion occurs), and $T_3$ is stable (stable combustion).
+% }
+% % 
 % 
-
-\begin{problem}[HIV Problem]
-    In a normal, HIV-free body, uninfected T-cells are introduced into the system at a
-    constant rate $\lambda$. The T-cells in the system have a finite life span, and hence a
-    proportion $\mu$ of the T-cells die. In an HIV infected body, there is a rate $k$ at which
-    the T-cells become infected. This rate depends both on the presence of T-cells and
-    free HIV-1 particles to infect the T-cells. Putting this together, we get the
-    following equation for the healthy T-cells:
-    \[ \frac{dT}{dt} = \lambda - \mu T - k TV \]
-    where
-    \begin{itemize}
-        \item $T(t)$ is the number of uninfected and activated T-cells at time $t$
-        \item $L(t)$ is the number of latently infected T-cells at time $t$
-        \item $I(t)$ is the number of actively infected T-cells at time $t$
-        \item $V(t)$ is the number of free HIV-1 particles at time $t$.
-    \end{itemize}
-    Once a T-cell becomes infected, a proportion $p$ of them will become latently infected,
-    while the remainder immediately be actively infected. A latently infected T-cell can
-    later become actively infected, and this happens at a rate $\alpha$. Latently infected cells
-    die at the same rate $\mu$ as uninfected T-cells. Actively infected T-cells will be
-    assumed to die at a different rate $a$. We can now write the equations for the infected
-    T-cells:
-    \begin{flalign*}
-        \frac{dL}{dt} &= kp TV - \mu L - \alpha L \\
-        \frac{dI}{dt} &= k(1-p) TV + \alpha L - a I
-    \end{flalign*}
-    Finally, free HIV-1 particles are manufactured inside actively infected T-cells at a
-    rate $c$. The particles die at a rate $\gamma$. The particles are also used in the process of
-    infecting healthy T-cells at the rate $k$. This gives us the following equation for
-    HIV-1 particles:
-    \[ \frac{dV}{dt} = cI - \gamma V - kTV. \]
-    Numerically solve system of differential equations and plot the time evolution of all
-    four components.  Write a thorough mathematical and biological description of the
-    evolution of the system.  The table below gives values for the initial conditions and
-    parameters.
-    \begin{center}
-        \begin{tabular}{|c|l|}
-            \hline
-            Parameters & Value \\ \hline \hline
-            $T(0)$ & 200 T-cells / mm$^3$ \\ \hline
-            $L(0)$ & 0 T-cells / mm$^3$ \\ \hline
-            $I(0)$ & 0 T-cells / mm$^3$ \\ \hline
-            $V(0)$ & $4 \times 10^{-7}$ HIV-1 cells / mm$^3$ \\ \hline
-            $\lambda$ & 0.272 / mm$^3$ day \\\hline
-            $\mu$ & $1.36 \times 10^{-3}$ / day \\\hline
-            $k$ & $2.7 \times 10^{-4}$ mm$^3$/day \\\hline
-            $p$ & 0.1 \\\hline
-            $\alpha$ & $3.6 \times 10^{-2}$ / day \\\hline
-            $a$ & 0.33 / day \\\hline
-            $c$ & 100 / day \\\hline
-            $\gamma$ & 2 / day \\\hline
-        \end{tabular}
-    \end{center}
-\end{problem}
-\hint{
-    This is a nonlinear system so use a robust solver.
-}
-
 
 
 \begin{problem}[Trebuchet Problem]
@@ -1141,22 +1218,95 @@ method to solve the differential equation(s).
     You can then use the fact that $S+I+R=N$ to get $R = N-S-I$.
 }
 
-\begin{problem}[H1N1 Problem]
-    The H1N1 virus, also known as the ``bird flu'', is a particularly virulent bug but
-    thankfully is also very predicable.  Once a person is infected they are infectious for
-    9 days.  Assume that a closed population of $N = 1500$ people (like a small college
-    campus) starts with exactly 1 infected person and hence the remainder of the
-    population is considered susceptible to the virus.  Furthermore, once a person is
-    recovered they have an immunity that typically lasts longer than the outbreak.
-    Mathematically we can model an H1N1 outbreak of this kind using 11 compartments:
-    susceptible people ($S$), 9 groups of infected people ($I_j$ for $j=1, 2, \cdots, 9$),
-    and recovered people ($R$). Write and numerically solve a system of 11 differential equations modeling the
-    H1N1 outbreak assuming that susceptible people become infected at a rate proportional
-    to the product of the number of susceptible people and the total number of infected
-    people. You may assume that the initial infected person is on the first day of their
-    infection and determine and unknown parameters using the fact that 1 week after the
-    infection starts there are 10 total people infected. 
-\end{problem}
+
+
+
+\newpage\section{Projects}
+In this section we propose several ideas for projects related to numerical ordinary
+differential equations.  These projects are meant to be open ended, to encourage creative
+mathematics, to push your coding skills, and to require you to write and communicate your
+mathematics.  Take the time to read Appendix \ref{app:writing_projects} before you write
+your final solution.
+
+\subsection{Pain Management}
+When a patient undergoing surgery is asked about their pain the doctors often ask
+patients to rate their pain on a
+subjective 0 to 10 scale with 0 meaning no pain and 10 meaning excruciating pain.
+After surgery the unmitigated pain level in a typical patient will be quite high and
+as such doctors typically treat with narcotics.  
+A mathematical model (inspired by
+\href{https://sinews.siam.org/Details-Page/data-driven-chronic-pain-management-using-hybrid-mathematical-methods}{THIS
+article}
+and \href{https://arxiv.org/pdf/1706.02366.pdf}{THIS paper}) 
+of a patient's subjective pain level as treated pharmaceutically
+by three drugs is given as:
+\begin{flalign*}
+    \frac{dP}{dt} &= - \left( k_0 + k_1 D_1 + k_2 D_2 +k_3 D_3\right)P + k_0 u \\
+    \frac{dD_1}{dt} &= -k_{D_1} D_1 + \sum_{j=1}^{N_1} \delta (t-\tau_{1,j}) \\ 
+    \frac{dD_2}{dt} &= -k_{D_2} D_2 + \sum_{j=1}^{N_2} \delta (t-\tau_{2,j}) \\ 
+    \frac{dD_3}{dt} &= -k_{D_3} D_3 + \sum_{j=1}^{N_3} \delta (t-\tau_{3,j})  
+\end{flalign*}
+where
+\begin{itemize}
+    \item $P$ is a patient's subjective pain level on a 0 to 10 scale, 
+    \item $D_i$ is the amount of the $i^{th}$ drug in the
+        patient's bloodstream,
+        \begin{itemize}
+            \item $D_1$ is a long-acting opioid
+            \item $D_2$ is a short-acting opioid
+            \item $D_3$ is a non-opioid
+        \end{itemize}
+    \item $k_0$ is the relaxation rate to baseline pain without drugs, 
+    \item $k_i$ is the impact of the $i^{th}$ drug on the relaxation rate, 
+    \item $u$ is the patient's baseline (unmitigated) pain, 
+    \item $k_{D_i}$ is the elimination rate of the $i^{th}$ drug from the bloodstream, 
+    \item $N_i$ is the total number of the $i^{th}$ drug doses taken, and 
+    \item $\tau_{i,j}$ are the time times the patient takes the $i^{th}$ drug.
+\end{itemize}
+Implement this model with parameters
+$u=8.01$, $k_0 = \ln(2)/2$, $k_1 = 0.319$, $k_2 = 0.184$, $k_3 = 0.201$, $k_{D_1} =
+\ln(0.5)/(-10)$, $k_{D_2} = \ln(0.5)/(-4)$, and $k_{D_3} = \ln(0.5)/(-4)$.  Take the
+initial pain level to be $P(0) = 3$ with no drugs on board.  Assume that the patient
+begins dosing the long-acting opioid at hour 2 and takes 1 dose periodically every 24 hours.
+Assume that the patient begins dosing the short-acting opioid at hour 0 and takes 1 dose
+periodically every 12 hours.  Finally assume that the patient takes 1 dose of the non-opioid
+drug every 48 hours starts at hour 24.  Of particular interest are how the pain level
+evolves over the first week out of surgery and how the drug concentrations evolve
+over this time.  
+
+\noindent Other questions:
+\begin{itemize}
+    \item What does this medication schedule do the patient's pain level?
+    \item What happens to the patient's pain level if he/she forgets the non-opioid
+        drug?
+    \item What happens to the patient's pain level if he/she has a bad reaction to
+        opioids and only takes the non-opioid drug?
+    \item What happens to the dynamics of the system if the patient's pain starts at
+        9/10?
+    \item In reality, the unmitigated pain $u$ will decrease in time.  Propose a
+        differential equation model for the unmitigated pain that will have a stable
+        equilibrium at 3 and has a value of 5 on day 5. Add this fifth differential
+        equation to the pain model and examine what happens to the patient's pain
+        over the first week. In this model, what happens after the first week if the
+        narcotics are ceased?
+\end{itemize}
+
+
+\subsection{The H1N1 Virus}
+The H1N1 virus, also known as the ``bird flu'', is a particularly virulent bug but
+thankfully is also very predicable.  Once a person is infected they are infectious for
+9 days.  Assume that a closed population of $N = 1500$ people (like a small college
+campus) starts with exactly 1 infected person and hence the remainder of the
+population is considered susceptible to the virus.  Furthermore, once a person is
+recovered they have an immunity that typically lasts longer than the outbreak.
+Mathematically we can model an H1N1 outbreak of this kind using 11 compartments:
+susceptible people ($S$), 9 groups of infected people ($I_j$ for $j=1, 2, \cdots, 9$),
+and recovered people ($R$). Write and numerically solve a system of 11 differential equations modeling the
+H1N1 outbreak assuming that susceptible people become infected at a rate proportional
+to the product of the number of susceptible people and the total number of infected
+people. You may assume that the initial infected person is on the first day of their
+infection and determine and unknown parameters using the fact that 1 week after the
+infection starts there are 10 total people infected. 
 \hint{
     The system of equations is
     \begin{flalign*}
@@ -1173,143 +1323,151 @@ method to solve the differential equation(s).
 }
 
 
-\begin{problem}[Pain Management]
-    
-    When a patient undergoing surgery is asked about their pain the doctors often ask
-    patients to rate their pain on a
-    subjective 0 to 10 scale with 0 meaning no pain and 10 meaning excruciating pain.
-    After surgery the unmitigated pain level in a typical patient will be quite high and
-    as such doctors typically treat with narcotics.  
-    A mathematical model (inspired by
-    \href{https://sinews.siam.org/Details-Page/data-driven-chronic-pain-management-using-hybrid-mathematical-methods}{THIS
-    article}
-    and \href{https://arxiv.org/pdf/1706.02366.pdf}{THIS paper}) 
-    of a patient's subjective pain level as treated pharmaceutically
-    by three drugs is given as:
-    \begin{flalign*}
-        \frac{dP}{dt} &= - \left( k_0 + k_1 D_1 + k_2 D_2 +k_3 D_3\right)P + k_0 u \\
-        \frac{dD_1}{dt} &= -k_{D_1} D_1 + \sum_{j=1}^{N_1} \delta (t-\tau_{1,j}) \\ 
-        \frac{dD_2}{dt} &= -k_{D_2} D_2 + \sum_{j=1}^{N_2} \delta (t-\tau_{2,j}) \\ 
-        \frac{dD_3}{dt} &= -k_{D_3} D_3 + \sum_{j=1}^{N_3} \delta (t-\tau_{3,j})  
-    \end{flalign*}
-    where
+\newpage\subsection{The Artillery Problem}
+The goal of artillery is to fire a shell (e.g. a cannon ball) so that it lands on a
+specific target.  If we ignore the effects of air resistance the differential equations
+describing its acceleration are very simple:
+\begin{flalign}
+    \frac{dv_x}{dt} = 0 \quad \text{and} \quad \frac{dv_z}{dt} = -g \label{eqn:no_air_res}
+\end{flalign}
+where $v_x$ and $v_z$ are the velocities in the $x$ and $z$ directions respectively and
+$g$ is the acceleration due to gravity ($g = 9.8$ m/s$^2$).  We can use equation
+\ref{eqn:no_air_res} to {\it easily} show that the resulting trajectory is parabolic.
+Once we know this we can easily\footnote{You should now pause and actually verify that it
+is indeed an easy mathematical task to verify that the trajectory is parabolic and to
+calculate the initial speed and angle necessary to reach a target.}  calculate the initial
+speed $v_0$ and angle $\theta_0$ above the horizontal necessary for the shell to reach the
+target.  We will undoubtedly find that the maximum range will always result from an angle
+of $\theta_0 = 45^\circ$.
+
+The effects of air resistance are significant when the shell must travel a large distance
+or when the speed is large.  If we modify \eqref{eqn:no_air_res} to include a simple model
+of air resistance the governing equations become
+\begin{flalign}
+    \frac{dv_x}{dt} = -c v_x \sqrt{ v_x^2 + v_z^2} \quad \text{and} \quad
+    \frac{dv_z}{dt} = -g - cv_z \sqrt{ v_x^2 + v_z^2}
+    \label{eqn:with_air_res}
+\end{flalign}
+where the constant $c$ depends on the shape and density of the shell and the density of
+air.  For this project assume that $c = 10^{-3} m^{-1}$. To calculate the components of the
+position vector recall that since the derivative of position, $s(t)$, is velocity we have
+\begin{flalign*}
+    s_x(t) = \int_0^t v_x(\tau) d\tau \quad \text{and} \quad s_z(t) = \int_0^t v_z(\tau)
+    d\tau.
+\end{flalign*}
+(Note that you will have to implement this integration numerically. I suggest looping over
+$t$ to build a vector of positions.)
+
+Now, imagine that you are living 200 years ago, acting as a consultant to an artillery
+officer who will be going into battle (perhaps against Napoleon -- he was known for hiring
+mathematicians to help his war efforts). Although computers have
+not yet been invented, given a few hours or a few days to work, a person living in this
+time could project trajectories using numerical methods (yes, numerical solutions to differential
+equations were well known back then too). Using this, you can try various
+initial speeds $v_0$ and angles $\theta_0$ until you find a pair that reach any target. However, the
+artillery officer needs a faster and simpler method. He can do math, but performing
+hundreds or thousands of numerical calculations on the battlefield is simply not
+practical. Suppose that our artillery piece will be firing at a target that is a distance
+$\Delta x$ away, and that $\Delta x$ is approximately half a mile away -- not exactly half a mile, but in
+that general neighborhood. 
+\begin{enumerate}
+    \item Develop a method for estimating $v_0$ and $\theta_0$ with reasonable
+        accuracy given the exact range to the target, $\Delta x$.  Test the
+        effectiveness of your method by comparing it to the numerical solution of
+        \eqref{eqn:with_air_res}.  Your method needs to be simple enough to use in real
+        time on a historic (Nepoleon-era)
+        battle field without the aid of a computer.  (Be sure to persuade me that your numerical solution is accurate
+        enough.) 
+    \item Discuss the sensitivity in your solutions to variations in the constant $c$.
+\item Extend this problem to make it more realistic.  A few possible extensions are
+    listed below but please do not restrict yourselves just to this list and do not think
+    that you need to do everything on the list.
     \begin{itemize}
-        \item $P$ is a patient's subjective pain level on a 0 to 10 scale, 
-        \item $D_i$ is the amount of the $i^{th}$ drug in the
-            patient's bloodstream,
-            \begin{itemize}
-                \item $D_1$ is a long-acting opioid
-                \item $D_2$ is a short-acting opioid
-                \item $D_3$ is a non-opioid
-            \end{itemize}
-        \item $k_0$ is the relaxation rate to baseline pain without drugs, 
-        \item $k_i$ is the impact of the $i^{th}$ drug on the relaxation rate, 
-        \item $u$ is the patient's baseline (unmitigated) pain, 
-        \item $k_{D_i}$ is the elimination rate of the $i^{th}$ drug from the bloodstream, 
-        \item $N_i$ is the total number of the $i^{th}$ drug doses taken, and 
-        \item $\tau_{i,j}$ are the time times the patient takes the $i^{th}$ drug.
+        \item You could consider the effects of targets at different altitudes $\Delta z$.
+        \item You could consider moving targets.
+        \item You could consider headwinds and/or tailwinds.
+        \item You could consider winds coming from an angle outside the $xz$-plane.
+        \item You could consider shooting the cannon from a boat with the target on shore
+            (the waves could be interesting!).
+        \item \dots You could consider any other physical situation which I haven't listed
+            here, but you have to do some amount of extension from the {\it basics}.
     \end{itemize}
-    Implement this model with parameters
-    $u=8.01$, $k_0 = \ln(2)/2$, $k_1 = 0.319$, $k_2 = 0.184$, $k_3 = 0.201$, $k_{D_1} =
-    \ln(0.5)/(-10)$, $k_{D_2} = \ln(0.5)/(-4)$, and $k_{D_3} = \ln(0.5)/(-4)$.  Take the
-    initial pain level to be $P(0) = 3$ with no drugs on board.  Assume that the patient
-    begins dosing the long-acting opioid at hour 2 and takes 1 dose periodically every 24 hours.
-    Assume that the patient begins dosing the short-acting opioid at hour 0 and takes 1 dose
-    periodically every 12 hours.  Finally assume that the patient takes 1 dose of the non-opioid
-    drug every 48 hours starts at hour 24.  Of particular interest are how the pain level
-    evolves over the first week out of surgery and how the drug concentrations evolve
-    over this time.  
-    
-    \noindent Other questions:
-    \begin{itemize}
-        \item What does this medication schedule do the patient's pain level?
-        \item What happens to the patient's pain level if he/she forgets the non-opioid
-            drug?
-        \item What happens to the patient's pain level if he/she has a bad reaction to
-            opioids and only takes the non-opioid drug?
-        \item What happens to the dynamics of the system if the patient's pain starts at
-            9/10?
-        \item In reality, the unmitigated pain $u$ will decrease in time.  Propose a
-            differential equation model for the unmitigated pain that will have a stable
-            equilibrium at 3 and has a value of 5 on day 5. Add this fifth differential
-            equation to the pain model and examine what happens to the patient's pain
-            over the first week. In this model, what happens after the first week if the
-            narcotics are ceased?
-    \end{itemize}
-\end{problem}
+\end{enumerate}
+
+\noindent The final product of this project will be:
+\begin{itemize}
+    \item a {\bf technical paper} describing your method to a mathematically sophisticated audience, and
+    \item a {\bf field manual} instructing the artillery officer how to use your method.
+\end{itemize}
+You can put both products in one paper.  Just use a section header to start the field
+manual.
 
 
-\newpage\section{Exercises}
-
-\subsection{Algorithm Summaries}
-
-\begin{problem}
-    Consider the first-order differential equation $y' = f(y,t)$.  What is Euler's method
-    for approximating the solution to this differential equation?  What is the order of
-    accuracy of Euler's method?  Explain the meaning of the order of the method in the
-    context of solving a differential equation.
-\end{problem}
-
-\begin{problem}
-    Explain in clear language what Euler's method does geometrically.
-\end{problem}
-
-\begin{problem}
-    Consider the first-order differential equation $y' = f(y,t)$.  What is the Midpoint method
-    for approximating the solution to this differential equation?  What is the order of
-    accuracy of the Midpoint method?  Explain the meaning of the order of the method in the
-    context of solving a differential equation.
-\end{problem}
-\begin{problem}
-    Explain in clear language what the Midpoint method does geometrically.
-\end{problem}
-
-\begin{problem}
-    Consider the first-order differential equation $y' = f(y,t)$.  What is the Runge Kutta
-    method for approximating the solution to this differential equation?  What is the
-    order of accuracy of the Runge Kutta method?  Explain the meaning of the order of the
-    method in the context of solving a differential equation.
-\end{problem}
-
-\begin{problem}
-    Explain in clear language what the Runge Kutta method does geometrically.
-\end{problem}
-
-\subsection{Applying What You've Learned}
-\begin{problem}
-    Test the Euler, Midpoint, and Runge Kutta methods on the differential
-    equation
-    \[ y' = \lambda \left( y - \cos(t) \right) - \sin(t) \quad \text{with} \quad y(0) = 1.5. \]
-    Find the exact solution by hand using the method of undetermined coefficients and note
-    that your exact solution will involve the parameter $\lambda$.  Produce log-log plots
-    for the error between your numerical solution and the exact solution for $\lambda =
-    -1$, $\lambda = -10$, $\lambda = -10^2$, \ldots, $\lambda = -10^6$.  In other words,
-    create 7 plots (one for each $\lambda$) showing how each of the 3 methods performs for
-    that value of $\lambda$ at different values for $\Delta t$.
-\end{problem}
-\hint{
-    Let the maximum time be small and take a large number of time steps.
-}
+Final note: 
+Remember that every time you use and discuss numerical solutions to differential
+equations, numerical differentiation, or numerical integration in a technical paper you need to discuss the
+error in your method.  All of our approximation methods come along with error and we have
+used Taylor series to derive the approximation error for most of them (the rest are easily Googleable).  When
+you present your findings to the reader you could say something like the following.
+\begin{quote}
+    {\it We use the Runge-Kutta 4 (RK4) method to approximate the solutions to
+    \eqref{eqn:with_air_res}.  Since the RK4 method is fourth-order and we took $\Delta t
+    < 0.1$ seconds we know that the maximum error in our solution at any given time is on the order of
+$(\Delta t)^4 < 0.0001$.}
+\end{quote}
+Similar statements need to be made \underline{every} time you discuss the use of an
+approximation method.
 
 
-\begin{problem}
-    We wish to solve the boundary valued problem $x'' + 4x = \sin(t)$ with initial
-    condition $x(0)=1$ and boundary condition $x(1)=2$.  Notice that you do not have the
-    initial position and initial velocity as you normally would with a second order
-    differential equation.  Devise a method for finding a numerical solution to this
-    problem. \\
-    Hint: First write the problem as a system of first order differential equations.  Then
-    think about how your bisection method code might help you.
-\end{problem}
-
-
-\begin{problem}
-    Write code to solve the boundary valued differential equation
-    \[ y'' = \cos(t) y' + \sin(t) y \quad \text{with} \quad y(0) = 0 \quad \text{and}
-        \quad y(1) = 1. \]
-\end{problem}
-\hint{
-    Introduce an auxiliary variable $v = y'$ and write the problem as a system of
-    equations.
-}
-
+\newpage\subsection{The HIV Problem}
+In a normal, HIV-free body, uninfected T-cells are introduced into the system at a
+constant rate $\lambda$. The T-cells in the system have a finite life span, and hence a
+proportion $\mu$ of the T-cells die. In an HIV infected body, there is a rate $k$ at which
+the T-cells become infected. This rate depends both on the presence of T-cells and
+free HIV-1 particles to infect the T-cells. Putting this together, we get the
+following equation for the healthy T-cells:
+\[ \frac{dT}{dt} = \lambda - \mu T - k TV \]
+where
+\begin{itemize}
+    \item $T(t)$ is the number of uninfected and activated T-cells at time $t$
+    \item $L(t)$ is the number of latently infected T-cells at time $t$
+    \item $I(t)$ is the number of actively infected T-cells at time $t$
+    \item $V(t)$ is the number of free HIV-1 particles at time $t$.
+\end{itemize}
+Once a T-cell becomes infected, a proportion $p$ of them will become latently infected,
+while the remainder immediately be actively infected. A latently infected T-cell can
+later become actively infected, and this happens at a rate $\alpha$. Latently infected cells
+die at the same rate $\mu$ as uninfected T-cells. Actively infected T-cells will be
+assumed to die at a different rate $a$. We can now write the equations for the infected
+T-cells:
+\begin{flalign*}
+    \frac{dL}{dt} &= kp TV - \mu L - \alpha L \\
+    \frac{dI}{dt} &= k(1-p) TV + \alpha L - a I
+\end{flalign*}
+Finally, free HIV-1 particles are manufactured inside actively infected T-cells at a
+rate $c$. The particles die at a rate $\gamma$. The particles are also used in the process of
+infecting healthy T-cells at the rate $k$. This gives us the following equation for
+HIV-1 particles:
+\[ \frac{dV}{dt} = cI - \gamma V - kTV. \]
+Numerically solve system of differential equations and plot the time evolution of all
+four components.  Write a thorough mathematical and biological description of the
+evolution of the system.  The table below gives values for the initial conditions and
+parameters.
+\begin{center}
+    \begin{tabular}{|c|l|}
+        \hline
+        Parameters & Value \\ \hline \hline
+        $T(0)$ & 200 T-cells / mm$^3$ \\ \hline
+        $L(0)$ & 0 T-cells / mm$^3$ \\ \hline
+        $I(0)$ & 0 T-cells / mm$^3$ \\ \hline
+        $V(0)$ & $4 \times 10^{-7}$ HIV-1 cells / mm$^3$ \\ \hline
+        $\lambda$ & 0.272 / mm$^3$ day \\\hline
+        $\mu$ & $1.36 \times 10^{-3}$ / day \\\hline
+        $k$ & $2.7 \times 10^{-4}$ mm$^3$/day \\\hline
+        $p$ & 0.1 \\\hline
+        $\alpha$ & $3.6 \times 10^{-2}$ / day \\\hline
+        $a$ & 0.33 / day \\\hline
+        $c$ & 100 / day \\\hline
+        $\gamma$ & 2 / day \\\hline
+    \end{tabular}
+\end{center}

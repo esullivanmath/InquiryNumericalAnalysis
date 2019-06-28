@@ -1582,3 +1582,434 @@ A = A'*A; % this will be a random symmetric NxN matrix.
     multi-variable Newton's method to find the critical points.  Classify the critical
     points as either local maximums or local minimums.
 \end{problem}
+
+
+\newpage\section{Projects}
+In this section we propose several ideas for projects related to numerical linear algebra.
+These projects are meant to be open ended, to encourage creative mathematics, to push your
+coding skills, and to require you to write and communicate your mathematics.  Take the
+time to read Appendix \ref{app:writing_projects} before you write your final solution.
+
+\subsection{Applications of the Singular Value Decomposition}
+The singular value decomposition (SVD) is a matrix factorization that can be thought of as
+the generalization of the eigenvalue problem for non-square matrices.  We wish to take a
+matrix $A$ that has size $m \times n$ and factor it into three matrices, $U$, $\Sigma$,
+and $V$ such that 
+\[ A = U \Sigma V^T \]
+where $U$ is an $m \times m$ orthonormal matrix, $\Sigma$ is an $m \times n$ rectangular
+diagonal matrix, and $V$ is and $n \times n$ orthonormal matrix.  Recall that an
+orthonormal matrix
+is a matrix where the transpose is the inverse.  That is, $UU^T = I_{m \times m}$ and $VV^T
+= I_{n \times n}$. The columns of $U$ are called the left singular vectors of $A$ and are
+the eigenvectors of the matrix $AA^T$.  The columns of $V$ are called the right singular
+vectors of $A$ and are the eigenvectors of the matrix $A^TA$.  The diagonal entries of
+$\Sigma$ are the square roots of the non-zero eigenvalues of both $AA^T$ and $A^TA$.
+
+It is probably best to have a look at an example (modified from
+\footnote{\href{http://www.d.umn.edu/~mhampton/m4326svd_example.pdf}{http://www.d.umn.edu/~mhampton/m4326svd\_example.pdf}}).  Consider the matrix 
+\[ A = \begin{pmatrix} 3 & 2 & 1 \\ 2 & 3 & -2 \end{pmatrix}. \]
+We would like to factor $A$ into $A = U \Sigma V^T$.  First we find the eigenvalues and
+eigenvectors of $AA^T$.  It is left to the reader to verify\footnote{That means that you
+should stop what you're doing and actually verify this result!} that the eigenvalues are
+$\lambda_1 = 25$ and $\lambda_2 = 9$.  Hence, the singular values are $\sigma_1 = 5$ and
+$\sigma_2 = 3$.  Next we find the right singular vectors (the columns of $V$) by finding
+an orthonormal set of eigenvectors of $A^TA$.  This too is left to the reader to verify
+that the matrix $V$ is 
+\[ V = \begin{pmatrix}
+        1/\sqrt{2} & 1/\sqrt{18} & 2/3 \\
+        1/\sqrt{2} & -1/\sqrt{18} & -2/3 \\
+        0 & 4/\sqrt{18} & -1/3 
+    \end{pmatrix}. \]
+The reader should also observe that the columns of $V$ are all orthogonal to each other as
+well as being unit vectors.
+
+We now know that 
+\[ A = U \Sigma V^T = U \begin{pmatrix} 5 & 0 & 0 \\ 0 & 3 & 0 \end{pmatrix} \begin{pmatrix} 1/\sqrt{2} & 1/\sqrt{2} & 0 \\ 1/\sqrt{18} & -1/\sqrt{18} &
+        4/\sqrt{18} \\ 2/3 & -2/3 & -1/3 \end{pmatrix} \]
+Since $V$ is an orthogonal matrix and the singular values $\sigma_1$ and $\sigma_2$ are
+non-zero we can see that 
+\[ U = AV\Sigma^\dagger \]
+where 
+\[ \Sigma^\dagger = \begin{pmatrix} 1/5 & 0 \\ 0 & 1/3 \\ 0 & 0 \end{pmatrix}. \]
+After a bit of computation we finally find that 
+\[ U = \begin{pmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ 1/\sqrt{2} & -1/\sqrt{2} \end{pmatrix}
+        \]
+and hence
+\[ A = \begin{pmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ 1/\sqrt{2} & -1/\sqrt{2} \end{pmatrix} \begin{pmatrix} 5 & 0 & 0 \\ 0 & 3 & 0 \end{pmatrix} \begin{pmatrix} 1/\sqrt{2} & 1/\sqrt{2} & 0 \\ 1/\sqrt{18} & -1/\sqrt{18} &
+        4/\sqrt{18} \\ 2/3 & -2/3 & -1/3 \end{pmatrix} \]
+We leave it to the reader to check that this is correct.  
+
+Obviously this is not a computation that you typically do by hand.  You should have SVD
+code handy that does this entire algorithm.  MATLAB also has a built-in svd code that is
+optimized to run faster than the one that we built in class.  You are welcome to use the
+built-in svd MATLAB routine in this project.
+
+\subsection*{Problem Statement}
+There are many applications of the singular value decomposition.  In fact, the SVD is
+considered one of the most useful and widely used matrix decompositions in the linear
+algebra arsenal.  Your job for this project will be to explore two of those applications.
+Below you will find a brief list of some of the primary uses for the singular value
+decomposition.  Some of them are rather intricate and some are fairly straight forward to
+implement, but I leave it to you to choose applications that are of interest to you.
+
+\subsection*{Your Tasks}
+You and your partner will choose two applications and do the following:
+\begin{enumerate}
+    \item[(a)] implement non-trivial examples of the application 
+    \item[(b)] write a brief technical report detailing how each application works
+        (including all of the mathematical details), and
+    \item[(c)] write a 1 paragraph non-technical summary describing
+        each application and how it works.  The audience for this non-technical summary is
+        any reasonably educated, but not necessarily mathematically sophisticated,
+        adult.
+\end{enumerate}
+
+Note: All code for this project must be uniquely yours or your partners.  
+
+\subsection*{List of Applications}
+Each of the following applications of the singular value decomposition is followed by a
+brief description (paraphrased from various web sources linked in the footnotes).  Use
+this to guide your choice.
+\begin{description}
+    \item[Principal Component Analysis:] (PCA) is a statistical tool that allows you to
+        convert a set of possibly correlated data observations into uncorrelated
+        components.  This is a method of data reduction that, in some sense, reduces how much
+        data is actually influential in your data set.  PCA takes
+        a potentially large data set and reduces it down to its {\it principal
+        components} that are the most influential on the data.  PCA itself has many
+        applications ranging from statistics to signal processing.  If you choose this
+        application you will need to implement PCA on a non-trivial data set of your
+        choosing.  There are several sample data sets on the web but the
+        ones that are used for explanation are often quite trivial in size
+        and scope.  \footnote{\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{PCA
+        Wiki page: en.wikipedia.org/wiki/Principal\_component\_analysis}}  Absolutely do
+        not just make up your own data set.
+    \item[Low Rank Image Approximations:] There are literally hundreds of ways to trim
+        information from images while retaining the most important parts of the image.  One of the simplest is to apply the singular value decomposition to the
+        rectangular image (either in grayscale or separately for each RBG matrix).  Then
+        you can zero out the lower value singular values and vectors and then rebuild the
+        image.  The
+        low rank approximation (really just another type of data reduction) does obviously lead to some loss of information but up to a certain point
+        this loss of information is un-noticeable to the human eye.  If you choose this
+        application you need to supply your own images as well as give several examples of
+        how low rank approximation changes the image.  You should also 
+        explore how low rank approximations can be used as a method of image compression.  and give some sort of mathematical measure
+        defining how much data reduction was performed along with the re-generated images
+        so we can see the
+        reduction.\footnote{\href{http://math.arizona.edu/~brio/VIGRE/ThursdayTalk.pdf}{A
+        Sample of the Image Compression Technique: math.arizona.edu/\~brio/VIGRE/ThursdayTalk.pdf}}
+    \item[Recommender Systems:] You run in the {\it recommender systems} all the time.
+        Amazon seems to know what other books you might like, NetFlix seems to know what
+        other movies you might like, and the list goes on.  One way to perform the
+        matching behind the scenes in a
+        recommender system is to use the SVD along with data reduction techniques (just
+        like with PCA and image compression).  If you choose this application you need to
+        provide a non-trivial example of a recommender system preferably of real data
+        released from one of the large common sites (NetFlix, Amazon,
+        etc.).\footnote{\href{http://www.cs.carleton.edu/cs_comps/0607/recommend/recommender/svd.html}{The
+            idea of SVD for Recommender Systems:
+        http://www.cs.carleton.edu/cs\_comps/0607/recommend/recommender/svd.html}}
+        \footnote{\href{http://robotics.stanford.edu/~ronnyk/WEBKDD2000/papers/sarwar.pdf}{Paper
+            about Recommender Systems:
+        http://robotics.stanford.edu/~ronnyk/WEBKDD2000/papers/sarwar.pdf}}
+    \item[The Kabsh Algorithm:] This is an algorithm for calculating the optimal rotation
+        matrix that minimizes the error between two sets of points.  This
+        is a useful method in comparing molecular structures (including proteins) but is
+        not just used in mathematical biology.  If you
+        choose this application then you need to provide several non-trivial examples of
+        how the method works and what it is that you are finding.
+        \footnote{\href{https://en.wikipedia.org/wiki/Kabsch_algorithm}{Wiki page for
+        Kabsh Algorithm: https://en.wikipedia.org/wiki/Kabsch\_algorithm} }
+%     \item[Image Deblurring:] A method for taking a blurred image and returning it to the
+%         sharp (or nearly sharp) original image is related to the singular value
+%         decomposition.  This method requires you to know the way in which the image was
+%         blurred but the inverse of the process is usually contaminated with noise so
+%         taking a simple linear inverse neither works nor makes sense.  Follow the link in
+%         the footnote for a full textbook on the image deblurring problem.
+%         \footnote{\href{http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/ImageDeblurring_2006.pdf}{Image
+%         Deblurring Text: http://web.ipac.caltech.edu/staff/fmasci/home/astro\_refs/ImageDeblurring\_2006.pdf}} 
+    \item[Choose Your Own Adventure:] If you happen upon an interesting and non-trivial
+        application of the singular value decomposition then you are welcome to use this
+        as one of your two applications.  Just be sure that you can implement it 
+        and that you can fully explain what you're doing. A decent place to start is the
+        applications section of the SVD Wiki page.
+        \footnote{\href{https://en.wikipedia.org/wiki/Singular_value_decomposition}{SVD
+            Wiki:
+        https://en.wikipedia.org/wiki/Singular\_value\_decomposition}}
+\end{description}
+
+
+\newpage\subsection{The Google Page Rank Algorithm}
+
+
+In this project you will discover how the PageRank algorithm works to give the most relevant
+information as the top hit on a Google search.  
+
+Search engines compile large indexes of the dynamic information on the Internet so they
+are easily searched.  This means that when you do a Google search, you are not actually
+searching the Internet; instead, you are searching the indexes at Google.
+
+When you type a query into Google the following two steps take place:
+\begin{enumerate}
+    \item Query Module: The query module at Google converts your natural language into a
+        language that the search system can understand and consults the various indexes
+        at Google in order to answer the query.  This is done to find the list of relevant
+        pages.
+    \item Ranking Module: The ranking module takes the set of relevant pages and ranks
+        them. The outcome of the ranking is an ordered list of web pages such
+        that the pages near the top of the list are most likely to be what you desire from
+        your search. This ranking is the same as assigning a {\it popularity score} to
+        each web site and then listing the relevant sites by this score.  
+\end{enumerate}
+
+This section focuses on the Linear Algebra behind the Ranking Module developed by the
+founders of Google: Sergey Brin and Larry Page.  Their algorithm is called the
+\emph{PageRank algorithm}, and you use it every single time you use Google's search
+engine.
+
+
+In simple terms: {\it A webpage is important if it is pointed to by other important
+pages}.
+
+The Internet can be viewed as a directed graph (look up this term
+\href{https://en.wikipedia.org/wiki/Directed_graph}{here on Wikipedia}) where the nodes
+are the web pages and the edges are the hyperlinks between the pages. The hyperlinks into a
+page are called {\it inlinks}, and the ones pointing out of a page are called {\it
+outlinks}.  In essence, a hyperlink from my page to yours is my endorsement of your page.
+Thus, a page with more recommendations must be more important than a page with a few
+links.  However, the status of the recommendation is also important. 
+
+Let us now translate this into mathematics. To help understand
+this we first consider the small web of six pages shown in Figure
+\ref{fig:example_graph} (a graph of the router level of the internet can be found
+\href{https://personalpages.manchester.ac.uk/staff/m.dodge/cybergeography/atlas/lumeta_large.jpg}{here}).  The links between the
+pages are shown by arrows. An arrow pointing into a node is an {\it inlink}
+and an arrow pointing out of a node is an {\it outlink}. In Figure
+\ref{fig:example_graph}, node 3 has three outlinks (to nodes 1, 2, and 5)
+and 1 inlink (from node 1).
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) node[circle,draw]{3};
+            \draw (-1,1) node[circle,draw]{1};
+            \draw (1,1) node[circle,draw]{2};
+            \draw (-1,-1) node[circle,draw]{6};
+            \draw (1,-1) node[circle,draw]{5};
+            \draw (0,-2) node[circle,draw]{4};
+        %
+            \draw[<->] (-0.25,0.25) -- (-0.75,0.75);
+            \draw[->] (-0.65,1) -- (0.65,1);
+            \draw[->] (0.25,0.25) -- (0.75,0.75);
+            \draw[->] (0.25,-0.25) -- (0.75,-0.75);
+            \draw[->] (0.65,-1) -- (-0.65,-1);
+            \draw[<->] (-0.75,-1.25) -- (-.25,-1.75);
+            \draw[<->] (0.75,-1.25) -- (0.25,-1.75);
+        \end{tikzpicture}
+    \end{center}
+        \caption{Sample graph of a web with six pages.}
+        \label{fig:example_graph}
+\end{figure}
+
+We will first define some notation in the PageRank algorithm:
+\begin{itemize}
+    \item $|P_i|$ is the number of outlinks from page $P_i$
+    \item $H$ is the {\it hyperlink} matrix defined as 
+        \[ H_{ij} = \left\{ \begin{array}{cl} \frac{1}{|P_j|}, & \text{if there is a link
+            from node $j$ to node $i$} \\ 0, & \text{otherwise} \end{array} \right. \]
+        where the ``$i$'' and ``$j$'' are the row and column indices respectively.  
+    \item $\bx$ is a vector that contains all of the PageRanks for the individual pages.
+\end{itemize}
+
+The PageRank algorithm works as follows:
+\begin{enumerate}
+    \item Initialize the page ranks to all be equal. This means that our initial
+        assumption is that all pages are of equal rank.  In the case of Figure
+        \ref{fig:example_graph} we would take $\bx_0$ to be 
+        \[ \bx_0 = \begin{pmatrix} 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \\ 1/6 \end{pmatrix}. \]
+    \item Build the hyperlink matrix.  \\ As an example we'll consider node 3 in Figure
+        \ref{fig:example_graph}.  There are three outlinks from node 3 (to nodes 1, 2, and
+        5).  Hence $H_{13}=1/3$, $H_{23} = 1/3$, and $H_{53} = 1/3$ and the partially
+        complete hyperlink matrix is
+        \[ H = \begin{pmatrix} 
+                - & - & 1/3 & - & - & - \\
+                - & - & 1/3 & - & - & - \\
+                - & - & 0   & - & - & - \\
+                - & - & 0   & - & - & - \\
+                - & - & 1/3 & - & - & - \\
+                - & - & 0   & - & - & - 
+            \end{pmatrix} \]
+    \item The difference equation $\bx_{n+1} = H \bx_n$ is used to iteratively refine the
+        estimates of the page ranks.  You can view the iterations as a person visiting a
+        page and then following a link at random, then following a random link on the next
+        page, and the next, and the next, etc.  Hence we see
+        that the iterations evolve exactly as expected for a difference equation.
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                Iteration & New Page Rank Estimation \\ \hline \hline
+                0 & $\bx_0$ \\
+                1 & $\bx_1 = H \bx_0$ \\
+                2 & $\bx_2 = H \bx_1 = H^2 \bx_0$ \\
+                3 & $\bx_3 = H \bx_2 = H^3 \bx_0$ \\
+                4 & $\bx_4 = H \bx_3 = H^4 \bx_0$ \\
+                \vdots & \qquad \vdots \\
+                $k$ & $\bx_k = H^k \bx_0$ \\ \hline
+            \end{tabular}
+        \end{center}
+    \item When a steady state is reached we sort the resulting vector $\bx_k$ to give the
+        page rank. The node (web page) with the highest rank will be the top search
+        result, the second highest rank will be the second search result, and so on.
+\end{enumerate}
+
+It doesn't take much to see that this process can be very time consuming.  Think about
+your typical web search with hundreds of thousands of hits; that makes a square matrix $H$
+that has a size of hundreds of thousands of entries by hundreds of thousands of entries!
+The matrix multiplications alone would take many minutes (or possibly many hours) for
+every search! \dots but Brin and Page were pretty smart dudes!!
+
+
+We now state a few theorems and definitions that will help us simplify the iterative
+PageRank process.
+\begin{thm}\label{thm:eigen_expand}
+    If $A$ is an $n \times n$ matrix with $n$ linearly independent eigenvectors $\bv_1,
+    \bv_2, \bv_3,$ $\ldots, \bv_n$ and associated eigenvalues $\lambda_1, \lambda_2,
+    \lambda_3, \ldots, \lambda_n$ then for any initial vector $\bx \in \mathbb{R}^n$ we
+    can write $A^k \bx$ as
+    \[ A^k \bx = c_1 \lambda_1^k \bv_1 + c_2 \lambda_2^k \bv_2 + c_3 \lambda_3^k \bv_3 +
+        \cdots c_n \lambda_n^k \bv_n \]
+    where $c_1, c_2, c_3, \ldots, c_n$ are the constants found by expressing $\bx$ as a
+    linear combination of the eigenvectors. \\Note: We can assume that the eigenvalues are ordered
+    such that $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge \cdots \ge \lambda_n$.
+\end{thm}
+\begin{proof}
+    (Prove the preceding theorem)
+\end{proof}
+
+\begin{definition}
+    A {\bf probability vector} is a vector with entries on the interval $[0,1]$ that add up to 1. 
+\end{definition}
+\begin{definition}
+    A {\bf stochastic matrix} is a square matrix whose columns are probability vectors.
+\end{definition}
+
+\begin{thm} \label{thm:largest_ev_stochastic}
+    If $A$ is a stochastic $n \times n$ matrix then $A$ will have $n$ linearly independent
+    eigenvectors.  Furthermore, the largest eigenvalue of a stochastic matrix will
+    \underline{always} be $\lambda_1 = 1$ and the smallest eigenvalue  will always be
+    nonnegative: $0 \le \lambda_n < 1$.
+\end{thm}
+
+Some of the following tasks will ask you to {\it prove} a statement or a theorem.  This
+means to clearly write all of the logical and mathematical reasons why the statement is
+true. Your proof should be absolutely crystal clear to anyone with a similar mathematical
+background \dots if you are in doubt then have a peer from a different group read your
+proof to you \underline{out loud}.
+
+\begin{problem}
+    Finish writing the hyperlink matrix $H$ from Figure \ref{fig:example_graph}.
+\end{problem}
+
+\begin{problem}
+    Write MATLAB code to implement the iterative process defined previously. Make a plot
+    that shows how the rank evolves over the iterations.
+\end{problem}
+
+
+\begin{problem}
+    What must be true about a collection of $n$ pages such that an $n\times n$
+        hyperlink matrix $H$ is a stochastic matrix.
+\end{problem}
+
+The statement of the next theorem is incomplete, but the proof is given to you.  Fill in
+the blank in the statement of the theorem and provide a few sentences supporting your
+answer.
+\begin{thm}\label{thm:steady}
+    If $A$ is an $n \times n$ stochastic matrix and $\bx_0$ is some initial vector
+    for the difference equation $\bx_{n+1} = A \bx_n$, then the steady state
+    vector is
+    \[ \bx_{equilib} = \lim_{k \to\infty} A^k \bx_0 = \underline{\hspace{1in}}. \]
+\end{thm}
+\begin{proof}
+    First note that $A$ is an $n \times n$ stochastic matrix so from Theorem
+    \ref{thm:largest_ev_stochastic} we know that there are $n$ linearly
+    independent eigenvectors.  We can then substitute
+    the eigenvalues from Theorem \ref{thm:largest_ev_stochastic} in Theorem
+    \ref{thm:eigen_expand}. Noting that if $0<\lambda_j<1$ we have $\lim_{k \to
+    \infty} \lambda_j^k = 0$ the result follows immediately.
+\end{proof}
+\begin{problem}
+    Discuss how Theorem \ref{thm:steady} greatly simplifies the PageRank iterative process
+    described previously.  In other words: there is no reason to iterate at all.  Instead,
+    just find \underline{\hspace{1in}}.
+\end{problem}
+\begin{problem}
+\item Now use the previous two problems to find the resulting PageRank vector from the web in Figure
+    \ref{fig:example_graph}?  Be sure to rank the pages in order of importance.
+    Compare your answer to the one that you got in problem 2.
+\end{problem}
+
+
+\begin{problem}
+    Consider the web in Figure \ref{fig:graph2}.
+        \begin{enumerate}
+            \item[(a)] Write the $H$ matrix and find the initial state $\bx_0$, 
+            \item[(b)] Find
+                steady state PageRank vector using the two different methods described:
+                one using the iterative difference equation and the other using Theorem
+                \ref{thm:steady} and the dominant eigenvector.
+            \item[(c)] Rank the pages in order of importance.
+        \end{enumerate}
+\end{problem}
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) node[circle,draw]{3};
+            \draw (-1,1) node[circle,draw]{1};
+            \draw (1,1) node[circle,draw]{2};
+            \draw (-1,-1) node[circle,draw]{6};
+            \draw (1,-1) node[circle,draw]{5};
+            \draw (0,-2) node[circle,draw]{4};
+            \draw (-2,0) node[circle,draw]{7};
+            \draw (-2,-2) node[circle,draw]{8};
+        %
+            \draw[<-] (-0.25,0.25) -- (-0.75,0.75);
+            \draw[->] (-0.65,1) -- (0.65,1);
+            \draw[<->] (0.25,0.25) -- (0.75,0.75);
+            \draw[<->] (0.25,-0.25) -- (0.75,-0.75);
+            \draw[->] (0.65,-1) -- (-0.65,-1);
+            \draw[<->] (-0.75,-1.25) -- (-.25,-1.75);
+            \draw[<->] (0.75,-1.25) -- (0.25,-1.75);
+            \draw[<->] (-1.75,0.25) -- (-1.25,0.75);
+            \draw[<->] (-1.65,0) -- (-0.35,0);
+            \draw[<-] (-1.75,-0.25) -- (0.7,-0.8);
+            \draw[->] (-2,-0.35) -- (-2,-1.65);
+            \draw[<->] (-1.65,-2) -- (-0.35,-2);
+        \end{tikzpicture}
+    \end{center}
+    \caption{Graph of a web with eight pages.}
+    \label{fig:graph2}
+\end{figure}
+
+
+\begin{problem}
+    One thing that we didn't consider in this version of the Google Page Rank algorithm is
+    the random behavior of humans.  One, admittedly slightly naive, modification that we
+    can make to the present algorithm is to assume that the person surfing the web will
+    randomly jump to any other page in the web at any time.  For example, if someone is on
+    page 1 in Figure \ref{fig:graph2} then they could randomly jump to any page 2 - 8.
+    They also have links to pages 2, 3, and 7.  That is a total of 10 possible next steps
+    for the web surfer.  There is a $2/10$ chance of heading to page 2.  One of those is
+    following the link from page 1 to page 2 and the other is a random jump to page 2
+    without following the link.  Similarly, there is a $2/10$ chance of
+    heading to page 3, $2/10$ chance of heading to page 7, and a $1/10$ chance of randomly
+    heading to any other page.
+
+    Implement this new algorithm, called the {\it random surfer algorithm}, on the web in
+    Figure \ref{fig:graph2}.  Compare your ranking to the non-random surfer results from
+    the previous problem.
+\end{problem}
+
+
+
+% \newpage\subsection{Principal Component Analysis (Incomplete)}

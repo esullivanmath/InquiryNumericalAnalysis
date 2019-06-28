@@ -1105,57 +1105,6 @@ details for ``why'' it works.
 \end{problem}
 
 
-\begin{problem}[Basins of Attraction]
-    Let $f(x)$ be a differentiable function with several roots.  Given a starting $x$
-    value we should be able to apply Newton's Method to that starting point and we will
-    converge to one of the roots (so long as you aren't in one of the special cases
-    discussed earlier in the chapter).  It stands to reason that starting points {\it
-    near} each other should all end up at the same root, and for some functions this is
-    true.  However, it is not true in general.  
-
-    A {\bf basin of attraction} for a root is the set of $x$ values that converges to that
-    root under Newton iterations.  In this problem you will produce colored plots showing
-    the basins of attraction for all of the following functions.  Do this as follows:
-    \begin{itemize}
-        \item Find the actual roots of the function by hand (this should be easy on the
-            functions below).  
-        \item Assign each of the roots a different color.
-        \item Pick a starting point on the $x$ axis and use it to start Newton's Method.
-        \item Color the starting point according to the root that it converges to.
-        \item Repeat this process for many many starting points so you get a colored
-            picture of the $x$ axis showing where the starting points converge to.
-    \end{itemize}
-    The set of points that are all the same color are called the {\bf basin of attraction}
-    for the root associated with that color.
-
-    \begin{enumerate}
-        \item[(a)] $f(x) = (x-4)(x+1)$
-        \item[(b)] $g(x) = (x-1)(x+3)$
-        \item[(c)] $h(x) = (x-4)(x-1)(x+3)$
-        \item[(d)] Find a function of your own that has an interesting picture of the
-            basins of attraction.
-    \end{enumerate}
-
-\end{problem}
-
-
-\begin{problem}
-    A {\it fixed point} of a function $f(x)$ is a point that solves the equation $f(x) =
-    x$.  Fixed points are interesting in iterative processes since fixed points don't
-    change under repeated application of the function $f$.  
-
-    For example, consider the function $f(x) = x^2 - 6$.  The fixed points of $f(x)$ can be found by
-    solving the equation $x^2 - 6 = x$ which, when simplified algebraically, is $x^2 - x -
-    6 = 0$.  Factoring the left-hand side gives $(x-3)(x+2)=0$ which implies that $x=3$
-    and $x=-2$ are fixed points for this function. That is, $f(3) = 3$ and $f(-2) = -2$.
-    Notice, however, that finding fixed points is identical to a root finding problem.
-    \begin{enumerate}
-        \item[(a)] Use a numerical root-finding algorithm to find the fixed points of the
-            function $f(x) = x^2 - 6$ on the interval $[0,\infty)$.
-            \item[(b)] Find the fixed points of the function $f(x) =
-                \sqrt{\frac{8}{x+6}}$.
-    \end{enumerate}
-\end{problem}
 
 \begin{problem}
     In Single Variable Calculus you studied methods for finding local and global extrema
@@ -1175,6 +1124,24 @@ details for ``why'' it works.
 
 
 
+\begin{problem}
+
+    A {\it fixed point} of a function $f(x)$ is a point that solves the equation $f(x) =
+    x$.  Fixed points are interesting in iterative processes since fixed points don't
+    change under repeated application of the function $f$.  
+
+    For example, consider the function $f(x) = x^2 - 6$.  The fixed points of $f(x)$ can be found by
+    solving the equation $x^2 - 6 = x$ which, when simplified algebraically, is $x^2 - x -
+    6 = 0$.  Factoring the left-hand side gives $(x-3)(x+2)=0$ which implies that $x=3$
+    and $x=-2$ are fixed points for this function. That is, $f(3) = 3$ and $f(-2) = -2$.
+    Notice, however, that finding fixed points is identical to a root finding problem.
+    \begin{enumerate}
+        \item[(a)] Use a numerical root-finding algorithm to find the fixed points of the
+            function $f(x) = x^2 - 6$ on the interval $[0,\infty)$.
+            \item[(b)] Find the fixed points of the function $f(x) =
+                \sqrt{\frac{8}{x+6}}$.
+        \end{enumerate}
+    \end{problem}
 
 
 % \begin{challenge}[modified from \cite{Chartier}]
@@ -1241,4 +1208,62 @@ details for ``why'' it works.
 %     \end{tikzpicture}
 % \end{center}
 % 
+
+
+\newpage\section{Projects}
+In this section we propose several ideas for projects related to numerical algebra.  These
+projects are meant to be open ended, to encourage creative mathematics, to push your
+coding skills, and to require you to write and communicate your mathematics.  Take the
+time to read Appendix \ref{app:writing_projects} before you write your final solution.
+
+\subsection{Basins of Attraction}
+
+Let $f(x)$ be a differentiable function with several roots.  Given a starting $x$
+value we should be able to apply Newton's Method to that starting point and we will
+converge to one of the roots (so long as you aren't in one of the special cases
+discussed earlier in the chapter).  It stands to reason that starting points {\it
+near} each other should all end up at the same root, and for some functions this is
+true.  However, it is not true in general.  
+
+A {\bf basin of attraction} for a root is the set of $x$ values that converges to that
+root under Newton iterations.  In this problem you will produce colored plots showing
+the basins of attraction for all of the following functions.  Do this as follows:
+\begin{itemize}
+    \item Find the actual roots of the function by hand (this should be easy on the
+        functions below).  
+    \item Assign each of the roots a different color.
+    \item Pick a starting point on the $x$ axis and use it to start Newton's Method.
+    \item Color the starting point according to the root that it converges to.
+    \item Repeat this process for many many starting points so you get a colored
+        picture of the $x$ axis showing where the starting points converge to.
+\end{itemize}
+The set of points that are all the same color are called the {\bf basin of attraction}
+for the root associated with that color.
+
+\begin{enumerate}
+    \item[(a)] $f(x) = (x-4)(x+1)$
+    \item[(b)] $g(x) = (x-1)(x+3)$
+    \item[(c)] $h(x) = (x-4)(x-1)(x+3)$
+    \item[(d)] Find a single-variable function of your own that has an interesting
+        picture of the basins of attraction.
+    \item[(e)] Now for the fun part!  Consider the function $f(z) = z^3 - 1$ where $z$
+        is a complex variable.  That is, $z = x + iy$ where $i = \sqrt{-1}$.  From the
+        Fundamental Theorem of Algebra we know that there are three roots to this
+        polynomial in the complex plane.  In fact, we know that the roots are $z_0 =
+        1$, $z_1 = \frac{1}{2}\left( -1 + \sqrt{3} i \right)$, and $z_2 =
+        \frac{1}{2} \left( -1 - \sqrt{3} i \right)$ (you should stop now and check
+        that these three numbers are indeed roots of the polynomial $f(z)$).  Your job
+        is to build a picture of the basins of attraction for the three roots in the
+        complex plane.  This picture will naturally be two-dimensional since numbers
+        in the complex plane are two dimensional (each has a real and an imaginary
+        part).  When you have your picture give a thorough write up of what you found.
+    \item[(f)] Now pick your favorite complex-valued function and build a picture of
+        the basins of attraction.  Consider this an art project!  See if you can come
+        up with the prettiest basin of attraction picture.
+\end{enumerate}
+
+
+
+
+
 

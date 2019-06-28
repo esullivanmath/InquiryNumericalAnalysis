@@ -59,8 +59,10 @@
 \newlabel{fig:taylor_thm_exp}{{1.1}{26}{The function $f(x) = e^x$ and a second order Taylor approximation. The solid black curve is $f(x) = e^x$ and the dashed red curve is the Taylor approximation. The right-hand plot shows a zoomed in view near the point $x=1$.\relax }{figure.caption.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces The function $f(x) = \qopname  \relax o{sin}(x)$ and a second order Taylor approximation. The solid black curve is $f(x) = \qopname  \relax o{sin}(x)$ and the dashed red curve is the Taylor approximation. The right-hand plot shows a zoomed in view near the point $x=0.5$.\relax }}{26}{figure.caption.3}}
 \newlabel{fig:taylor_thm_sine}{{1.2}{26}{The function $f(x) = \sin (x)$ and a second order Taylor approximation. The solid black curve is $f(x) = \sin (x)$ and the dashed red curve is the Taylor approximation. The right-hand plot shows a zoomed in view near the point $x=0.5$.\relax }{figure.caption.3}{}}
-\citation{Chartier}
 \@writefile{toc}{\contentsline {section}{\numberline {1.5}Exercises}{28}{section.1.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.1}Coding Exercises}{28}{subsection.1.5.1}}
+\citation{Chartier}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.2}Applying What You've Learned}{29}{subsection.1.5.2}}
 \citation{Chartier}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Numerical Algebra}{33}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -82,257 +84,280 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.7.1}Algorithm Summaries}{48}{subsection.2.7.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.7.2}Applying What You've Learned}{48}{subsection.2.7.2}}
 \citation{Chartier}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Numerical Calculus}{52}{chapter.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.8}Projects}{51}{section.2.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8.1}Basins of Attraction}{51}{subsection.2.8.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Numerical Calculus}{53}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Numerical Differentiation}{52}{section.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A partition of an interval on the real line.\relax }}{52}{figure.caption.5}}
-\newlabel{fig:differentiation_partition}{{3.1}{52}{A partition of an interval on the real line.\relax }{figure.caption.5}{}}
-\newlabel{eqn:derivative_defintiion}{{3.1}{52}{Numerical Differentiation}{equation.3.1.1}{}}
-\newlabel{eqn:derivative_first_approx}{{3.2}{53}{Numerical Differentiation}{equation.3.1.2}{}}
-\newlabel{prob:numdiff1}{{3.1}{53}{}{theorem.3.1}{}}
-\newlabel{prob:num_diff_first_order}{{3.2}{53}{}{theorem.3.2}{}}
-\newlabel{thm:first_order_first_deriv}{{3.5}{54}{First Order Approximation of the First Derivative}{theorem.3.5}{}}
-\newlabel{prob:deriv_error_analysis_ex}{{3.8}{54}{}{theorem.3.8}{}}
-\newlabel{prob:numdiff3}{{3.12}{56}{}{theorem.3.12}{}}
-\newlabel{prob:numdiff4}{{3.18}{59}{}{theorem.3.18}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces First and second derivatives.\relax }}{60}{table.caption.6}}
-\newlabel{tab:first_and_second_derivatives}{{3.1}{60}{First and second derivatives.\relax }{table.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Numerical Integration}{62}{section.3.2}}
-\newlabel{eqn:Riemann_integral}{{3.3}{62}{Numerical Integration}{equation.3.2.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Riemann sum to approximate an integral with left, midpoint, and right rectangles.\relax }}{62}{figure.caption.7}}
-\newlabel{fig:integral_with_rectangles}{{3.2}{62}{Riemann sum to approximate an integral with left, midpoint, and right rectangles.\relax }{figure.caption.7}{}}
-\newlabel{prob:left_riemann_error}{{3.25}{63}{}{theorem.3.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Using rectangles and trapezoids with $\Delta x = 1$ for approximating the integral $\intop \kp@ilimits _1^4 f(x)dx$.\relax }}{64}{figure.caption.8}}
-\newlabel{fig:trap_motivation}{{3.3}{64}{Using rectangles and trapezoids with $\Delta x = 1$ for approximating the integral $\int _1^4 f(x)dx$.\relax }{figure.caption.8}{}}
-\newlabel{thm:num_int}{{3.40}{69}{Numerical Integration Techniques}{theorem.3.40}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Errors with integration techniques.\relax }}{70}{figure.caption.9}}
-\newlabel{fig:integration_errors}{{3.4}{70}{Errors with integration techniques.\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Numerical Optimization}{71}{section.3.3}}
-\newlabel{prob:cardboard}{{3.43}{71}{The Classic Cardboard Box Problem}{theorem.3.43}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Single Variable Numerical Optimization}{72}{subsection.3.3.1}}
-\newlabel{prob:intuitive_max}{{3.44}{72}{}{theorem.3.44}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Numerical Differentiation}{53}{section.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A partition of an interval on the real line.\relax }}{53}{figure.caption.5}}
+\newlabel{fig:differentiation_partition}{{3.1}{53}{A partition of an interval on the real line.\relax }{figure.caption.5}{}}
+\newlabel{eqn:derivative_defintiion}{{3.1}{53}{Numerical Differentiation}{equation.3.1.1}{}}
+\newlabel{eqn:derivative_first_approx}{{3.2}{54}{Numerical Differentiation}{equation.3.1.2}{}}
+\newlabel{prob:numdiff1}{{3.1}{54}{}{theorem.3.1}{}}
+\newlabel{prob:num_diff_first_order}{{3.2}{54}{}{theorem.3.2}{}}
+\newlabel{thm:first_order_first_deriv}{{3.5}{55}{First Order Approximation of the First Derivative}{theorem.3.5}{}}
+\newlabel{prob:deriv_error_analysis_ex}{{3.8}{55}{}{theorem.3.8}{}}
+\newlabel{prob:numdiff3}{{3.12}{57}{}{theorem.3.12}{}}
+\newlabel{prob:numdiff4}{{3.18}{60}{}{theorem.3.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces First and second derivatives.\relax }}{61}{table.caption.6}}
+\newlabel{tab:first_and_second_derivatives}{{3.1}{61}{First and second derivatives.\relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Numerical Integration}{63}{section.3.2}}
+\newlabel{eqn:Riemann_integral}{{3.3}{63}{Numerical Integration}{equation.3.2.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Riemann sum to approximate an integral with left, midpoint, and right rectangles.\relax }}{63}{figure.caption.7}}
+\newlabel{fig:integral_with_rectangles}{{3.2}{63}{Riemann sum to approximate an integral with left, midpoint, and right rectangles.\relax }{figure.caption.7}{}}
+\newlabel{prob:left_riemann_error}{{3.25}{64}{}{theorem.3.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Using rectangles and trapezoids with $\Delta x = 1$ for approximating the integral $\intop \kp@ilimits _1^4 f(x)dx$.\relax }}{65}{figure.caption.8}}
+\newlabel{fig:trap_motivation}{{3.3}{65}{Using rectangles and trapezoids with $\Delta x = 1$ for approximating the integral $\int _1^4 f(x)dx$.\relax }{figure.caption.8}{}}
+\newlabel{thm:num_int}{{3.40}{70}{Numerical Integration Techniques}{theorem.3.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Errors with integration techniques.\relax }}{71}{figure.caption.9}}
+\newlabel{fig:integration_errors}{{3.4}{71}{Errors with integration techniques.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Numerical Optimization}{72}{section.3.3}}
+\newlabel{prob:cardboard}{{3.43}{72}{The Classic Cardboard Box Problem}{theorem.3.43}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Single Variable Numerical Optimization}{73}{subsection.3.3.1}}
+\newlabel{prob:intuitive_max}{{3.44}{73}{}{theorem.3.44}{}}
 \citation{Meerschaert}
 \citation{Meerschaert}
-\newlabel{prob:pig_numerical}{{3.57}{74}{}{theorem.3.57}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces A challenging numerical optimization problem. If we start at the black point then how will any of our algorithms find the local minimum at the red point?\relax }}{75}{figure.caption.10}}
-\newlabel{fig:num_opt_challenging}{{3.5}{75}{A challenging numerical optimization problem. If we start at the black point then how will any of our algorithms find the local minimum at the red point?\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Multivariable Numerical Optimization}{75}{subsection.3.3.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Numerical Curve Fitting}{78}{section.3.4}}
-\newlabel{tech:least_squares}{{3.70}{79}{Nonlinear Least Squares Curve Fitting}{theorem.3.70}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Demonstration of the curve fitting technique. The vertical black bars between the points show the point-wise error in the estimate. In these four pictures we are only modifying the value of $a$ while leaving $b = 2$ and $c=0.7$ fixed for simplicity. In reality we need to change all three parameters in the minimization process - hence the actual minimization takes place in three dimensions.\relax }}{80}{figure.caption.11}}
-\newlabel{fig:least_squares_ex}{{3.6}{80}{Demonstration of the curve fitting technique. The vertical black bars between the points show the point-wise error in the estimate. In these four pictures we are only modifying the value of $a$ while leaving $b = 2$ and $c=0.7$ fixed for simplicity. In reality we need to change all three parameters in the minimization process - hence the actual minimization takes place in three dimensions.\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces The sum of the squared errors for the function $f(x) = ax^2 + bx + c$ for the data set $S = \{ (0,1.07), \tmspace  +\thinmuskip {.1667em} (1,3.9), \tmspace  +\thinmuskip {.1667em} (2,14.8), \tmspace  +\thinmuskip {.1667em} (3,26.8)\}$. For $b=2$ and $c=0.7$ the minimum occurs on this curve at approximately $a \approx 2.3$ with the sum of the square errors of approximately 2.51. (To build this plot we took increments of $0.1$ between different guesses for $a$ from $1$ to $3$ -- a very brute-force way of approximating a minimum.\relax }}{81}{figure.caption.12}}
-\newlabel{fig:least_squares_ex_error_plot}{{3.7}{81}{The sum of the squared errors for the function $f(x) = ax^2 + bx + c$ for the data set $S = \{ (0,1.07), \, (1,3.9), \, (2,14.8), \, (3,26.8)\}$. For $b=2$ and $c=0.7$ the minimum occurs on this curve at approximately $a \approx 2.3$ with the sum of the square errors of approximately 2.51. (To build this plot we took increments of $0.1$ between different guesses for $a$ from $1$ to $3$ -- a very brute-force way of approximating a minimum.\relax }{figure.caption.12}{}}
-\newlabel{prob:least_squares_plots}{{3.71}{81}{}{theorem.3.71}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Several data plots for Problem \ref  {prob:least_squares_plots}.\relax }}{82}{figure.caption.13}}
-\newlabel{fig:plot_least_squares_prob}{{3.8}{82}{Several data plots for Problem \ref {prob:least_squares_plots}.\relax }{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Exercises}{84}{section.3.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Algorithm Summaries}{84}{subsection.3.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Applying What You've Learned}{85}{subsection.3.5.2}}
-\newlabel{prob:first_deriv_data}{{3.85}{85}{}{theorem.3.85}{}}
-\newlabel{prob:trap_from_data}{{3.87}{85}{}{theorem.3.87}{}}
-\newlabel{prob:curve_fitting_exercises}{{3.94}{88}{}{theorem.3.94}{}}
+\newlabel{prob:pig_numerical}{{3.57}{75}{}{theorem.3.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces A challenging numerical optimization problem. If we start at the black point then how will any of our algorithms find the local minimum at the red point?\relax }}{76}{figure.caption.10}}
+\newlabel{fig:num_opt_challenging}{{3.5}{76}{A challenging numerical optimization problem. If we start at the black point then how will any of our algorithms find the local minimum at the red point?\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Multivariable Numerical Optimization}{76}{subsection.3.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Numerical Curve Fitting}{79}{section.3.4}}
+\newlabel{tech:least_squares}{{3.70}{80}{Nonlinear Least Squares Curve Fitting}{theorem.3.70}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Demonstration of the curve fitting technique. The vertical black bars between the points show the point-wise error in the estimate. In these four pictures we are only modifying the value of $a$ while leaving $b = 2$ and $c=0.7$ fixed for simplicity. In reality we need to change all three parameters in the minimization process - hence the actual minimization takes place in three dimensions.\relax }}{81}{figure.caption.11}}
+\newlabel{fig:least_squares_ex}{{3.6}{81}{Demonstration of the curve fitting technique. The vertical black bars between the points show the point-wise error in the estimate. In these four pictures we are only modifying the value of $a$ while leaving $b = 2$ and $c=0.7$ fixed for simplicity. In reality we need to change all three parameters in the minimization process - hence the actual minimization takes place in three dimensions.\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces The sum of the squared errors for the function $f(x) = ax^2 + bx + c$ for the data set $S = \{ (0,1.07), \tmspace  +\thinmuskip {.1667em} (1,3.9), \tmspace  +\thinmuskip {.1667em} (2,14.8), \tmspace  +\thinmuskip {.1667em} (3,26.8)\}$. For $b=2$ and $c=0.7$ the minimum occurs on this curve at approximately $a \approx 2.3$ with the sum of the square errors of approximately 2.51. (To build this plot we took increments of $0.1$ between different guesses for $a$ from $1$ to $3$ -- a very brute-force way of approximating a minimum.\relax }}{82}{figure.caption.12}}
+\newlabel{fig:least_squares_ex_error_plot}{{3.7}{82}{The sum of the squared errors for the function $f(x) = ax^2 + bx + c$ for the data set $S = \{ (0,1.07), \, (1,3.9), \, (2,14.8), \, (3,26.8)\}$. For $b=2$ and $c=0.7$ the minimum occurs on this curve at approximately $a \approx 2.3$ with the sum of the square errors of approximately 2.51. (To build this plot we took increments of $0.1$ between different guesses for $a$ from $1$ to $3$ -- a very brute-force way of approximating a minimum.\relax }{figure.caption.12}{}}
+\newlabel{prob:least_squares_plots}{{3.71}{82}{}{theorem.3.71}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Several data plots for Problem \ref  {prob:least_squares_plots}.\relax }}{83}{figure.caption.13}}
+\newlabel{fig:plot_least_squares_prob}{{3.8}{83}{Several data plots for Problem \ref {prob:least_squares_plots}.\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Exercises}{85}{section.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Algorithm Summaries}{85}{subsection.3.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Applying What You've Learned}{86}{subsection.3.5.2}}
+\newlabel{prob:first_deriv_data}{{3.85}{86}{}{theorem.3.85}{}}
+\newlabel{prob:trap_from_data}{{3.87}{86}{}{theorem.3.87}{}}
+\newlabel{prob:curve_fitting_exercises}{{3.92}{88}{}{theorem.3.92}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Plots for Problem \ref  {prob:curve_fitting_exercises}.\relax }}{89}{figure.caption.14}}
 \newlabel{fig:curve_fitting_exercises_plots}{{3.9}{89}{Plots for Problem \ref {prob:curve_fitting_exercises}.\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Numerical Linear Algebra}{90}{chapter.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Projects}{90}{section.3.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.1}Galaxy Integration}{90}{subsection.3.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.2}Higher Order Integration}{91}{subsection.3.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6.3}Dam Integration}{91}{subsection.3.6.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Numerical Linear Algebra}{93}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Matrix Operations}{90}{section.4.1}}
-\newlabel{prob:matrix_mult}{{4.3}{91}{}{theorem.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Solving Systems of Linear Equations}{93}{section.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Upper and Lower Triangular Systems}{93}{subsection.4.2.1}}
-\newlabel{tech:lsolve}{{4.9}{94}{Forward Substitution: \texttt {LSolve}}{theorem.4.9}{}}
-\newlabel{tech:usolve}{{4.13}{94}{Backward Substitution: \texttt {USolve}}{theorem.4.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}The LU Factorization}{95}{subsection.4.2.2}}
-\newlabel{tech:lu}{{4.22}{97}{LU Factorization}{theorem.4.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Curve Fitting with Linear Algebra -- The Least Squares Problem}{99}{section.4.3}}
-\newlabel{sec:least_squares}{{4.3}{99}{Curve Fitting with Linear Algebra -- The Least Squares Problem}{section.4.3}{}}
-\newlabel{prob:least_squares_1}{{4.27}{99}{}{theorem.4.27}{}}
-\newlabel{eqn:TSS}{{4.1}{100}{}{equation.4.3.1}{}}
-\newlabel{eqn:RSS}{{4.2}{100}{}{equation.4.3.2}{}}
-\newlabel{eqn:Rsquared}{{4.3}{100}{}{equation.4.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}The QR Factorization}{103}{section.4.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}The Eigenvalue-Eigenvector Problem}{105}{section.4.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}The Singular Value Decomposition}{107}{section.4.6}}
-\newlabel{thm:sym_matrix}{{4.50}{107}{}{theorem.4.50}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Multi-Dimensional Newton's Method}{110}{section.4.7}}
-\newlabel{sec:mv_newton}{{4.7}{110}{Multi-Dimensional Newton's Method}{section.4.7}{}}
-\newlabel{prob:mv_newton}{{4.57}{112}{}{theorem.4.57}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.8}Exercises}{115}{section.4.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Algorithm Summaries}{115}{subsection.4.8.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Applying What You've Learned}{115}{subsection.4.8.2}}
-\newlabel{prob:heated_rod_lin_alg}{{4.70}{115}{}{theorem.4.70}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Matrix Operations}{93}{section.4.1}}
+\newlabel{prob:matrix_mult}{{4.3}{94}{}{theorem.4.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Solving Systems of Linear Equations}{96}{section.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Upper and Lower Triangular Systems}{96}{subsection.4.2.1}}
+\newlabel{tech:lsolve}{{4.9}{97}{Forward Substitution: \texttt {LSolve}}{theorem.4.9}{}}
+\newlabel{tech:usolve}{{4.13}{97}{Backward Substitution: \texttt {USolve}}{theorem.4.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}The LU Factorization}{98}{subsection.4.2.2}}
+\newlabel{tech:lu}{{4.22}{100}{LU Factorization}{theorem.4.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Curve Fitting with Linear Algebra -- The Least Squares Problem}{102}{section.4.3}}
+\newlabel{sec:least_squares}{{4.3}{102}{Curve Fitting with Linear Algebra -- The Least Squares Problem}{section.4.3}{}}
+\newlabel{prob:least_squares_1}{{4.27}{102}{}{theorem.4.27}{}}
+\newlabel{eqn:TSS}{{4.1}{103}{}{equation.4.3.1}{}}
+\newlabel{eqn:RSS}{{4.2}{103}{}{equation.4.3.2}{}}
+\newlabel{eqn:Rsquared}{{4.3}{103}{}{equation.4.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}The QR Factorization}{106}{section.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}The Eigenvalue-Eigenvector Problem}{108}{section.4.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}The Singular Value Decomposition}{110}{section.4.6}}
+\newlabel{thm:sym_matrix}{{4.50}{110}{}{theorem.4.50}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Multi-Dimensional Newton's Method}{113}{section.4.7}}
+\newlabel{sec:mv_newton}{{4.7}{113}{Multi-Dimensional Newton's Method}{section.4.7}{}}
+\newlabel{prob:mv_newton}{{4.57}{115}{}{theorem.4.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Exercises}{118}{section.4.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Algorithm Summaries}{118}{subsection.4.8.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Applying What You've Learned}{118}{subsection.4.8.2}}
+\newlabel{prob:heated_rod_lin_alg}{{4.70}{118}{}{theorem.4.70}{}}
 \citation{Meerschaert}
-\newlabel{thm:symmetric_matrix_thm}{{4.76}{118}{Eigen-Structure of Symmetric Matrices}{theorem.4.76}{}}
-\newlabel{prob:lawn_chair}{{4.79}{118}{}{theorem.4.79}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Numerical Ordinary Differential Equations}{120}{chapter.5}}
+\newlabel{thm:symmetric_matrix_thm}{{4.76}{121}{Eigen-Structure of Symmetric Matrices}{theorem.4.76}{}}
+\newlabel{prob:lawn_chair}{{4.79}{121}{}{theorem.4.79}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Projects}{123}{section.4.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.1}Applications of the Singular Value Decomposition}{123}{subsection.4.9.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.2}The Google Page Rank Algorithm}{127}{subsection.4.9.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Sample graph of a web with six pages.\relax }}{127}{figure.caption.18}}
+\newlabel{fig:example_graph}{{4.1}{127}{Sample graph of a web with six pages.\relax }{figure.caption.18}{}}
+\newlabel{thm:eigen_expand}{{4.80}{129}{}{theorem.4.80}{}}
+\newlabel{thm:largest_ev_stochastic}{{4.83}{129}{}{theorem.4.83}{}}
+\newlabel{thm:steady}{{4.87}{130}{}{theorem.4.87}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Graph of a web with eight pages.\relax }}{131}{figure.caption.19}}
+\newlabel{fig:graph2}{{4.2}{131}{Graph of a web with eight pages.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Numerical Ordinary Differential Equations}{132}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:odes}{{5}{120}{Numerical Ordinary Differential Equations}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Recalling the Basics of Ordinary Differential Equations}{120}{section.5.1}}
-\newlabel{def:diff_eq}{{5.2}{121}{}{theorem.5.2}{}}
-\newlabel{def:soln_diff_eq}{{5.3}{121}{}{theorem.5.3}{}}
-\newlabel{def:num_soln_diff_eq}{{5.4}{121}{}{theorem.5.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Euler's Method}{124}{section.5.2}}
-\newlabel{prob:euler_motivation}{{5.13}{124}{}{theorem.5.13}{}}
-\newlabel{eqn:Eulers_method}{{5.1}{125}{Euler's Method}{equation.5.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces A depiction of Euler's method with step size $h=1$ (red) and $h=0.5$ (blue).\relax }}{125}{figure.caption.15}}
-\newlabel{fig:Euler}{{5.1}{125}{A depiction of Euler's method with step size $h=1$ (red) and $h=0.5$ (blue).\relax }{figure.caption.15}{}}
-\newlabel{prob:ode_error_analysis}{{5.16}{125}{}{theorem.5.16}{}}
-\newlabel{prob:2dPredPrey}{{5.18}{127}{}{theorem.5.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}The Midpoint Method}{128}{section.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Graphical depictions of two numerical methods: Euler (left) and Midpoint (right). Here we use the simple differential equation $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$. The exact solution is shown in red.\relax }}{130}{figure.caption.16}}
-\newlabel{fig:Euler_Midpoint}{{5.2}{130}{Graphical depictions of two numerical methods: Euler (left) and Midpoint (right). Here we use the simple differential equation $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$. The exact solution is shown in red.\relax }{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}The Runge-Kutta Method}{130}{section.5.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Graphical depiction of the RK4 method. The red dashed curve gives the exact solution to the differential equation $y' = y$ with initial condition $y(0) = 1$. The solid black line gives the final projection.\relax }}{131}{figure.caption.17}}
-\newlabel{fig:RK4_graphical}{{5.3}{131}{Graphical depiction of the RK4 method. The red dashed curve gives the exact solution to the differential equation $y' = y$ with initial condition $y(0) = 1$. The solid black line gives the final projection.\relax }{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}The Backwards Euler Method}{134}{section.5.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Mathematical Modeling with ODE's}{137}{section.5.6}}
-\newlabel{eqn:pursuit_evasion_assumption3}{{5.2}{139}{Pursuit and Evasion Problem}{equation.5.6.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Exercises}{147}{section.5.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.1}Algorithm Summaries}{147}{subsection.5.7.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.2}Applying What You've Learned}{147}{subsection.5.7.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{148}{chapter.6}}
+\newlabel{ch:odes}{{5}{132}{Numerical Ordinary Differential Equations}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Recalling the Basics of Ordinary Differential Equations}{132}{section.5.1}}
+\newlabel{def:diff_eq}{{5.2}{133}{}{theorem.5.2}{}}
+\newlabel{def:soln_diff_eq}{{5.3}{133}{}{theorem.5.3}{}}
+\newlabel{def:num_soln_diff_eq}{{5.4}{133}{}{theorem.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Euler's Method}{136}{section.5.2}}
+\newlabel{prob:euler_motivation}{{5.13}{136}{}{theorem.5.13}{}}
+\newlabel{eqn:Eulers_method}{{5.1}{137}{Euler's Method}{equation.5.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces A depiction of Euler's method with step size $h=1$ (red) and $h=0.5$ (blue).\relax }}{137}{figure.caption.20}}
+\newlabel{fig:Euler}{{5.1}{137}{A depiction of Euler's method with step size $h=1$ (red) and $h=0.5$ (blue).\relax }{figure.caption.20}{}}
+\newlabel{prob:ode_error_analysis}{{5.16}{137}{}{theorem.5.16}{}}
+\newlabel{prob:2dPredPrey}{{5.18}{139}{}{theorem.5.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}The Midpoint Method}{140}{section.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Graphical depictions of two numerical methods: Euler (left) and Midpoint (right). Here we use the simple differential equation $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$. The exact solution is shown in red.\relax }}{142}{figure.caption.21}}
+\newlabel{fig:Euler_Midpoint}{{5.2}{142}{Graphical depictions of two numerical methods: Euler (left) and Midpoint (right). Here we use the simple differential equation $y'=y$ with $y(0) = 0.5$ and $\Delta t = 1$. The exact solution is shown in red.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}The Runge-Kutta Method}{142}{section.5.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Graphical depiction of the RK4 method. The red dashed curve gives the exact solution to the differential equation $y' = y$ with initial condition $y(0) = 1$. The solid black line gives the final projection.\relax }}{145}{figure.caption.22}}
+\newlabel{fig:RK4_graphical}{{5.3}{145}{Graphical depiction of the RK4 method. The red dashed curve gives the exact solution to the differential equation $y' = y$ with initial condition $y(0) = 1$. The solid black line gives the final projection.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}The Backwards Euler Method}{147}{section.5.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Exercises}{150}{section.5.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Algorithm Summaries}{150}{subsection.5.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}Applying What You've Learned}{150}{subsection.5.6.2}}
+\newlabel{eqn:pursuit_evasion_assumption3}{{5.2}{152}{Pursuit and Evasion Problem}{equation.5.6.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Projects}{156}{section.5.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.1}Pain Management}{156}{subsection.5.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.2}The H1N1 Virus}{157}{subsection.5.7.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.3}The Artillery Problem}{158}{subsection.5.7.3}}
+\newlabel{eqn:no_air_res}{{5.5}{158}{The Artillery Problem}{equation.5.7.5}{}}
+\newlabel{eqn:with_air_res}{{5.6}{158}{The Artillery Problem}{equation.5.7.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.4}The HIV Problem}{160}{subsection.5.7.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Numerical Partial Differential Equations}{162}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{148}{section.6.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{150}{section.6.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces The analytic solution to $y'=y$ and the points given by calculus intuition.\relax }}{150}{figure.caption.18}}
-\newlabel{fig:intuition_odes}{{6.1}{150}{The analytic solution to $y'=y$ and the points given by calculus intuition.\relax }{figure.caption.18}{}}
-\newlabel{prob:heat_intuition_1}{{6.3}{151}{}{theorem.6.3}{}}
-\newlabel{prob:heat_intuition_2}{{6.4}{152}{}{theorem.6.4}{}}
-\newlabel{prob:wave_intuition_1}{{6.8}{152}{}{theorem.6.8}{}}
-\newlabel{prob:wave_intuition_2}{{6.9}{153}{}{theorem.6.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Analytic Solutions to Linear PDEs}{155}{section.6.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}Boundary Conditions}{160}{section.6.4}}
-\newlabel{prob:heat_bc}{{6.36}{161}{}{theorem.6.36}{}}
-\newlabel{prob:wave_bc}{{6.37}{161}{}{theorem.6.37}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}Numerical Solutions of The Heat Equation}{163}{section.6.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}1D Heat Equation}{163}{subsection.6.5.1}}
-\newlabel{eqn:heat_euler}{{6.1}{163}{}{equation.6.5.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Stabilized 1D Heat Equation -- The Crank Nicolson Method}{164}{subsection.6.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}2D Heat Equation}{166}{subsection.6.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{167}{figure.caption.19}}
-\newlabel{fig:2DHeat_BC}{{6.2}{167}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.6}Numerical Solutions of The Wave Equation}{168}{section.6.6}}
-\newlabel{eqn:wave1D}{{6.2}{168}{}{equation.6.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{168}{figure.caption.20}}
-\newlabel{fig:2DWave_BC}{{6.3}{168}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.7}Traveling Waves}{169}{section.6.7}}
-\newlabel{eqn:frog}{{6.3}{169}{}{equation.6.7.3}{}}
-\newlabel{eqn:fried}{{6.4}{169}{}{equation.6.7.4}{}}
-\newlabel{eqn:wend}{{6.5}{169}{}{equation.6.7.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.8}The Laplace and Poisson Equations -- Steady State PDEs}{170}{section.6.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{171}{figure.caption.21}}
-\newlabel{fig:2DPoisson_BC}{{6.4}{171}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.9}Exercises}{172}{section.6.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.9.1}Algorithm Summaries}{172}{subsection.6.9.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.9.2}Applying What You've Learned}{172}{subsection.6.9.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Writing and Projects}{176}{appendix.A}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Quick Review -- Main Ideas from Vector Calculus}{162}{section.6.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}An Intuitive Introduction to some Common PDEs}{164}{section.6.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces The analytic solution to $y'=y$ and the points given by calculus intuition.\relax }}{164}{figure.caption.23}}
+\newlabel{fig:intuition_odes}{{6.1}{164}{The analytic solution to $y'=y$ and the points given by calculus intuition.\relax }{figure.caption.23}{}}
+\newlabel{prob:heat_intuition_1}{{6.3}{165}{}{theorem.6.3}{}}
+\newlabel{prob:heat_intuition_2}{{6.4}{166}{}{theorem.6.4}{}}
+\newlabel{prob:wave_intuition_1}{{6.8}{166}{}{theorem.6.8}{}}
+\newlabel{prob:wave_intuition_2}{{6.9}{167}{}{theorem.6.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Analytic Solutions to Linear PDEs}{169}{section.6.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Boundary Conditions}{174}{section.6.4}}
+\newlabel{prob:heat_bc}{{6.36}{175}{}{theorem.6.36}{}}
+\newlabel{prob:wave_bc}{{6.37}{175}{}{theorem.6.37}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Numerical Solutions of The Heat Equation}{177}{section.6.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}1D Heat Equation}{177}{subsection.6.5.1}}
+\newlabel{eqn:heat_euler}{{6.1}{177}{}{equation.6.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Stabilized 1D Heat Equation -- The Crank Nicolson Method}{178}{subsection.6.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}2D Heat Equation}{180}{subsection.6.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{181}{figure.caption.24}}
+\newlabel{fig:2DHeat_BC}{{6.2}{181}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6}Numerical Solutions of The Wave Equation}{182}{section.6.6}}
+\newlabel{eqn:wave1D}{{6.2}{182}{}{equation.6.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{182}{figure.caption.25}}
+\newlabel{fig:2DWave_BC}{{6.3}{182}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.7}Traveling Waves}{183}{section.6.7}}
+\newlabel{eqn:frog}{{6.3}{183}{}{equation.6.7.3}{}}
+\newlabel{eqn:fried}{{6.4}{183}{}{equation.6.7.4}{}}
+\newlabel{eqn:wend}{{6.5}{183}{}{equation.6.7.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.8}The Laplace and Poisson Equations -- Steady State PDEs}{184}{section.6.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Dirichlet boundary conditions for a 2D Poisson equation.\relax }}{185}{figure.caption.26}}
+\newlabel{fig:2DPoisson_BC}{{6.4}{185}{Dirichlet boundary conditions for a 2D Poisson equation.\relax }{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.9}Exercises}{186}{section.6.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.9.1}Algorithm Summaries}{186}{subsection.6.9.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.9.2}Applying What You've Learned}{186}{subsection.6.9.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.10}Projects}{188}{section.6.10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.10.1}Hunting and Diffusion}{188}{subsection.6.10.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.10.2}Heating Adobe Houses}{189}{subsection.6.10.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.10.3}The River Contamination Problem}{190}{subsection.6.10.3}}
+\newlabel{eqn:balance}{{6.6}{190}{Derivation of the Advection-Diffusion Equation}{equation.6.10.6}{}}
+\newlabel{eqn:adv_flux}{{6.7}{190}{Derivation of the Advection-Diffusion Equation}{equation.6.10.7}{}}
+\newlabel{eqn:adv_diff_1}{{6.8}{191}{Derivation of the Advection-Diffusion Equation}{equation.6.10.8}{}}
+\newlabel{eqn:adv_diff_2}{{6.9}{191}{Derivation of the Advection-Diffusion Equation}{equation.6.10.9}{}}
+\newlabel{eqn:adv_diff}{{6.10}{191}{Derivation of the Advection-Diffusion Equation}{equation.6.10.10}{}}
+\newlabel{eqn:adv_diff2}{{6.11}{191}{Derivation of the Advection-Diffusion Equation}{equation.6.10.11}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Writing and Projects}{193}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {A.1}The Paper}{176}{section.A.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.2}Figures and Tables}{176}{section.A.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.3}Writing Style}{177}{section.A.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{177}{section.A.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.1}Audience}{177}{subsection.A.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{178}{subsection.A.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{178}{subsection.A.4.3}}
-\newlabel{eqn:sample_eqn}{{A.1}{181}{Some Writing Tips}{equation.A.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{182}{subsection.A.4.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{183}{section.A.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{185}{section.A.6}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}MATLAB Basics}{187}{appendix.B}}
+\newlabel{app:writing_projects}{{A}{193}{Writing and Projects}{appendix.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}The Paper}{193}{section.A.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Figures and Tables}{193}{section.A.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.3}Writing Style}{194}{section.A.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{194}{section.A.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.1}Audience}{194}{subsection.A.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{194}{subsection.A.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{195}{subsection.A.4.3}}
+\newlabel{eqn:sample_eqn}{{A.1}{198}{Some Writing Tips}{equation.A.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{199}{subsection.A.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.5}Sensitivity Analysis}{200}{section.A.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{202}{section.A.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}MATLAB Basics}{204}{appendix.B}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:MATLAB}{{B}{187}{MATLAB Basics}{appendix.B}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.1}Vectors and Matrices}{187}{section.B.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.2}Looping}{189}{section.B.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2.1}For Loops}{189}{subsection.B.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2.2}The While Loop}{190}{subsection.B.2.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.3}Conditional Statements}{191}{section.B.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.3.1}If Statements}{191}{subsection.B.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{192}{subsection.B.3.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.4}Functions}{192}{section.B.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.5}Plotting}{193}{section.B.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.6}Animations}{194}{section.B.6}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}\LaTeX  }{196}{appendix.C}}
+\newlabel{app:MATLAB}{{B}{204}{MATLAB Basics}{appendix.B}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.1}Vectors and Matrices}{204}{section.B.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.2}Looping}{206}{section.B.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2.1}For Loops}{206}{subsection.B.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2.2}The While Loop}{207}{subsection.B.2.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.3}Conditional Statements}{208}{section.B.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3.1}If Statements}{208}{subsection.B.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3.2}Case-Switch Statements}{209}{subsection.B.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.4}Functions}{209}{section.B.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.5}Plotting}{210}{section.B.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.6}Animations}{211}{section.B.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}\LaTeX  }{213}{appendix.C}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{196}{section.C.1}}
-\newlabel{ex:C2:pythag}{{C.1}{196}{}{theorem.C.1}{}}
-\newlabel{eqn:pythag}{{C.1}{196}{}{equation.C.1.1}{}}
-\newlabel{eqn:sample_equation}{{C.5}{197}{Equation Environments and Cross Referencing}{equation.C.1.5}{}}
-\newlabel{eqn:sine}{{C.6a}{198}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
-\newlabel{eqn:cosine}{{C.6b}{198}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
-\newlabel{eqn:trig}{{C.6}{198}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{199}{section.C.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{199}{subsection.C.2.1}}
-\newlabel{ex:C3:tabular}{{C.2}{199}{}{theorem.C.2}{}}
-\newlabel{ex:C3:table}{{C.3}{199}{}{theorem.C.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces This is the amazing table of doom\relax }}{200}{table.caption.22}}
-\newlabel{tab:MyLabel}{{C.1}{200}{This is the amazing table of doom\relax }{table.caption.22}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX  }{200}{subsection.C.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.3}Figures}{200}{subsection.C.2.3}}
-\newlabel{ex:C3:fig}{{C.4}{200}{}{theorem.C.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{200}{subsection.C.2.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Figure for Example \ref  {ex:C3:fig}\relax }}{201}{figure.caption.23}}
-\newlabel{fig:C3:fig}{{C.1}{201}{Figure for Example \ref {ex:C3:fig}\relax }{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C.3}Graphics in \LaTeX  }{203}{section.C.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{203}{subsection.C.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {C.2}{\ignorespaces A simple Tikz picture\relax }}{204}{figure.caption.24}}
-\newlabel{fig:C5:tikz1}{{C.2}{204}{A simple Tikz picture\relax }{figure.caption.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {C.3}{\ignorespaces A figure drawn with the \texttt  {tikzpicture} and \texttt  {axis} commands (leveraging the \texttt  {pgfplots} package in the backgroud).\relax }}{205}{figure.caption.25}}
-\newlabel{fig:C5:pgf}{{C.3}{205}{A figure drawn with the \texttt {tikzpicture} and \texttt {axis} commands (leveraging the \texttt {pgfplots} package in the backgroud).\relax }{figure.caption.25}{}}
-\newlabel{ex:C5:bar}{{C.7}{205}{}{theorem.C.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {C.4}{\ignorespaces Figure for Example \ref  {ex:C5:bar}\relax }}{206}{figure.caption.26}}
-\newlabel{fig:C5:bar}{{C.4}{206}{Figure for Example \ref {ex:C5:bar}\relax }{figure.caption.26}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C.4}Bibliography Management}{206}{section.C.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{213}{section.C.1}}
+\newlabel{ex:C2:pythag}{{C.1}{213}{}{theorem.C.1}{}}
+\newlabel{eqn:pythag}{{C.1}{213}{}{equation.C.1.1}{}}
+\newlabel{eqn:sample_equation}{{C.5}{214}{Equation Environments and Cross Referencing}{equation.C.1.5}{}}
+\newlabel{eqn:sine}{{C.6a}{215}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
+\newlabel{eqn:cosine}{{C.6b}{215}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
+\newlabel{eqn:trig}{{C.6}{215}{Equation Environments and Cross Referencing}{equation.C.1.6a}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{216}{section.C.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{216}{subsection.C.2.1}}
+\newlabel{ex:C3:tabular}{{C.2}{216}{}{theorem.C.2}{}}
+\newlabel{ex:C3:table}{{C.3}{216}{}{theorem.C.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.1}{\ignorespaces This is the amazing table of doom\relax }}{217}{table.caption.30}}
+\newlabel{tab:MyLabel}{{C.1}{217}{This is the amazing table of doom\relax }{table.caption.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX  }{217}{subsection.C.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.3}Figures}{217}{subsection.C.2.3}}
+\newlabel{ex:C3:fig}{{C.4}{217}{}{theorem.C.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{217}{subsection.C.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.1}{\ignorespaces Figure for Example \ref  {ex:C3:fig}\relax }}{218}{figure.caption.31}}
+\newlabel{fig:C3:fig}{{C.1}{218}{Figure for Example \ref {ex:C3:fig}\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.3}Graphics in \LaTeX  }{220}{section.C.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{220}{subsection.C.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.2}{\ignorespaces A simple Tikz picture\relax }}{221}{figure.caption.32}}
+\newlabel{fig:C5:tikz1}{{C.2}{221}{A simple Tikz picture\relax }{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.3}{\ignorespaces A figure drawn with the \texttt  {tikzpicture} and \texttt  {axis} commands (leveraging the \texttt  {pgfplots} package in the backgroud).\relax }}{222}{figure.caption.33}}
+\newlabel{fig:C5:pgf}{{C.3}{222}{A figure drawn with the \texttt {tikzpicture} and \texttt {axis} commands (leveraging the \texttt {pgfplots} package in the backgroud).\relax }{figure.caption.33}{}}
+\newlabel{ex:C5:bar}{{C.7}{222}{}{theorem.C.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.4}{\ignorespaces Figure for Example \ref  {ex:C5:bar}\relax }}{223}{figure.caption.34}}
+\newlabel{fig:C5:bar}{{C.4}{223}{Figure for Example \ref {ex:C5:bar}\relax }{figure.caption.34}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C.4}Bibliography Management}{223}{section.C.4}}
 \citation{lamport94}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{207}{subsection.C.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{207}{subsection.C.4.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Optional Material}{208}{appendix.D}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{224}{subsection.C.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{224}{subsection.C.4.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Optional Material}{225}{appendix.D}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {D.1}Interpolation}{208}{section.D.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.1}Vandemonde Interpolation}{208}{subsection.D.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces A simple Vandermonde interpolation for the data set $S = \{(0,1) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (1,2) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (2,5) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (3,10) \}$ resulting in the interpolating function $p(x) = 1+x^2$.\relax }}{209}{figure.caption.27}}
-\newlabel{fig:vandermonde}{{D.1}{209}{A simple Vandermonde interpolation for the data set $S = \{(0,1) \, , \, (1,2) \, , \, (2,5) \, , \, (3,10) \}$ resulting in the interpolating function $p(x) = 1+x^2$.\relax }{figure.caption.27}{}}
-\newlabel{prob:vandermonde_1}{{D.1}{209}{}{theorem.D.1}{}}
-\newlabel{eqn:vandermonde}{{D.1}{209}{The Vandermonde Matrix}{equation.D.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.2}Lagrange Interpolation}{210}{subsection.D.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.3}Interpolation at Chebyshev Points}{211}{subsection.D.1.3}}
-\newlabel{eqn:chebyshev_cosine}{{D.2}{212}{Interpolation at Chebyshev Points}{equation.D.1.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {D.2}{\ignorespaces Chebyshev interpolation nodes for the interval $[-1,1]$. In this case each node is separated by $\pi /8$ radians giving 13 interpolations points including the endpoints.\relax }}{213}{figure.caption.28}}
-\newlabel{fig:chebyshev_nodes}{{D.2}{213}{Chebyshev interpolation nodes for the interval $[-1,1]$. In this case each node is separated by $\pi /8$ radians giving 13 interpolations points including the endpoints.\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.2}Low Rank Approximations of Matrices}{214}{section.D.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.3}The Google Page Rank Algorithm}{215}{section.D.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {D.3}{\ignorespaces Sample graph of a web with six pages.\relax }}{215}{figure.caption.29}}
-\newlabel{fig:example_graph}{{D.3}{215}{Sample graph of a web with six pages.\relax }{figure.caption.29}{}}
-\newlabel{thm:eigen_expand}{{D.13}{217}{}{theorem.D.13}{}}
-\newlabel{thm:largest_ev_stochastic}{{D.16}{217}{}{theorem.D.16}{}}
-\newlabel{thm:steady}{{D.20}{218}{}{theorem.D.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {D.4}{\ignorespaces Graph of a web with eight pages.\relax }}{219}{figure.caption.30}}
-\newlabel{fig:graph2}{{D.4}{219}{Graph of a web with eight pages.\relax }{figure.caption.30}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.4}Principal Component Analysis (Incomplete)}{220}{section.D.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {D.5}Building PDE's From Conservation Laws}{221}{section.D.5}}
-\newlabel{eqn:global_balance}{{D.3}{221}{Derivation of General Balance Law}{equation.D.5.3}{}}
-\newlabel{eqn:global_balance2}{{D.4}{221}{Derivation of General Balance Law}{equation.D.5.4}{}}
-\newlabel{eqn:global_balance3}{{D.5}{221}{Derivation of General Balance Law}{equation.D.5.5}{}}
-\newlabel{eqn:local_balance}{{D.6}{221}{Derivation of General Balance Law}{equation.D.5.6}{}}
-\newlabel{eqn:local_source_free}{{D.7}{222}{Simplification of the Local Balance Law}{equation.D.5.7}{}}
-\newlabel{eqn:fick}{{D.8}{222}{Mass Balance}{equation.D.5.8}{}}
-\newlabel{eqn:fick2_simp}{{D.9}{222}{Mass Balance}{equation.D.5.9}{}}
-\newlabel{eqn:fick3}{{D.10}{222}{Mass Balance}{equation.D.5.10}{}}
-\newlabel{eqn:fick3_expanded}{{D.11}{222}{Mass Balance}{equation.D.5.11}{}}
-\newlabel{eqn:fourier}{{D.12}{223}{Energy Balance}{equation.D.5.12}{}}
-\newlabel{eqn:fourier2}{{D.13}{223}{Energy Balance}{equation.D.5.13}{}}
-\newlabel{eqn:fourier3}{{D.14}{223}{Energy Balance}{equation.D.5.14}{}}
-\newlabel{eqn:fourier3_expanded}{{D.15}{223}{Energy Balance}{equation.D.5.15}{}}
-\newlabel{eqn:laplace}{{D.16}{223}{Laplace's Equation and Poisson's Equation}{equation.D.5.16}{}}
-\newlabel{eqn:poisson}{{D.17}{223}{Laplace's Equation and Poisson's Equation}{equation.D.5.17}{}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{224}{equation.D.5.17}}
+\@writefile{toc}{\contentsline {section}{\numberline {D.1}Interpolation}{225}{section.D.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.1}Vandemonde Interpolation}{225}{subsection.D.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.1}{\ignorespaces A simple Vandermonde interpolation for the data set $S = \{(0,1) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (1,2) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (2,5) \tmspace  +\thinmuskip {.1667em} , \tmspace  +\thinmuskip {.1667em} (3,10) \}$ resulting in the interpolating function $p(x) = 1+x^2$.\relax }}{226}{figure.caption.35}}
+\newlabel{fig:vandermonde}{{D.1}{226}{A simple Vandermonde interpolation for the data set $S = \{(0,1) \, , \, (1,2) \, , \, (2,5) \, , \, (3,10) \}$ resulting in the interpolating function $p(x) = 1+x^2$.\relax }{figure.caption.35}{}}
+\newlabel{prob:vandermonde_1}{{D.1}{226}{}{theorem.D.1}{}}
+\newlabel{eqn:vandermonde}{{D.1}{226}{The Vandermonde Matrix}{equation.D.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.2}Lagrange Interpolation}{227}{subsection.D.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1.3}Interpolation at Chebyshev Points}{228}{subsection.D.1.3}}
+\newlabel{eqn:chebyshev_cosine}{{D.2}{229}{Interpolation at Chebyshev Points}{equation.D.1.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.2}{\ignorespaces Chebyshev interpolation nodes for the interval $[-1,1]$. In this case each node is separated by $\pi /8$ radians giving 13 interpolations points including the endpoints.\relax }}{230}{figure.caption.36}}
+\newlabel{fig:chebyshev_nodes}{{D.2}{230}{Chebyshev interpolation nodes for the interval $[-1,1]$. In this case each node is separated by $\pi /8$ radians giving 13 interpolations points including the endpoints.\relax }{figure.caption.36}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D.2}Building PDE's From Conservation Laws}{231}{section.D.2}}
+\newlabel{eqn:global_balance}{{D.3}{231}{Derivation of General Balance Law}{equation.D.2.3}{}}
+\newlabel{eqn:global_balance2}{{D.4}{231}{Derivation of General Balance Law}{equation.D.2.4}{}}
+\newlabel{eqn:global_balance3}{{D.5}{231}{Derivation of General Balance Law}{equation.D.2.5}{}}
+\newlabel{eqn:local_balance}{{D.6}{231}{Derivation of General Balance Law}{equation.D.2.6}{}}
+\newlabel{eqn:local_source_free}{{D.7}{232}{Simplification of the Local Balance Law}{equation.D.2.7}{}}
+\newlabel{eqn:fick}{{D.8}{232}{Mass Balance}{equation.D.2.8}{}}
+\newlabel{eqn:fick2_simp}{{D.9}{232}{Mass Balance}{equation.D.2.9}{}}
+\newlabel{eqn:fick3}{{D.10}{232}{Mass Balance}{equation.D.2.10}{}}
+\newlabel{eqn:fick3_expanded}{{D.11}{232}{Mass Balance}{equation.D.2.11}{}}
+\newlabel{eqn:fourier}{{D.12}{233}{Energy Balance}{equation.D.2.12}{}}
+\newlabel{eqn:fourier2}{{D.13}{233}{Energy Balance}{equation.D.2.13}{}}
+\newlabel{eqn:fourier3}{{D.14}{233}{Energy Balance}{equation.D.2.14}{}}
+\newlabel{eqn:fourier3_expanded}{{D.15}{233}{Energy Balance}{equation.D.2.15}{}}
+\newlabel{eqn:laplace}{{D.16}{233}{Laplace's Equation and Poisson's Equation}{equation.D.2.16}{}}
+\newlabel{eqn:poisson}{{D.17}{233}{Laplace's Equation and Poisson's Equation}{equation.D.2.17}{}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{234}{equation.D.2.17}}
 \bibcite{Chartier}{1}
 \bibcite{Burden}{2}
 \bibcite{Kincaid}{3}

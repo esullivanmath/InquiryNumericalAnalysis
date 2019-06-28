@@ -1131,12 +1131,14 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 \begin{problem}
     In this problem we will solve a more realistic 1D heat equation.  We will allow the
     diffusivity to change spatially, so $D = D(x)$ and we want to solve
-    \[ u_t = \left( D(x) u'(x) \right)' \]
+    \[ u_t = \left( D(x) u_x \right)_x \]
     on $x \in (0,1)$ with Dirichlet boundary conditions $u(t,0) = u(t,1) = 0$ and initial
-    condition $u(0,x) = \sin(2 \pi x)$. In this problem we will take $D(x)$ to be the
-    parabola $D(x)= x(1-x)$. We start by doing some calculus to rewrite the
+    condition $u(0,x) = \sin(2 \pi x)$.  This is ``more realistic'' since it would be rare
+    to have a perfectly homogenous medium, and the function $D$ reflects any
+    heterogeneities in the way the diffusion occurs.  In this problem we will take $D(x)$
+    to be the parabola $D(x)= x(1-x)$. We start by doing some calculus to rewrite the
     differential equation:
-    \[ u_t = D(x) u''(x) + D'(x) u'(x). \]
+    \[ u_t = D(x) u_{xx}(x) + D'(x) u_x(x). \]
 
     Your jobs are:
     \begin{enumerate}
@@ -1179,50 +1181,6 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
 
 
 
-\begin{problem}
-    Let $u$ be a function modeling a mobile population that in an environment where it has a growth rate of
-    $r\%$ per year with a carrying capacity of $K$.  If we were only worried about the
-    size of the population we could solve the differential equation 
-    \[ \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right), \]
-    but there is more to the story.  
-    
-    Hunters harvest $h$\% of the population per year so we can append the differential
-    equation with the harvesting term ``$-h u$'' to arrive at the ordinary differential
-    equation 
-    \[ \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right) - hu. \]
-
-    Since the population is mobile let's make a few assumptions about the environment that
-    they're in and how the individuals move.
-    \begin{itemize}
-        \item Food is abundant in the entire environment.
-        \item Individuals in the population like to spread out so that they don't
-            interfere with each other's hunt for food.
-        \item It is equally easy for the individuals to travel in any direction in the
-            environment.
-    \end{itemize}
-    Clearly some of these assumptions are unreasonable for real populations and real
-    environments, but let's go with it for now.  Given the nature of these assumptions we
-    assume that a diffusion term models the spread of the individuals in the population.
-    Hence, the PDE model is
-    \[ \pd{u}{t} = ru\left( 1-\frac{u}{K} \right) - hu + D \nabla \cdot \nabla u. \]
-    \begin{enumerate}
-        \item[(a)] Use any of your ODE codes to solve the ordinary differential equation
-            with harvesting.  Give a complete description of the parameter space.
-        \item[(b)] Write code to solve the spatial+temporal PDE equation on the 2D domain
-            $(x,y) \in [0,1] \times [0,1]$.  Choose an appropriate initial condition and
-            choose appropriate boundary conditions.
-        \item[(c)] The third assumption isn't necessary true for rough terrain. The true
-            form of the spatial component of the differential equation is $\nabla \cdot
-            \left( D(x,y) \nabla u \right)$ where $D(x,y)$ is a multivariable function
-            dictating the ease of diffusion in different spatial locations.  Propose a
-            (non-negative) function $D(x,y)$ and repeat part (b) with this new diffusion
-            term.
-    \end{enumerate}
-\end{problem}
-\hint{
-    Maybe the simplest initial condition for the PDE in part (b) is to use a Gaussian {\it
-    bump} that puts the majority of the initial population near the center of the domain.
-}
 
 
 \begin{problem}
@@ -1252,29 +1210,230 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
     \end{enumerate}
 \end{problem}
 
-\begin{problem}
-    Adobe houses, typically built in desert climates, are known for their great thermal
-    efficiency.  The heat equation 
-    \[ \frac{\partial T}{\partial t} = \frac{k}{c_p \rho} \nabla \cdot \nabla T, \]
-    where $c_p$ is the specific heat of the adobe, $\rho$ is the mass density of the
-    adobe, and $k$ is the thermal conductivity of the adobe, can be used to model the heat
-    transfer through the adobe from the outside of the house to the inside.  Clearly, the
-    thicker the adobe walls the better, but there is a trade off to be considered: 
-    \begin{itemize}
-        \item it would be prohibitively expensive to build walls so think that the inside
-            temperature was (nearly) constant, and 
-        \item if the walls are too thin then the cost is low but the temperature inside
-            has a large amount of variability.  
-    \end{itemize}
-    Your Tasks:
-    \begin{enumerate}
-        \item[(a)] Pick a desert location in the southwestern US (New Mexico, Arizona, Nevada, or
-            Southern California) and find some basic temperature data to model the outside
-            temperature during typical summer and winter months.
-        \item[(b)] Do some research on the cost of building adobe walls and find approximations for the
-            parameters in the heat equation.
-        \item[(c)] Use a numerical model to find the optimal thickness of an adobe wall.
-            Be sure to fully describe your criteria for optimality, the initial and
-            boundary conditions used, and any other simplifying assumptions needed for your model.
-    \end{enumerate}
-\end{problem}
+
+\newpage\section{Projects}
+In this section we propose several ideas for projects related to numerical partial
+differential equations.  These projects are meant to be open ended, to encourage creative
+mathematics, to push your coding skills, and to require you to write and communicate your
+mathematics.  Take the time to read Appendix \ref{app:writing_projects} before you write
+your final solution.
+
+
+
+
+\subsection{Hunting and Diffusion}
+Let $u$ be a function modeling a mobile population that in an environment where it has a
+growth rate of $r\%$ per year with a carrying capacity of $K$.  If we were only worried
+about the size of the population we could solve the differential equation 
+\[ \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right), \]
+but there is more to the story.  
+
+Hunters harvest $h$\% of the population per year so we can append the differential
+equation with the harvesting term ``$-h u$'' to arrive at the ordinary differential
+equation 
+\[ \frac{du}{dt} = ru \left( 1-\frac{u}{K} \right) - hu. \]
+
+Since the population is mobile let's make a few assumptions about the environment that
+they're in and how the individuals move.
+\begin{itemize}
+    \item Food is abundant in the entire environment.
+    \item Individuals in the population like to spread out so that they don't
+        interfere with each other's hunt for food.
+    \item It is equally easy for the individuals to travel in any direction in the
+        environment.
+\end{itemize}
+Clearly some of these assumptions are unreasonable for real populations and real
+environments, but let's go with it for now.  Given the nature of these assumptions we
+assume that a diffusion term models the spread of the individuals in the population.
+Hence, the PDE model is
+\[ \pd{u}{t} = ru\left( 1-\frac{u}{K} \right) - hu + D \nabla \cdot \nabla u. \]
+\begin{enumerate}
+    \item[(a)] Use any of your ODE codes to solve the ordinary differential equation
+        with harvesting.  Give a complete description of the parameter space.
+    \item[(b)] Write code to solve the spatial+temporal PDE equation on the 2D domain
+        $(x,y) \in [0,1] \times [0,1]$.  Choose an appropriate initial condition and
+        choose appropriate boundary conditions.
+    \item[(c)] The third assumption isn't necessary true for rough terrain. The true
+        form of the spatial component of the differential equation is $\nabla \cdot
+        \left( D(x,y) \nabla u \right)$ where $D(x,y)$ is a multivariable function
+        dictating the ease of diffusion in different spatial locations.  Propose a
+        (non-negative) function $D(x,y)$ and repeat part (b) with this new diffusion
+        term.
+\end{enumerate}
+
+\newpage\subsection{Heating Adobe Houses}
+Adobe houses, typically built in desert climates, are known for their great thermal
+efficiency.  The heat equation 
+\[ \frac{\partial T}{\partial t} = \frac{k}{c_p \rho} \nabla \cdot \nabla T, \]
+where $c_p$ is the specific heat of the adobe, $\rho$ is the mass density of the
+adobe, and $k$ is the thermal conductivity of the adobe, can be used to model the heat
+transfer through the adobe from the outside of the house to the inside.  Clearly, the
+thicker the adobe walls the better, but there is a trade off to be considered: 
+\begin{itemize}
+    \item it would be prohibitively expensive to build walls so think that the inside
+        temperature was (nearly) constant, and 
+    \item if the walls are too thin then the cost is low but the temperature inside
+        has a large amount of variability.  
+\end{itemize}
+Your Tasks:
+\begin{enumerate}
+    \item[(a)] Pick a desert location in the southwestern US (New Mexico, Arizona, Nevada, or
+        Southern California) and find some basic temperature data to model the outside
+        temperature during typical summer and winter months.
+    \item[(b)] Do some research on the cost of building adobe walls and find approximations for the
+        parameters in the heat equation.
+    \item[(c)] Use a numerical model to find the optimal thickness of an adobe wall.
+        Be sure to fully describe your criteria for optimality, the initial and
+        boundary conditions used, and any other simplifying assumptions needed for your model.
+\end{enumerate}
+
+\newpage\subsection{The River Contamination Problem}
+In this project you will be exploring a particular Partial Differential Equation: the
+Advection-Diffusion equation.  In the following subsections of this document we will
+derive the equation from first principals.  You will then be given a choice of
+applications of the advection diffusion equation.  Your job will be to numerically solve
+the equation with physically realistic boundary and initial conditions, thus allowing you
+to study the possible behaviors of your system.  
+
+\subsection*{Derivation of the Advection-Diffusion Equation}
+% Before reading further you need to go back to the class notes from the first day of our
+% study of PDEs.  The derivation of the general balance law is where we will start in this
+% document, so make sure that you understand where these equations come from.  
+% 
+The mathematical formulation for a balance law is 
+\begin{flalign}
+    \pd{u}{t} + \nabla \cdot \bq = f(t,\bx)
+    \label{eqn:balance}
+\end{flalign}
+where $u$ is the quantity of interest (e.g. temperature, mass concentration, momentum,
+etc), $\bq$ is the flux of the quantity, and $f$ is any external source of the quantity.
+For example, in the heat equation we took Fourier's law for heat conduction which assumes
+that $\bq = -\kappa \nabla T$ and arrived at the classic heat equation $\pd{T}{t} - \nabla
+\cdot \left( \kappa \nabla T \right) = f$.  Similarly, if we are studying mass transport we
+might take Fick's law for molecular diffusion which assumes that $\bq = -D \nabla C$ and
+arrive at the classic diffusion equation $\pd{C}{t} - \nabla \cdot \left( D \nabla C\right)
+= f$.  These are, in effect, the exact same equation since the PDEs take the exact same
+functional form. The values of $\kappa$ and $D$ are the diffusivity constants and, in
+part, describe how easy it is for the conserved quantity to diffuse through the medium of
+interest.  For example, in heat transport $\kappa$ is related to the specific heat.  One
+primary physical disadvantage to the heat equation (and it's analogous brethren) is that
+it does not allow for advection.
+
+\begin{definition}
+    {\bf Advection} is the transport of conserved quantity or substance.
+\end{definition}
+\begin{definition}
+    {\bf Diffusion} is the net movement of a conserved quantity or substance from regions
+    of high concentration to regions of low concentration.
+\end{definition}
+\begin{definition}
+    {\bf Convection} is the movement of a fluid, possibly in response to heat (e.g.
+    convection currents from a heater).  Often convection is used to describe the combined
+    effects of advection and diffusion.
+\end{definition}
+
+In the presence of a moving fluid, the flux term in \eqref{eqn:balance} can be taken as
+the sum of a diffusive and an advective vector,
+\begin{flalign}
+    \bq = -D \nabla u + \bv u,
+    \label{eqn:adv_flux}
+\end{flalign}
+where $D$ is the diffusivity parameter, $u$ is the quantity of interest (e.g.
+concentration, temperature, etc.), and $\bv$ is the flow velocity vector for the fluid.
+In more concrete terms, if we are modeling die expanding in a flowing pipe, $u$ might be
+the concentration of dye (maybe in ml/L) and $\bv$ might be the constant flow rate of the
+pipe.  Substituting \eqref{eqn:adv_flux} into \eqref{eqn:balance} gives
+\begin{flalign}
+    \pd{u}{t} + \nabla \cdot \left( -D \nabla u + \bv u \right) = f(t,\bx).
+    \label{eqn:adv_diff_1}
+\end{flalign}
+Expanding the divergence on the left-hand side of \eqref{eqn:adv_diff_1} gives
+\begin{flalign}
+    \pd{u}{t} - \nabla \cdot \left( D \nabla u \right) + \nabla \cdot \left( \bv u \right) =
+    f(t,\bx).
+    \label{eqn:adv_diff_2}
+\end{flalign}
+When a fluid is incompressible it can be shown that $\nabla \cdot \bv = 0$. The impact of
+this is that by the product rule we have $\nabla \cdot \left( \bv u \right) = \bv \cdot \nabla u + u
+\nabla \cdot \bv$ and since $\nabla \cdot \bv = 0$ we get $\nabla \cdot \left( \bv u \right) = \bv \cdot \nabla u$.  Hence, when
+modeling an incompressible fluid we can finally write the advection diffusion equation as
+\begin{flalign}
+    \boxed{\pd{u}{t} - \underbrace{\nabla \cdot \left( D \nabla u
+    \right)}_{\text{Diffusion}} + \underbrace{\bv \cdot \nabla u}_{\text{Advection}} =
+f(t,\bx).}
+    \label{eqn:adv_diff}
+\end{flalign}
+Other simplifications include a non-spatially dependent diffusivity coefficient, implying
+that $\nabla \cdot \left( D \nabla u \right) = D \nabla \cdot \nabla u$, and problems that are
+free of external sources so $f(t,\bx) = 0$. Keep in mind that these simplification are
+problem dependent.  Without a source we can rearrange \eqref{eqn:adv_diff} to get
+\begin{flalign}
+    \boxed{\pd{u}{t} = \underbrace{\nabla \cdot \left( D \nabla u
+    \right)}_{\text{Diffusion}} - \underbrace{\bv \cdot \nabla u}_{\text{Advection}}.}
+    \label{eqn:adv_diff2}
+\end{flalign}
+
+\subsection*{River Contamination Problem}
+Contaminant transport in a river is naturally modeled with the advection-diffusion
+equation.  Let $u$ be the concentration of a contaminant in the river and let $\bv$ be the
+flow rate of the river.  Equation \eqref{eqn:adv_diff} models the concentration of the
+contaminant as the river flows.  You get to choose the river, the contaminant, the flow
+rate, the river's velocity profile\footnote{You may want to look up what a pipe flow
+velocity profile looks like.}, etc.  A primary simplifying assumption is that the
+river is straight and two dimensional, but don't hesitate to include a 3D model if you
+feel it necessary.
+
+
+A few words of caution: (1) The advection-diffusion equations are not designed to model
+turbulent flow so don't expect to see eddies in your solutions, (2) start with simple
+geometry and build up from there, and (3) there is a wealth of literature out there for
+the advection diffusion equation \dots just enough to get yourself lost and confused.
+Start simple and build from there.  
+
+Remember the most important part of this project: Have Fun!!
+
+
+
+\subsection*{Project Goals}
+There are many areas of application for the advection diffusion equation which could span
+several majors, several courses, and possibly several undergraduate and graduate degrees.
+For this project we are only studying one broad area of application
+so as to narrow the scope of the project. You get to choose exactly what direction
+you want to take it.  For your chosen direction you will need to do the following.
+\begin{enumerate}
+    \item Clearly state what system you are trying to model.
+    \item Clearly state appropriate initial and boundary conditions for the
+        system\footnote{The boundary conditions for these problems take a great deal of
+        care.  You WILL need to look back to our homework from numerical differentiation
+    to figure out how to discretize the derivatives near the boundaries. In particular,
+look at problem 6 on page 226 of the text.  You WILL need this.}.
+    \item Clearly give reasonable physical values for all of the parameters (citing
+        appropriate research).
+    \item Clearly explain the numerical methods used in the solution of the system.  Your
+        numerical methods should at least be 2D, but I won't stop you from doing 3D.  You
+        can also allow the river to be straight or allow it to bend.  If you allow it to
+        bend be sure to very carefully explain your numerical method.  You should do
+        at least two numerical methods and do a comparison study.
+    \item Include a verification that the time steps $\Delta t$ and spatial steps $\Delta
+        x$, $\Delta y$ (and possibly $\Delta z$) are of the appropriate size to guarantee
+        convergence.  This means that you must compare the results for different choices
+        of $\Delta t, \, \Delta x, \, \Delta y,$ and $\Delta z$ to verify that they
+        produce the same result.\footnote{The best way to show convergence is some sort of error
+        plot.}  
+    \item Present graphs and results exploring the behaviors that result from a wide
+        variety of initial conditions, boundary conditions, changes in parameters, etc.
+        Again, your project should at least be in two spatial dimensions.  If you need to
+        use animations (in addition to the images in your document) you can upload those
+        along with your project and cite them accordingly.
+    \item Discuss the meaning of your work with the intention that the audience for your
+        paper is mathematically sophisticated.
+    \item Finally, you will need to submit a zipped file containing MATLAB codes that run
+        select simulations and animations.  The main driver file that you turn in needs to
+        contain enough information so that your instructor can run your code by changing
+        as few things as possible.\footnote{Realistically, your instructor should just
+            have to tell the code to run and it will do the rest.  Cumbersome, broken, and
+        hard-to-use code will not be taken lightly.}
+\end{enumerate}
+
+
+

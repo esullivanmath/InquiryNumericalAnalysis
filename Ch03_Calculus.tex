@@ -1957,29 +1957,6 @@ optimization occurs see a course in mathematical optimization or machine learnin
 
 
 
-\begin{problem}
-    Go to the USGS water data repository: \\
-    \href{https://maps.waterdata.usgs.gov/mapper/index.html}{https://maps.waterdata.usgs.gov/mapper/index.html}.\\
-    Here you'll find a map with information about water resources around the country.
-    \begin{itemize}
-        \item Zoom in to a dam of your choice (make sure that it is a dam).
-        \item Click on the map tag then click ``Access Data''
-        \item From the dropdown menu at the top select either ``Daily Data'' or ``Current
-            / Historical Data''.  If these options don't appear then choose a different
-            dam.
-        \item Change the dates so you have the past year's worth of information.
-        \item Select ``Tab-separated'' under ``Output format'' and press Go.  Be sure that
-            the data you got has a flow rate (ft$^3$/sec).
-        \item At this point you should have access to the entire data set.  Copy it into a
-            \texttt{csv} file and save it to your computer.
-    \end{itemize}
-    For the data that you just downloaded you have three tasks: (1) plot the data in a
-    reasonable way giving appropriate units, (2) find the total amount of water that
-    has been discharged from the dam during the past calendar year, and (3) report any
-    margin of error in your calculation based on the numerical method that you used in
-    part (2).
-\end{problem}
-
 
 \begin{problem}
     Integrate each of the functions over the interval $[-1,2]$ and verify mathematically
@@ -1993,26 +1970,25 @@ optimization occurs see a course in mathematical optimization or machine learnin
 \end{problem}
 
 
-\begin{problem}
-    Although Simpson’s rule was derived from parabolas, prove that it integrates all cubic
-    polynomials exactly.
-\end{problem}
-\hint{
-    Apply Simpson's rule to the function $f(x) = Ax^3 + Bx^2 + Cx + D$ on the interval
-    $[\alpha,\beta]$. This means that you will be evaluating the function at $\alpha$,
-    $\beta$, and $(\alpha+\beta)/2$. You can also easily do this integral by hand
-    symbolically:
-    \[ \int_\alpha^\beta Ax^3 + Bx^2 + Cx + D dx = \left( \frac{Ax^4}{4} + \frac{Bx^3}{3} +
-    \frac{Cx^2}{2} + Dx \right) \Big|_{\alpha}^{\beta} = \cdots. \]
-    Verify that
-    Simpson's rule gives exactly the same answer symbolically.
+% \begin{problem}
+%     Although Simpson’s rule was derived from parabolas, prove that it integrates all cubic
+%     polynomials exactly.
+% \end{problem}
+% \hint{
+%     Apply Simpson's rule to the function $f(x) = Ax^3 + Bx^2 + Cx + D$ on the interval
+%     $[\alpha,\beta]$. This means that you will be evaluating the function at $\alpha$,
+%     $\beta$, and $(\alpha+\beta)/2$. You can also easily do this integral by hand
+%     symbolically:
+%     \[ \int_\alpha^\beta Ax^3 + Bx^2 + Cx + D dx = \left( \frac{Ax^4}{4} + \frac{Bx^3}{3} +
+%     \frac{Cx^2}{2} + Dx \right) \Big|_{\alpha}^{\beta} = \cdots. \]
+%     Verify that
+%     Simpson's rule gives exactly the same answer symbolically.
+% 
+% 
+% 
+% }
 
 
-
-}
-
-
-\newpage
 \begin{problem}\label{prob:curve_fitting_exercises}
     The plots in Figure \ref{fig:curve_fitting_exercises_plots} show noisy data from
     measurements of elementary single variable functions.
@@ -2412,4 +2388,108 @@ optimization occurs see a course in mathematical optimization or machine learnin
     \caption{Plots for Problem \ref{prob:curve_fitting_exercises}.}
     \label{fig:curve_fitting_exercises_plots}
 \end{figure}
+
+
+
+
+\newpage\section{Projects}
+In this section we propose several ideas for projects related to numerical Calculus.  These
+projects are meant to be open ended, to encourage creative mathematics, to push your
+coding skills, and to require you to write and communicate your mathematics.  Take the
+time to read Appendix \ref{app:writing_projects} before you write your final solution.
+
+
+\subsection{Galaxy Integration}
+
+To analyze the light from stars and galaxies, scientists use a spectral grating (fancy prism) to
+split it up into the different frequencies (colors). We can then measure the intensity
+(brightness) of the light (in units of Watts per square meter) at each frequency (measured
+in Hertz), to get intensity per frequency (Watts per square meter per Hertz, W/(m$^2$
+Hz)). Light from the dense opaque surface of a star produces a smooth rainbow, which
+produces a continuous curve when we plot intensity versus frequency. However stars are
+also surrounded by thin gas which either emits or absorbs light at only a specific set of
+frequencies, called spectral lines. Every chemical element produces a specific set of
+lines (or peaks) at fixed frequencies, so by identifying the lines, we can tell what types of atoms
+and molecules a star is made of. If the gas is cool, then it will absorb light at these
+wavelengths, and if the gas is hot then it will emit light at these wavelengths. For
+galaxies, on the other hand, we expect mostly emission spectra: light emitted from the
+galaxy.  
+
+For this project we will be analyzing the galaxy ``ngc 1275''.  The black hole at the
+center of this galaxy is often referred to as the ``Galactic Spaghetti Monster'' since the magnetic field ``sustains a mammoth network of
+spaghetti-like gas filaments around it''.\footnote{\href{https://www.newscientist.com/article/dn14573-galactic-spaghetti-monster-powered-by-magnetic-fields/}{www.newscientist.com/article/dn14573-galactic-spaghetti-monster-powered-by-magnetic-fields/}}
+% 
+In the Excel file associated with this project you will see the spectral data measuring the
+light intensity from ncg 1275 at several different wavelengths (measured in Angstroms
+).
+You will notice in this data set that there are several emission lines at various
+wavelengths.  Of particular interest are the peaks near
+$3800$ Angstroms, $5100$ Angstroms, $6400$ Angstroms, and the two peaks around $6700$ Angstroms. The data
+set contains 1,727 data points at different wavelengths. Your first job will be to
+transform the wavelength data to frequency via the formula
+\[ \lambda = \frac{c}{f} \]
+where $\lambda$ is the wavelength, $c$ is the speed of light, and $f$ is the frequency
+(measured in Hertz). Be sure to double check the units. Given the inverse relationship
+between frequency and wavelength you should see the emission lines flip to the other side
+of the plot (right-to-left or left-to-right).  
+
+
+The strength of each emission line (in W/m$^2$) is defined as the relative intensity of each peak
+\underline{integrated}
+across the associated frequencies. Note that you are not interested in the intensity of the continuous
+spectrum -- just the peaks. That is to say that you are only interested in the area above
+the background curve and the background noise.  
+
+% \subsection*{Your Tasks}
+Your primary task is to develop a process
+for analyzing data sets like this so as to determine the strength of each emission lines.
+You must demonstrate your process on this particular data set, but your process must be
+generalizable to any similar data set.
+Your process must clearly 
+determine the strength of peaks in data sets like this and you must apply your procedure
+to determine the strength of each of these four lines with an associated margin of
+error.\footnote{I would be surprised if you didn't do some statistics along the way.}
+Keep in mind that you will first want to first develop a method for removing the
+background noise. Finally, the double peak near $6700$ Angstroms needs to be handled with care:
+the strength of each emission line is only the integral over one peak, not two, so you'll
+need to determine a way to separate these peaks.
+
+Finally, it would be cool, but is not necessary, to report on which chemicals
+correspond to the emission lines in the data.  Remember that the galaxy is far away and
+hence there is a non-trivial red-shift to consider.  This will take some research but if
+done properly will likely give a lot more merit to your paper.
+
+\subsection{Higher Order Integration}
+Riemann sums can be used to approximate integrals and they do so by using piecewise
+constant functions to approximate the function.  The trapezoidal rule uses piecewise
+linear functions to approximate the function and then the area of a trapezoid to
+approximate the area.  We saw earlier that Simpson's rule uses piecewise parabolas to
+approximate the function.  The process which we used to build Simpson's rule can be
+extended to any higher-order polynomial.  Your job in this project is to build integration
+algorithms that use piecewise cubic functions, quartic functions, etc.  For each you need
+to show all of the mathematics necessary to derive the algorithm, provide several test
+cases to show that the algorithm works, and produce a numerical experiment that shows the
+order of accuracy of the algorithm.  
+
+\subsection{Dam Integration}
+Go to the USGS water data repository: \\
+\href{https://maps.waterdata.usgs.gov/mapper/index.html}{https://maps.waterdata.usgs.gov/mapper/index.html}.\\
+Here you'll find a map with information about water resources around the country.
+\begin{itemize}
+    \item Zoom in to a dam of your choice (make sure that it is a dam).
+    \item Click on the map tag then click ``Access Data''
+    \item From the dropdown menu at the top select either ``Daily Data'' or ``Current
+        / Historical Data''.  If these options don't appear then choose a different
+        dam.
+    \item Change the dates so you have the past year's worth of information.
+    \item Select ``Tab-separated'' under ``Output format'' and press Go.  Be sure that
+        the data you got has a flow rate (ft$^3$/sec).
+    \item At this point you should have access to the entire data set.  Copy it into a
+        \texttt{csv} file and save it to your computer.
+\end{itemize}
+For the data that you just downloaded you have three tasks: (1) plot the data in a
+reasonable way giving appropriate units, (2) find the total amount of water that
+has been discharged from the dam during the past calendar year, and (3) report any
+margin of error in your calculation based on the numerical method that you used in
+part (2).
 

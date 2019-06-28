@@ -437,11 +437,11 @@ A typical computer number:
     \end{center}
     What is this number?  Is it stored in single or double precision? 
 \end{problem}
-\solution{
-Remember that the ``$1.$'' is actually in front of the binary {\it significand}.  Hence,
-this number is 
-\[ x = +1.100110011 \times 2^4 = + 11001.10011 = 1+8+16+(1/2)+(1/16)+(1/32) = 25.59375\]
-}
+% \solution{
+% Remember that the ``$1.$'' is actually in front of the binary {\it significand}.  Hence,
+% this number is 
+% \[ x = +1.100110011 \times 2^4 = + 11001.10011 = 1+8+16+(1/2)+(1/16)+(1/32) = 25.59375\]
+% }
 
 
 \begin{problem}
@@ -1012,20 +1012,10 @@ right-hand plot shows a zoomed in view near the point $x=0.5$.}
 
 
 \newpage\section{Exercises}
-Several of the exercises in this section are designed just to get you coding.  If you are
-having trouble getting started on the coding please see Appendix \ref{app:MATLAB}.
 
-\begin{problem}
-    For each of the following commands tell what the command is asking MATLAB to do and
-    why the answer is {\it wrong}.
-    \begin{enumerate}
-        \item[(a)] \mcode{sqrt(2)^2 == 2}
-        \item[(b)] \mcode{(1/49)*49 == 1}
-        \item[(c)] \mcode{exp(log(3)) == 3}
-    \end{enumerate}
-\end{problem}
-
-
+\subsection{Coding Exercises}
+The first several exercises here are meant for you to practice and improve your coding
+skills.  
 
 \begin{problem}
     If we list all of the numbers below 10 that are multiples of 3 or 5 we get 3, 5, 6,
@@ -1075,6 +1065,109 @@ having trouble getting started on the coding please see Appendix \ref{app:MATLAB
     this more than 1,000,000 times to get a good average \ldots and the number that you
     get should be familiar!
 \end{problem}
+
+
+
+\begin{problem}[Jenny's Phone Number]
+    My favorite prime number is 8675309.  Yep.  Jenny's phone number is prime!  Write a
+    MATLAB script that verifies this fact.  You cannot use the built-in MATLAB function
+    \mcode{isprime( )}.
+    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    the coding.
+\end{problem}
+\hint{
+    Remember that a prime number has exactly two divisors: 1 and itself.  
+    You only need to check divisors as large as the square root of 8675309 (why). 
+}
+
+\begin{problem}
+    Write a function called \mcode{MyPrimeChecker} that accepts an integer and returns a
+    binary variable: 0 = not prime, 1 = prime.\\
+    \mcode{function Primality = MyPrimeChecker(n)} \\
+    Next write a MATLAB script to find the sum of all of the prime numbers less than 1000.
+    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    the coding.
+\end{problem}
+\hint{
+    Remember that a prime number has exactly two divisors: 1 and itself.  
+    You only need to check divisors as large as the square root of $n$. Your script should
+    probably be smart enough to avoid all of the non-prime even numbers.
+}
+
+
+
+
+\begin{problem}
+    The sum of the squares of the first ten natural numbers is,
+    \[ 1^2 + 2^2 + \dots + 10^2 = 385 \]
+    The square of the sum of the first ten natural numbers is,
+    \[ (1 + 2 + \dots + 10)^2 = 55^2 = 3025 \]
+    Hence the difference between the sum of the squares of the first ten natural numbers
+    and the square of the sum is $3025 - 385 = 2640$.
+
+    Write code to find the difference between the sum of the squares of the first one
+    hundred natural numbers and the square of the sum.  Your code needs to run error free
+    and output only the difference.  
+\end{problem}
+\hint{
+% Source: Project Euler Prolem \#6:
+    (big hint) the answer is 25164150. Of course you'll have to write code to get this. 
+}
+
+\begin{problem}
+    The prime factors of $13195$ are $5, 7, 13$ and $29$.  Write
+    code to find the largest prime factor of the number $600851475143$? Your code needs to
+    run error free and output only the largest prime factor. 
+\end{problem}
+\hint{
+% Source: Project Euler Problem \#3: 
+(big hint) the answer is 6857.  Of course you'll have to write code to get this.}
+
+
+\begin{problem}
+    The number 2520 is the smallest number that can be divided by each of the
+    numbers from 1 to 10 without any remainder.  Write code to find the smallest positive
+    number that is evenly divisible by all of the numbers from 1 to 20?
+\end{problem}
+\hint{% Source: Project Euler Problem \#5: 
+    Solution: 232792560. You may want to use modular division.  The code \mcode{mod(a,b)}
+    will give the remainder when $a$ is divided by $b$.  If the answer is 0 then $a$ can
+be divided by $b$.  For example, \mcode{mod(6,2)} is 0 since 6 is divisible by 2, and
+\mcode{mod(7,3)} is 1 since 7 divided by 3 is 2 with a remainder of 1.
+
+In this problem you should not be doing an exhaustive search.  
+}
+
+
+\begin{problem}
+    The following iterative sequence is defined for the set of
+    positive integers:
+    \begin{flalign*}
+        & n \to \frac{n}{2} \quad \text{(n is even)} \\
+        & n \to 3n + 1 \quad \text{(n is odd)}
+    \end{flalign*}
+    Using the rule above and starting with $13$, we generate the following sequence:
+    \[ 13 \to  40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1 \]
+    It can be seen that this sequence (starting at 13 and finishing at 1) contains 10
+    terms. Although it has not been proved yet (Collatz Problem), it is thought that all
+    starting numbers finish at 1.
+
+    Write code to determine which starting number, under one million, produces the longest
+    chain. NOTE: Once the chain starts the terms are allowed to go above one million.
+\end{problem}
+% \solution{Source: Project Euler Problem \#14: Solution: 837799}
+
+\subsection{Applying What You've Learned}
+\begin{problem}
+    For each of the following commands tell what the command is asking MATLAB to do and
+    why the answer is {\it wrong}.
+    \begin{enumerate}
+        \item[(a)] \mcode{sqrt(2)^2 == 2}
+        \item[(b)] \mcode{(1/49)*49 == 1}
+        \item[(c)] \mcode{exp(log(3)) == 3}
+    \end{enumerate}
+\end{problem}
+
 
 \begin{problem}
     Use the ratio test to determine the radius of convergence for the functions $\sin(x)$, $\cos(x)$,
@@ -1205,94 +1298,6 @@ TaylorAnimation(f,N)
 \end{lstlisting}
 \end{problem}
 
-\begin{problem}[Jenny's Phone Number]
-    My favorite prime number is 8675309.  Yep.  Jenny's phone number is prime!  Write a
-    MATLAB script that verifies this fact.  You cannot use the built-in MATLAB function
-    \mcode{isprime( )}.
-    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
-    the coding.
-\end{problem}
-\hint{
-    Remember that a prime number has exactly two divisors: 1 and itself.  
-    You only need to check divisors as large as the square root of 8675309 (why). 
-}
-
-\begin{problem}
-    Write a function called \mcode{MyPrimeChecker} that accepts an integer and returns a
-    binary variable: 0 = not prime, 1 = prime.\\
-    \mcode{function Primality = MyPrimeChecker(n)} \\
-    Next write a MATLAB script to find the sum of all of the prime numbers less than 1000.
-    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
-    the coding.
-\end{problem}
-\hint{
-    Remember that a prime number has exactly two divisors: 1 and itself.  
-    You only need to check divisors as large as the square root of $n$. Your script should
-    probably be smart enough to avoid all of the non-prime even numbers.
-}
-
-
-
-
-\begin{problem}
-    The sum of the squares of the first ten natural numbers is,
-    \[ 1^2 + 2^2 + \dots + 10^2 = 385 \]
-    The square of the sum of the first ten natural numbers is,
-    \[ (1 + 2 + \dots + 10)^2 = 55^2 = 3025 \]
-    Hence the difference between the sum of the squares of the first ten natural numbers
-    and the square of the sum is $3025 - 385 = 2640$.
-
-    Write code to find the difference between the sum of the squares of the first one
-    hundred natural numbers and the square of the sum.  Your code needs to run error free
-    and output only the difference.  
-\end{problem}
-\hint{
-% Source: Project Euler Prolem \#6:
-    (big hint) the answer is 25164150. Of course you'll have to write code to get this. 
-}
-
-\begin{problem}
-    The prime factors of $13195$ are $5, 7, 13$ and $29$.  Write
-    code to find the largest prime factor of the number $600851475143$? Your code needs to
-    run error free and output only the largest prime factor. 
-\end{problem}
-\hint{
-% Source: Project Euler Problem \#3: 
-(big hint) the answer is 6857.  Of course you'll have to write code to get this.}
-
-
-\begin{problem}
-    The number 2520 is the smallest number that can be divided by each of the
-    numbers from 1 to 10 without any remainder.  Write code to find the smallest positive
-    number that is evenly divisible by all of the numbers from 1 to 20?
-\end{problem}
-\hint{% Source: Project Euler Problem \#5: 
-    Solution: 232792560. You may want to use modular division.  The code \mcode{mod(a,b)}
-    will give the remainder when $a$ is divided by $b$.  If the answer is 0 then $a$ can
-be divided by $b$.  For example, \mcode{mod(6,2)} is 0 since 6 is divisible by 2, and
-\mcode{mod(7,3)} is 1 since 7 divided by 3 is 2 with a remainder of 1.
-
-In this problem you should not be doing an exhaustive search.  
-}
-
-
-\begin{problem}
-    The following iterative sequence is defined for the set of
-    positive integers:
-    \begin{flalign*}
-        & n \to \frac{n}{2} \quad \text{(n is even)} \\
-        & n \to 3n + 1 \quad \text{(n is odd)}
-    \end{flalign*}
-    Using the rule above and starting with $13$, we generate the following sequence:
-    \[ 13 \to  40 \to 20 \to 10 \to 5 \to 16 \to 8 \to 4 \to 2 \to 1 \]
-    It can be seen that this sequence (starting at 13 and finishing at 1) contains 10
-    terms. Although it has not been proved yet (Collatz Problem), it is thought that all
-    starting numbers finish at 1.
-
-    Write code to determine which starting number, under one million, produces the longest
-    chain. NOTE: Once the chain starts the terms are allowed to go above one million.
-\end{problem}
-% \solution{Source: Project Euler Problem \#14: Solution: 837799}
 
 \begin{problem}
     Find the domain of convergence for the Taylor series for each of the following Taylor
