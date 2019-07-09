@@ -94,8 +94,8 @@
 \contentsline {section}{\numberline {A.3}Writing Style}{194}{section.A.3}
 \contentsline {section}{\numberline {A.4}Tips For Writing Clear Mathematics}{194}{section.A.4}
 \contentsline {subsection}{\numberline {A.4.1}Audience}{194}{subsection.A.4.1}
-\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{194}{subsection.A.4.2}
-\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{195}{subsection.A.4.3}
+\contentsline {subsection}{\numberline {A.4.2}How To Make Mathematics Readable -- 10 Things To Do}{195}{subsection.A.4.2}
+\contentsline {subsection}{\numberline {A.4.3}Some Writing Tips}{196}{subsection.A.4.3}
 \contentsline {subsection}{\numberline {A.4.4}Mathematical Vocabulary}{199}{subsection.A.4.4}
 \contentsline {section}{\numberline {A.5}Sensitivity Analysis}{200}{section.A.5}
 \contentsline {section}{\numberline {A.6}Example of Sensitivity Analysis:}{202}{section.A.6}
@@ -110,22 +110,52 @@
 \contentsline {section}{\numberline {B.4}Functions}{209}{section.B.4}
 \contentsline {section}{\numberline {B.5}Plotting}{210}{section.B.5}
 \contentsline {section}{\numberline {B.6}Animations}{211}{section.B.6}
-\contentsline {chapter}{\numberline {C}\LaTeX }{213}{appendix.C}
-\contentsline {section}{\numberline {C.1}Equation Environments and Cross Referencing}{213}{section.C.1}
-\contentsline {section}{\numberline {C.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{216}{section.C.2}
-\contentsline {subsection}{\numberline {C.2.1}Tables and Tabular Environments}{216}{subsection.C.2.1}
-\contentsline {subsection}{\numberline {C.2.2}Excel To \LaTeX }{217}{subsection.C.2.2}
-\contentsline {subsection}{\numberline {C.2.3}Figures}{217}{subsection.C.2.3}
-\contentsline {subsection}{\numberline {C.2.4}New Commands: Shortcuts are AWESOME!}{217}{subsection.C.2.4}
-\contentsline {section}{\numberline {C.3}Graphics in \LaTeX }{220}{section.C.3}
-\contentsline {subsection}{\numberline {C.3.1}The Tikz and PGFPlots Packages}{220}{subsection.C.3.1}
-\contentsline {section}{\numberline {C.4}Bibliography Management}{223}{section.C.4}
-\contentsline {subsection}{\numberline {C.4.1}Embedded Bibliography}{224}{subsection.C.4.1}
-\contentsline {subsection}{\numberline {C.4.2}Bibliography Database: BibTeX}{224}{subsection.C.4.2}
-\contentsline {chapter}{\numberline {D}Optional Material}{225}{appendix.D}
-\contentsline {section}{\numberline {D.1}Interpolation}{225}{section.D.1}
-\contentsline {subsection}{\numberline {D.1.1}Vandemonde Interpolation}{225}{subsection.D.1.1}
-\contentsline {subsection}{\numberline {D.1.2}Lagrange Interpolation}{227}{subsection.D.1.2}
-\contentsline {subsection}{\numberline {D.1.3}Interpolation at Chebyshev Points}{228}{subsection.D.1.3}
-\contentsline {section}{\numberline {D.2}Building PDE's From Conservation Laws}{231}{section.D.2}
-\contentsline {chapter}{Bibliography}{234}{equation.D.2.17}
+\contentsline {chapter}{\numberline {C}Python Basics}{213}{appendix.C}
+\contentsline {section}{\numberline {C.1}Getting Started}{214}{section.C.1}
+\contentsline {section}{\numberline {C.2}Python Programming Basics}{215}{section.C.2}
+\contentsline {subsection}{\numberline {C.2.1}Variables}{215}{subsection.C.2.1}
+\contentsline {subsection}{\numberline {C.2.2}Indexing and Lists}{216}{subsection.C.2.2}
+\contentsline {subsection}{\numberline {C.2.3}List Operations}{218}{subsection.C.2.3}
+\contentsline {subsection}{\numberline {C.2.4}Tuples}{220}{subsection.C.2.4}
+\contentsline {subsection}{\numberline {C.2.5}Control Flow: Loops and If Statements}{221}{subsection.C.2.5}
+\contentsline {subsubsection}{For Loops}{221}{section*.30}
+\contentsline {subsubsection}{While Loops}{223}{section*.31}
+\contentsline {subsubsection}{If Statements}{224}{section*.32}
+\contentsline {subsection}{\numberline {C.2.6}Functions}{226}{subsection.C.2.6}
+\contentsline {subsection}{\numberline {C.2.7}Packages}{229}{subsection.C.2.7}
+\contentsline {section}{\numberline {C.3}Numerical Python with \texttt {numpy}}{231}{section.C.3}
+\contentsline {subsection}{\numberline {C.3.1}Numpy Arrays, Array Operations, and Matrix Operations}{233}{subsection.C.3.1}
+\contentsline {subsection}{\numberline {C.3.2}\texttt {arange, linspace, zeros, ones}, and \texttt {mgrid}}{238}{subsection.C.3.2}
+\contentsline {section}{\numberline {C.4}Mathematical Plotting with \texttt {matplotlib}}{241}{section.C.4}
+\contentsline {subsection}{\numberline {C.4.1}Basics with \texttt {plt.plot()}}{241}{subsection.C.4.1}
+\contentsline {subsection}{\numberline {C.4.2}Subplots}{241}{subsection.C.4.2}
+\contentsline {subsection}{\numberline {C.4.3}Logarithmic Scaling with \texttt {semilogy}, \texttt {semilogx}, and \texttt {loglog}}{241}{subsection.C.4.3}
+\contentsline {section}{\numberline {C.5}Symbolic Algebra and Calculus with \texttt {sympy}}{241}{section.C.5}
+\contentsline {subsection}{\numberline {C.5.1}Symbolic Variables with \texttt {symbols}}{241}{subsection.C.5.1}
+\contentsline {subsection}{\numberline {C.5.2}Symbolic Algebra}{241}{subsection.C.5.2}
+\contentsline {subsection}{\numberline {C.5.3}Symbolic Calculus}{241}{subsection.C.5.3}
+\contentsline {subsubsection}{Derivatives}{241}{section*.33}
+\contentsline {subsubsection}{Integrals}{241}{section*.34}
+\contentsline {subsubsection}{Limits}{241}{section*.35}
+\contentsline {subsubsection}{Taylor Series}{241}{section*.36}
+\contentsline {subsection}{\numberline {C.5.4}Solving Equations Symbolically}{241}{subsection.C.5.4}
+\contentsline {subsection}{\numberline {C.5.5}Symbolic Plotting}{241}{subsection.C.5.5}
+\contentsline {chapter}{\numberline {D}\LaTeX }{242}{appendix.D}
+\contentsline {section}{\numberline {D.1}Equation Environments and Cross Referencing}{242}{section.D.1}
+\contentsline {section}{\numberline {D.2}Tables, Tabular, Figures, Shortcuts, and Other Environments}{245}{section.D.2}
+\contentsline {subsection}{\numberline {D.2.1}Tables and Tabular Environments}{245}{subsection.D.2.1}
+\contentsline {subsection}{\numberline {D.2.2}Excel To \LaTeX }{246}{subsection.D.2.2}
+\contentsline {subsection}{\numberline {D.2.3}Figures}{246}{subsection.D.2.3}
+\contentsline {subsection}{\numberline {D.2.4}New Commands: Shortcuts are AWESOME!}{246}{subsection.D.2.4}
+\contentsline {section}{\numberline {D.3}Graphics in \LaTeX }{249}{section.D.3}
+\contentsline {subsection}{\numberline {D.3.1}The Tikz and PGFPlots Packages}{249}{subsection.D.3.1}
+\contentsline {section}{\numberline {D.4}Bibliography Management}{252}{section.D.4}
+\contentsline {subsection}{\numberline {D.4.1}Embedded Bibliography}{253}{subsection.D.4.1}
+\contentsline {subsection}{\numberline {D.4.2}Bibliography Database: BibTeX}{253}{subsection.D.4.2}
+\contentsline {chapter}{\numberline {E}Optional Material}{254}{appendix.E}
+\contentsline {section}{\numberline {E.1}Interpolation}{254}{section.E.1}
+\contentsline {subsection}{\numberline {E.1.1}Vandermonde Interpolation}{254}{subsection.E.1.1}
+\contentsline {subsection}{\numberline {E.1.2}Lagrange Interpolation}{256}{subsection.E.1.2}
+\contentsline {subsection}{\numberline {E.1.3}Interpolation at Chebyshev Points}{257}{subsection.E.1.3}
+\contentsline {section}{\numberline {E.2}Building PDE's From Conservation Laws}{260}{section.E.2}
+\contentsline {chapter}{Bibliography}{263}{equation.E.2.17}

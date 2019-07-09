@@ -110,22 +110,45 @@
 \BOOKMARK [1][-]{section.B.4}{Functions}{appendix.B}% 110
 \BOOKMARK [1][-]{section.B.5}{Plotting}{appendix.B}% 111
 \BOOKMARK [1][-]{section.B.6}{Animations}{appendix.B}% 112
-\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 113
-\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 114
-\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 115
-\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 116
-\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 117
-\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 118
-\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 119
-\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 120
-\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 121
-\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 122
-\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 123
-\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 124
-\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 125
-\BOOKMARK [1][-]{section.D.1}{Interpolation}{appendix.D}% 126
-\BOOKMARK [2][-]{subsection.D.1.1}{Vandemonde Interpolation}{section.D.1}% 127
-\BOOKMARK [2][-]{subsection.D.1.2}{Lagrange Interpolation}{section.D.1}% 128
-\BOOKMARK [2][-]{subsection.D.1.3}{Interpolation at Chebyshev Points}{section.D.1}% 129
-\BOOKMARK [1][-]{section.D.2}{Building PDE's From Conservation Laws}{appendix.D}% 130
-\BOOKMARK [0][-]{equation.D.2.17}{Bibliography}{}% 131
+\BOOKMARK [0][-]{appendix.C}{Python Basics}{}% 113
+\BOOKMARK [1][-]{section.C.1}{Getting Started}{appendix.C}% 114
+\BOOKMARK [1][-]{section.C.2}{Python Programming Basics}{appendix.C}% 115
+\BOOKMARK [2][-]{subsection.C.2.1}{Variables}{section.C.2}% 116
+\BOOKMARK [2][-]{subsection.C.2.2}{Indexing and Lists}{section.C.2}% 117
+\BOOKMARK [2][-]{subsection.C.2.3}{List Operations}{section.C.2}% 118
+\BOOKMARK [2][-]{subsection.C.2.4}{Tuples}{section.C.2}% 119
+\BOOKMARK [2][-]{subsection.C.2.5}{Control Flow: Loops and If Statements}{section.C.2}% 120
+\BOOKMARK [2][-]{subsection.C.2.6}{Functions}{section.C.2}% 121
+\BOOKMARK [2][-]{subsection.C.2.7}{Packages}{section.C.2}% 122
+\BOOKMARK [1][-]{section.C.3}{Numerical Python with numpy}{appendix.C}% 123
+\BOOKMARK [2][-]{subsection.C.3.1}{Numpy Arrays, Array Operations, and Matrix Operations}{section.C.3}% 124
+\BOOKMARK [2][-]{subsection.C.3.2}{arange, linspace, zeros, ones, and mgrid}{section.C.3}% 125
+\BOOKMARK [1][-]{section.C.4}{Mathematical Plotting with matplotlib}{appendix.C}% 126
+\BOOKMARK [2][-]{subsection.C.4.1}{Basics with plt.plot\(\)}{section.C.4}% 127
+\BOOKMARK [2][-]{subsection.C.4.2}{Subplots}{section.C.4}% 128
+\BOOKMARK [2][-]{subsection.C.4.3}{Logarithmic Scaling with semilogy, semilogx, and loglog}{section.C.4}% 129
+\BOOKMARK [1][-]{section.C.5}{Symbolic Algebra and Calculus with sympy}{appendix.C}% 130
+\BOOKMARK [2][-]{subsection.C.5.1}{Symbolic Variables with symbols}{section.C.5}% 131
+\BOOKMARK [2][-]{subsection.C.5.2}{Symbolic Algebra}{section.C.5}% 132
+\BOOKMARK [2][-]{subsection.C.5.3}{Symbolic Calculus}{section.C.5}% 133
+\BOOKMARK [2][-]{subsection.C.5.4}{Solving Equations Symbolically}{section.C.5}% 134
+\BOOKMARK [2][-]{subsection.C.5.5}{Symbolic Plotting}{section.C.5}% 135
+\BOOKMARK [0][-]{appendix.D}{LaTeX}{}% 136
+\BOOKMARK [1][-]{section.D.1}{Equation Environments and Cross Referencing}{appendix.D}% 137
+\BOOKMARK [1][-]{section.D.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.D}% 138
+\BOOKMARK [2][-]{subsection.D.2.1}{Tables and Tabular Environments}{section.D.2}% 139
+\BOOKMARK [2][-]{subsection.D.2.2}{Excel To LaTeX}{section.D.2}% 140
+\BOOKMARK [2][-]{subsection.D.2.3}{Figures}{section.D.2}% 141
+\BOOKMARK [2][-]{subsection.D.2.4}{New Commands: Shortcuts are AWESOME!}{section.D.2}% 142
+\BOOKMARK [1][-]{section.D.3}{Graphics in LaTeX}{appendix.D}% 143
+\BOOKMARK [2][-]{subsection.D.3.1}{The Tikz and PGFPlots Packages}{section.D.3}% 144
+\BOOKMARK [1][-]{section.D.4}{Bibliography Management}{appendix.D}% 145
+\BOOKMARK [2][-]{subsection.D.4.1}{Embedded Bibliography}{section.D.4}% 146
+\BOOKMARK [2][-]{subsection.D.4.2}{Bibliography Database: BibTeX}{section.D.4}% 147
+\BOOKMARK [0][-]{appendix.E}{Optional Material}{}% 148
+\BOOKMARK [1][-]{section.E.1}{Interpolation}{appendix.E}% 149
+\BOOKMARK [2][-]{subsection.E.1.1}{Vandermonde Interpolation}{section.E.1}% 150
+\BOOKMARK [2][-]{subsection.E.1.2}{Lagrange Interpolation}{section.E.1}% 151
+\BOOKMARK [2][-]{subsection.E.1.3}{Interpolation at Chebyshev Points}{section.E.1}% 152
+\BOOKMARK [1][-]{section.E.2}{Building PDE's From Conservation Laws}{appendix.E}% 153
+\BOOKMARK [0][-]{equation.E.2.17}{Bibliography}{}% 154
