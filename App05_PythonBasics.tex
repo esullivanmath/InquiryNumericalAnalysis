@@ -1572,28 +1572,598 @@ comfortable here, but there are some differences to be aware of.
 Note: The reader should note that we will NOT be plotting symbolically defined functions
 in this section.  The \texttt{plot} command that we will be using is reserved for numerically
 defined plots (i.e. plots of data points), not functions that are symbolically defined.
+If you have a symbolically defined function and need a plot, then pick a domain, build
+some $x$ data, use the function to build the corresponding $y$ data, and use the plotting
+tools discussed here.  If you need a plot of a symbolic function and for some reason these
+steps are too much to ask, then look to the section of this Appendix on \texttt{sympy}.
 
 
 \subsection{Basics with \texttt{plt.plot()}}
+We are going to start right away with an example.  In this example, however, we'll walk
+through each of the code chunks one-by-one so that we understand how to set up a proper
+plot.  Something to keep in mind.  The author strongly encourages students and readers to
+use Jupyter Notebooks for their Python coding.  As such, there are some tricks for getting
+the plots to render that only apply to Jupyter Notebooks.
+
+\begin{example}[Plotting with \texttt{plt.plot()}]
+    In the first example we want to simply plot the sine function on the domain  $x \in
+    [0,2\pi]$, color it green, put a grid on it, and give a meaningful legend and axis
+    labels.  To do so we first need to take care of a couple of housekeeping items.
+    \begin{itemize}
+        \item Import \texttt{numpy} so we can take advantage of some good numerical routines.
+        \item Import \texttt{matplotlib}'s \texttt{pyplo}t module. The standard way to
+            pull it is in is with the nickname \texttt{plt} (just like with
+            \texttt{numpy} when we import it as \texttt{np}).
+    \end{itemize}
+\bcode
+\begin{lstlisting}
+import numpy as np 
+import matplotlib.pyplot as plt
+\end{lstlisting}
+
+    In Jupyter Notebooks the plots will not show up unless you tell the notebook to put
+    them ``inline''.  Usually we will use the following command to get the plots to show up.
+
+\bcode
+\begin{lstlisting}
+%matplotlib inline
+\end{lstlisting}
+    The percent sign is called a {\it magic} command in Jupyter Notebooks.  This is not a
+    Python command, but it is a command for controlling the Jupyter IDE specifically.  
+
+    Now we'll build a \texttt{numpy} array of $x$ values (using the \texttt{linspace}
+    command) and a \texttt{numpy} array of $y$ values for the sine function.
+
+\bcode
+\begin{lstlisting}
+x = np.linspace(0,2*np.pi, 100) # 100 equally spaced points from 0 to 2pi
+y = np.sin(x)
+\end{lstlisting}
+
+\begin{itemize}
+    \item Finally, build the plot with \texttt{plt.plot()}.  This function behaves just
+        like MATLAB's \texttt{plot} command: \\
+        \texttt{plt.plot(x, y, 'color', ...)} \\
+        where you have several options that you can pass (more on that later).
+    \item Notice that we send the plot legend in directly to the plot command (unlike MATLAB).
+    \item Then we'll add the grid with \texttt{plt.grid()}
+    \item Then we'll add the legend to the plot
+    \item Finally we'll add the axis labels
+    \item We end the plotting code with \texttt{plt.show()} to tell Python to finally show
+        the plot.  You can get by without this line of code, but it is handy to have in
+        there when you're doing complicated plots.
+\end{itemize}
+
+\bcode
+\begin{lstlisting}
+plt.plot(x,y, 'green', label='The Sine Function')
+plt.grid()
+plt.legend()
+plt.xlabel("x axis")
+plt.ylabel("y axis")
+plt.show()
+\end{lstlisting}
+The plot that is produced can be seen in Figure \ref{fig:matplotlib_1}.
+\end{example}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{Images/matplotlib_1.png}
+    \caption{The sine function on $x\in [0,2\pi]$, colored greed, with a grid, and with a
+    legend.}
+    \label{fig:matplotlib_1}
+\end{figure}
+
+\begin{example}[Overlayed Plots with MatPlotLib]
+    Now let's do a second example, but this time we want to show four different plots on
+    top of each other.  When you start a figure, \texttt{matplotlib} is expecting all of
+    those plots to be layered on top of each other.  For MATLAB users, this means that you
+    do not need the \texttt{hold on} command since it is automatically ``on''.  
+
+In this example we will plot
+$$y_0 = \sin(2\pi x) \quad y_1 = \cos(2 \pi x) \quad y_2 = y_0 + y_1 \quad \text{and} \quad y_3 = y_0 - y_1$$
+on the domain $x \in [0,1]$ with 100 equally spaced points.  We'll give each of the plots a different line style, built a legend, put a grid on the plot, and give axis labels.
+
+\bcode
+\begin{lstlisting}
+# We really don't need to import the packages again, 
+# but for completeness of the example let's do it anyway.
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+# build the x and y values
+x = np.linspace(0,1,100)
+y0 = np.sin(2*np.pi*x)
+y1 = np.cos(2*np.pi*x)
+y2 = y0 + y1
+y3 = y0 - y1
+
+# plot each of the functions (notice that they will be on the same axes)
+plt.plot(x, y0, 'b-.', label=r"$y_0 = \sin(2\pi x)$")
+plt.plot(x, y1, 'r--', label=r"$y_1 = \cos(2\pi x)$")
+plt.plot(x, y2, 'g:', label=r"$y_2 = y_0 + y_1$")
+plt.plot(x, y3, 'k-', label=r"$y_3 = y_0 - y_1$")
+
+# put in a grid, legend, title, and axis labels
+plt.grid()
+plt.legend()
+plt.title("Awesome Title")
+plt.xlabel('x axis label')
+plt.ylabel('y axis label')
+plt.show()
+\end{lstlisting}
+The resulting plot can be seen in Figure \ref{fig:matplotlib_2}
+\end{example}
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{Images/matplotlib_2.png}
+    \caption{Several trigonometric functions on the same axes.}
+    \label{fig:matplotlib_2}
+\end{figure}
+
+Notice in Figure \ref{fig:matplotlib_2} that the legend was placed automatically.  There
+are ways to control the placement of the legend if you wish, but for now just let Python
+and \texttt{matplotlib} have control over the placement.
+
+\begin{example}[Same Plot, Different Code]
+    Now let's create the same plot as in Figure \ref{fig:matplotlib_2} with slightly different code.  The \texttt{plot}
+    command can take several $(x, y)$ pairs in the same line of code.  This can really
+    shrink the amount of coding that you have to do when plotting several functions on top
+    of each other.
+
+\bcode
+\begin{lstlisting}
+# The next line of code does all of the plotting of all of the functions.
+# Notice the order: x, y, color and line style, repeat
+plt.plot(x, y0, 'b-.', x, y1, 'r--', x, y2, 'g:', x, y3, 'k-')
+
+plt.grid()
+plt.legend([r"$y_0 = \sin(2\pi x)$",r"$y_1 = \cos(2\pi x)$",\
+            r"$y_2 = y_0 + y_1$",r"$y_3 = y_0 - y_1$"])
+plt.title("Awesome Title")
+plt.xlabel('x axis label')
+plt.ylabel('y axis label')
+plt.show()
+\end{lstlisting}
+    
+\end{example}
+
+
+\begin{problem}
+    Plot the functions $f(x) = x^2$, $g(x) = x^3$, and $h(x) = x^4$ on the same axes.  Use the domain $x \in [0,1]$ and the range $y \in [0,1]$.  Put a grid, a legend, a title, and appropriate labels on the axes.
+\end{problem}
+
 
 \subsection{Subplots}
+It is often very handy to place plots side-by-side or as some array of plots.  The
+\texttt{subplots} command allows us that control.  The main idea is that we are setting up
+a matrix of blank plot and then populating the axes with the plots that we want.
+
+\begin{example}[First Subplot Example]
+    Let's repeat the previous exercise (which produced Figure \ref{fig:matplotlib_2}), but
+    this time we will put each of the plots in its own subplot.  There are a few extra
+    coding quirks that come along with building subplots so we'll highlight each block of
+    code separately.
+
+    \begin{itemize}
+        \item First we set up the plot area with \texttt{plt.subplots()}.  The first two inputs
+            to the \texttt{subplots} command are the number of rows and the number of
+            columns in your plot array.  For the first example we will do 2 rows of plots
+            with 2 columns -- so there are four plots total. The last input for the
+            \texttt{subplots} command is the size of the figure (this is really just so
+            that it shows up well in Jupyter Notebooks -- spend some time playing with the
+            figure size to get it to look right).
+        \item Then we build each plot individually telling \texttt{matplotlib} which axes
+            to use for each of the things in the plots.
+        \item Notice the small differences in how we set the titles and labels
+        \item In this example we are setting the $y$-axis to the interval $[-2,2]$ for
+            consistency across all of the plots.
+    \end{itemize}
+
+\bcode
+\begin{lstlisting}
+# set up the blank matrix of plots
+fig, axes = plt.subplots(nrows = 2, ncols = 2, figsize = (10,5))
+
+# Build the first plot
+axes[0,0].plot(x, y0, 'b-.')
+axes[0,0].grid()
+axes[0,0].set_title(r"$y_0 = \sin(2\pi x)$")
+axes[0,0].set_ylim(-2,2)
+axes[0,0].set_xlabel("x")
+axes[0,0].set_ylabel("y")
+
+# Build the second plot
+axes[0,1].plot(x, y1, 'r--')
+axes[0,1].grid()
+axes[0,1].set_title(r"$y_1 = \cos(2\pi x)$")
+axes[0,1].set_ylim(-2,2)
+axes[0,1].set_xlabel("x")
+axes[0,1].set_ylabel("y")
+
+# Build the first plot
+axes[1,0].plot(x, y2, 'g:')
+axes[1,0].grid()
+axes[1,0].set_title(r"$y_2 = y_0 + y_1$")
+axes[1,0].set_ylim(-2,2)
+axes[1,0].set_xlabel("x")
+axes[1,0].set_ylabel("y")
+
+# Build the first plot
+axes[1,1].plot(x, y3, 'k-')
+axes[1,1].grid()
+axes[1,1].set_title(r"$y_3 = y_0 - y_1$")
+axes[1,1].set_ylim(-2,2)
+axes[1,1].set_xlabel("x")
+axes[1,1].set_ylabel("y")
+
+fig.tight_layout()
+\end{lstlisting}
+The resulting plot can be seen in Figure \ref{fig:matplotlib_3}. The
+\texttt{fig.tight\_layout()} command makes the plot labels a bit more readable in this
+instance (again, something you can play with).
+\end{example}
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{Images/matplotlib_3.png}
+    \caption{The trigonometric functions with a $2\times 2$ matrix of subplots.}
+    \label{fig:matplotlib_3}
+\end{figure}
+
+\begin{problem}
+    Put the functions $f(x) = x^2$, $g(x) = x^3$ and $h(x) = x^4$ in a subplot environment with 1 row and 3 columns of plots.  Use the unit interval as the domain and range for all three plot, but sure that each plot has a grid, appropriate labels, an appropriate title, and the overall figure has a title.
+\end{problem}
+
 
 \subsection{Logarithmic Scaling with \texttt{semilogy}, \texttt{semilogx}, and
 \texttt{loglog}}
+It is occasionally useful to scale an axis logarithmically.  This arises most often when
+we're examining an exponential function, or some other function, that is close to zero for
+much of the domain.  Scaling logarithmically allows us to see how small the function is
+getting in orders of magnitude instead of as a raw real number.
 
+\begin{example}
+    In this example we'll plot the function $y = 10^{-0.01x}$ on a regular (linear) scale
+    and on a logarithmic scale on the $y$ axis.  Use the interval $[0,500]$ as a domain.
+
+\bcode
+\begin{lstlisting}
+x = np.linspace(0,500,1000)
+y = 10**(-0.01*x)
+fig, axis = plt.subplots(1,2, figsize = (10,5))
+
+axis[0].plot(x,y, 'r')
+axis[0].grid()
+axis[0].set_title("Linearly scaled y axis")
+axis[0].set_xlabel("x")
+axis[0].set_ylabel("y")
+
+axis[1].semilogy(x,y, 'k--')
+axis[1].grid()
+axis[1].set_title("Logarithmically scaled y axis")
+axis[1].set_xlabel("x")
+axis[1].set_ylabel("Log(y)")
+\end{lstlisting}
+The output for this code can be seen in Figure \ref{fig:matplotlib_4}.
+
+It should be noted that the same result can be achieved using the \texttt{yscale} command
+along with the \texttt{plot} command instead of using the \texttt{semilogy} command.  Pay
+careful attention to the subtle changes in the following code.
+
+\bcode
+\begin{lstlisting}
+x = np.linspace(0,500,1000)
+y = 10**(-0.01*x)
+fig, axis = plt.subplots(1,2, figsize = (10,5))
+
+axis[0].plot(x,y, 'r')
+axis[0].grid()
+axis[0].set_title("Linearly scaled y axis")
+axis[0].set_xlabel("x")
+axis[0].set_ylabel("y")
+
+axis[1].plot(x,y, 'k--') # <----- Notice the change here
+axis[1].set_yscale("log") # <----- And we added this line
+axis[1].grid()
+axis[1].set_title("Logarithmically scaled y axis")
+axis[1].set_xlabel("x")
+axis[1].set_ylabel("Log(y)")
+\end{lstlisting}
+\end{example}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{Images/matplotlib_4.png}
+    \caption{The left-hand plot shows the exponential function $y = 10^{-0.01x}$ and the
+right-hand side shows the same plot with the $y$ axis scaled logarithmically.}
+    \label{fig:matplotlib_4}
+\end{figure}
+
+
+\begin{problem}
+    Plot the function $f(x) = x^3$ for $x \in [0,1]$ on linearly scaled axes, logarithmic
+    axis in the $y$ direction, logarithmically scaled axes in the $x$ direction, and a
+    log-log plot with logarithmic scaling on both axes.  Use \texttt{subplots} to put your plots side-by-side.  Give appropriate labels, titles, etc.  
+\end{problem}
 
 \section{Symbolic Algebra and Calculus with \texttt{sympy}}
+In this section we will learn the tools necessary to do symbolic mathematics in Python.
+The relevant package is \texttt{sympy} (symbolic python) and it works much like
+Mathematica, Maple, or MATLAB's symbolic toolbox.  That being said, Mathematica and Maple
+are designed to do symbolic computation in the fastest and best possible ways, so in some
+sense, \texttt{sympy} is a little step-sibling to these much bigger pieces of software.
+Remember: Python is free, and this is a book on numerical analysis \ldots
+
+For the sake of convenience we will load \texttt{matplotlib} so we can plot a few things
+along the way.  
+
+\bcode
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+%matplotlib inline
+\end{lstlisting}
+
+Let's import \texttt{sympy} in the usual way.  We will use the nickname \texttt{sp} (just
+like we used \texttt{np} for \texttt{numpy}).  This is not a standard nickname in the
+Python literature, but it will suffice for our purposes.
+
+\bcode
+\begin{lstlisting}
+import sympy as sp
+# The directory of sympy is full of stuff.  
+# Uncomment the next line and run the code to see what you're getting.
+# print(dir(sp))
+
+sp.init_printing() # This allows for a more LaTeX style output
+\end{lstlisting}
+The last line of the previous block of code is again just for Jupyter Notebooks.  We want
+to allow for some beautiful styling of the output of these symbolic calculations and this
+is the line that allows Jupyter to do it.
+
+
 
 \subsection{Symbolic Variables with \texttt{symbols}}
+When you are working with symbolic variables you have to tell Python that that's what
+you're doing.  In other words, we actually have to type-cast the variables when we name
+them.  Otherwise Python won't know what to do with them.
+
+Let's define the variable $x$ as a symbolic variable.  Then we'll define a few symbolic
+expressions that use $x$ as a variable.
+
+\bcode
+\begin{lstlisting}
+x = sp.Symbol('x') # note the capitalization
+\end{lstlisting}
+
+Now we'll define the function $f(x) = (x+2)^3$ and spend the next few examples playing
+with it.
+
+\bcode
+\begin{lstlisting}
+f = (x+2)**3 # A symbolic function
+f
+\end{lstlisting}
+The output of these lines of code is the nicely formatted symbolic expression $\displaystyle
+(x+2)^3$.
+
+Be careful that you are using symbolically defined function along with your symbols.  For example, see the code below:
+
+\bcode
+\begin{lstlisting}
+# g = sin(x) # this line gives an error since it doesn't know which "sine" function to use.
+g = sp.sin(x) # this one works
+g
+\end{lstlisting}
+The output of these lines of code is the symbolic expression $\sin(x)$.
 
 \subsection{Symbolic Algebra}
+One of the primary purposes of doing symbolic programming is to do symbolic algebra (the
+other is typically symbolic calculus).  In this section we'll look at a few of the common
+algebraic exercises that can be handled with \texttt{sympy}.
+
+\begin{example}[Expand a Polynomial]
+    Expand the function $f(x) = (x+2)^3$.  In other words, multiply this out fully so that
+    it is a sum or difference of monomials instead of the cube of a binomial.
+
+\bcode
+\begin{lstlisting}
+f = (x+2)**3
+sp.expand(f) # do the multiplication to expand the polynomial
+\end{lstlisting}
+The output of these lines of code is the expression $x^{3} + 6 x^{2} + 12 x + 8$.
+\end{example}
+
+\begin{example}[Factor a Polynomial]
+    We will factor the polynomial $h(x) = x^2 + 4x + 3$.
+
+\bcode
+\begin{lstlisting}
+h = x**2 + 4*x + 3
+sp.factor(h) # factor this polynomial
+\end{lstlisting}
+The output of this function is the expression $\left(x + 1\right) \left(x + 3\right)$.
+\end{example}
+
+\begin{example}[Trig Expansion]
+    The \texttt{sympy} package knows how to work with trigonometric identities.  In this
+    example we show how \texttt{sympy} expands $\sin(a+b)$.
+
+\bcode
+\begin{lstlisting}
+a, b = sp.symbols('a b')
+j = sp.sin(a+b)
+sp.expand(j, trig=True) # Trig identities are built in!
+\end{lstlisting}
+The output of these linse of code is the expression $\displaystyle \sin{\left(a
+\right)} \cos{\left(b \right)} + \sin{\left(b \right)} \cos{\left(a \right)}$
+\end{example}
+
+\begin{example}[Simplifying Algebraic Expressions]
+    In this example we will simplify the function $g(x) = x^3 + 5x^3 + 12x^2 +1$.
+
+\bcode
+\begin{lstlisting}
+g = x**3 + 5*x**3 + 12*x**2 + 1
+sp.simplify(g) # Simplify some algebraic expression
+\end{lstlisting}
+The output of these lines of code is the expression $6 x^{3} + 12 x^{2} + 1$.
+\end{example}
+
+\begin{example}[Simplifying Trig Expressions]
+    In this example we'll simplify an expression that involves trigonometry.
+
+\bcode
+\begin{lstlisting}
+sp.simplify( sp.sin(x) / sp.cos(x)) # simplify a trig expression.
+\end{lstlisting}
+The output of this line of code is the expression $\tan(x)$ as expected.
+\end{example}
+
+The primary goal of many algebra problems is to solve an equation.  We will dedicate more
+time to algebraic equation solving later in this section, but the following example gives
+a simple example of how it works in \texttt{sympy}.
+
+\begin{example}[Simple Equation Solving]
+    We want to solve the equation $x^2 + 4x + 3 = 0$ for $x$.
+
+\bcode
+\begin{lstlisting}
+h = x**2 + 4*x + 3
+sp.solve(h,x)
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+[-3, -1]
+\end{lstlisting}
+As expected, the roots of the function $h(x)$ are $x=-3$ and $x=1$ since $h(x)$ factors
+into $h(x) = (x+3)(x-1)$.
+    
+\end{example}
+
+\subsection{Symbolic Function Evaluation}
+In \texttt{sympy} we cannot simply just evaluate functions as we would on paper.  Let's
+say we have the function $f(x)= (x+2)^3$ and we want to find $f(5)$.  We would say that we
+``substitute 5 into f for x'', and that is exactly what we have to tell Python.
+Unfortunately we cannot just write ``f(5)'' since that would mean that ``f'' is a Python
+function and we are sending the number 5 into that function.  This is an unfortunate
+double-use of the word ``function'', but stop and think about it for a second: When we
+write \texttt{f = (x+2)**3} we are just telling Python that \texttt{f} is a symolic
+expression in terms of the symbol \texttt{x}, but we did not use \texttt{def} to define it
+as a function as we did for all other function.
+
+The following code is what the mathematicians in us would like to do:
+\bcode
+\begin{lstlisting}
+f = (x+2)**3
+f(5) # This gives an error!
+\end{lstlisting}
+
+\ldots but this is how it should be done:
+\bcode
+\begin{lstlisting}
+f.subs(x,5) # This actually substitutes 5 for x in f
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+343
+\end{lstlisting}
 
 
 \subsection{Symbolic Calculus}
+The \texttt{sympy} package has routines to take symbolic derivatives, antiderivatives,
+limits, and Taylor series just like other computer algebra systems.  
 
 \subsubsection{Derivatives}
+The \texttt{diff} command is the command for differentiation.  
+Take careful note that \texttt{diff} is defined both in \texttt{sympy} and in
+\texttt{numpy}.  That means that there are symbolic and numerical routines for taking
+derivatives in Python \ldots and we need to tell our instance of Python which one we're working with every time we use it.  
+
+\begin{example}[Symbolic Differentiation]
+    In this example we'll differentiate the function $f(x) = (x+2)^3$.
+
+\bcode
+\begin{lstlisting}
+import sympy as sp # we already did this above, but let's do it again for clarity
+x = sp.Symbol('x') # Define the symbol x
+f = (x+2)**3 # Define a symbolic function f(x) = (x+2)^3
+df = sp.diff(f,x) # Take the derivative of f and call it "df"
+print("f(x) = ", f)
+print("f'(x) = ",df)
+print("f'(x) = ", sp.expand(df))
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+f(x) =  (x + 2)**3
+f'(x) =  3*(x + 2)**2
+f'(x) =  3*x**2 + 12*x + 12
+\end{lstlisting}
+
+Now let's get the first, second, third, and fourth derivatives of the function \texttt{f}.
+
+\bcode
+\begin{lstlisting}
+df = sp.diff(f,x,1) # first derivative
+ddf = sp.diff(f,x,2) # second deriative
+dddf = sp.diff(f,x,3) # third deriative
+ddddf = sp.diff(f,x,4) # fourth deriative
+print("f'(x) = ",df)
+print("f''(x) = ",sp.simplify(ddf))
+print("f'''(x) = ",sp.simplify(dddf))
+print("f''''(x) = ",sp.simplify(ddddf))
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+f'(x) =  3*(x + 2)**2
+f''(x) =  6*x + 12
+f'''(x) =  6
+f''''(x) =  0
+\end{lstlisting}
+\end{example}
+
+\begin{example}[Partial Derivatives]
+    Now let's do some partial derivatives.  The \texttt{diff} command is still the right
+    tool.  You just have to tell it which variable you're working with.
+
+\bcode
+\begin{lstlisting}
+x, y = sp.symbols('x y') # Define the symbols
+f = sp.sin(x*y) + sp.cos(x**2) # Define the function
+fx = sp.diff(f,x)
+fy = sp.diff(f,y)
+print("f(x,y) = ", f)
+print("f_x(x,y) = ", fx)
+print("f_y(x,y) = ", fy)
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+f(x,y) =  sin(x*y) + cos(x**2)
+f_x(x,y) =  -2*x*sin(x**2) + y*cos(x*y)
+f_y(x,y) =  x*cos(x*y)
+\end{lstlisting}
+\end{example}
+
+\begin{example}[\LaTeX\ from Symbolic Expressions]
+    It is worth noting that when you have a symbolically defined function you can ask
+    sympy to give you the \LaTeX\ code for the symbolic function so you can use it when you write about it.
+
+\bcode
+\begin{lstlisting}
+sp.latex(f)
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+'\\sin{\\left(x y \\right)} + \\cos{\\left(x^{2} \\right)}'
+\end{lstlisting}
+\end{example}
 
 \subsubsection{Integrals}
+For integration, the \texttt{integrate} tool is the command for the job.
 
 \subsubsection{Limits}
 
