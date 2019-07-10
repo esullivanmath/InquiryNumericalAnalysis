@@ -342,7 +342,7 @@ error approximation.
 \begin{problem}
     Write a \ProgLang function that takes a function and a domain and returns a second order
     numerical approximation to the first derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
-    MATLAB file.    Your function should
+    \ProgLang file.    Your function should
     accept an anonymous function handle, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
@@ -1369,7 +1369,12 @@ the actual function?
 In Technique \ref{tech:least_squares} the last step is a bit vague.  That was purposeful
 since there are many techniques that could be used to minimize the sum of the square
 errors.  In this particular section of this text we'll look at two of them: (1) Solver in
-MS Excel and (2) \texttt{fminsearch} in MATLAB.  Before we get into how those techniques
+MS Excel and (2) 
+\ifnum\Python=0 \texttt{fminsearch} in MATLAB.
+\else
+\texttt{scipy.optimize.fmin} in Python's \texttt{scipy} package.
+\fi
+Before we get into how those techniques
 work let's look at an example of how the minimization step works graphically.
 
 Let's return to the data set 
@@ -1683,7 +1688,12 @@ a unique sum of square errors.  The goal, of course, is to pick parameters that 
 the sum of square errors.  It is beyond the scope of this book to write a gradient
 descent or derivative free optimization routine to do this optimization.  Instead we will
 lean on several pre-built tools that can do this optimization for us: MS Excel's Solver
-and MATLAB's \texttt{fminsearch} to name two of them.  If you are curious about how the
+and 
+\ifnum\Python=0 MATLAB's \texttt{fminsearch}
+\else
+Python's \texttt{scipy.optimize.fmin}
+\fi
+to name two of them.  If you are curious about how the
 optimization occurs see a course in mathematical optimization or machine learning.
 
 \begin{problem}
@@ -1694,7 +1704,12 @@ optimization occurs see a course in mathematical optimization or machine learnin
 \end{problem}
 
 \begin{problem}
-    Repeat the previous problem with MATLAB's \texttt{fminsearch} function.
+    Repeat the previous problem with 
+    \ifnum\Python=0 MATLAB's \texttt{fminsearch}
+    \else
+    Python's \texttt{scipy.optimize.fmin}
+    \fi
+    function.
 \end{problem}
 
 \begin{problem}
@@ -1814,15 +1829,16 @@ optimization occurs see a course in mathematical optimization or machine learnin
 }
 
 \begin{problem}\label{prob:first_deriv_data}
-    Write a MATLAB function that accepts a list of $(x,y)$ ordered pairs from an Excel
+    Write a \ProgLang function that accepts a list of $(x,y)$ ordered pairs from an Excel
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a first order
     approximation of the first derivative of the
-    underlying function. \\
-    \mcode{function [new_x,dydx] = FirstDerivFromData(ExcelFileName,Xrange,Yrange)} \\
-    In the function all of the inputs are strings.  For example \\
-    \mcode{FirstDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
+    underlying function. 
+%     \\
+%     \mcode{function [new_x,dydx] = FirstDerivFromData(ExcelFileName,Xrange,Yrange)} \\
+%     In the function all of the inputs are strings.  For example \\
+%     \mcode{FirstDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
-    your MATLAB function is finding the correct derivative.
+    your \ProgLang function is finding the correct derivative.
 \end{problem}
 \hint{
     Be sure to re-define the list of $x$ values so you can plot the output.  You're doing
@@ -1832,15 +1848,16 @@ optimization occurs see a course in mathematical optimization or machine learnin
 
 
 \begin{problem}
-    Write a MATLAB function that accepts a list of $(x,y)$ ordered pairs from an Excel
+    Write a \ProgLang function that accepts a list of $(x,y)$ ordered pairs from an Excel
     spreadsheet and returns a list of $(x,y)$ ordered pairs for a second order
     approximation of the second derivative of the
-    underlying function. \\
-    \mcode{function [new_x,dydx] = SecondDerivFromData(ExcelFileName,Xrange,Yrange)} \\
-    In the function all of the inputs are strings.  For example \\
-    \mcode{SecondDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
+    underlying function. 
+%     \\
+%     \mcode{function [new_x,dydx] = SecondDerivFromData(ExcelFileName,Xrange,Yrange)} \\
+%     In the function all of the inputs are strings.  For example \\
+%     \mcode{SecondDerivativeFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
     Create a test Excel file and a test script that have graphical output showing that
-    your MATLAB function is finding the correct derivative.
+    your \ProgLang function is finding the correct derivative.
 \end{problem}
 \hint{
     Be sure to re-define the list of $x$ values so you can plot the output.  You're doing
@@ -1849,13 +1866,14 @@ optimization occurs see a course in mathematical optimization or machine learnin
 
 
 \begin{problem}\label{prob:trap_from_data}
-    Write a MATLAB function that implements the trapezoidal rule on a list of $(x,y)$
+    Write a \ProgLang function that implements the trapezoidal rule on a list of $(x,y)$
     order pairs representing the integrand function.  The list of ordered pairs should be
-    read from an Excel file. \\
-    \mcode{function Area = TrapezoidFromData(ExcelFilename, Xlist, Ylist)}\\
-    In the function all of the inputs are strings.  For example \\
-    \mcode{Area = TrapezoidFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
-    Create a test Excel file and a test script showing that your MATLAB function is
+    read from an Excel file. 
+%     \\
+%     \mcode{function Area = TrapezoidFromData(ExcelFilename, Xlist, Ylist)}\\
+%     In the function all of the inputs are strings.  For example \\
+%     \mcode{Area = TrapezoidFromData('MyFunctionData.xlsx','A2:A101','B2:B101')}\\
+    Create a test Excel file and a test script showing that your \ProgLang function is
     finding the correct integral.
 \end{problem}
 
@@ -1891,8 +1909,12 @@ optimization occurs see a course in mathematical optimization or machine learnin
     necessary.  Create a loglog plot that shows the errors for the integrals with different values of $h$ (log
     of $h$ on the $x$-axis and log of the absolute error on the $y$-axis).
     Write a complete interpretation of the loglog plot.  
-    To get the {\it exact} answer for these plots use the MATLAB \mcode{quad} command.
-    (What we're really doing here is comparing our algorithms to MATLAB's built in algorithm).
+    To get the {\it exact} answer for these plots use the 
+    \ifnum\Python=0 MATLAB \mcode{quad} command.
+    \else
+    Python's \texttt{scipy.integrate.quad} command.
+    \fi
+    (What we're really doing here is comparing our algorithms to \ProgLang's built in algorithm).
 \end{problem}
 
 

@@ -1,10 +1,10 @@
 \chapter{Numerical Linear Algebra}
 \begin{quote}
-    ``Linear algebra is the central subject of mathematics.  You cannot learn too much
-    linear algebra.''\\--Benedict Gross, Harvard University
+    {\it You cannot learn too much
+    linear algebra.} \\ -- Every mathematician
 \end{quote}
 
-The preceding quote says it all -- linear algebra is the most important of all of the
+The preceding comment says it all -- linear algebra is the most important of all of the
 mathematical tools that you can learn and build.  The theorems, proofs, conjectures, and
 big ideas in almost every other mathematical field find their roots in linear algebra.
 Our goal in this chapter is to explore numerical algorithms for the primary questions of
@@ -16,25 +16,38 @@ computing applications.
 
 
 \section{Matrix Operations}
-We start this chapter with the basics: the dot product and matrix multiplication.  MATLAB
-is designed to do these tasks in very efficient ways but it is a good coding exercise to
-build your own dot product and matrix multiplication routines.  You'll find in numerical
-linear algebra that the indexing and the housekeeping in the codes is the hardest part, so
-why don't we start ``easy''.
+We start this chapter with the basics: the dot product and matrix multiplication.  
+\ifnum\Python=0 
+MATLAB is designed 
+\else
+The numerical routines in Python's \texttt{numpy} packages are designed 
+\fi
+to do these tasks in very efficient ways but it is a good coding exercise to build your
+own dot product and matrix multiplication routines.  You'll find in numerical linear
+algebra that the indexing and the housekeeping in the codes is the hardest part, so why
+don't we start ``easy''.
 
 \begin{problem}
     Recall that the dot product of two vectors $\bu, \bv \in \mathbb{R}^n$ is 
     \[ \bu \cdot \bv = \sum_{j=1}^n u_j v_j. \]
-    Write a MATLAB function that accepts two vectors and returns the dot product. \\
+    Write a \ProgLang function that accepts two vectors and returns the dot product. \\
+    \ifnum\Python=0
     \mcode{function DotProduct = MyDotProduct(u, v)} \\
+    \else
+    \mcode{def MyDotProduct(u, v):} \\
+    \fi
     It would be wise to put an error check in your code to make sure that the vectors are
     the same size.  You should be able to write this code without any loops.
 \end{problem}
 
 \begin{problem}
     Write a test script for the dot product of two random $n \times 1$ vectors.  Your
-    script should output the absolute error between your dot product code and MATLAB's
+    script should output the absolute error between your dot product code and \ProgLang's
+    \ifnum\Python=0
     \mcode{dot}
+    \else
+    \mcode{numpy.dot}
+    \fi
     command.
 \end{problem}
 
@@ -46,16 +59,22 @@ why don't we start ``easy''.
     product, 
     \[ \left( AB \right)_{ij} = \left( \text{Row $i$ of matrix $A$} \right) \cdot \left(
     \text{Column $j$ of matirx $B$} \right). \]
-    Write a MATLAB function that accepts two matrices and returns the matrix product. \\
+    Write a \ProgLang function that accepts two matrices and returns the matrix product. \\
+    \ifnum\Python=0
     \mcode{function MatrixProduct = MatrixMultiply(A, B)} \\
+    \else
+    \mcode{def MatrixMultiply(A, B):} \\
+    \fi
     You
     should be able to write this code with only two loops; one for $i$ and one for $j$.
     The rest of the work should be done using dot products.
 \end{problem}
 \begin{problem}
-    Write a test script for the matrix product of two random matrices of appropriate sizes.  Your
-    script should output the normed error between your matrix product code and MATLAB's
-    matrix multiplication.
+    Write a test script for the matrix product of two random matrices of appropriate
+    sizes.  Your script should output the normed error between your matrix product code
+    and \ProgLang's matrix multiplication. \ifnum\Python=1 (Remember to cast your
+    \texttt{numpy} arrays as matrices in order to get proper matrix multiplication in
+    Python.)\fi
 \end{problem}
 
 If you're having trouble seeing that matrix multiplication is just a bunch of dot products
@@ -92,6 +111,7 @@ matrices of any size.
         95 & 106 & 117 \end{pmatrix} \]
 \end{example}
 
+\ifnum\Python=1 {\color{red} Note: Write a similar paragraph for Python} \fi
 The following MATLAB code gives the matrix product between two matrices, but when you
 build your own code you need to have sufficient catches that avoid inappropriately sized
 matrices.
@@ -105,7 +125,7 @@ end
 
 \begin{problem}
     In matrix arithmetic there are two types of multiplication: matrix-matrix
-    multiplication and scalar multiplication.  Modify your MATLAB code written in problem
+    multiplication and scalar multiplication.  Modify your code written in problem
     \ref{prob:matrix_mult} so that if one of the two matrices is entered as a scalar (a $1
     \times 1$ matrix) then your \mcode{MatrixMultiply} code gives the correct result. You
     should be able to do this with no loops.
@@ -170,6 +190,7 @@ for i = 1:n
     end
 end
 \end{lstlisting}
+\ifnum\Python=1 {\color{red} Note: Write a similar block for Python} \fi
 \end{technique}
 
 \begin{problem}
@@ -181,7 +202,7 @@ end
 \end{problem}
 
 \begin{problem}
-    Copy the code from Technique \ref{tech:lsolve} into a MATLAB function but in your code
+    Copy the code from Technique \ref{tech:lsolve} into a \ProgLang function but in your code
     write a comment on every line stating what it is doing.  Write a test script that
     creates a lower triangular matrix of the correct form and a right-hand side $\bb$ and
     solve for ${\bf y}$.  Your code needs to work on systems of arbitrarily large size.
@@ -215,6 +236,7 @@ for i = ? : ? : ?        % what should you be looping over?
     end
 end
 \end{lstlisting}
+\ifnum\Python=1 {\color{red} Note: Write a similar technique for Python}\fi
 \end{technique}
 
 \begin{problem}
@@ -229,7 +251,7 @@ end
 \end{problem}
 
 \begin{problem}
-    Copy the code from Technique \ref{tech:usolve} into a MATLAB function but in your code
+    Copy the code from Technique \ref{tech:usolve} into a \ProgLang function but in your code
     write a comment on every line stating what it is doing.  Write a test script that
     creates an upper triangular matrix of the correct form and a right-hand side ${\bf y}$ and
     solve for ${\bf x}$.  Your code needs to work on systems of arbitrarily large size.
