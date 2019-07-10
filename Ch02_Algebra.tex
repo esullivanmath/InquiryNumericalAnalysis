@@ -35,40 +35,43 @@ Let's play a game!
 \end{problem}
 
 \begin{problem}
-    Now we want to write MATLAB code so you can play the game from Problem
-    \ref{prob:bisection_game} against the computer.  The following incomplete code should
-    get you started.  Fill in the missing pieces of the code and play the game several
-    times to be sure that it works.  What strategy do you find yourself using to play the
-    game? You can get a copy of the partial code
-    \href{https://drive.google.com/file/d/1QFeb6ZGMppKtV-03_cbUzwaaKM8N39t2/view?usp=sharing}{HERE}.
-\begin{lstlisting}
-%% Secret Number Guesser Game
-clear; clc; format compact;
-secret = 100*rand(1,1); % random secret number between 0 and 100
-tolerance = 0.01;
-a = randi(floor(secret),1); % initial lower bound integer below the secret
-b = randi( [ceil(secret),101] , 1); % initial upper bound integer above the secret
-c = 1000; % dummy initial value for c
-n = 1; % initialize the game counter
-while abs( secret - c ) > tolerance
-    fprintf('Guess #%g.\n',n)
-    fprintf('The secret number is between %g and %g.\n',a,b)
-    c = input('What is your guess for the secret number? ');
-    if abs( secret - c ) < tolerance
-        fprintf('  \n') % respond appropriately here
-        ... % write more code here if necessary
-    elseif secret < (c-tolerance)
-        ... % write appropriate code here in this case
-    elseif secret > (c+tolerance)
-        ... % write appropriate code here in this case
-    end
-    if n>=20
-        fprintf('   \n') % respond appropriately here
-        break % this will break out of the loop
-    end
-    n=n+1; % increment the game counter
-end
-\end{lstlisting}
+    Write \ProgLang code so you can play the game from Problem
+    \ref{prob:bisection_game} against the computer.  
+%     The following incomplete code should
+%     get you started.  Fill in the missing pieces of the code and play the game several
+%     times to be sure that it works.  
+    What strategy do you find yourself using to play the
+    game? 
+%     You can get a copy of the partial code
+%     \href{https://drive.google.com/file/d/1QFeb6ZGMppKtV-03_cbUzwaaKM8N39t2/view?usp=sharing}{HERE}.
+% \begin{lstlisting}
+% %% Secret Number Guesser Game
+% clear; clc; format compact;
+% secret = 100*rand(1,1); % random secret number between 0 and 100
+% tolerance = 0.01;
+% a = randi(floor(secret),1); % initial lower bound integer below the secret
+% b = randi( [ceil(secret),101] , 1); % initial upper bound integer above the secret
+% c = 1000; % dummy initial value for c
+% n = 1; % initialize the game counter
+% while abs( secret - c ) > tolerance
+%     fprintf('Guess #%g.\n',n)
+%     fprintf('The secret number is between %g and %g.\n',a,b)
+%     c = input('What is your guess for the secret number? ');
+%     if abs( secret - c ) < tolerance
+%         fprintf('  \n') % respond appropriately here
+%         ... % write more code here if necessary
+%     elseif secret < (c-tolerance)
+%         ... % write appropriate code here in this case
+%     elseif secret > (c+tolerance)
+%         ... % write appropriate code here in this case
+%     end
+%     if n>=20
+%         fprintf('   \n') % respond appropriately here
+%         break % this will break out of the loop
+%     end
+%     n=n+1; % increment the game counter
+% end
+% \end{lstlisting}
 \end{problem}
 
 
@@ -260,10 +263,11 @@ algorithm there are several questions you need to answer.
 
 
 \begin{problem}
-    We want to write a MATLAB function for the Bisection Method.  Instead of jumping
+    We want to write a \ProgLang function for the Bisection Method.  Instead of jumping
     straight into the code we should ALWAYS write pseudo-code first.  It is often helpful
-    to write pseudo-code as comments in your MATLAB file.  Use the template below to
+    to write pseudo-code as comments in your \ProgLang file.  Use the template below to
     complete your pseudo-code.
+    \ifnum\Python=0
 \begin{lstlisting}
 function root = Bisection(f , a , b , tol)
 % The input parameters are
@@ -290,16 +294,47 @@ function root = Bisection(f , a , b , tol)
 % end the while loop
 % define the root
 \end{lstlisting}
+\else
+\begin{lstlisting}
+def Bisection(f , a , b , tol):
+# The input parameters are
+# f is a function
+# a is the lower guess
+# b is the upper guess
+# tol is an optional tolerance for the accuracy of the root
+
+# if the user doesn't define a tolerance we need code to create a default
+
+# check that there is a root between a and b
+# if not we should return an error and break the code
+
+# next calculate the midpoint m = (a+b)/2
+
+# start a while loop
+#   # in the while loop we need an if statement
+#   # if ...
+#   # elif ...
+#   # elif ...
+
+#   # we should check that the while loop isn't running away
+
+# end the while loop
+# define and return the root
+\end{lstlisting}
+\fi
 \end{problem}
 
 
 \begin{problem}
-    Now use the pseudo-code as structure to complete a MATLAB function for the Bisection
+    Now use the pseudo-code as structure to complete a \ProgLang function for the Bisection
     Method.  Also write a test script that verifies that your function works properly. Be
     sure that it can take an anonymous function handle as an input along with an initial
     lower bound, an initial upper bound, and an optional error tolerance. The output
     should be only 1 single number: the root.\\
-    \mcode{function root=Bisection(f , a , b , tol)}
+    \ifnum\Python=0 \mcode{function root=Bisection(f , a , b , tol)} 
+    \else
+    \mcode{def Bisection(f , a , b , tol):}
+    \fi
 \end{problem}
 
 \begin{problem}
@@ -561,17 +596,20 @@ and to iteratively zero in on the root of the function on the given interval.
 }
 
 \begin{problem}
-    Create a new MATLAB function called \mcode{RegulaFalsi} and write comments giving pseudo-code
-    for the Regula-Falsi method.
+    Create a new \ProgLang function called \mcode{RegulaFalsi} and write comments giving
+    pseudo-code for the Regula-Falsi method.
 \end{problem}
 
 \begin{problem}
-   Use your pseudo-code to create a MATLAB function that implements the Regula Falsi method, and write a test script
+   Use your pseudo-code to create a \ProgLang function that implements the Regula Falsi method, and write a test script
    that verifies that your function works properly. Your function should accept an
     anonymous function handle as an input along with an initial lower bound, an initial
     upper bound, and an optional error tolerance. The output should be only 1 single number: the
     root.\\
-    \mcode{function root=RegulaFalsi(f , a , b , tol)}
+    \ifnum\Python=0 \mcode{function root=RegulaFalsi(f , a , b , tol)}
+    \else
+    \mcode{def RegulaFalsi(f, a, b, tol):}
+    \fi
 \end{problem}
 
 
@@ -792,30 +830,37 @@ fail.  Some of these issues can be foreseen by examining the iteration formula
 \end{problem}
 
 \begin{problem}
-    Create a new MATLAB function called \mcode{Newton} and write comments giving
+    Create a new \ProgLang function called \mcode{Newton} and write comments giving
     pseudo-code for Newton's method.  This version of Newton's method will accept the
     function and the first derivative so you don't need to set aside any code for
     calculating the derivative.
 \end{problem}
 
 \begin{problem}
-    Write a MATLAB function for Newton's method.  Your function needs to accept an
+    Write a \ProgLang function for Newton's method.  Your function needs to accept an
     anonymous function handle, the derivative of $f(x)$ as an anonymous function handle,
     an initial guess, and an optional error tolerance. The only output should be the
     solution to the equation that you are solving.  Write a test script to verify that
     your Newton's method code indeed works.
     \\
+    \ifnum\Python=0
     \mcode{function soln = Newton(f , df , x0 , tol)}
+    \else
+    \mcode{def Newton(f , df , x0 , tol):}
+    \fi
 \end{problem}
 
 \begin{problem}
     The previous problem required that you calculate the derivative ahead of time for
     Newton's method.  While this is relatively easy with a computer algebra system it
     might be easier just to have your function compute the derivative for you.  Write a
-    new MATLAB function for Newton's method that accepts the function as an anonymous
-    function handle, the initial point, and an optional error tolerance.  Your function
+    new \ProgLang function for Newton's method that accepts the function symbolically,, the initial point, and an optional error tolerance.  Your function
     must compute the derivative symbolically behind the scenes. \\
+    \ifnum\Python=0
     \mcode{function soln = NewtonSymbolic(f, x0, tol)}
+    \else
+    \mcode{def NewtonSymbolic(f, x0, tol):}
+    \fi
 \end{problem}
 
 \begin{problem}
@@ -841,9 +886,11 @@ fail.  Some of these issues can be foreseen by examining the iteration formula
     iterations compute the error between the approximations and the exact root. For
     simplicity let's solve the equation $x^2-2=0$.  Plot the sequence of error
     approximations with the iterate $e_k$ on the $x$-axis and the iterate $e_{k+1}$ on the
-    $y$-axis of a log-log plot.  \\ Your plot command will look something like: \\
-    \mcode{loglog(error(1:end-1),error(2:end),'b*')} \\where \mcode{error} is a vector
-    containing all of the errors.  Quadratic convergence means that at every iteration the
+    $y$-axis of a log-log plot.  
+%     \\ Your plot command will look something like: \\
+%     \mcode{loglog(error(1:end-1),error(2:end),'b*')} \\where \mcode{error} is a vector
+%     containing all of the errors.  
+    Quadratic convergence means that at every iteration the
     error should decrease by roughly 2 orders of magnitude.  How can you see this in your
     plot?
 \end{problem}
@@ -897,12 +944,17 @@ of the tangent line.
 \end{problem}
 
 \begin{problem}
-    Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
+    Write \ProgLang code for solving algebraic equations of the form $f(x) = 0$ with the
     Secant method.  You should ALWAYS start by writing pseudo-code as comments in your
-    MATLAB file.   Your function should accept an anonymous function handle, two starting
+    \ProgLang file.   Your function should accept \ifnum\Python=0 an anonymous function
+    handle\else a Python function\fi, two starting
     points, and an optional error tolerance.  Also write a test script that clearly shows that your code is working.
     \\
+    \ifnum\Python=0
     \mcode{function soln = SecantMethod(f, x0, x1, tol)}
+    \else
+    \mcode{def SecantMethod(f, x0, x1, tol):}
+    \fi
 \end{problem}
 
 \begin{problem}
@@ -911,41 +963,6 @@ of the tangent line.
     look back at \ref{prob:newton_convergence}.
 \end{problem}
 
-
-% \begin{algorithm}[Steffensen's Method]
-%     To solve $f(x) = 0$:
-%     \begin{enumerate}
-%         \item Determine if there is a root {\it near} an arbitrary starting point $x_0$.
-%         \item In Steffensen's method we approximate the derivative with 
-%             \[ f'(x_n) \approx \frac{f(x_n + f(x_x)) - f(x_n)}{f(x_n)} \]
-%         \item Perform the Newton-type iteration 
-%             \[ x_{n+1} = x_n - \frac{f(x_n)}{ \left(  \frac{f(x_n + f(x_x)) - f(x_n)}{f(x_n)}\right)} \]
-%             until $f(x_n)$ is {\it close enough} to zero.  Notice that the new iteration
-%             simplifies to
-%             \[ x_{n+1} = x_n - \frac{f(x_n)^2}{f(x_n + f(x_n)) -
-%             f(x_{n})}. \]
-%     \end{enumerate}
-% \end{algorithm}
-% 
-% \begin{problem}
-%     The Steffensen method uses a really funky approximation of the derivative.  Draw
-%     pictures and choose example functions to explain that choice.
-% \end{problem}
-% 
-% \begin{problem}
-%     Write MATLAB code for solving algebraic equations of the form $f(x) = 0$ with the
-%     Steffensen's method. You should ALWAYS start by writing pseudo-code as comments in your
-%     MATLAB file.    Your function should accept an anonymous function handle, a
-%     starting point, and an optional error tolerance.  Also write a test script that
-%     clearly shows that your code is working. \\ 
-%     \mcode{function soln = Steffensen(f, x0, tol)}
-% \end{problem}
-% 
-% \begin{problem}
-%     Choose a non-trivial algebraic equation for which you know the solution and write a
-%     script to empirically determine the convergence rate of Steffensen's method.  You may want to
-%     look back at \ref{prob:newton_convergence}.
-% \end{problem}
 
 
 
@@ -987,11 +1004,11 @@ details for ``why'' it works.
     In this problem you will demonstrate that all of your root finding codes work.
     At the beginning of this chapter we proposed the algebraic equation solving problem
     \[ 3\sin(x) + 9 = x^2 - \cos(x). \]
-    Write a MATLAB script that calls upon your Bisection, Regula Falsi, Newton, and
+    Write a \ProgLang script that calls upon your Bisection, Regula Falsi, Newton, and
     Secant, methods one at a time to find the positive solution to this equation.  Your
     script needs to output the solutions in a clear and readable way so you can tell which
     answer can from which root finding algorithm. Clearly all of your root finding
-    routines will be stored as MATLAB functions so be sure to turn in all of these
+    routines will be stored as \ProgLang functions so be sure to turn in all of these
     functions along with this problem.
 \end{problem}
 
@@ -1052,7 +1069,7 @@ details for ``why'' it works.
             the function $R(v_0,\theta)$.
         \item[(f)] For a certain projectile and canon the initial velocity is $v_0 =
             126$m/s.  We want to give the artillery officer a distance, $d$, and have them
-            calculate the angle to hit the target.  Write MATLAB code to approximate
+            calculate the angle to hit the target.  Write \ProgLang code to approximate
             $\theta$ in the equation 
             \[ R(126,\theta) = d. \]
             (Hint: remember that we can rewrite the equation $R(126,\theta)=d$ in the form
@@ -1098,7 +1115,7 @@ details for ``why'' it works.
 
 
 \begin{problem}
-    Write MATLAB code that produces a loglog plot that compares the convergence rates for
+    Write \ProgLang code that produces a loglog plot that compares the convergence rates for
     the bisection method, the regula-falsi method, Newton's method, and the secant method
     on a problem where we know the exact answer. See problem \ref{prob:newton_convergence}
     to get you started.
@@ -1143,71 +1160,6 @@ details for ``why'' it works.
         \end{enumerate}
     \end{problem}
 
-
-% \begin{challenge}[modified from \cite{Chartier}]
-%     Implement the following algorithm to create a {\it fractal coastline} -- a collection
-%     of line
-%     segments that looks like a realistic coastline as viewed from above.
-%     \begin{enumerate}
-%         \item Begin with one straight line segment from the point $(0,0)$ to the point
-%             $(1,0)$.  Make a plot of this line segment using the \mcode{plot( )} command in MATLAB.
-%         \item Repeat the following until your image looks like a coastline.
-%             \begin{enumerate}
-%                 \item Find the midpoint of every line segment
-%                 \item For each midpoint create a new point by adding a random $2 \times 1$ vector to that
-%                     midpoint.  The largest allowable size of the random vector needs to be
-%                     smaller in each iteration.
-%                 \item Connect the points with the plot command.  You may want to put a
-%                     pause command in your code so you can see the evolution of your
-%                     coastline
-%             \end{enumerate}
-%     \end{enumerate}
-%     An example of the first few iterations is shown in the figures below where the red arrows indicate
-%     the random $2 \times 1$ vectors, the dashed lines indicate the previous iteration, the
-%     red circles indicate the midpoints, and the black circles indicate the new points.  The
-%     solid black line is the result of the algorithm at the end of the iteration.  Write
-%     MATLAB code to implement this algorithm where the resulting animation shows the
-%     evolution of the coastline. 
-% %     Hint: It would be helpful to figure out what the code below does before proceeding.
-% %     \begin{lstlisting}
-% %     xy = [0 , 0 ; 0.45 , 0.8 ; 1 , 1];
-% %     newpt = [0.3 , 0.6]
-% %     xy = [xy(1,:) ; newpt ; xy(2:end,:)] 
-% %     \end{lstlisting}
-% \end{challenge}
-% \begin{center}
-%     \begin{tikzpicture}
-%         \draw[thick, black] (0,0) circle(0.07cm) -- (10,0) circle(0.07cm)
-%         node[anchor=west]{Iteration \#0};
-%         \draw[dashed, black] (0,-2) circle(0.07cm) -- (10,-2) circle(0.07cm);
-%         \draw[thick, black] (0,-2) circle(0.07cm) --(6,-1.2) circle(0.07cm) -- (10,-2)
-%         circle(0.07cm) node[anchor=west]{Iteration \#1};
-%         \draw[red] (5,-2) circle(0.07cm);
-%         \draw[red, ->] (5,-2) -- (5.85,-1.3);
-%         \draw[dashed, black] (0,-4) circle(0.07cm) --(6,-3.2) circle(0.07cm) -- (10,-4) circle(0.07cm);
-%         \draw[red, ->] (3,-3.6) -- (3.45,-4.1);
-%         \draw[red, ->] (8,-3.6) -- (7.55,-3.2);
-%         \draw[red] (3,-3.6) circle(0.07cm);
-%         \draw[red] (8,-3.6) circle(0.07cm);
-%         \draw[thick, black] (0,-4) circle(0.07cm) -- (3.5,-4.2) circle(0.07cm) -- (6,-3.2)
-%         circle(0.07cm) -- (7.5,-3.1) circle(0.07cm) -- (10,-4) circle(0.07cm) node[anchor=west]{Iteration \#2};
-%         \draw[dashed, black] (0,-6) circle(0.07cm) -- (3.5,-6.2) circle(0.07cm) -- (6,-5.2)
-%         circle(0.07cm) -- (7.5,-5.1) circle(0.07cm) -- (10,-6) circle(0.07cm) node[anchor=west]{Iteration \#3};
-%         \draw[thick, black] (0,-6) circle(0.07cm) -- (1.65,-6.4) circle(0.07cm) --
-%         (3.5,-6.2) circle(0.07cm) -- (5.1,-5.8) circle(0.07cm) -- (6,-5.2)
-%         circle(0.07cm) -- (6.9,-5.3) circle(0.07cm) -- (7.5,-5.1) circle(0.07cm) --
-%         (8.9,-5.9) circle(0.07cm) -- (10,-6) circle(0.07cm) node[anchor=west]{Iteration \#3};
-%         \draw[red] (1.75,-6.1) circle(0.07cm);
-%         \draw[red] (4.75,-5.7) circle(0.07cm);
-%         \draw[red] (6.75,-5.15) circle(0.07cm);
-%         \draw[red] (8.75,-5.55) circle(0.07cm);
-%         \draw[red, ->] (1.75,-6.1) -- (1.655,-6.3);
-%         \draw[red, ->] (4.75,-5.7) -- (5.02,-5.77);
-%         \draw[red, ->] (6.75,-5.15) -- (6.86,-5.25);
-%         \draw[red, ->] (8.75,-5.55) -- (8.88,-5.83);
-%     \end{tikzpicture}
-% \end{center}
-% 
 
 
 \newpage\section{Projects}

@@ -1,4 +1,4 @@
-\chapter{Python Basics}\label{app:Python}
+\chapter{Python Basics}\label{app:coding}
 
 Note to the reader: In future versions of this book we will exclusively be using Python
 for the programming language of choice.  This appendix will eventually be rolled into
@@ -2079,7 +2079,10 @@ The \texttt{sympy} package has routines to take symbolic derivatives, antideriva
 limits, and Taylor series just like other computer algebra systems.  
 
 \subsubsection{Derivatives}
-The \texttt{diff} command is the command for differentiation.  
+The \texttt{diff} command in \texttt{sympy} does differentiation.
+\begin{lstlisting}
+sp.diff(function, variable, [order])
+\end{lstlisting}
 Take careful note that \texttt{diff} is defined both in \texttt{sympy} and in
 \texttt{numpy}.  That means that there are symbolic and numerical routines for taking
 derivatives in Python \ldots and we need to tell our instance of Python which one we're working with every time we use it.  
@@ -2163,16 +2166,383 @@ sp.latex(f)
 \end{example}
 
 \subsubsection{Integrals}
-For integration, the \texttt{integrate} tool is the command for the job.
+For integration, the \texttt{integrate} tool is the command for the job
+\begin{lstlisting}
+sp.integrate(function, variable) # antiderivative
+sp.integrate(function, (variable, lower, upper)) # definite integral
+\end{lstlisting}
+The
+\texttt{integrate} command in \texttt{sympy} accepts a symbolically defined function along
+with the variable of integration and optional bounds.  If the bounds aren't given then the
+command finds the antiderivative.  Otherwise it finds the definite integral.
+
+\begin{example}[An Antiderivative]
+    Find the antiderivative of the function $f(x) = (x+2)^3$.
+
+\bcode
+\begin{lstlisting}
+import sympy as sp 
+x = sp.Symbol('x')
+f = (x+2)**3
+F = sp.integrate(f,x)
+F
+\end{lstlisting}
+The output of these lines of code is the expression $\frac{x^{4}}{4} + 2 x^{3} + 6 x^{2}
++ 8 x$ which is indeed the antiderivative.  We can ask \texttt{sympy} to factor the result
+with 
+
+\bcode
+\begin{lstlisting}
+sp.factor(F)
+\end{lstlisting}
+which results in the expression $\displaystyle \frac{x \left(x + 4\right) \left(x^{2}
++ 4 x + 8\right)}{4}$
+\end{example}
+
+\begin{example}[Another Antiderivative]
+    Consider the multivariable antiderivative
+    \[ \int \sin(xy) + \cos(x) dx.\]
+    The \texttt{sympy} package deals with the second variable just as it should.  
+
+\bcode
+\begin{lstlisting}
+g = sp.sin(x*y) + sp.cos(x)
+G = sp.integrate(g,x) 
+G 
+\end{lstlisting}
+These lines of code result in the output 
+\[ \begin{cases} - \frac{\cos{\left(x y \right)}}{y} & \text{for}\: y \neq 0 \\0 & \text{otherwise} \end{cases} + \sin{\left(x \right)}  \]
+so it is apparent that \texttt{sympy} was sensitive to the fact that there was trouble at
+$y=0$ and took care of it with a piecewise function.
+
+\end{example}
+
+\begin{example}[A Definite Integral]
+    Consider the integral $$\int_0^\pi \sin(x) dx.$$
+    Notice that the variable and the bounds are sent to the \texttt{integrate} command as
+    a tuple.  Furthermore, notice that we had to send the symbolic version of $\pi$
+    instead of any other version (e.g. \texttt{numpy}).
+
+\bcode
+\begin{lstlisting}
+sp.integrate( sp.sin(x), (x,0,sp.pi))
+\end{lstlisting}
+This line of code results in $2$; the correct definite integral.
+\end{example}
+
+\begin{example}[A Tougher Definite Integral]
+    This is a fun one.  Let's do the definite integral
+$$ \int_{-\infty}^\infty e^{-x^2} dx.$$
+We have to use the ``infinity'' symbol from \texttt{sympy}.  It is two lower-case O's next
+to each other: \texttt{oo}.  It kind of looks like and infinity I suppose.  
+
+\bcode
+\begin{lstlisting}
+sp.integrate( sp.exp(-x**2) , (x, -sp.oo, sp.oo))
+\end{lstlisting}
+which results in the value $\sqrt{\pi}$ \ldots which is simply a fun integral.
+
+\end{example}
 
 \subsubsection{Limits}
+The \texttt{limit} command in \texttt{sympy} takes symbolic limits
+\begin{lstlisting}
+sp.limit(function, variable, value, [direction])
+\end{lstlisting}
+The direction (left or right) is optional and if you leave it off then the limit is
+considered from both directions.
+
+\begin{example}[Symbolic Limit]
+    Let's take the limit
+$$\lim_{x \to 0} \frac{\sin(x)}{x}.$$
+
+\bcode
+\begin{lstlisting}
+sp.limit( sp.sin(x)/x, x, 0)
+\end{lstlisting}
+which gives us the value 1.
+\end{example}
+
+\begin{example}[Difference Quotient]
+    Let's do the difference quotient
+$$\lim_{h \to 0} \frac{ f(x+h) - f(x)}{h}$$
+for the function $f(x) = (x+2)^3$.  Taking the limit should give the derivative so we'll
+check that the \texttt{diff} command gives us the same thing using \texttt{==} \ldots warning!
+
+\bcode
+\begin{lstlisting}
+f = (x+2)**3
+print(sp.diff(f,x))
+h = sp.Symbol('h')
+df = sp.limit( (f.subs(x,x+h) - f) / h , h , 0 )
+print(df)
+print(df == sp.diff(f,x)) # notice that these are not "symbolically" equatl
+print(df == sp.expand(sp.diff(f,x))) # but these are
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+3*(x + 2)**2
+3*x**2 + 12*x + 12
+False
+True
+\end{lstlisting}
+Notice that when we check to see if two symbolic functions are equal they must be in the
+same exact symbolic form.  Otherwise \texttt{sympy} won't recognize them as actually being
+equal even though they are mathematically equivalent.
+\end{example}
+
+\begin{problem}
+    Define the function $f(x) = 3x^2 + x\sin(x^2)$ symbolically and then do the following:
+
+    \begin{enumerate}
+        \item Evaluate the function at $x=2$ and get symbolic and numerical answers.
+        \item Take the first and second derivative
+        \item Take the antiderivative
+        \item Find the definite integral from 0 to 1
+        \item Find the limit as $x$ goes to 3
+    \end{enumerate}
+\end{problem}
 
 \subsubsection{Taylor Series}
+The \texttt{sympy} package has a tool for expanding Taylor Series of symbolic functions.  
+\begin{lstlisting}
+sp.series( function, variable, [center], [num terms])
+\end{lstlisting}
+The center defaults to $0$ and the number of terms defaults to $5$.  
+
+\begin{example}[A Taylor Series Expansion]
+    Find the Taylor series for $f(x) = e^x$ centered at $x=0$ and centered at $x=1$.  
+
+\bcode
+\begin{lstlisting}
+sp.series( sp.exp(x),x)
+\end{lstlisting}
+gives the output $\displaystyle 1 + x + \frac{x^{2}}{2} + \frac{x^{3}}{6} +
+\frac{x^{4}}{24} + \frac{x^{5}}{120} + \mathcal{O}\left(x^{6}\right).$
+
+\bcode
+\begin{lstlisting}
+sp.series( sp.exp(x), x, 1) # expand at x=1
+\end{lstlisting}
+gives the output 
+\[ e + e \left(x - 1\right) + \frac{e \left(x -
+    1\right)^{2}}{2} + \frac{e \left(x - 1\right)^{3}}{6} + \frac{e \left(x -
+        1\right)^{4}}{24} + \frac{e \left(x - 1\right)^{5}}{120} + \mathcal{O}\left(\left(x -
+    1\right)^{6}; x\rightarrow 1\right) \]
+
+Finally, if we want more terms then we can send the number of desired terms to the
+\texttt{series} command.
+
+\bcode
+\begin{lstlisting}
+sp.series( sp.exp(x), x, 0, 10) # expand at x=0 and give 10 terms
+\end{lstlisting}
+gives the output
+\[ 1 + x + \frac{x^{2}}{2} + \frac{x^{3}}{6} + \frac{x^{4}}{24} + \frac{x^{5}}{120} +
+    \frac{x^{6}}{720} + \frac{x^{7}}{5040} + \frac{x^{8}}{40320} +
+\frac{x^{9}}{362880} + \mathcal{O}\left(x^{10}\right). \]
+\end{example}
 
 \subsection{Solving Equations Symbolically}
+One of the big reasons to use a symbolic toolboxes such as \texttt{sympy} is to solve
+algebraic equations exactly.  This isn't always going to be possible, but when it is we
+get some nice results.  The \texttt{solve} command in \texttt{sympy} is the tool for the job.
+\begin{lstlisting}
+sp.solve( equation, variable )
+\end{lstlisting}
+The equation doesn't actually need to be the whole equation.  For any equation-solving
+problem we can always reframe it so that we are solving $f(x) = 0$ by subtracting the
+right-hand side of the equation to the left-hand side.  Hence we can leave the equal sign
+and the zero off and \texttt{sympy} understands what we're doing.
+
+\begin{example}[Solve Equation Symbolically]
+    Let's solve the equation $x^2 - 2 = 0$ for $x$.  We know that the roots are $\pm \sqrt{2}$ so this should be pretty trivial for a symbolic solver.
+
+\bcode
+\begin{lstlisting}
+sp.solve( x**2 - 2, x)
+\end{lstlisting}
+gives the output
+$\displaystyle \left[ -\sqrt{2}, \sqrt{2} \right]$.
+\end{example}
+
+\begin{example}[A Slightly More Challenging Equation Solving Problem]
+    Now let's solve the equation $x^4 - x^2 - 1= 0$ for $x$.  You might recognize this as
+    a quadratic equation in disguise so you can definitely do it by hand ... if you want
+    to.  (You could also recognize that this equation is related to the golden ratio!)
+
+\bcode
+\begin{lstlisting}
+sp.solve( x**4 - x**2 - 1, x)
+\end{lstlisting}
+which gives the output
+\[ \left[ - i \sqrt{- \frac{1}{2} + \frac{\sqrt{5}}{2}}, \  i \sqrt{- \frac{1}{2} + \frac{\sqrt{5}}{2}}, \  - \sqrt{\frac{1}{2} + \frac{\sqrt{5}}{2}}, \  \sqrt{\frac{1}{2} + \frac{\sqrt{5}}{2}}\right] \]
+Notice that \texttt{sympy} has no problem dealing with the complex roots. 
+\end{example}
+
+In the previous example the answers may be a bit hard to read due to their symbolic form.
+This is particularly true for far more complicated equation solving problems.  The next
+example shows how you can loop through the solutions and then print them in decimal form
+so they are a bit more readable.
+
+\begin{example}[Converting Symbolic Answers to Floating Point]
+   We will again solve the equation   $x^4 - x^2 - 1= 0$ for $x$, but this time we will
+   output the answers as floating point decimals.  We are using the \texttt{N} command to
+   convert from symbolic to numerical.
+
+\bcode
+\begin{lstlisting}
+soln = sp.solve( x**4 - x**2 - 1, x)
+for j in range(0, len(soln)):
+    print(sp.N(soln[j]))
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+-0.786151377757423*I
+0.786151377757423*I
+-1.27201964951407
+1.27201964951407
+\end{lstlisting}
+\end{example}
+
+The \texttt{N} command gives a numerical approximation for a symbolic expression (this is
+taken straight from Mathematica!).
+
+\begin{problem}
+    Give the exact and floating point solutions to the equation $x^4 - x^2 - x + 5 = 0$.
+\end{problem}
+
+
+When you want to solve a symbolic equation numerically you can use the \texttt{nsolve}
+command.  This will do something like Newton's method in the background.  You need to give
+it a starting point where it can look for you the solution to your equation.  
+\begin{lstlisting}
+sp.nsolve( equation, variable, intial guess )
+\end{lstlisting}
+
+\begin{example}[Numerical Solve on a Symbolically Defined Equation]
+    Let's solve the equation $x^3 - x^2 - 2$ for $x$ both symbolically and numerically.
+    The numerical solution with \texttt{nsolve} will search for the solution near $x=1$.
+
+\bcode
+\begin{lstlisting}
+sp.solve(x**3 - x**2 - 2, x, 1) # symbolic solution
+\end{lstlisting}
+gives the exact solution
+\begin{flalign*}
+\left[ \frac{1}{3} + \left(- \frac{1}{2} - \frac{\sqrt{3} i}{2}\right)
+    \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}} + \frac{1}{9 \left(- \frac{1}{2} -
+    \frac{\sqrt{3} i}{2}\right) \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}}}, \right. \\
+    \frac{1}{3} + \frac{1}{9 \left(- \frac{1}{2} + \frac{\sqrt{3} i}{2}\right)
+    \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}}} + \left(- \frac{1}{2} + \frac{\sqrt{3}
+i}{2}\right) \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}}, \\
+\left. \frac{1}{9 \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}}} + \frac{1}{3} + \sqrt[3]{\frac{\sqrt{87}}{9} + \frac{28}{27}}\right]
+\end{flalign*}
+which is rather challenging to read.  We can give all of the floating point approximations
+with the following code.
+
+\bcode
+\begin{lstlisting}
+print("First Solution: ",sp.N(ExactSoln[0]))
+print("Second Solution: ",sp.N(ExactSoln[1]))
+print("Third Solution: ",sp.N(ExactSoln[2]))
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+First Solution:  -0.347810384779931 - 1.02885225413669*I
+Second Solution:  -0.347810384779931 + 1.02885225413669*I
+Third Solution:  1.69562076955986
+\end{lstlisting}
+
+If we were only looking for the floating point real solution near $x=1$ then we could just
+use \texttt{nsolve}.
+
+\bcode
+\begin{lstlisting}
+sp.nsolve(x**3 - x**2 - 2, x, 1)
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+1.69562076955986
+\end{lstlisting}
+\end{example}
+
+
+\begin{problem}
+    Solve the equation 
+$$x^3 \ln(x) = 7$$
+and give your answer both symbolically and numerically.
+\end{problem}
 
 \subsection{Symbolic Plotting}
+In this final section we will show how to make plots of symbolically defined functions.
+Be careful here.  There are times when you want to plot a symbolically defined function
+and there are times when you want to plot data.  
+\begin{lstlisting}
+sp.plot( function, (variable, left, right) )
+\end{lstlisting}
+It is easy to get confused since they
+both use the \texttt{plot} function in their own packages (\texttt{sympy} and
+\texttt{matplotlib} respectively).
 
+Note: For MATLAB users, the \texttt{sympy.plot} command is similar to MATLAB's
+\texttt{ezplot} command.
+
+In numerical analysis we don't often need to make plots of symbolically defined functions.
+There is more that could be said about \texttt{sympy}'s plotting routine, but since it
+won't be used often in this text it doesn't seem necessary to give those details here.
+When you need to make a plot just make a careful consideration as to whether you need a
+symbolic plot (with \texttt{sympy}) or a plot of data points (with \texttt{matplotlib}).
+
+\begin{example}[A Symbolic Plot]
+    Let's get a quick plot of the function $f(x) = (x+2)^3$ on the domain $x \in [-5,2]$.
+
+\bcode
+\begin{lstlisting}
+import sympy as sp
+x = sp.Symbol('x')
+f = (x+2)**3
+sp.plot(f,(x,-5,2))
+\end{lstlisting}
+The output for which can be seen in Figure \ref{fig:sympy_plot_1}.
+\end{example}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{Images/sympy_plot_1.png}
+    \caption{A plot of $f(x) = (x+2)^3$ on the domain $x \in [-5,2]$ created with
+        \texttt{sympy.plot}.}
+    \label{fig:sympy_plot_1}
+\end{figure}
+
+Multiple plots can be done at the same time with the \texttt{sympy.plot} command.
+
+\begin{example}
+    Plot $f(x) = (x+2)^3$ and $g(x) = 20\cos(x)$ on the same axes on the domain $x \in
+    [-5,2]$.
+
+\bcode
+\begin{lstlisting}
+import sympy as sp
+x = sp.Symbol('x')
+f = (x+2)**3
+g = 20*sp.cos(x)
+sp.plot(f, g, (x,-5,2))
+\end{lstlisting}
+The output for which can be seen in Figure \ref{fig:sympy_plot_2}
+\end{example}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{Images/sympy_plot_2.png}
+    \caption{Two plots on top of eachother created with \texttt{sympy.plot}.}
+    \label{fig:sympy_plot_2}
+\end{figure}
+
+
+\begin{problem}
+    Make a symbolic plot of the function $f(x) = x^3 \ln(x) - 7$ on the domain $[0,3]$.
+\end{problem}
 
 
 

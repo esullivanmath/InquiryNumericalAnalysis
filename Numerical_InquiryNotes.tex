@@ -2,6 +2,9 @@
 
 \def\ShowSoln{0}
 
+% Define the programming language for the book
+\def\Python{1} % 1=Python Version, 0=MATLAB Version
+\newcommand{\ProgLang}{\ifnum\Python=1 Python \else MATLAB \fi}
 
 \usepackage[toc,page]{appendix}
 \usepackage{marginnote}
@@ -193,13 +196,13 @@ height=1cm,text centered, draw=black, fill=red!30]
 
 
 
-\title{Numerical Methods \\ An Inquiry-Based Approach
+\title{Numerical Methods: \\ An Inquiry-Based Approach \\ with \ProgLang
     \ifnum\ShowSoln=1 {\color{red} \\ {\bf Solutions}} \fi}
 \date{Content Last Updated: \today}
 \author{
 %     \includegraphics[width=0.6\columnwidth, trim=0cm 6cm 0cm 8cm,
 % clip=true]{CoverWave.pdf} \\
-Eric Sullivan \\ Department of
+Dr. Eric Sullivan \\ Department of
 Mathematics \\
 Carroll College, Helena, MT \\ \texttt{esullivan@carroll.edu} \\
 %     This work is licensed under
@@ -239,19 +242,19 @@ California, 94105, USA.
 
 
 \input{Ch00_Preface.tex}
-% \input{Ch01_Introduction.tex}
-% \input{Ch02_Algebra.tex}
-% \input{Ch03_Calculus.tex}
-% \input{Ch04_LinearAlgebra.tex}
-% \input{Ch05_ODEs.tex}
-% \input{Ch06_PDEs.tex}
+\input{Ch01_Introduction.tex}
+\input{Ch02_Algebra.tex}
+\input{Ch03_Calculus.tex}
+\input{Ch04_LinearAlgebra.tex}
+\input{Ch05_ODEs.tex}
+\input{Ch06_PDEs.tex}
 
 \begin{appendix}
-% \input{App01_Projects.tex}
-% \input{App02_Coding.tex}
-\input{App05_PythonBasics.tex}
-% \input{App03_LaTeX.tex}
-% \input{App04_Extras.tex}
+\ifnum\Python=0 \input{App02_Coding.tex} \fi
+\ifnum\Python=1 \input{App05_PythonBasics.tex} \fi
+\input{App01_Projects.tex}
+\input{App03_LaTeX.tex}
+\input{App04_Extras.tex}
 
 
 \addcontentsline{toc}{chapter}{Bibliography}

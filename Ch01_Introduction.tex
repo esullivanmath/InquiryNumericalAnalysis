@@ -29,9 +29,8 @@ Series in this chapter. The Taylor Series underpins many of our approximation me
 this class; so much so that we could easily rename the course: {\it Applied Taylor
 Series}.  Finally, at the end of this chapter we provide several coding exercises that
 will help you to develop your programming skills.  It is expected that you know some of
-the basics of MATLAB programming before beginning this class.  If you need to review the
-basics then see the Scientific Computing with MATLAB text cited in the bibliography of
-these notes \cite{SciCompMATLAB}.  Trust me, you'll have more
+the basics of \ProgLang programming before beginning this class.  If you need to review the
+basics then Appendix \ref{app:coding}.  Trust me, you'll have more
 than just the basics by the end.
 
 \begin{center}
@@ -47,10 +46,10 @@ than just the basics by the end.
 }
 
 \begin{problem}\label{prob:base_10_failb}
-Now use Excel and MATLAB to do the computations.  Do you get the same answers?  
+Now use Excel and \ProgLang to do the computations.  Do you get the same answers?  
 \end{problem}
 \solution{
-In both Excel and MATLAB you lose accuracy at about the 40th iteration. 
+In both Excel and \ProgLang you lose accuracy at about the 40th iteration. 
 }
 
 \begin{problem}\label{prob:base_10_failc}
@@ -258,34 +257,6 @@ We can do a similar thing with binary decimals.
 \end{problem}
 
 
-% \begin{problem}
-%     Use the ``\mcode{=if( )}'' command in Excel to create a spreadsheet that uses the process from the
-%     previous problem to turn a base 10 decimal (less than 1) into a binary decimal.
-% \end{problem}
-% 
-% \begin{problem}
-%     Use a \texttt{for loop} and \texttt{if-else} statements in MATLAB to write a script
-%     that converts a base 10 decimal (less than 1) into a binary decimal.
-% \end{problem}
-% \solution{
-% % \begin{lstlisting}
-% x = 0.635\\
-% b = []\\
-% for n=1:20 \\ % first 20 binary digits
-%     if $x \ge 1$ \\
-%         x = (x-1)*2; \\
-%     else \\
-%         $x = 2*x$;\\
-%     end \\
-%     if $x \ge 1$ \\
-%         b = [b,1]; \\
-%     else \\
-%         b = [b,0];\\
-%     end \\
-% end \\
-% b
-% % \end{lstlisting}
-% }
 
 \begin{problem}
     Convert the base 10 fraction $1/10$ into binary.  Use your solution to fully describe
@@ -380,8 +351,8 @@ For all practical purposes the computer cannot tell the difference between two n
 the difference is smaller than machine precision. This is of the utmost important when you
 want to check that something is ``zero'' since a computer just cannot know the difference
 between $0$ and $\epsilon$.
-As a side note: You can determine the working precision in MATLAB by typing ``eps'' in the
-command line.
+% As a side note: You can determine the working precision in MATLAB by typing ``eps'' in the
+% command line.
 
 
 
@@ -556,7 +527,7 @@ properties to {\it match} the exponential function.
     \end{itemize}
     \begin{enumerate}
         \item[(a)] Using any convenient graphing tool (e.g. Desmos, a graphing calculator,
-            MATLAB, etc) make a plot of the exponential function along with the first,
+            \ProgLang, etc) make a plot of the exponential function along with the first,
             second, and third order approximations.  What do you notice and what do you
             wonder?
         \item[(b)] Repeat part (a) with the sine function.
@@ -728,7 +699,7 @@ thorough statement of the Ratio Test as it applies to Taylor Series.
 
 
 \begin{problem}
-    Write MATLAB code to show successive approximations of the function $f(x) = e^x$ on
+    Write \ProgLang code to show successive approximations of the function $f(x) = e^x$ on
     the domain $-1 < x < 1$ using a Taylor series centered at $a=0$.  Write your code so
     that it animates through the approximations.  Once your code is working, modify it to
     do the same for $f(x) = \sin(x)$ centered at $a=0$ and for $f(x) = \cos(x)$ centered
@@ -741,7 +712,7 @@ thorough statement of the Ratio Test as it applies to Taylor Series.
         \item[(a)] Build the Taylor Series for this function centered at $a=0$.
         \item[(b)] Using the previous example as a guide find the domain of convergence
             for the Taylor Series.
-        \item[(c)] Modify your MATLAB code from the previous problem to demonstrate the
+        \item[(c)] Modify your \ProgLang code from the previous problem to demonstrate the
             fact that $f(x) = \frac{1}{1+x^2}$ does not have an infinite domain of
             convergence.
     \end{enumerate}
@@ -1021,7 +992,7 @@ skills.
     If we list all of the numbers below 10 that are multiples of 3 or 5 we get 3, 5, 6,
     and 9.  The sum of these multiples is 23.  Write code to find the sum of all the
     multiples of 3 or 5 below 1000.  Your code needs to run error free and output only the
-    sum.  Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    sum.  Consult some of the examples in Appendix \ref{app:coding} if you're stuck with
     the coding.
 \end{problem}
 % \solution{
@@ -1040,7 +1011,8 @@ skills.
     \[ 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \dots \]
     By considering the terms in the Fibonacci sequence whose values do not exceed four
     million, write code to find the sum of the even-valued terms. Your code needs to run
-    error free and output only the sum.  Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    error free and output only the sum.  Consult some of the examples in Appendix
+    \ref{app:coding} if you're stuck with
     the coding.
 \end{problem}
 % \solution{
@@ -1058,10 +1030,12 @@ skills.
     distributed uniformly, until
     the sum of the numbers that you draw is greater than 1.  Keep track of how many
     numbers you draw.  Then write a loop that does this process many many times.  On
-    average, how many numbers do you have draw until your sum is larger than 1? \\ Hint
+    average, how many numbers do you have draw until your sum is larger than 1? \\ 
+    Hint
     \#1:
-    In \texttt{MATLAB} you should use the \mcode{rand(1,1)} command to draw a single
-    number from a uniform distribution with bounds $[0,1]$. \\ Hint \#2: You should do
+    In \ProgLang you should use the \ifnum\Python=0 \mcode{rand(1,1)} \else  \texttt{numpy.random.rand(1,1)}\fi command to draw a single
+    number from a uniform distribution with bounds $[0,1]$. 
+    \\ Hint \#2: You should do
     this more than 1,000,000 times to get a good average \ldots and the number that you
     get should be familiar!
 \end{problem}
@@ -1070,9 +1044,10 @@ skills.
 
 \begin{problem}[Jenny's Phone Number]
     My favorite prime number is 8675309.  Yep.  Jenny's phone number is prime!  Write a
-    MATLAB script that verifies this fact.  You cannot use the built-in MATLAB function
-    \mcode{isprime( )}.
-    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    \ProgLang script that verifies this fact.  
+    \ifnum\Python=0 You cannot use the built-in MATLAB function
+    \mcode{isprime( )}.\fi
+    Consult some of the examples in Appendix \ref{app:coding} if you're stuck with
     the coding.
 \end{problem}
 \hint{
@@ -1082,10 +1057,9 @@ skills.
 
 \begin{problem}
     Write a function called \mcode{MyPrimeChecker} that accepts an integer and returns a
-    binary variable: 0 = not prime, 1 = prime.\\
-    \mcode{function Primality = MyPrimeChecker(n)} \\
-    Next write a MATLAB script to find the sum of all of the prime numbers less than 1000.
-    Consult some of the examples in Appendix \ref{app:MATLAB} if you're stuck with
+    binary variable: 0 = not prime, 1 = prime.
+    Next write a \ProgLang script to find the sum of all of the prime numbers less than 1000.
+    Consult some of the examples in Appendix \ref{app:coding} if you're stuck with
     the coding.
 \end{problem}
 \hint{
@@ -1159,7 +1133,7 @@ In this problem you should not be doing an exhaustive search.
 
 \subsection{Applying What You've Learned}
 \begin{problem}
-    For each of the following commands tell what the command is asking MATLAB to do and
+    For each of the following commands tell what the command is asking \ProgLang to do and
     why the answer is {\it wrong}.
     \begin{enumerate}
         \item[(a)] \mcode{sqrt(2)^2 == 2}
@@ -1195,12 +1169,20 @@ In this problem you should not be doing an exhaustive search.
 
     {\bf Your Tasks:}
     \begin{enumerate}
-        \item[(a)] Explain what the following two lines of MATLAB code do.
+        \item[(a)] Explain what the following two lines of \ProgLang code do.
 % \begin{verbatim}
+            \ifnum\Python=0
 \begin{lstlisting}
 accounts = 100 + (100000-100) * rand(50000,1);
 accounts = floor(100*accounts)/100;
 \end{lstlisting}
+\else
+\begin{lstlisting}
+import numpy as np
+accounts = 100 + (100000-100) * np.random.rand(50000,1);
+accounts = np.floor(100*accounts)/100;
+\end{lstlisting}
+\fi
 % \end{verbatim}
         \item[(b)] By hand (no computer) write the mathematical steps necessary to
             increase the accounts by (5/365)\% per day, truncate the accounts to the
@@ -1284,18 +1266,28 @@ accounts = floor(100*accounts)/100;
 }
 
 \begin{problem}
-    Create a MATLAB function that accepts an anonymous function handle $f(x)$ and an
+    Create a \ProgLang function that accepts an anonymous function handle $f(x)$ and an
     integer $N$ and gives as an output an animation of successive Taylor approximations of
     the function up to the $N^{th}$ term.  \\
-    \mcode{function TaylorAnimation(f , N)} \\
+%     \mcode{function TaylorAnimation(f , N)} \\
     Write a test script that calls your function on several different infinitely
     differentiable functions.  Your test script will look something like the following.
+    \ifnum\Python=0
 \begin{lstlisting}
 clear; clc; clf;
 f = @(x) sin(x)
 N = 50;
 TaylorAnimation(f,N)
 \end{lstlisting}
+\else
+\begin{lstlisting}
+import numpy as np
+def f(x):
+    return(np.sin(x))
+N = 50;
+TaylorAnimation(f,N)
+\end{lstlisting}
+\fi
 \end{problem}
 
 
