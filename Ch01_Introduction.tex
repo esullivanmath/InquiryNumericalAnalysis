@@ -1,3 +1,4 @@
+\mainmatter
 \chapter{Introductory Topics}
 
 \section{An Introduction to Numerical Analysis}
@@ -5,7 +6,7 @@
     ``In the 1950s and 1960s, the founding fathers of [Numerical Analysis] discovered that
     inexact arithmetic can be a source of danger, causing errors in results that `ought'
     to be right.'' \\
-    \\ Lloyd N. Trefethen (2006)
+    \\ --Oxfor Professor Lloyd N. Trefethen (2006)
 \end{quote}
 
 The field of Numerical Analysis is really the study of how to take
@@ -25,12 +26,11 @@ In this chapter we will discuss some of the basic underlying ideas behind the sc
 Numerical Analysis, and the essence of the  above quote will be part of the focus of this chapter.
 Particularly, we need to know how a computer stores numbers and when that storage can get
 us into trouble.  On a more mathematical side, we offer a brief review of the Taylor
-Series in this chapter. The Taylor Series underpins many of our approximation methods in
-this class; so much so that we could easily rename the course: {\it Applied Taylor
-Series}.  Finally, at the end of this chapter we provide several coding exercises that
+Series from Calculus at the end of this chapter. The Taylor Series underpins many of our approximation methods in
+this class.  Finally, at the end of this chapter we provide several coding exercises that
 will help you to develop your programming skills.  It is expected that you know some of
 the basics of \ProgLang programming before beginning this class.  If you need to review the
-basics then Appendix \ref{app:coding}.  Trust me, you'll have more
+basics then Appendix \ref{app:coding}.  You'll have more
 than just the basics by the end.
 
 \begin{center}
@@ -433,7 +433,7 @@ this class and this book to go into all of those details here.
 
 
 
-\newpage\section{The Taylor Series}
+\newpage\section{Polynomial Approximation and The Taylor Series}
 Now we turn our attention in this introduction to something more mathematical.  The Taylor
 Series is a mathematical tool that is widely used in approximation theory, and since a 
 computer can only make approximations we need ways to approximate functions so that a
@@ -451,7 +451,7 @@ Polynomials are some of the simplest types of functions since they involve very 
 mathematical operations: really just addition and multiplication (since subtraction
 and division are just {\it special} addition and multiplication).  
 
-\subsection{Polynomial Approximation}
+% \subsection{Polynomial Approximation}
 Let's get a feel for how we approximate functions like $f(x) = e^x$ with a simple
 exercise. In the following exercise we will build a polynomial function with certain
 properties to {\it match} the exponential function.
@@ -550,7 +550,7 @@ properties to {\it match} the exponential function.
     on larger and larger domains as the degree of the polynomial increases.  Now we'll
     test the conjecture in general:
     \begin{quote}
-        {\bf Conjecture: } {\it Will the Taylor polynomial always be a better approximation over a larger
+        {\bf Conjecture: } {\it The Taylor polynomial always be a better approximation over a larger
         domain when we add more terms?}
     \end{quote}
     Below you will find several functions along with their polynomial approximations.
@@ -719,25 +719,36 @@ thorough statement of the Ratio Test as it applies to Taylor Series.
 \end{problem}
 
 
-\subsection{Truncation Error in Taylor Series}
+\section{Truncation Error in Taylor Series}
 The great thing about the Taylor Series is that it allows for the
 approximation of smooth functions as polynomials -- and polynomials are easily dealt with on
-a computer. The down side is that the sum is infinite.  Hence, every time we use a Taylor
+a computer since they involve only addition, subtraction, multiplication, division, and
+integer powers. The down side is that the sum is infinite.  Hence, every time we use a Taylor
 series on a computer we are actually going to be using a truncated Taylor Series where we
 only take a finite number of terms.  
 
+\begin{definition}[Truncation Error]
+    If $f(x) = \sum_{n=0}^\infty c_n (x-a)^n$ is the Taylor Series expansion for $f(x)$ at
+    the point $x=a$ then $f_N(x) = \sum_{n=0}^N c_n (x-a)^n$ is an approximation of $f(x)$
+    using only $N$ terms of the Taylor Series where $N < \infty$.  The function $f_N(x)$
+    is only the same as $f(x)$ if $N$ goes to infinity.  The {\bf truncation error} at the
+    point $x=x_0$ made when truncating the infinite series is the absolute difference
+    between $f(x_0)$ and $f_N(x_0)$
+    \[ T_{x_0} = | f(x_0) - f_N(x_0)|. \]
+\end{definition}
+
 \begin{problem}
     What is the absolute truncation error when calculating $e^1$ with the Taylor Series
-    \[ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} \]
+    \[ e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} + \cdots \]
     using the following values for $n$? Recall that $e^1 \approx 2.718281828459045$.
     \begin{center}
         \begin{tabular}{|c|c|c|}
             \hline
             $n$ & Value from the Taylor Series & Absolute Error \\ \hline \hline
-            0 & 1 & $1.718281828459045\ldots$ \\ \hline
-            1 & 1+1=2 & $0.718281828459045\ldots$ \\ \hline
-            2 & $1+1+1^2/2=2.5$ & $0.218281828459045\ldots$ \\ \hline
-            3 & $1+1+1^2/2+1^3/6=2.\bar{6}$ & \\ \hline
+            0 & 1 & $|e^1 - 1| \approx 1.718281828459045\ldots$ \\ \hline
+            1 & 1+1=2 & $|e^1 - 2| \approx 0.718281828459045\ldots$ \\ \hline
+            2 & $1+1+1^2/2=2.5$ & $|e^1 - 2.5| \approx 0.218281828459045\ldots$ \\ \hline
+            3 & $1+1+1^2/2+1^3/6=2.\bar{6}$ & $|e^1 - 2.\bar{6}| \approx$  \\ \hline
             4 & & \\ \hline
             5 & & \\ \hline
             6 & & \\ \hline

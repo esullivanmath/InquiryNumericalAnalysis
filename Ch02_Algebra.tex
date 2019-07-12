@@ -37,41 +37,62 @@ Let's play a game!
 \begin{problem}
     Write \ProgLang code so you can play the game from Problem
     \ref{prob:bisection_game} against the computer.  
-%     The following incomplete code should
-%     get you started.  Fill in the missing pieces of the code and play the game several
-%     times to be sure that it works.  
-    What strategy do you find yourself using to play the
-    game? 
-%     You can get a copy of the partial code
-%     \href{https://drive.google.com/file/d/1QFeb6ZGMppKtV-03_cbUzwaaKM8N39t2/view?usp=sharing}{HERE}.
-% \begin{lstlisting}
-% %% Secret Number Guesser Game
-% clear; clc; format compact;
-% secret = 100*rand(1,1); % random secret number between 0 and 100
-% tolerance = 0.01;
-% a = randi(floor(secret),1); % initial lower bound integer below the secret
-% b = randi( [ceil(secret),101] , 1); % initial upper bound integer above the secret
-% c = 1000; % dummy initial value for c
-% n = 1; % initialize the game counter
-% while abs( secret - c ) > tolerance
-%     fprintf('Guess #%g.\n',n)
-%     fprintf('The secret number is between %g and %g.\n',a,b)
-%     c = input('What is your guess for the secret number? ');
-%     if abs( secret - c ) < tolerance
-%         fprintf('  \n') % respond appropriately here
-%         ... % write more code here if necessary
-%     elseif secret < (c-tolerance)
-%         ... % write appropriate code here in this case
-%     elseif secret > (c+tolerance)
-%         ... % write appropriate code here in this case
-%     end
-%     if n>=20
-%         fprintf('   \n') % respond appropriately here
-%         break % this will break out of the loop
-%     end
-%     n=n+1; % increment the game counter
-% end
-% \end{lstlisting}
+    The following incomplete code should get you started.  Fill in the missing pieces of
+    the code and play the game several times to be sure that it works.  What strategy do
+    you find yourself using to play the game? 
+    \ifnum\Python=0
+\begin{lstlisting}
+%% Secret Number Guesser Game
+clear; clc; format compact;
+secret = 100*rand(1,1); % random secret number between 0 and 100
+tolerance = 0.01;
+a = randi(floor(secret),1); % initial lower bound integer below the secret
+b = randi( [ceil(secret),101] , 1); % initial upper bound integer above the secret
+guess = 1000; % dummy initial value for the guess
+n = 1; % initialize the game counter
+while abs( secret - c ) > tolerance && n < 20
+    fprintf('Guess number %g.\n',n)
+    fprintf('The secret number is between %g and %g.\n',a,b)
+    guess = input('What is your guess for the secret number? ');
+    if abs( secret - guess ) < tolerance
+        fprintf('Close enough!  The actual random number was %g. \n',secret) 
+        break
+    elseif guess < (secret-tolerance)
+        ... % write appropriate code here in this case
+    elseif guess > (secret+tolerance)
+        ... % write appropriate code here in this case
+    end
+    n=n+1; % increment the game counter
+end
+\end{lstlisting}
+\else
+\begin{lstlisting}
+from numpy import *
+secret = 100*rand(1,1) # get the secret random number
+secret = secret[0,0]
+tolerance = 0.01
+
+# initial lower bound integer below secret number
+a = float(randint(low=0, high=floor(secret))) 
+# initial lower bound integer below secret number
+b = float(randint(low=ceil(secret),high=101))
+
+guess = 1000 # initial guess
+n = 1 # initialize the game counter
+while abs( secret - guess ) > tolerance and n < 20:
+    print('Guess Number',n)
+    print('The secret number is between',a,' and ',b)
+    guess = float(input('What is your guess for the secret number?'))
+    if abs(secret - guess) < tolerance:
+        print("Close enough!  The random number was",secret)
+        break
+    elif guess < (secret - tolerance):
+        ... # write appropriate code here in this case
+    elif guess > (secret + tolerance):
+        ... # write appropriate code here in this case
+    n += 1 # increment the game counter
+\end{lstlisting}
+\fi
 \end{problem}
 
 
@@ -123,8 +144,8 @@ equations have the same solutions: $x_1 \approx -2.55$ and $x_2 \approx 2.88$.
             \end{axis}
         \end{tikzpicture}
     \end{center}
-    \caption{The left-hand plot shows two nonlinear functions, $\ell(x) = \sin(x) + 9$ and
-        $r(x) = x^2 - \tan(x)$, with their intersection points marked. The right-hand plot
+    \caption{The left-hand plot shows two nonlinear functions, $\ell(x) = 3\sin(x) + 9$ and
+        $r(x) = x^2 - \cos(x)$, with their intersection points marked. The right-hand plot
     shows the equivalent problem formed by solving $\ell(x) - r(x) = 0$.}
     \label{fig:initial_root_example}
 \end{figure}
@@ -134,6 +155,15 @@ this chapter, if $f(x)$ has certain properties then different numerical techniqu
 solving the equation will apply -- and some will be much faster and more accurate than
 others. The following sections give several different techniques for solving algebraic
 equations of the form $f(x) = 0$.
+
+\begin{problem}
+    With a partner make three different plots just like Figure
+    \ref{fig:initial_root_example}.  Do so by picking an algebraic root-finding problem,
+    plotting the left and right sides on top of each other (for the left-hand plot) and
+    then plotting the difference between the left and right sides of your equation (for
+    the right-hand plot).  Visually verify that the intersections you see on the left-hand
+    plot and the same as the roots on the right-hand plot each time.
+\end{problem}
 
 \newpage
 \section{The Bisection Method}
@@ -1012,6 +1042,129 @@ details for ``why'' it works.
     functions along with this problem.
 \end{problem}
 
+\begin{problem}[Order of Convergence]
+    A root-finding method has a convergence rate of order $M$ if the ratio 
+    \[ \frac{|x_{k+1} - x_*|}{|x_k - x_*|^M} \]
+    is roughly constant for each iteration $k$.  In this ration, $x_*$ is the exact root, $x_k$ is
+    the $k^{th}$ iteration of the root finding technique, and $x_{k+1}$ is the
+    $(k+1)^{st}$ iteration of the root finding technique.  We will call the value
+    $|x_{k}-x_*|$ the ``old'' error since it is the error in the method at the old step.
+    We will call the value $|x_{k+1}-x_*|$ the ``new'' error since it is the error in the
+    method at the new step.
+    \begin{enumerate}
+        \item[(a)] If we consider the equation 
+            \[ C =   \frac{|x_{k+1} - x_*|}{|x_k - x_*|^M} \]
+            and take the logarithm (base 10) of both sides then we get
+            \[ \log(C) = \log \left( |x_{k+1} - x_*| \right) -
+            M \log\left( |x_{k} - x_*| \right). \]
+            Solving for $\log(|x_{k+1} - x_*|)$ we get
+            \[ \log\left( |x_{k+1} - x_*| \right) = \underline{\hspace{1in}} +
+            \underline{\hspace{1in}} \]
+        \item[(b)] In part (a) you should have found that the log of new error is a linear
+            function of the log of the old error.  What is the slope of this linear
+            function on a log-log plot?
+        \item[(c)] In the plots below you will see three different log-log plots of the new
+            error to the old error for different root finding techniques.  What is the
+            order of the convergence rate for each of these methods?
+        \item[(d)] In your own words, what does it mean for a root finding method to have
+            a ``first order convergence rate''?  ``Second order convergence rate''? etc.
+    \end{enumerate}
+\begin{center}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{loglogaxis}[grid, xmin=1e-16, xmax=1, ymin=1e-16, ymax=1, title={Method
+            \#1}, xlabel={Old Error}, ylabel={New Error}]
+            \addplot[only marks, color=blue] coordinates{
+                (	0.909538969	,	0.005632421	)
+                (	0.00909539	,	5.63242E-05	)
+                (	9.09539E-05	,	5.63242E-07	)
+                (	9.09539E-07	,	5.63242E-09	)
+                (	9.09539E-09	,	5.63242E-11	)
+                (	9.09539E-11	,	5.63242E-13	)
+                (	9.09539E-13	,	5.63242E-15	)
+                (	9.09539E-15	,	5.63242E-17	)                    
+            };
+        \end{loglogaxis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{loglogaxis}[grid, xmin=1e-16, xmax=1, ymin=1e-16, ymax=1, title={Method
+            \#2}, xlabel={Old Error}, ylabel={New Error}]
+            \addplot[only marks, color=red] coordinates{
+                (	0.297389258	,	0.04564068	)
+                (	0.04564068	,	0.007707808	)
+                (	0.007707808	,	0.000959205	)
+                (	0.000959205	,	0.000139301	)
+                (	0.000139301	,	1.48093e-05	)
+                (	1.48093e-05	,	2.27993e-06	)
+                (	2.27993e-06	,	2.43575e-07	)
+                (	2.43575e-07	,	2.45946e-08	)
+                (	2.45946e-08	,	3.07365e-09	)
+                (	3.07365e-09	,	3.33233e-10	)
+                (	3.33233e-10	,	4.01008e-11	)
+                (	4.01008e-11	,	4.70157e-12	)
+                (	4.70157e-12	,	5.33293e-13	)
+                (	5.33293e-13	,	6.03244e-14	)
+                (	6.03244e-14	,	6.782e-15	)                    
+                (6.5853e-15,	6.73173e-16)
+                (6.73173e-16,	7.63516e-17)
+            };
+        \end{loglogaxis}
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.8]
+        \begin{loglogaxis}[grid, xmin=1e-16, xmax=1, ymin=1e-16, ymax=1, title={Method
+            \#3}, xlabel={Old Error}, ylabel={New Error}]
+            \addplot[only marks, color=black] coordinates{
+(	0.570332325	,	0.000570332	)
+(	0.000570332	,	5.70332E-07	)
+(	5.70332E-07	,	5.70332E-10	)
+(	5.70332E-10	,	5.70332E-13	)
+(	5.70332E-13	,	5.70332E-16	)
+(	5.70332E-16	,	5.70332E-19	)                
+            };
+        \end{loglogaxis}
+    \end{tikzpicture}
+\end{center}
+
+\end{problem}
+
+
+\begin{problem}
+    \begin{enumerate}
+        \item[(a)] Write code and create plots to demonstrate that the Bisection Method
+            has approximately first order convergence.  Demonstrate this result on several
+            differen equation-solving problems.
+        \item[(b)] Write code and create plots to demonstrate that Newton's Method has
+            second order convergence.  Demonstrate this result on the same
+            equation-solving problems from part (a).
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Multiple Choice: For every step of Newton's method the new estimate of the error
+    between the Newton iteration and the exact answer is approximately:
+    \begin{enumerate}
+        \item[(a)] the same as it was on the previous step.
+        \item[(b)] ten times smaller than it was on the previous step
+        \item[(c)] one hundred times smaller than it was on the previous step
+        \item[(d)] one thousand times smaller than it was on the previous step
+    \end{enumerate}
+    Defend your answer with a sentence or two.
+\end{problem}
+
+
+% \begin{problem}
+%     Bob solved the equation $f(x) = 0$ for a differentiable function using two different
+%     methods studied in this chapter.  He
+%     happened to know the root for the function $f(x)$ so he build a vector of absolute
+%     errors for each of the two methods.  In Figure \ldots you see the error at the
+%     $n^{th}$ iteration on the horizontal axis and the error at the $(n+1)^{st}$ iteration
+%     on the vertical axis. From this plot what can you say about the method in  
+% \end{problem}
+\begin{problem}
+    Write \ProgLang code that produces a loglog plot that compares the convergence rates for
+    the bisection method, the regula-falsi method, Newton's method, and the secant method
+    on a problem where we know the exact answer. 
+\end{problem}
+
 
 
 \begin{problem}
@@ -1113,13 +1266,6 @@ details for ``why'' it works.
         graphically but be sure to fully explain your graphical reasoning.
 \end{problem}
 
-
-\begin{problem}
-    Write \ProgLang code that produces a loglog plot that compares the convergence rates for
-    the bisection method, the regula-falsi method, Newton's method, and the secant method
-    on a problem where we know the exact answer. See problem \ref{prob:newton_convergence}
-    to get you started.
-\end{problem}
 
 
 
