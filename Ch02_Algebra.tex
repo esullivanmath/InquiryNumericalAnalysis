@@ -1178,8 +1178,8 @@ details for ``why'' it works.
 
 \begin{problem}
     Show several plots that demonstrates that the Chebyshev Method,
-    \[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} - \frac{1}{2} \frac{[f(x_n)]^2}{[f'(x_n)]^3}
-f''(x_n), \]
+    \[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} - \frac{1}{2} \left( \frac{f(x_n)}{f'(x_n)}
+    \right)^2 \frac{f''(x_n)}{f'(x_n)}, \]
     exhibits a third-order convergence rate. That is, create a log-log plot of the
     successive errors for several different equation-solving problems.  What does this
     ``third order convergence'' mean about the successive

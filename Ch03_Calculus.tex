@@ -5,7 +5,7 @@ we will make heavy use of Taylor's Theorem to build these approximations. At the
 the chapter we'll examine a numerical technique for solving optimization problems without
 explicitly finding derivatives. 
 
-\section{Numerical Differentiation}
+\section{Differentiation}
 In this section we'll build several approximation of first and second derivatives.  The
 idea for each of these approximation is:
 \begin{itemize}
@@ -201,7 +201,7 @@ have the following definition.
     the domain.  Your function should output the $x$ values and $y$ values associated with
     the derivative.\\
     \ifnum\Python=0
-    \mcode{function [new_x,dfdx]=FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)} 
+    \mcode{function [newx,yprime]=FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)} 
     \else
     \mcode{def FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts):} 
     \fi
@@ -212,8 +212,122 @@ approximation and to do the derivative by hand and to plot the error. Be warned,
 that the numerical derivative that we have built from Theorem
 \ref{thm:first_order_first_deriv} should have one less value than the
 original list of $x$ and $y$ values.  Think about why this must be true. Also double check
-your code from the previous problem and make sure that you can plot \mcode{new_x} vs
-\mcode{dfdx} without having to change their size.  
+your code from the previous problem and make sure that you can plot \mcode{newx} vs
+\mcode{yprime} without having to change their size.  
+
+\begin{example}[Efficient Coding with Vectors]
+Let's pause now for a few words on efficient vector-based coding.  We can absolutely write
+code for the first derivative using a \mcode{for} loop as you can see in the code below.
+Notice that I have resized the $x$ vector so that it is the same length as the $y'$ vector.
+
+\bcode
+\ifnum\Python=0
+\begin{lstlisting}
+function [newx,yprime] = FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)
+    x = linspace(xmin,xmax,num_interior_pts))
+    y = f(x)
+    yprime = zeros(length(y)-1)
+    newx = zeros(length(x)-1)
+    for n = 1:length(yprime)
+        newx(n) = x(n)
+        yprime(n) = (y(n+1)-y(n)) / (x(n+1) - x(n))
+    end
+end
+\end{lstlisting}
+\else
+\begin{lstlisting}
+def FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts):
+    import numpy as np
+    x = np.array(np.linspace(xmin,xmax,num_interior_pts))
+    y = f(x)
+    yprime = np.zeros(y.size-1)
+    newx = np.zeros_like(yprime)
+    for n in range(0,y.size-1):
+        newx[n] = x[n]
+        yprime[n] = (y[n+1]-y[n]) / (x[n+1] - x[n])
+    return(newx, yprime)
+\end{lstlisting}
+\fi
+
+Implementing this code we can use the following script.
+
+\bcode
+\ifnum\Python=0
+\begin{lstlisting}
+f = @(x) sin(x)
+xmin = 0
+xmax = 2*pi
+numpts = 100
+x = linspace(xmin,xmax,numpts)
+y = f(x)
+[newx, yprime] = FirstDerivFirstOrder(f,xmin,xmax,numpts)
+plot(x,y,'b--',newx,yprime,'r--')
+grid on
+\end{lstlisting}
+\else
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline # for use in Jupyter Notebooks
+
+def f(x): # define the function of interest
+    import numpy as np
+    return(np.sin(x))
+xmin = 0
+xmax = 2*np.pi
+numpts = 100
+x = np.linspace(xmin,xmax,numpts)
+y = f(x)
+dx, dy = FirstDerivFirstOrder(f,xmin,xmax,numpts)
+plt.plot(x,y,'b--',newx,yprime,'r--')
+plt.grid()
+\end{lstlisting}
+\fi
+The output of this code will give the sine function along with the derivative, the cosine
+function as seen in Figure \ref{fig:first_deriv_sine}.
+
+Now let's build the first derivative function in a much smarter way.  Instead of looping
+over all of the elements we can take advantage of the fact that every thing is stored in
+vectors.  Hence we can just do vector operations and do all of the subtractions and
+divisions at once.
+\ifnum\Python=0
+\begin{lstlisting}
+function [newx, yprime] = FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts)
+    x = linspace(xmin,xmax,num_interior_pts);
+    y = f(x);
+    yprime = (y(2:end) - y(1:end-1)) ./ (x(2:end) - x(1:end-1));
+    newx = x(1:end-1)
+end
+\end{lstlisting}
+\else
+\begin{lstlisting}
+def FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts):
+    import numpy as np
+    x = np.array(np.linspace(xmin,xmax,num_interior_pts))
+    y = f(x)
+    yprime = (y[1:]-y[:-1]) / (x[1:] - x[:-1])
+    newx = x[:-1]
+    return(newx, yprime)
+\end{lstlisting}
+\fi
+
+
+\end{example}
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, domain=0:6.28]
+                \addplot[smooth, thick, blue] {sin(deg(x))};
+                \addplot[dashed, thick, red] {cos(deg(x))};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The result of using the first derivative code with 100 interior point on the
+    function $f(x) = \sin(x)$.}
+    \label{fig:first_deriv_sine}
+\end{figure}
+
 
 \begin{problem}
     Write code that finds a first order approximation for the first derivative
@@ -222,7 +336,7 @@ your code from the previous problem and make sure that you can plot \mcode{new_x
     \begin{enumerate}
         \item The left-hand plot should show the function in blue and the first derivative
             as a red dashed curve. Sample code for this problem is
-           \ifnum\Python=1 {\color{red} write some Python pseudo-code} \fi
+           \ifnum\Python=0
 \begin{lstlisting}
  f = @(x) sin(x) - x*sin(x);
  a=0; b=15;
@@ -232,20 +346,52 @@ your code from the previous problem and make sure that you can plot \mcode{new_x
  subplot(1,2,1)
  plot(x, f(x) , 'b' , new_x , dfdx , 'r--')
 \end{lstlisting}
-        \item The right-hand plot should show the absolute error between the exact derivative and
-            the numerical derivative.
-            \ifnum\Python=1 {\color{red} write some Python pseudo-code} \fi
+\else
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+def f(x):
+    import numpy as np
+    return(np.sin(x) - x * np.sin(x))
+xmin = 0
+xmax = 15
+numpts = 1000
+x = np.linspace(xmin,xmax,numpts)
+y = f(x)
+newx, yprime = FirstDerivFirstOrder(f,xmin,xmax,numpts)
+
+fig, ax = plt.subplots(1,2)
+ax[0].plot(x,y,'b',newx,yprime,'r--')
+ax[0].grid()
+\end{lstlisting}
+\fi
+        \item The right-hand plot should show the absolute error between the exact
+            derivative and the numerical derivative.  You should use a logarithmic $y$
+            axis for this plot.
+            \ifnum\Python=0
 \begin{lstlisting}
 df = @(x) ... % write code for the exact derivative
 subplot(1,2,2)
 plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 \end{lstlisting}
+\else
+\begin{lstlisting}
+def df(x):
+    # write a function for the exact derivative
+dy = df(newx)
+ax[1].semilogy(newx,abs(dy - yprime))
+ax[1].grid()
+\end{lstlisting}
+\fi
     \end{enumerate}
     Discuss how you can see the fact that this is a first order method.  You may want to
     put one (or both) of the plots on a log-log scale or a semi-log scale \ldots I'll let
     you figure out which one makes the most sense.
 \end{problem}
 
+
+Let's return to the mathematics: \\
 Next we'll build a more accurate numerical first derivative scheme.  The derivation
 technique is the same: play a little algebra game with the Taylor series and see if you
 can get the first derivative to simplify out.  This time we'll be hoping to have a better
@@ -343,7 +489,7 @@ error approximation.
     Write a \ProgLang function that takes a function and a domain and returns a second order
     numerical approximation to the first derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
     \ProgLang file.    Your function should
-    accept an anonymous function handle, the bounds on the domain, and the number of
+    accept a function, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
     \ifnum\Python=0
@@ -351,6 +497,7 @@ error approximation.
     \else
     \mcode{def FirstDerivSecondOrder(f,xmin,xmax,num_interior_pts):}
     \fi
+    You should try to write this code without using any \mcode{for} loops.
 \end{problem}
 
 Now we'll search for an approximation of the second derivative.  Again, the game will be
@@ -406,7 +553,7 @@ computations.
     Write a \ProgLang function that takes a function and a domain and returns a second order
     numerical approximation to the second derivative on the interval. You should ALWAYS start by writing pseudo-code as comments in your
     \ProgLang file.    Your function should
-    accept an anonymous function handle, the bounds on the domain, and the number of
+    accept a function, the bounds on the domain, and the number of
     interior points used for approximation within the domain. Your function should output
     the x values and y values associated with the derivative.\\
     \ifnum\Python=0
@@ -414,6 +561,7 @@ computations.
     \else
     \mcode{def SecondDerivSecondOrder(f,xmin,xmax,num_interior_pts):}
     \fi
+    Again, you should write your code without using any \mcode{for} loops.
 \end{problem}
 
 \begin{problem}
@@ -489,7 +637,7 @@ differential equations in Chapter \ref{ch:odes}.
 
 
 
-\newpage\section{Numerical Integration}
+\newpage\section{Integration}
 Next we will build methods for approximating integrals.  Recall from Calculus that the definition of the
 Riemann integral is
 \begin{flalign}
@@ -510,9 +658,9 @@ a depiction of this in Figure \ref{fig:integral_with_rectangles}.
         \begin{tikzpicture}[x=1.5cm, line cap=round, line join=round] 
             \foreach \k [count=\z] in {0, 1/4, 1/2}{
                 \begin{scope}[shift=(0:\z*3)]
-                    \path [plot fill] plot [domain=0:2] (\x,{y(\x)}) -| cycle;
+                    \path [plot fill, fill=red!30] plot [domain=0:2] (\x,{y(\x)}) -| cycle;
                     \foreach \x in {0, 1/2, 1, 3/2}
-                    \path [bar]  (\x,0) |- (\x+1/2, {y(\x+\k)}) |- cycle;
+                    \path [bar, fill=blue!30]  (\x,0) |- (\x+1/2, {y(\x+\k)}) |- cycle;
                     \path [plot]  plot [domain=0:2] (\x,{y(\x)});
                     \path [axis] (0,4.5) |- (2.5,0);
                     \foreach \t [count=\x from 0] in {0,\frac{1}{2},1,\frac{3}{2},2}
@@ -526,7 +674,7 @@ a depiction of this in Figure \ref{fig:integral_with_rectangles}.
         \end{tikzpicture}
     \end{center}
     \caption{Riemann sum to approximate an integral with left, midpoint, and right
-    rectangles.}
+    rectangles on the function $f(x) = 4 - x^2$ on the interval $x \ in [0,2]$.}
     \label{fig:integral_with_rectangles}
 \end{figure}
 
@@ -543,7 +691,8 @@ Clearly, the more rectangles we choose the closer the sum of the areas of the re
     \mcode{def MyRiemannSum(f, a, b, num_subintervals, type):}
     \fi
     \\
-    Test your code on several functions for which you know the integral.
+    Test your code on several functions for which you know the integral.  You should write
+    your code without any \mcode{for} loops.
 \end{problem}
 
 \begin{problem}\label{prob:left_riemann_error}
@@ -856,7 +1005,7 @@ for integration.
     order of the error for numerical integration and differentiation schemes.  It is now
     up to you.  \\
     Build a numerical experiment that allows you to conjecture the order of the
-    approximation error for Simpson's rule.  Remember that the goal is the answer the
+    approximation error for Simpson's rule.  Remember that the goal is to answer the
     question: \\
     If I approximate the integral with a fixed $\Delta x$ and find an absolute percent
     error of $P$, then what will the absolute percent error be using a width of $\Delta x
@@ -866,7 +1015,7 @@ for integration.
 \begin{problem}
     Write \ProgLang functions that implement both the trapezoidal rule and Simpson's rule.
     You should ALWAYS start by writing pseudo-code as comments in your \ProgLang file.   Keep
-    in mind that \ProgLang deals with vectors and iteration in very nice ways.  You shouldn't
+    in mind that \ProgLang \ifnum\Python=1(\texttt{numpy} arrays, specifically)\fi deals with vectors and iteration in very nice ways.  You shouldn't
     need a \texttt{for loop} in your function.
 
     Test both \ProgLang functions on known integrals and approximate the order of the error
@@ -961,7 +1110,7 @@ approximations for integrals and we leave the further research to the curious re
 
 
 
-\newpage\section{Numerical Optimization}
+\newpage\section{Optimization}
 You likely recall that one of the major applications of Calculus was to solve optimization
 problems -- find the value of $x$ which makes some function as big or as small as
 possible.  The process itself can sometimes be rather challenging since due to the
@@ -1010,7 +1159,7 @@ algebra and differentiation.
     \end{enumerate}
 \end{problem}
 
-\newpage\subsection{Single Variable Numerical Optimization}
+% \newpage\subsection{Single Variable Numerical Optimization}
 
 Now we'll propose a few numerical techniques that can approximate the solution to these
 types of problems.  The basic ideas are simple!
@@ -1184,104 +1333,8 @@ one(s) you ended up recreating?  The intuition for these algorithms is pretty da
 \end{figure}
 
 
-\newpage\subsection{Multivariable Numerical Optimization}
-Now let's look at multivariable optimization.  The analytic process for finding optimal
-solutions is essentially the same as for single variable.
-\begin{itemize}
-    \item Write a function that models a scenario in multiple variables,
-    \item find the gradient vector (presuming that the function is differentiable),
-    \item set the gradient vector equal to the zero vector and solve for the critical point(s), and
-    \item interpret your answer in the context of the problem.
-\end{itemize}
-The trouble with unconstrained multivariable optimization is that finding the critical
-points is now equivalent to solving a system of nonlinear equations; a task that is likely
-impossible even with a computer algebra system.  (In Section \ref{sec:mv_newton} we will
-build a multivariable version of Newton's method if you want to look ahead.)
 
-Let's see if you can extend your intuition from single variable to multivariable.
-\begin{problem}
-    The derivative free optimization method discussed in the single variable optimization
-    section just said that you should pick two points and pick the one that takes you
-    furthest uphill.  
-    \begin{enumerate}
-        \item[(a)] Why is it insufficient to choose just two points if we are dealing with a
-            function of two variables?  Hint: think about contour line.
-        \item[(b)] For a function of two variables, how many points should you use to
-            compare and determine the direction of ``uphill''?
-        \item[(c)] Extend your answer from part (b) to $n$ dimensions.  How many points
-            should we compare if we are in $n$ dimensions and need to determine which
-            direction is ``uphill''?
-        \item[(d)] Back in the case of a two-variable function, you should have decided
-            that three points was best.  Explain an algorithm for moving one point at a
-            time so that your three points eventually converge to a nearby local maximum.
-            It may be helpful to make a surface plot or a contour plot of a well-known
-            function just as a visual.
-    \end{enumerate}
-\end{problem}
-
-\begin{problem}
-    Now let's tackle the gradient ascent/descent algorithm.  You should recall that the gradient
-    vector points in the direction of maximum change.  How can you use this fact to modify
-    the gradient ascent/descent algorithm given previously?  Clearly write your algorithm
-    so that a classmate could turn it into code.
-\end{problem}
-
-\begin{problem}
-    How does the Monte Carlo algorithm extend to a two-variable optimization problem?
-    Clearly write your algorithm.
-\end{problem}
-
-\begin{problem}
-    Try out the three algorithms that you just wrote on the function $f(x,y) =
-    \sin(x)\cos(y) + 0.1 x^2$ which has many local extrema and no global maximum.
-\end{problem}
-
-
-The derivative free, gradient ascent/descent, and monte carlo techniques still have good
-analogues in higher dimensions.  We just need to be a bit careful since in higher
-dimensions there is much more room to move.  Below we'll give the full description of the
-gradient ascent/descent algorithm.  We don't give the full description of the derivative
-free or Monte Carlo algorithms since there are many ways to implement them.  The
-interested reader should see a course in mathematical optimization or machine learning.
-
-\begin{algorithm}[Gradient Descent]
-    We want to solve the problem 
-    \[ \text{minimize } f(x_1, x_2, \ldots, x_n) \text{ subject to }(x_1, x_2, \ldots, x_n) \in S. \]
-    \begin{enumerate}
-        \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
-        \item We are going to define a difference equation that gives successive guesses
-            for the optimal value:
-            \[ \bx_{n+1} = \bx_n - \alpha \nabla f(\bx_n). \]
-            The difference equation says to follow the negative gradient a certain
-            distance from your present point (why are we doing this).  Note that the value
-            of $\alpha$ is up to you so experiment with a few values (you should probably
-            take $\alpha \le 1$ \ldots why?).
-        \item Repeat the iterative process in step 2 until two successive points are {\it
-            close enough} to each other.
-    \end{enumerate}
-\end{algorithm}
-Note: If you are looking to maximize your objective function then in the Monte-Carlo
-search you should examine if $z$ is greater than your current largest value.  For gradient
-descent you should actually do a gradient {\it
-ascent} and follow the positive gradient instead of the negative gradient.
-
-\begin{problem}
-    Write generic code to implement the Gradient Descent algorithm in as many dimensions
-    as necessary and test your code on a multivariable function where you know the
-    location and value of a local minimum.
-\end{problem}
-
-\begin{problem}
-    The functions like $f(x,y) = \sin(x)\cos(y)$ have many local extreme values which makes
-    optimization challenging.  Impelement your Gradient Descent code on this function to
-    find the local minimum $(0,0)$.  Start somewhere near $(0,0)$ and show by way of
-    example that your gradient descent code may not converge to this particular local
-    minimum. Why is this important?
-\end{problem}
-
-
-
-\newpage\section{Numerical Curve Fitting}
+\newpage\section{Curve Fitting}
 In this section we'll change our focus a bit to look at a different question from algebra
 \ldots and reveal a hidden numerical optimization problem.
 Instead of finding the roots of an algebraic equation, what if we have a few data points

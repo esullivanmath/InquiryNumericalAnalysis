@@ -4,8 +4,106 @@ teach it.  There are only a few exercises and minimal editing has been doing on 
 sections.  Instructors may be interested in expanding upon what is here for their classes.
 
 
-\section{Interpolation}
-The least squares problem that we studied in the previous sections seeks to find a best
+
+\newpage\section{Multivariable Numerical Optimization}
+Now let's look at multivariable optimization.  The analytic process for finding optimal
+solutions is essentially the same as for single variable.
+\begin{itemize}
+    \item Write a function that models a scenario in multiple variables,
+    \item find the gradient vector (presuming that the function is differentiable),
+    \item set the gradient vector equal to the zero vector and solve for the critical point(s), and
+    \item interpret your answer in the context of the problem.
+\end{itemize}
+The trouble with unconstrained multivariable optimization is that finding the critical
+points is now equivalent to solving a system of nonlinear equations; a task that is likely
+impossible even with a computer algebra system.  (In Section \ref{sec:mv_newton} we will
+build a multivariable version of Newton's method if you want to look ahead.)
+
+Let's see if you can extend your intuition from single variable to multivariable.
+\begin{problem}
+    The derivative free optimization method discussed in the single variable optimization
+    section just said that you should pick two points and pick the one that takes you
+    furthest uphill.  
+    \begin{enumerate}
+        \item[(a)] Why is it insufficient to choose just two points if we are dealing with a
+            function of two variables?  Hint: think about contour line.
+        \item[(b)] For a function of two variables, how many points should you use to
+            compare and determine the direction of ``uphill''?
+        \item[(c)] Extend your answer from part (b) to $n$ dimensions.  How many points
+            should we compare if we are in $n$ dimensions and need to determine which
+            direction is ``uphill''?
+        \item[(d)] Back in the case of a two-variable function, you should have decided
+            that three points was best.  Explain an algorithm for moving one point at a
+            time so that your three points eventually converge to a nearby local maximum.
+            It may be helpful to make a surface plot or a contour plot of a well-known
+            function just as a visual.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Now let's tackle the gradient ascent/descent algorithm.  You should recall that the gradient
+    vector points in the direction of maximum change.  How can you use this fact to modify
+    the gradient ascent/descent algorithm given previously?  Clearly write your algorithm
+    so that a classmate could turn it into code.
+\end{problem}
+
+\begin{problem}
+    How does the Monte Carlo algorithm extend to a two-variable optimization problem?
+    Clearly write your algorithm.
+\end{problem}
+
+\begin{problem}
+    Try out the three algorithms that you just wrote on the function $f(x,y) =
+    \sin(x)\cos(y) + 0.1 x^2$ which has many local extrema and no global maximum.
+\end{problem}
+
+
+The derivative free, gradient ascent/descent, and monte carlo techniques still have good
+analogues in higher dimensions.  We just need to be a bit careful since in higher
+dimensions there is much more room to move.  Below we'll give the full description of the
+gradient ascent/descent algorithm.  We don't give the full description of the derivative
+free or Monte Carlo algorithms since there are many ways to implement them.  The
+interested reader should see a course in mathematical optimization or machine learning.
+
+\begin{algorithm}[Gradient Descent]
+    We want to solve the problem 
+    \[ \text{minimize } f(x_1, x_2, \ldots, x_n) \text{ subject to }(x_1, x_2, \ldots, x_n) \in S. \]
+    \begin{enumerate}
+        \item Choose an arbitrary starting point $\bx_0 = (x_1,x_2,\ldots,x_n)\in S$.
+        \item We are going to define a difference equation that gives successive guesses
+            for the optimal value:
+            \[ \bx_{n+1} = \bx_n - \alpha \nabla f(\bx_n). \]
+            The difference equation says to follow the negative gradient a certain
+            distance from your present point (why are we doing this).  Note that the value
+            of $\alpha$ is up to you so experiment with a few values (you should probably
+            take $\alpha \le 1$ \ldots why?).
+        \item Repeat the iterative process in step 2 until two successive points are {\it
+            close enough} to each other.
+    \end{enumerate}
+\end{algorithm}
+Note: If you are looking to maximize your objective function then in the Monte-Carlo
+search you should examine if $z$ is greater than your current largest value.  For gradient
+descent you should actually do a gradient {\it
+ascent} and follow the positive gradient instead of the negative gradient.
+
+\begin{problem}
+    Write generic code to implement the Gradient Descent algorithm in as many dimensions
+    as necessary and test your code on a multivariable function where you know the
+    location and value of a local minimum.
+\end{problem}
+
+\begin{problem}
+    The functions like $f(x,y) = \sin(x)\cos(y)$ have many local extreme values which makes
+    optimization challenging.  Impelement your Gradient Descent code on this function to
+    find the local minimum $(0,0)$.  Start somewhere near $(0,0)$ and show by way of
+    example that your gradient descent code may not converge to this particular local
+    minimum. Why is this important?
+\end{problem}
+
+
+
+\newpage\section{Interpolation}
+The least squares problem that we studied in Chapter \ref{ch:linear_algebra} seeks to find a best
 fitting function that is {\it closest} (in the 2-norm sense) to a set of data.  What if,
 instead, we want to match the data points \underline{exactly} with a function. This is the realm of
 interpolation.  Take note that there are many many forms of interpolation that are
