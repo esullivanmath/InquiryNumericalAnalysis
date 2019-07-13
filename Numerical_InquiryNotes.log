@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 JUL 2019 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 JUL 2019 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2929,59 +2929,59 @@ Package pdftex.def Info: CreativeCommons.png used on input line 881.
  [36]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 936.
+Package pdftex.def Info: CreativeCommons.png used on input line 947.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [37]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 952.
+(mdframed)              on input line 963.
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 988.
+Package pdftex.def Info: CreativeCommons.png used on input line 999.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [38]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1000.
+Package pdftex.def Info: CreativeCommons.png used on input line 1011.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [39]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1056.
+Package pdftex.def Info: CreativeCommons.png used on input line 1072.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [40]
-Overfull \hbox (1.27528pt too wide) in paragraph at lines 1132--1135
+Overfull \hbox (1.27528pt too wide) in paragraph at lines 1142--1145
 []\OT1/jkp/m/n/12 Write code and cre-ate plots to demon-strate that the Bi-sec-
 tion Method
  []
 
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1135.
+Package pdftex.def Info: CreativeCommons.png used on input line 1148.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [41]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1206.
+Package pdftex.def Info: CreativeCommons.png used on input line 1221.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [42]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1260.
+Package pdftex.def Info: CreativeCommons.png used on input line 1270.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [43]
 File: CreativeCommons.png Graphic file (type png)
  <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1311.
+Package pdftex.def Info: CreativeCommons.png used on input line 1335.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [44]
 File: CreativeCommons.png Graphic file (type png)
 
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png used on input line 1358.
+Package pdftex.def Info: CreativeCommons.png used on input line 1382.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [45]) (./Ch03_Calculus.tex
 File: CreativeCommons.png Graphic file (type png)
@@ -5218,7 +5218,7 @@ sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (281 pages, 1216557 bytes).
+Output written on Numerical_InquiryNotes.pdf (281 pages, 1217431 bytes).
 PDF statistics:
  4584 PDF objects out of 5155 (max. 8388607)
  4216 compressed objects within 43 object streams

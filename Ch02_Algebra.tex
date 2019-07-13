@@ -903,19 +903,30 @@ fail.  Some of these issues can be foreseen by examining the iteration formula
 
 
 \begin{problem}\label{prob:newton_convergence}
-    Newton's Method is known to have a {\it quadratic convergence rate}.  This means that 
-    \[ \lim_{k \to \infty} \frac{|x_{k+1} - x_*|}{|x_k - x_*|^2} \]
-    will be constant where $x_*$ is the root that we're hunting for.  This implies that
+    Newton's Method is known to have a {\it quadratic convergence rate}.  This means that
+    there is some constant $C$ such that 
+    \[ |x_{k+1} - x_*| \leq C |x_{k} - x_*|^2, \]
+%     \[ \lim_{k \to \infty} \frac{|x_{k+1} - x_*|}{|x_k - x_*|^2} \]
+    where $x_*$ is the root that we're hunting for.  
+    To simplify the notation a bit we define $\varepsilon_{k} = |x_k - x_*|$ as the error
+    in the Newton iteration at step $k$.  Therefore, there must be a constant $C$ such
+    that 
+    \[ \varepsilon_{k+1} \leq C \varepsilon_k^2. \]
+    The quadratic convergence implies that
     if we plot the error in the new iterate on the $y$-axis and the error in the old
     iterate on the $x$ axis of a log-log plot then we will see a constant slope of 2.
-    (stop and verify why this would be true).
+    To see this we can take the log (base 10) of both sides of the previous equation to
+    get 
+    \[ \log(\varepsilon_{k+1}) = \log(C) + 2 \log(\varepsilon_k), \]
+    and we see that this is a linear function (on a log-log plot) and the slope is 2.
     
     In this problem we're going to build a numerical experiment to verify that Newton's
     method indeed has quadratic convergence.  Modify your Newton's method code so that it
     outputs all of the iterations instead of just the final root.  Once you have the
     iterations compute the error between the approximations and the exact root. For
     simplicity let's solve the equation $x^2-2=0$.  Plot the sequence of error
-    approximations with the iterate $e_k$ on the $x$-axis and the iterate $e_{k+1}$ on the
+    approximations with the iterate $\varepsilon_k$ on the $x$-axis and the iterate
+    $\varepsilon_{k+1}$ on the
     $y$-axis of a log-log plot.  
 %     \\ Your plot command will look something like: \\
 %     \mcode{loglog(error(1:end-1),error(2:end),'b*')} \\where \mcode{error} is a vector
@@ -926,11 +937,11 @@ fail.  Some of these issues can be foreseen by examining the iteration formula
 \end{problem}
 
 
-\begin{problem}
-    Repeat the previous problem with the bisection and regula falsi
-    methods.  Plot the errors of all three methods on the same plot and discuss the rates
-    of convergence for the three methods.
-\end{problem}
+% \begin{problem}
+%     Repeat the previous problem with the bisection and regula falsi
+%     methods.  Plot the errors of all three methods on the same plot and discuss the rates
+%     of convergence for the three methods.
+% \end{problem}
 
 
 \newpage\section{Quasi-Newton Methods}
@@ -1043,22 +1054,21 @@ details for ``why'' it works.
 \end{problem}
 
 \begin{problem}[Order of Convergence]
-    A root-finding method has a convergence rate of order $M$ if the ratio 
-    \[ \frac{|x_{k+1} - x_*|}{|x_k - x_*|^M} \]
-    is roughly constant for each iteration $k$.  In this ration, $x_*$ is the exact root, $x_k$ is
+    A root-finding method has a convergence rate of order $M$ if there is a constant $C$
+    such that 
+    \[ |x_{k+1} - x_*| \leq C |x_k - x_*|^M. \]
+%     \[ \frac{|x_{k+1} - x_*|}{|x_k - x_*|^M} \]
+    Here, $x_*$ is the exact root, $x_k$ is
     the $k^{th}$ iteration of the root finding technique, and $x_{k+1}$ is the
     $(k+1)^{st}$ iteration of the root finding technique.  We will call the value
-    $|x_{k}-x_*|$ the ``old'' error since it is the error in the method at the old step.
-    We will call the value $|x_{k+1}-x_*|$ the ``new'' error since it is the error in the
+    $\varepsilon_k = |x_{k}-x_*|$ the ``old'' error since it is the error in the method at the old step.
+    We will call the value $\varepsilon_{k+1} = |x_{k+1}-x_*|$ the ``new'' error since it is the error in the
     method at the new step.
     \begin{enumerate}
         \item[(a)] If we consider the equation 
-            \[ C =   \frac{|x_{k+1} - x_*|}{|x_k - x_*|^M} \]
+            \[ |x_{k+1} - x_*| \leq C |x_k - x_*|^M \]
             and take the logarithm (base 10) of both sides then we get
-            \[ \log(C) = \log \left( |x_{k+1} - x_*| \right) -
-            M \log\left( |x_{k} - x_*| \right). \]
-            Solving for $\log(|x_{k+1} - x_*|)$ we get
-            \[ \log\left( |x_{k+1} - x_*| \right) = \underline{\hspace{1in}} +
+            \[ \log\left( |x_{k+1} - x_*| \right) \leq \underline{\hspace{1in}} +
             \underline{\hspace{1in}} \]
         \item[(b)] In part (a) you should have found that the log of new error is a linear
             function of the log of the old error.  What is the slope of this linear
@@ -1164,6 +1174,20 @@ details for ``why'' it works.
     the bisection method, the regula-falsi method, Newton's method, and the secant method
     on a problem where we know the exact answer. 
 \end{problem}
+
+
+\begin{problem}
+    Show several plots that demonstrates that the Chebyshev Method,
+    \[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} - \frac{1}{2} \frac{[f(x_n)]^2}{[f'(x_n)]^3}
+f''(x_n), \]
+    exhibits a third-order convergence rate. That is, create a log-log plot of the
+    successive errors for several different equation-solving problems.  What does this
+    ``third order convergence'' mean about the successive
+    approximations in the Chebyshev iterations?  What are the pro's and con's to using
+    Chebyshev's method instead of Newton's method?
+\end{problem}
+
+
 
 
 
