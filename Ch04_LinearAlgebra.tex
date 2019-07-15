@@ -30,6 +30,8 @@ don't we start ``easy''.
 \begin{problem}
     Recall that the dot product of two vectors $\bu, \bv \in \mathbb{R}^n$ is 
     \[ \bu \cdot \bv = \sum_{j=1}^n u_j v_j. \]
+    Without summation notation,
+    \[ \bu \cdot \bv = u_1 v_1 + u_2 v_2 + \cdots + u_n v_n. \]
     Write a \ProgLang function that accepts two vectors and returns the dot product. \\
     \ifnum\Python=0
     \mcode{function DotProduct = MyDotProduct(u, v)} \\
@@ -52,7 +54,7 @@ don't we start ``easy''.
 \end{problem}
 
 \begin{problem}\label{prob:matrix_mult}
-    Recall that if $A \in \mathbb{R}^{n \times p}$ and $B \in \mathbb{R}^{p \times m}$
+    Recall that if $A$ and $B$ are matrices with $A \in \mathbb{R}^{n \times p}$ and $B \in \mathbb{R}^{p \times m}$
     then the product $AB$ is defined as
     \[ \left( AB \right)_{ij} = \sum_{k=1}^p A_{ik} B_{kj}. \]
     A moments reflection reveals that each entry in the matrix product is actually a dot
@@ -111,10 +113,11 @@ matrices of any size.
         95 & 106 & 117 \end{pmatrix} \]
 \end{example}
 
-\ifnum\Python=1 {\color{red} Note: Write a similar paragraph for Python} \fi
-The following MATLAB code gives the matrix product between two matrices, but when you
+% \ifnum\Python=1 {\color{red} Note: Write a similar paragraph for Python} \fi
+The following \ProgLang code gives the matrix product between two matrices, but when you
 build your own code you need to have sufficient catches that avoid inappropriately sized
 matrices.
+\ifnum\Python=0
 \begin{lstlisting}
 for i = 1:size(A,1) % row index
     for j = 1:size(B,2) % column index
@@ -122,6 +125,13 @@ for i = 1:size(A,1) % row index
     end
 end
 \end{lstlisting}
+\else
+\begin{lstlisting}
+for i in range(0,A.shape[1]):
+    for j in range(0,B.shape[2]):
+        AB[i,j] = dot( A[i,:], B[:,j] )
+\end{lstlisting}
+\fi
 
 \begin{problem}
     In matrix arithmetic there are two types of multiplication: matrix-matrix
