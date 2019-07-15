@@ -638,8 +638,37 @@ differential equations in Chapter \ref{ch:odes}.
 
 
 \newpage\section{Integration}
-Next we will build methods for approximating integrals.  Recall from Calculus that the definition of the
-Riemann integral is
+\begin{problem}
+    Consider the shaded area of the region under the function plotted in Figure
+    \ref{fig:integral_ex1} between $x=0$ and $x=2$.  
+    \begin{enumerate}
+        \item[(a)] What rectangle with area 6 gives an upper bound for the area under the
+            curve? Can you give a better upper bound?
+        \item[(b)] Why must the area under the curve be greater than 3?
+        \item[(c)] Is the area greater than 4? Why/Why not?
+        \item[(c)] Work with your partner to give an estimate of the area and provide an
+            estimate for the amount of error that you're making.
+    \end{enumerate}
+\end{problem}
+
+\begin{figure}[ht!]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, axis on top, grid,major grid style=black, xtick={0,0.5,1,1.5,2},
+                ytick={0,0.5,1,1.5,2,2.5,3}, domain=0:2, ymin=0, ymax=3]
+                \addplot[smooth, very thick, black, fill=blue!30] {0.25*sin(4*deg(x)) +
+                    x*exp(-0.15*x)+1} \closedcycle;
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Approximate the area under the curve between $x=0$ and $x=2$.}
+    \label{fig:integral_ex1}
+\end{figure}
+
+
+
+In this section we will build methods for approximating integrals.  Recall from Calculus
+that the definition of the Riemann integral is
 \begin{flalign}
     \int_a^b f(x) dx = \lim_{\Delta x \to 0} \sum_{j=1}^N f(x_j) \Delta x
     \label{eqn:Riemann_integral}
@@ -680,7 +709,7 @@ a depiction of this in Figure \ref{fig:integral_with_rectangles}.
 
 Clearly, the more rectangles we choose the closer the sum of the areas of the rectangles will get to the integral.
 \begin{problem}
-    Write \ProgLang code approximate an integral withe Riemann sums. You should ALWAYS start by writing pseudo-code as comments in your
+    Write \ProgLang code approximate an integral with Riemann sums. You should ALWAYS start by writing pseudo-code as comments in your
     \ProgLang file.    Your \ProgLang function
     should accept \ifnum\Python=0 an anonymous function handle\else a Python function\fi, a lower bound, an upper bound, the number
     of subintervals, and an optional input that allows the user to designate whether they
@@ -908,9 +937,9 @@ how to systematically approximate definite integrals via trapezoids.
     = \sin(x)$ from $x=0$ to $x=1$ with more and more trapezoids.  In each case compare to
     the exact answer and find the absolute percent error.  The goal is to answer the
     question: \\
-    If I calculate the definite integral with a fixed $\Delta x$ and get an absolute
+    {\it If I calculate the definite integral with a fixed $\Delta x$ and get an absolute
     percent error, $P$, then what absolute percent error will I get if I use a width of
-    $\Delta x / M$ for some positive number $M$?
+$\Delta x / M$ for some positive number $M$?}
 \end{problem}
 
 The trapezoidal rule does a decent job approximating integrals, but ultimately you are
@@ -948,7 +977,7 @@ and the technique will give an exact answer for any polynomial of order 2 or bel
 
 \begin{problem}
     \begin{enumerate}
-        \item[(a)] Use the method described above to find approximate the area under the
+        \item[(a)] Use the method described above to approximate the area under the
             curve $f(x) = (1/5) x^2 (5-x)$ on the interval $[1,4]$.  To be clear, you will
             be using the points $a=1, m=2.5$, and $b=4$ in the above derivation.  
         \item[(b)] Next find the exact area under the curve $g(x) = (-1/2)x^2 +3.3x -2$ on
@@ -1001,7 +1030,7 @@ for integration.
 \end{technique}
 
 \begin{problem}
-    We have spend a lot of time over the past many pages building approximations of the
+    We have spent a lot of time over the past many pages building approximations of the
     order of the error for numerical integration and differentiation schemes.  It is now
     up to you.  \\
     Build a numerical experiment that allows you to conjecture the order of the
@@ -1113,16 +1142,16 @@ approximations for integrals and we leave the further research to the curious re
 \newpage\section{Optimization}
 You likely recall that one of the major applications of Calculus was to solve optimization
 problems -- find the value of $x$ which makes some function as big or as small as
-possible.  The process itself can sometimes be rather challenging since due to the
-modeling aspect of the problems but all due to the fact that the differentiation might be
+possible.  The process itself can sometimes be rather challenging due to either the
+modeling aspect of the problems and/or the fact that the differentiation might be
 quite cumbersome.  In this section we will revisit those problems from Calculus, but our
 goal will be to build a numerical method for the Calculus step in hopes to avoid the messy
 algebra and differentiation.
 
 \begin{problem}[The Classic Cardboard Box Problem]\label{prob:cardboard}
     A piece of cardboard measuring 20cm by 20cm is to be cut so that it can be folded into
-    a box without a lid. Find the size of the cut, $x$, that maximizes the volume of the
-    box. 
+    a box without a lid. We want to find the size of the cut, $x$, that maximizes the
+    volume of the box. 
     \begin{center}
         \begin{tikzpicture}
             \draw[thick, black] (0,0) -- (5,0) -- (5,5) -- (0,5) -- (0,0);
@@ -1216,12 +1245,18 @@ one(s) you ended up recreating?  The intuition for these algorithms is pretty da
     \begin{itemize}
         \item Find the derivative of your objective function, $f'(x)$.
         \item Pick a starting point, $x_0$.
-        \item Pick a small control parameter, $\alpha$, called the ``learning rate''
+        \item Pick a small control parameter, $\alpha$ (in machine learning this parameter
+            is called the ``learning rate'' for the gradient descent algorithm).
         \item Use the iteration $x_{n+1} = x_n + \alpha f'(x_n) $ if you're maximizing.
             Use the iteration $x_{n+1} = x_n - \alpha f'(x_n)$ if you're minimizing.
         \item Iterate (decide on a good stopping rule)
     \end{itemize}
 \end{algorithm}
+% \begin{problem}
+%     Give graphical reasoning for the formula given in the 1D gradient descent algorithm.
+%     Also decide what will happen in the algorithm if $\alpha$ is larger or smaller.
+% \end{problem}
+
 \begin{problem}
     Write code to implement the 1D gradient descent algorithm and use it to solve
     Problem \ref{prob:cardboard}. Compare your answer to the analytic solution.
@@ -1335,8 +1370,8 @@ one(s) you ended up recreating?  The intuition for these algorithms is pretty da
 
 
 \newpage\section{Curve Fitting}
-In this section we'll change our focus a bit to look at a different question from algebra
-\ldots and reveal a hidden numerical optimization problem.
+In this section we'll change our focus a bit to look at a different question from algebra,
+and, in turn, reveal a hidden numerical optimization problem.
 Instead of finding the roots of an algebraic equation, what if we have a few data points
 and a reasonable guess for the type of function fitting the points, how would we determine
 the actual function?  
@@ -2013,9 +2048,49 @@ optimization occurs see a course in mathematical optimization or machine learnin
     the function along with its numerical first derivative.
     \begin{enumerate}
         \item[(a)] $\ds f(x) = \frac{x}{1+x^4}$
-        \item[(b)] $\ds g(x) = (x_1)^3 (x-2)^2$
+        \item[(b)] $\ds g(x) = (x-1)^3 (x-2)^2$
         \item[(c)] $\ds h(x) = \sin\left(x^2\right)$
     \end{enumerate}
+\end{problem}
+
+
+\begin{problem}
+    A bicyclist completes a race course in 90 seconds.  The speed of the biker at each
+    10-second interval is determined using a radar gun and is given in the table in feet
+    per second.  How long is the race course?
+    \begin{center}
+        \begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            Time (sec) &      0 & 10 & 20 & 30 & 40 & 50 & 60 & 70 & 80 & 90 \\ \hline
+            Speed (ft/sec) & 34 & 32 & 29 & 33 & 37 & 40 & 41 & 36 & 38 & 39 \\
+            \hline
+        \end{tabular}
+        \begin{tikzpicture}
+            \begin{axis}[axis lines=center, grid, xlabel={Time}, ylabel={Speed}, ymin=0,
+                ymax=45, xmin=0, xmax=95]
+                \addplot[only marks, mark=*] coordinates{
+(0,34)(10,32)(20,29)(30,33)(40,37)(50,40)(60,41)(70,36)(80,38)(90,39)
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{problem}
+
+\begin{problem}
+    For each of the following functions write code to find the local maximum or minimum
+    that is closest to $x=0$.  You may want to start with a plot of the function just to
+    get a feel for where the local extreme value might be.
+    \begin{enumerate}
+        \item[(a)] $\displaystyle f(x) = \frac{x}{1+x^4} + \sin(x)$
+        \item[(b)] $\displaystyle g(x) =
+            \left(x-1\right)^3\cdot\left(x-2\right)^2+e^{-0.5\cdot x}$
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Go back to your old Calculus textbook or homework and find your favorite optimization
+    problem.  State the problem, create the mathematical model, and use any of the numerical
+    optimization techniques in this chapter to get an approximate solution to the problem.
 \end{problem}
 
 
