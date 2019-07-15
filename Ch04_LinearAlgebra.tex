@@ -119,6 +119,7 @@ build your own code you need to have sufficient catches that avoid inappropriate
 matrices.
 \ifnum\Python=0
 \begin{lstlisting}
+AB = zeros( size(A,1) , size(B,2) );
 for i = 1:size(A,1) % row index
     for j = 1:size(B,2) % column index
         AB(i,j) = dot( A(i,:) , B(:,j) );
@@ -127,9 +128,10 @@ end
 \end{lstlisting}
 \else
 \begin{lstlisting}
-for i in range(0,A.shape[1]):
-    for j in range(0,B.shape[2]):
-        AB[i,j] = dot( A[i,:], B[:,j] )
+AB = np.zeros( (A.shape[0], B.shape[1]) )
+for i in range(0,A.shape[0]): # row index
+    for j in range(0,B.shape[1]): # column index
+        AB[i,j] = np.dot( A[i,:] , B[:,j])
 \end{lstlisting}
 \fi
 
@@ -142,7 +144,7 @@ for i in range(0,A.shape[1]):
 \end{problem}
 
 
-\newpage\section{Solving Systems of Linear Equations}
+\newpage\section{Efficiently Solving Systems of Linear Equations}
 One of the many classic problems of linear algebra is to solve the linear system $A \bx =
 \bb$. In this chapter we will talk about efficient ways to have the computer solve
 these systems. You likely recall row reduction (AKA Gaussian Elimination or RREF) from previous linear algebra
@@ -165,7 +167,7 @@ problem.
 \end{problem}
 
 
-\subsection{Upper and Lower Triangular Systems}
+\subsection{Lower Triangular Systems}
 Row reduction works well on dense (or nearly dense) matrices but if the coefficient matrix
 has special structure then we can avoid row reduction in lieu of faster algorithms.
 Furthermore, the process that you know as Gaussian Elimination is really just a collection
@@ -189,6 +191,9 @@ Elimination that is easily implemented in a computer.
     The following code solves the problem $L {\bf y} = \bb$ using forward
     substitution.  The matrix $L$ is assumed the be lower triangular with ones on the main
     diagonal.
+
+\bcode
+\ifnum\Python=0
 \begin{lstlisting}
 function y = LSolve(L , b)
 n = length(b);
@@ -200,7 +205,21 @@ for i = 1:n
     end
 end
 \end{lstlisting}
-\ifnum\Python=1 {\color{red} Note: Write a similar block for Python} \fi
+\else
+\begin{lstlisting}
+def LSolve(L, b):
+    L = np.matrix(L) # make sure L is the correct data type
+    n = b.size
+    y = np.matrix( np.zeros( (n,1)) )
+    for i in range(0,n):
+        y[i] = b[i]
+        for j in range(0,i):
+            y[i] = y[i] - L[i,j] * y[j]
+    return(y)
+\end{lstlisting}
+\fi
+Take note in the code that we are leveraging the fact that \ProgLang will not enter a
+\mcode{for} loop if the ending value is less than the starting value.
 \end{technique}
 
 \begin{problem}
@@ -218,6 +237,8 @@ end
     solve for ${\bf y}$.  Your code needs to work on systems of arbitrarily large size.
 \end{problem}
 
+
+\subsection{Upper Triangular Systems}
 Now that we have a method for solving lower triangular systems, let's build a similar
 method for solving upper triangular systems.  The merging of lower and upper triangular
 systems will play an important role in solving systems of equations.
@@ -235,18 +256,33 @@ systems will play an important role in solving systems of equations.
     The following code solves the problem $U {\bf x} = {\bf y}$ using backward
     substitution.  The matrix $U$ is assumed the be upper triangular.  You'll notice that
     most of this code is incomplete.  It is your job to complete this code.
+
+\bcode
+\ifnum\Python=0
 \begin{lstlisting}
 function x = USolve(U , y)
 n = length(y);
 x = zeros(n,1);
-for i = ? : ? : ?        % what should you be looping over?
-    x(i) = y(i) / ???;   % what should you be dividing by?
-    for j = ? : ? : ?    % what should you be looping over? 
-        x(i) = x(i) - U(i,j) * x(j) / ???;  % what should you be dividing by?
+for i = ? : ? : ?        % what should we be looping over?
+    x(i) = y(i) / ???;   % what should we be dividing by?
+    for j = ? : ? : ?    % what should we be looping over? 
+        x(i) = x(i) - U(i,j) * x(j) / U(i,i)
     end
 end
 \end{lstlisting}
-\ifnum\Python=1 {\color{red} Note: Write a similar technique for Python}\fi
+\else
+\begin{lstlisting}
+def USolve(U, y):
+    U = np.matrix(U)
+    n = y.size
+    x = np.matrix( np.zeros( (n,1)))
+    for i in range(? , ? , ?):     # what should we be looping over?
+        x[i] = y[i] / ???          # what should we be dividing by?
+        for j in range(? , ? , ?): # what should we be looping over:
+            x[i] = x[i] - U[i,j] * x[j] / U[i,i]
+    return(x)
+\end{lstlisting}
+\fi
 \end{technique}
 
 \begin{problem}
@@ -272,14 +308,16 @@ In the next few problems we will solve the system of equations
 \[ \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \begin{pmatrix} x_1
     \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \]
 using upper and lower triangular matrices.  We have already solved this problem with your
-Gaussian Elimination algorithm -- now let's improve upon that algorithm and reveal some
-amazing underlying structure.
+Gaussian Elimination algorithm at the beginning of this chapter -- now let's improve upon
+that algorithm and reveal some amazing underlying structure.
 
 Throughout the following several problems, let $A$ and $b$ be defined as
 \[ A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{pmatrix} \qquad \bb =
 \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}. \]
 \begin{problem}
-    Open a new MATLAB script and enter the matrix $A$.  Observe what happens when we do the following in sequence:
+    In \ProgLang enter the matrix $A$ \ifnum\Python=1(Remember to use \mcode{A =
+    np.matrix()} to define a Python matrix)\fi.  Observe what happens when we do the
+    following in sequence:
     \begin{itemize}
         \item left multiply $A$ by the matrix
             \[ L_1 = \begin{pmatrix} 1 & 0 & 0 \\ -4 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
@@ -316,7 +354,7 @@ Throughout the following several problems, let $A$ and $b$ be defined as
 
 \begin{problem}
     In the previous problem you likely found that $L = L_1^{-1} L_2^{-1} L_3^{-1}$.  Use
-    MATLAB to find $L_j^{-1}$ for each $j$ and discuss general observations about how to
+    \ProgLang to find $L_j^{-1}$ for each $j$ and discuss general observations about how to
     find inverses of lower triangular matrices.  
 \end{problem}
 
@@ -349,6 +387,9 @@ Throughout the following several problems, let $A$ and $b$ be defined as
     The following MATLAB function takes a square matrix $A$ and
     outputs the matrices $L$ and $U$ such that $A = LU$.  Partial code is given below.
     Complete the code.
+
+\bcode
+\ifnum\Python=0
 \begin{lstlisting}
 function [L,U] = MyLU(A)
 n = size(A,1);      % finds the size of the matrix
@@ -368,6 +409,24 @@ for j = 1 : (n-1)   % loop over the columns
     end
 end
 \end{lstlisting}
+\else
+\begin{lstlisting}
+def MyLU(A):
+    n = A.shape[0]
+    if A.shape[0] != A.shape[1]:
+        print('Error: The matrix A is not square.')
+    L = np.matrix( np.identity(n) )
+    U = A
+    for j in range(0,n-1):
+        for i in range(j+1,n):
+            mult = A[i,j] / A[j,j]
+            A[i, j+1:n] = A[i, j+1:n] - mult * A[j,j+1:n]
+            U[i, j+1:n] = A[i, j+1:n]
+            L[i,j] = mult
+            U[i,j] = 0
+    return(L,U)
+\end{lstlisting}
+\fi
 \end{technique}
 
 \begin{thm}[LU Factorization Algorithm]
@@ -389,6 +448,9 @@ end
     system for which you know the answer.  Then test your problem on a system
     that you don't know the solution to.  Discuss where your code will fail. Use the
     following partial code to test your functions.
+
+\bcode
+\ifnum\Python=0
 \begin{lstlisting}
 A = [...; ...; ... ];
 b=  [...; ...; ... ];
@@ -398,6 +460,21 @@ x = Usolve(U,y)
 MATLABExactAnswer = A\b
 MyError = norm(x-MATLABExactAnswer)
 \end{lstlisting}
+\else
+\begin{lstlisting}
+import numpy as np
+A = np.matrix( ) # put the matrix A here
+b = np.matrix( ) # put the vector b here
+ExactSoln = np.linalg.solve(A,b) # get the exact answer from numpy's linalg.solve()
+
+L, U = MyLU(A) # get the L and U matrices
+y = LSolve(L,b) # do the lower solve
+x = USolve(U,y) # do the upper solve
+
+Error = np.linalg.norm(ExactSoln - x) # check the size of the difference
+print(Error)
+\end{lstlisting}
+\fi
 \end{problem}
 
 
@@ -431,7 +508,135 @@ MyError = norm(x-MATLABExactAnswer)
 \end{problem}
 
 
-\newpage\section{Curve Fitting with Linear Algebra -- The Least Squares Problem}\label{sec:least_squares}
+
+\newpage\section{The QR Factorization}
+There are several instances where the $LU$ factorization will not perform very fast.  In
+fact, there are several ways that the $LU$ factorization (the way that we have stated it)
+will fail.  In this section we propose a new factorization that improves the performance
+of solving a linear system in some instances.
+
+Let's say that we want to find $\bx$ such that $A \bx =
+\bb$ but where $\bb$ is not in the column space of $A$.  Strictly speaking there is no
+solution to this type of equation -- the column vector $\bb$ cannot be written as a linear
+combination of the columns of $A$.  If we multiply both sides of this equation by $A^T$ we
+build what are called the {\bf normal equations:}
+\[ A^T A \bx = A^T \bb. \]
+In this equation, the right-hand side is a collection of the projections of $\bb$ onto the
+column space of $A$.  The nicest type of projections occur when the columns are
+perpendicular to each other.  Hence, our goal is to take $A$ and factor it into $A = QR$
+where the columns of $Q$ are orthonormal (orthogonal and normalized) and $R$ is an upper
+triangular matrix.  In this case we get the following advantages:
+\begin{itemize}
+    \item If $A \bx = \bb$ then we can write $QR \bx = \bb$.
+    \item Multiplying by $Q^T$ on both sides gives $R \bx = Q^T \bb$.
+    \item If $R$ is upper triangular then the resulting solve can be done very quickly.
+\end{itemize}
+
+\begin{problem}
+    If $Q \in \mathbb{R}^{m \times n}$ is an orthonormal matrix then what are the products
+    $Q^TQ$ and $QQ^T$?  
+\end{problem}
+
+\begin{problem}
+    If $A  = QR$ where $Q$ is an orthonormal matrix and $R$ is upper triangular then how
+    would we go about solving the equation $A\bx = \bb$ and where would the $QR$
+    factorization help us?
+\end{problem}
+
+\begin{problem}
+    First we'll do a problem by hand: \\
+    Consider the matrix $A = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 1
+    \end{pmatrix}$.  We want to factor $A$ into $A = QR$ where the columns of $Q$ are
+    orthonormal and $R$ is upper triangular.  Here is the algorithm (run every step by
+    hand!).  For notation purposes, $\ba_j$ will be the $j^{th}$ column of $A$.
+    \begin{enumerate}
+        \item Define $\bq_1 = \displaystyle \frac{\ba_1}{\|\ba_1\|}$.  This will be the
+            first column of $Q$.\\
+%             \teacher{
+%                 \[ \bq_1 = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \\ 0 \end{pmatrix} \]
+%             }
+        \item Define $\bq_2 = \displaystyle \ba_2 - \left( \ba_2 \cdot \bq_1 \right)
+            \bq_1$.  Once you've done this calculation normalize your result so
+            $\displaystyle \bq_2 = \frac{\bq_2}{\|\bq_2\|}$. This is the second column
+            of $Q$.  \\Explain the geometry of this step (DRAW A PICTURE!)\\
+%             \teacher{
+%                 \[ \bq_2 = \begin{pmatrix} 1\\0\\1\end{pmatrix} - \frac{1}{\sqrt{2}}
+%                         \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \\0\end{pmatrix} =
+%                             \begin{pmatrix} 1/2 \\ -1/2 \\ 1 \end{pmatrix} \quad \bu_2 =
+%                                 \begin{pmatrix} 1/\sqrt{6} \\ -1/\sqrt{6} \\ 2/\sqrt{6}
+%                                 \end{pmatrix} \]
+%             }
+        \item Define $\bq_3 = \displaystyle \ba_3 - \left( \ba_3 \cdot \bq_1 \right)\bq_1
+            - \left( \ba_3 \cdot \bq_2 \right)\bq_2$ and then redefine $\displaystyle
+            \bq_3 = \frac{\bq_3}{\|\bq_3\|}$.  This is now the third column of
+            $Q$.\\
+%             \teacher{
+%             \[ \bq_3 = \begin{pmatrix} -1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}
+%                 \end{pmatrix} \]
+%             }
+        \item The matrix $R$ is formed as follows:
+            \[ R = \begin{pmatrix} \ba_1 \cdot \bq_1 & \ba_2 \cdot \bq_1 & \ba_3 \cdot
+                    \bq_1 \\ 0 & \ba_2 \cdot \bq_2 & \ba_3 \cdot \bq_2 \\ 0 & 0 & \ba_3
+                    \cdot \bq_3 \end{pmatrix} \]
+%             \teacher{
+%             \[ R = \begin{pmatrix} 2/\sqrt{2} & 1/\sqrt{2} & 1/\sqrt{2} \\ 0 & 3/\sqrt{6}
+%                     & 1\/\sqrt{6} \\ 0 & 0 & 2/\sqrt{3} \end{pmatrix} \]
+%             }
+        \item Write down $Q$ and observe that the process is just begging for several
+            loops on a computer to implement this on bigger matrices.
+        \item Use \ProgLang to check that $A = QR$.
+        \item Finally let's look at the utility of the result:
+            \begin{enumerate}
+                \item Since $Q$ is an orthonormal matrix $Q^TQ$ is the identity matrix!
+                    (Explain why.)
+                \item If we want to solve $A\bx = \bb$ and we can write $A = QR$ then 
+                    \[ A \bx = \bb \quad \implies \quad QR \bx = \bb \quad \implies \quad
+                        R \bx = Q^T \bb \]
+                \item Since $R$ is upper triangular we can use the \mcode{Usolve} code we
+                    have from our work with the LU-factorization to solve for $\bx$.  THIS
+                    IS REALLY FAST!!
+                \item Compare this to the number of computer operations needed so solve
+                    the normal equations $A^TA\bx = A^T \bb$ with an $LU$-solver.
+            \end{enumerate}
+    \end{enumerate}
+\end{problem}
+
+\ifnum\Python=1 {\color{red} Continue altering the coding sections starting here}\fi
+
+\begin{problem}
+    Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs 
+    both the $Q$ matrix and the $R$ matrix. Pseducode for this function is as follows:
+    \begin{itemize}
+        \item Set up the function call:\\ \mcode{function [Q,R] = MyQR(A)}
+        \item Set up \mcode{zeros} matrices for both $Q$ and $R$.  Remember that $A$ may
+            not be square so assume that the columns are in $\mathbb{R}^m$ and the rows
+            are in $\mathbb{R}^n$.  Hence $Q$ will be $m \times n$ and $R$ will be $n
+            \times n$.
+        \item Start a loop that counts across the columns:\\ \mcode{for j=1:n}
+            \begin{itemize}
+                \item define a temporary variable: $\hat{\bq} = \ba_j$
+                \item start a loop that will do all of the subtractions and build some of
+                    the $R's$:\\ \mcode{for i=1:j-1}
+                    \begin{itemize}
+                        \item build one of the $R's$: $R_{ij} = \ba_j \cdot \bq_i$
+                        \item Do one of the subtractions: $\hat{\bq} = \hat{\bq} - R_{ij} \bq_i$
+                    \end{itemize}
+                \item end the loop for \mcode{i}
+                \item normalize the $j^{th}$ column in $Q$: $\bq_j = \hat{\bq} / \| \hat{\bq} \|$
+                \item build the $R's$ on the diagonal: $R_{jj} = \ba_j \cdot \bq_j$
+            \end{itemize}
+        \item end the loop for \mcode{j}
+    \end{itemize}
+\end{problem}
+
+\begin{problem}
+    Write a script that tests your \mcode{MyQR} function on randomly generated $m\times n$ matrices
+    with randomly generated right-hand sides. Compare the time that it takes to solve the
+    least squares problems using QR to the time necessary to solve with LU via the normal
+    equations. When is LU more efficient? When is QR more efficient?
+\end{problem}
+
+\newpage\section{Curve Fitting -- The Least Squares Problem via Linear Algebra}\label{sec:least_squares}
 \begin{problem}\label{prob:least_squares_1}
     Grab the data sets from the Google Sheet
     \href{https://docs.google.com/spreadsheets/d/1bpqb51eTTtJbe9V1JLt_JkzN-8kbIh2RzisRQHIMLrY/edit?usp=sharing}{HERE}.
@@ -555,8 +760,8 @@ simple linear algebra behind the scenes.
             linear data).
 
         \item Now that this is a square matrix you can solve for $\beta_0$ and $\beta_1$ using
-            your $LU$ code. (You can also use \texttt{MATLAB}'s {\it backslash} (\verb|\|) command to
-            do the linear solve)
+            your $LU$ or $QR$ code. \ifnum\Python=0 (You can also use \texttt{MATLAB}'s {\it backslash} (\verb|\|) command to
+            do the linear solve)\fi
         \item Now that you have $\beta_0$ and $\beta_1$ you can form the linear approximation.
             Plot the approximation along with your data.  Also write code to plot the
             residuals (subplot would be great here).
@@ -619,154 +824,6 @@ matrix inversion (or Gaussian Elimination).
     Explain what the previous problem tells you about fitting polynomials to data.
 \end{problem}
 
-% \begin{problem}
-%     In the same Excel document you will find a set of data representing a nonlinear
-%     function.  Use Excel to find the best fit curve by making a {\it guess} about the form
-%     of the function.  Since this is a nonlinear relationship our method of using the
-%     normal equations will not work.
-% \end{problem}
-% 
-% \begin{problem}
-%     The method of using the {\bf normal equations} to solve a least squares regression
-%     problem also works for multiple regression.  In this example go to the second tab of
-%     the Excel document to find the Hollywood Box Office Receipts (measured in millions).
-%     We are seeking a model of the form
-%     \[ X_1  \approx \beta_1 + \beta_2 X_2 + \beta_3 X_3. \]
-%     That is, we seek to predict first year box office receipts ($X_1$) from production
-%     cost data ($X_2$) and promotional cost data ($X_3$).
-%     \begin{itemize}
-%         \item Read the data into MATLAB
-%         \item Find the matrix $A$ to form the overdetermined system of equations
-%             \[ A \begin{pmatrix} \beta_1 \\ \beta_2 \\ \beta_3 \end{pmatrix} =
-%                     \bx_1 \]
-%         \item Form the normal equations and solve for $\beta_1, \beta_2,$ and $\beta_3$.  
-%         \item Star Wars: The Force Awakens had a production cost of \$32M and a
-%             promotional cost of only \$17M.  What does our model predict about the first
-%             year box office receipts?
-%     \end{itemize}
-% \end{problem}
-% 
-% 
-% \begin{problem}
-%     Let's go back to the World Health Organization, but this time you're looking for a
-%     data set where you can use \underline{multiple regression} (linear or polynomial).
-%     Give a full description of the data set, discuss why regression is a sensible thing to
-%     do, find a regression model, and make a prediction using your regression model.
-% \end{problem}
-% 
-
-
-\newpage\section{The QR Factorization}
-Our goal in this section is to improve the efficiency of solving the least squares
-problems via the normal equations.  Recall that we want to find $\bx$ such that $A \bx =
-\bb$ but where $\bb$ is not in the column space of $A$.  This necessitated the use of the
-normal equations $A^T A \bx = A^T \bb$ to project $\bb$ onto the column space of $A$.
-This would be FAR more efficient if the columns of $A$ were orthogonal (perpendicular) and
-normalized (unit vectors).  Hence, our goal is to take $A$ and factor it into $A = QR$
-where the columns of $Q$ are orthonormal (orthogonal and normalized) and $R$ is an upper
-triangular matrix.
-
-\begin{problem}
-    If $Q \in \mathbb{R}^{m \times n}$ is an orthonormal matrix then what are the products
-    $Q^TQ$ and $QQ^T$?  
-\end{problem}
-
-\begin{problem}
-    If $A  = QR$ where $Q$ is an orthonormal matrix and $R$ is upper triangular then how
-    would we go about solving the equation $A\bx = \bb$ and where would the $QR$
-    factorization help us?
-\end{problem}
-
-\begin{problem}
-    First we'll do a problem by hand: \\
-    Consider the matrix $A = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 1
-    \end{pmatrix}$.  We want to factor $A$ into $A = QR$ where the columns of $Q$ are
-    orthonormal and $R$ is upper triangular.  Here is the algorithm (run every step by
-    hand!).  For notation purposes, $\ba_j$ will be the $j^{th}$ column of $A$.
-    \begin{enumerate}
-        \item Define $\bq_1 = \displaystyle \frac{\ba_1}{\|\ba_1\|}$.  This will be the
-            first column of $Q$.\\
-%             \teacher{
-%                 \[ \bq_1 = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \\ 0 \end{pmatrix} \]
-%             }
-        \item Define $\bq_2 = \displaystyle \ba_2 - \left( \ba_2 \cdot \bq_1 \right)
-            \bq_1$.  Once you've done this calculation normalize your result so
-            $\displaystyle \bq_2 = \frac{\bq_2}{\|\bq_2\|}$. This is the second column
-            of $Q$.  \\Explain the geometry of this step (DRAW A PICTURE!)\\
-%             \teacher{
-%                 \[ \bq_2 = \begin{pmatrix} 1\\0\\1\end{pmatrix} - \frac{1}{\sqrt{2}}
-%                         \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \\0\end{pmatrix} =
-%                             \begin{pmatrix} 1/2 \\ -1/2 \\ 1 \end{pmatrix} \quad \bu_2 =
-%                                 \begin{pmatrix} 1/\sqrt{6} \\ -1/\sqrt{6} \\ 2/\sqrt{6}
-%                                 \end{pmatrix} \]
-%             }
-        \item Define $\bq_3 = \displaystyle \ba_3 - \left( \ba_3 \cdot \bq_1 \right)\bq_1
-            - \left( \ba_3 \cdot \bq_2 \right)\bq_2$ and then redefine $\displaystyle
-            \bq_3 = \frac{\bq_3}{\|\bq_3\|}$.  This is now the third column of
-            $Q$.\\
-%             \teacher{
-%             \[ \bq_3 = \begin{pmatrix} -1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}
-%                 \end{pmatrix} \]
-%             }
-        \item The matrix $R$ is formed as follows:
-            \[ R = \begin{pmatrix} \ba_1 \cdot \bq_1 & \ba_2 \cdot \bq_1 & \ba_3 \cdot
-                    \bq_1 \\ 0 & \ba_2 \cdot \bq_2 & \ba_3 \cdot \bq_2 \\ 0 & 0 & \ba_3
-                    \cdot \bq_3 \end{pmatrix} \]
-%             \teacher{
-%             \[ R = \begin{pmatrix} 2/\sqrt{2} & 1/\sqrt{2} & 1/\sqrt{2} \\ 0 & 3/\sqrt{6}
-%                     & 1\/\sqrt{6} \\ 0 & 0 & 2/\sqrt{3} \end{pmatrix} \]
-%             }
-        \item Write down $Q$ and observe that the process is just begging for several
-            loops on a computer to implement this on bigger matrices.
-        \item Use MATLAB to check that $A = QR$.
-        \item Finally let's look at the utility of the result:
-            \begin{enumerate}
-                \item Since $Q$ is an orthonormal matrix $Q^TQ$ is the identity matrix!
-                    (Explain why.)
-                \item If we want to solve $A\bx = \bb$ and we can write $A = QR$ then 
-                    \[ A \bx = \bb \quad \implies \quad QR \bx = \bb \quad \implies \quad
-                        R \bx = Q^T \bb \]
-                \item Since $R$ is upper triangular we can use the \mcode{Usolve} code we
-                    have from our work with the LU-factorization to solve for $\bx$.  THIS
-                    IS REALLY FAST!!
-                \item Compare this to the number of computer operations needed so solve
-                    the normal equations $A^TA\bx = A^T \bb$ with an $LU$-solver.
-            \end{enumerate}
-    \end{enumerate}
-\end{problem}
-
-\begin{problem}
-    Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs 
-    both the $Q$ matrix and the $R$ matrix. Pseducode for this function is as follows:
-    \begin{itemize}
-        \item Set up the function call:\\ \mcode{function [Q,R] = MyQR(A)}
-        \item Set up \mcode{zeros} matrices for both $Q$ and $R$.  Remember that $A$ may
-            not be square so assume that the columns are in $\mathbb{R}^m$ and the rows
-            are in $\mathbb{R}^n$.  Hence $Q$ will be $m \times n$ and $R$ will be $n
-            \times n$.
-        \item Start a loop that counts across the columns:\\ \mcode{for j=1:n}
-            \begin{itemize}
-                \item define a temporary variable: $\hat{\bq} = \ba_j$
-                \item start a loop that will do all of the subtractions and build some of
-                    the $R's$:\\ \mcode{for i=1:j-1}
-                    \begin{itemize}
-                        \item build one of the $R's$: $R_{ij} = \ba_j \cdot \bq_i$
-                        \item Do one of the subtractions: $\hat{\bq} = \hat{\bq} - R_{ij} \bq_i$
-                    \end{itemize}
-                \item end the loop for \mcode{i}
-                \item normalize the $j^{th}$ column in $Q$: $\bq_j = \hat{\bq} / \| \hat{\bq} \|$
-                \item build the $R's$ on the diagonal: $R_{jj} = \ba_j \cdot \bq_j$
-            \end{itemize}
-        \item end the loop for \mcode{j}
-    \end{itemize}
-\end{problem}
-
-\begin{problem}
-    Write a script that tests your \mcode{MyQR} function on randomly generated $m\times n$ matrices
-    with randomly generated right-hand sides. Compare the time that it takes to solve the
-    least squares problems using QR to the time necessary to solve with LU via the normal
-    equations. When is LU more efficient? When is QR more efficient?
-\end{problem}
 
 
 \newpage
@@ -1003,219 +1060,6 @@ A = rand(500,300);
 error = norm(A - U*S*V')
 \end{lstlisting}
 \end{problem}
-
-
-
-
-\newpage\section{Multi-Dimensional Newton's Method}\label{sec:mv_newton}
-Now that we know some linear algebra let's return to the Newton's Method root finding
-technique from earlier in the book. This time we will consider root finding problems where
-we are not just solving the equation $f(x) = 0$ as we did Chapter
-\ref{ch:numerical_algebra}.  Instead consider the function $F$ that takes a vector of
-variables in and outputs a vector.  An example of such a function is
-\[ F(x,y) = \begin{pmatrix} x\sin(y) \\ \cos(x) + \sin(y^2)
-\end{pmatrix}. \]
-It should be clear that making a picture of this type of function is a frivolous endeavor!
-In the case of the previous example, there are two inputs and two outputs so the
-``picture'' would have to be four dimensional.  Even so, we can still ask the question:
-\begin{quote}
-    {\it For what values of $x$ and $y$ does the function $F$ give the zero vector?}
-\end{quote}
-That is, what if we have $F$ defined as 
-\[ F(x,y) = \begin{pmatrix} f(x,y) \\ g(x,y) \end{pmatrix} \]
-and want to solve the system of equations
-\begin{flalign*}
-    f(x,y) &= 0 \\ 
-    g(x,y) &= 0. 
-\end{flalign*}
-In the present problem this amounts to solving the nonlinear system of equations
-\begin{flalign*}
-    x\sin(y) &= 0 \\
-    \cos(x) + \sin(y^2) &=0.
-\end{flalign*}
-In this case it should be clear that we are implicitly defining $f(x,y) = x\sin(y)$ and
-$g(x,y) = \cos(x) + \sin(y^2)$.  A moment's reflection (or perhaps some deep meditation)
-should reveal that $(\pm\pi/2,0)$ are two solutions to the system, and given the trig
-functions it stands to reason that $(\pi/2 + \pi k,\pi j)$ will be a solution for all
-integer values of $k$ and $j$.
-
-\begin{problem}
-To build a numerical solver for a nonlinear system of equations, let's just recall
-Newton's Method in one dimension and then mimic that for systems of higher dimensions.
-We'll stick to two dimensions in this problem for relative simplicity.
-\begin{enumerate}
-    \item[(a)] In Newton's Method we first found the derivative of our function.  In a
-        nonlinear system such as this one, talking about ``the derivative'' is a bit
-        nonsense since there are many first derivatives.  Instead we will define the
-        Jacobian matrix $J(x,y)$ as a matrix of the first partial derivatives of the
-        functions $f$ and $g$.
-        \[ J(x,y) = \begin{pmatrix} f_x & f_y \\ g_x & g_y \end{pmatrix}. \]
-        In the present example (fill in the rest of the blanks),
-        \[ J(x,y) = \begin{pmatrix} \sin(y) &
-                \underline{\hspace{0.5in}} \\  \underline{\hspace{0.5in}} &
-            \underline{\hspace{0.5in}} \end{pmatrix}. \]
-    \item[(b)] Now let's do some Calculus and algebra.  Your job in this part of this
-        problem is to follow all of the algebraic steps.
-        \begin{enumerate}
-            \item[(i)] In one-dimensional Newton's Method we then write the equation of a tangent
-        line at a point $(x_0, f(x_0))$
-        \[ f(x) - f(x_0) \approx f'(x_0)(x-x_0) \]
-        to give a local approximation to the function.  
-        We'll do the exact same thing here, but in place of ``$x$'' we need to have a
-        vector and in place of the derivative we need to have the Jacobian
-        \[ F(x,y) - F(x_0,y_0) \approx J(x_0, y_0) \left( \begin{pmatrix} x \\ y
-        \end{pmatrix} - \begin{pmatrix} x_0 \\ y_0 \end{pmatrix} \right). \]
-%         Write this equation in vector form for the functions $f(x,y) = x\sin(y)$ and
-%         $g(x,y) = \cos(x) + \sin(y^2)$.
-    \item[(ii)] In one-dimensional Newton's Method we then set $f(x)$ to zero since we were
-        ultimately trying to solve the equation $f(x) = 0$.  Hence we got the equation 
-        \[ 0 - f(x_0) \approx f'(x_0)(x-x_0) \]
-        and then rearranged to solve for $x$.  This gave us 
-        \[ x \approx x_0 - \frac{f(x_0)}{f'(x_0)}. \]
-        In the multi-dimensional case we have the same goal.  If we set $F(x,y)$ to the
-        zero vector and solve for the vector $\begin{pmatrix}x\\y\end{pmatrix}$ then we
-        get
-        \[ \begin{pmatrix} x\\y\end{pmatrix} \approx \begin{pmatrix}
-                x_0 \\ y_0 \end{pmatrix} -
-            \left[ J(x_0,y_0) \right]^{-1} F(x_0,y_0). \]
-        Take very careful note here that we didn't divide by the Jacobian \ldots it is a
-        matrix after all!!
-        \item[(iii)] The final step in one-dimensional Newton's Method was to turn the
-            approximation of $x$ into an iterative process by replacing $x$ with $x_{n+1}$ and
-            replacing $x_0$ with $x_{n}$ resulting in the iterative form of Newton's
-            Method
-            \[ x_{n+1} = x_{n} - \frac{f(x_n)}{f'(x_n)}. \]
-            We can do the exact same thing in the two-dimensional version of Newton's
-            Method to arrive at 
-            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
-            x_n \\ y_n \end{pmatrix} - J^{-1}(x_n,y_n) F(x_n, y_n).} \]
-        Writing this in full matrix-vector form we get
-            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
-                x_n \\ y_n \end{pmatrix} - \begin{pmatrix} f_x & f_y \\ g_x & g_y
-        \end{pmatrix}^{-1} \begin{pmatrix} f(x_n,y_n) \\ g(x_n,y_n) \end{pmatrix}.} \]
-\end{enumerate}
-\item[(c)] Write down the Newton iteration formula for the system
-    \begin{flalign*}
-        x\sin(y) &= 0 \\
-        \cos(x) + \sin(y^2) &= 0.
-    \end{flalign*}
-    Do not actually compute the matrix inverse of the Jacobian.
-\item[(d)] The inverse of the Jacobian needs to be dealt with carefully.  We typically
-    don't calculate inverses directly in numerical analysis, but since we have some other
-    tools to do the work we can think of it as follows:
-    \begin{itemize}
-        \item We need the vector $\bb = J^{-1}(x_n,y_n) F(x_n,y_n)$.
-        \item The vector $\bb$ is the same as the solution to the equation $J(x_n,y_n) \bb
-            = F(x_n,y_n)$ at each iteration of Newton's Method.
-        \item Therefore we can so a relatively fast linear solve (using any technique from
-            this chapter) to find $\bb$.
-        \item The Newton iteration becomes 
-            \[ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix} x_n \\
-                y_n \end{pmatrix} - \bb. \]
-    \end{itemize}
-    Write code to solve the present nonlinear system of equations.  Implement some sort of
-    linear solver within your code and be able to defend your technique.  Be prepared to
-    share your answer and your technique with your peers.  Try to pick a starting point so
-    that you find the solution $(\pi/2,\pi)$ on your first attempt at solving this
-    problem.  Then play with the starting point to verify that you can get the other
-    solutions.
-\end{enumerate}
-\end{problem}
-
-
-
-\begin{problem}
-    Test your code from the previous problem on the system of nonlinear equations
-    \begin{flalign*}
-        1+x^2 - y^2 + e^x\cos(y) &= 0 \\
-        2xy + e^x\sin(y) &=0.
-    \end{flalign*}
-    Note here that $f(x,y) = 1+x^2 - y^2 + e^x\cos(y)$ and $g(x,y) = 2xy + e^x \sin(y)$.
-\end{problem}
-
-
-
-\begin{problem}\label{prob:mv_newton}
-    Let's generalize the process a bit so we can numerically approximate solutions to systems of nonlinear algebraic
-    equations in any number of dimensions.
-    The Newton's method that we derived in Chapter \ref{ch:numerical_algebra} is only
-    applicable to functions $f: \mathbb{R} \to \mathbb{R}$ (functions mapping a real
-    number to a real number).   In the previous problem we build a method for solving the
-    equation $F(x,y) = (0,0)$ where $F: \mathbb{R}^2 \to \mathbb{R}^2$.  What about
-    vector-valued functions in $n$ dimensions?  In particular, we
-    would like to have an analogous method for finding roots of a function $F$ where $F:
-    \mathbb{R}^k \to \mathbb{R}^k$.
-
-    Let $\bx$ be a vector in $\mathbb{R}^k$, let 
-    \[ F(\bx) = \begin{pmatrix} f_1(\bx) \\ f_2(\bx) \\ \vdots \\ f_k(\bx) \end{pmatrix} \]
-    be a vector valued function, and let $J$ be the Jacobian matrix
-    \[ J(\bx) = 
-        \begin{pmatrix} \partial f_1 / \partial x_1(\bx) & \partial f_1 / \partial
-            x_2(\bx) & \cdots
-            & \partial f_1 / \partial x_k(\bx) \\ 
-         \partial f_2 / \partial x_1(\bx) & \partial f_2 / \partial x_2(\bx) & \cdots &
-         \partial f_2 / \partial x_k(\bx) \\ 
-         \vdots & \vdots & \ddots & \vdots \\
-         \partial f_k / \partial x_1(\bx) & \partial f_k / \partial x_2(\bx) & \cdots & \partial f_k /
-     \partial x_k(\bx) \end{pmatrix} \]
-    By analogy, the multi-dimensional Newton's method is
-    \[ \bx_{n+1} = \bx_n -  J^{-1}(\bx_n)F(\bx_n) \]
-    where $J^{-1}(\bx_n)$ is the inverse of the Jacobian matrix evaluated at the point
-    $\bx_n$.
-    \begin{enumerate}
-        \item[(a)] Write MATLAB code that accepts any number of functions and an initial
-            vector guess and returns an approximation to the root for the problem $F(\bx) = \bo$.
-        \item[(c)] Use Newton's method to find an approximate solution to the system of
-            equations
-            \begin{flalign*}
-                x^2 + y^2 + z^2 &= 100 \\
-                xyz &= 1 \\
-                x - y - \sin(z) &= 0
-            \end{flalign*}
-    \end{enumerate}
-\end{problem}
-\hint{
-    If you want to evaluate the matrix-vector multiplication $J^{-1}(\bx_n) F(\bx_n)$ then
-    you are really looking for the solution $\bu$ to the system of equations $J(\bx_n) \bu =
-    F(\bx_n)$ and you can use MATLAB's backslash command to get it quickly. 
-
-    For part (c) be sure to first make the right-hand side zero.
-}
-
-\begin{technique}[Multi-Dimensional Newton's Method]
-    The iteration for Newton's Method in multiple dimensions is
-    \[ \bx_{n+1} = \bx_n - J^{-1}(\bx_n) F(\bx_n) \]
-    where $\bx_n \in \mathbb{R}^k$, $J$ is the $k$-dimensional Jacobian matrix, and
-    $F:\mathbb{R}^k \to \mathbb{R}^k$.  Take note that numerically you do not want to
-    directly compute the inverse of the Jacobian.  Instead you solve the sub-problem
-    \[ J(\bx_n) \bb = F(\bx_n) \]
-    for the vector $\bb$ using any technique from linear algebra (e.g. an LU or QR
-    decomposition) and iterate the equation
-    \[ \bx_{n+1} = \bx_n - \bb. \]
-\end{technique}
-
-
-\begin{problem}
-    When will the multi-dimensional version of Newton's Method fail?  Compare and contrast
-    this with what you found about the one-dimensional version of Newton's Method in
-    Chapter \ref{ch:numerical_algebra}.  Extend your discussion to talk about the
-    eigenvalues of the Jacobian matrix for a nonlinear system.
-\end{problem}
-
-One place that solving nonlinear systems arises naturally is when we need to find
-equilibrium points for systems of differential equations.  Remember that to find the
-equilibrium points for a first order differential equation we set the derivative term to
-zero and solve the resulting equation.  
-\begin{problem}
-    Find the equilibrium point(s) for the system of differential equations 
-    \begin{flalign*}
-        x' &= \alpha x - \beta xy \\
-        y' &= \delta y + \gamma xy
-    \end{flalign*}
-    where $\alpha = 1, \beta = 0.05, \gamma = 0.01$ and $\delta =1$.  You will play more
-    with this differential equation system later.
-\end{problem}
-
 
 
 
@@ -1584,36 +1428,6 @@ A = A'*A; % this will be a random symmetric NxN matrix.
 
 
 
-\begin{problem}
-    Find the equilibrium point(s) for the system of differential equations
-    \begin{flalign*}
-        x' &= -0.1 xy - x \\
-        y' &= -x + 0.9y \\
-        z' &= \cos(y) - xz
-    \end{flalign*}
-    if they exist.
-\end{problem}
-
-
-
-\begin{problem}\label{prob:lawn_chair}
-    (This problem is modified from \cite{Meerschaert}) \\
-    A manufacturer of lawn furniture makes two types of lawn chairs, one with a wood
-    frame and one with a tubular aluminum frame.  The wood-frame model costs \
-    418 per unit to manufacture, and the aluminum-frame model costs \$10 per unit.  The
-    company operates in a market where the number of units that can be sold depends on the
-    price.  It is estimated that in order to sell $x$ units per day of the wood-frame
-    model and $y$ units per day of the aluminum-frame model, the selling price cannot
-    exceed 
-    \[ 10 + \frac{31}{\sqrt{x}} + \frac{1.3}{y^{0.2}} \text{ dollars per unit} \]
-    for wood-frame chairs, and 
-    \[ 5 + \frac{15}{y^{0.4}} + \frac{0.8}{x^{0.08}} \text{ dollars per unit} \]
-    for the aluminum chairs.  We want to find the optimal production levels.  Write this
-    situation as a multi-variable mathematical model, use a computer
-    algebra system (or by-hand computation) to find the gradient vector, and then use the
-    multi-variable Newton's method to find the critical points.  Classify the critical
-    points as either local maximums or local minimums.
-\end{problem}
 
 
 \newpage\section{Projects}

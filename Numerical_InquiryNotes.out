@@ -33,7 +33,7 @@
 \BOOKMARK [1][-]{section.3.1}{Differentiation}{chapter.3}% 33
 \BOOKMARK [1][-]{section.3.2}{Integration}{chapter.3}% 34
 \BOOKMARK [1][-]{section.3.3}{Optimization}{chapter.3}% 35
-\BOOKMARK [1][-]{section.3.4}{Curve Fitting}{chapter.3}% 36
+\BOOKMARK [1][-]{section.3.4}{Curve Fitting \205 The Least Squares Problem via Numerical Optimization}{chapter.3}% 36
 \BOOKMARK [1][-]{section.3.5}{Exercises}{chapter.3}% 37
 \BOOKMARK [2][-]{subsection.3.5.1}{Algorithm Summaries}{section.3.5}% 38
 \BOOKMARK [2][-]{subsection.3.5.2}{Applying What You've Learned}{section.3.5}% 39
@@ -43,20 +43,20 @@
 \BOOKMARK [2][-]{subsection.3.6.3}{Dam Integration}{section.3.6}% 43
 \BOOKMARK [0][-]{chapter.4}{Numerical Linear Algebra}{}% 44
 \BOOKMARK [1][-]{section.4.1}{Matrix Operations}{chapter.4}% 45
-\BOOKMARK [1][-]{section.4.2}{Solving Systems of Linear Equations}{chapter.4}% 46
-\BOOKMARK [2][-]{subsection.4.2.1}{Upper and Lower Triangular Systems}{section.4.2}% 47
-\BOOKMARK [2][-]{subsection.4.2.2}{The LU Factorization}{section.4.2}% 48
-\BOOKMARK [1][-]{section.4.3}{Curve Fitting with Linear Algebra \205 The Least Squares Problem}{chapter.4}% 49
-\BOOKMARK [1][-]{section.4.4}{The QR Factorization}{chapter.4}% 50
-\BOOKMARK [1][-]{section.4.5}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 51
-\BOOKMARK [1][-]{section.4.6}{The Singular Value Decomposition}{chapter.4}% 52
-\BOOKMARK [1][-]{section.4.7}{Multi-Dimensional Newton's Method}{chapter.4}% 53
-\BOOKMARK [1][-]{section.4.8}{Exercises}{chapter.4}% 54
-\BOOKMARK [2][-]{subsection.4.8.1}{Algorithm Summaries}{section.4.8}% 55
-\BOOKMARK [2][-]{subsection.4.8.2}{Applying What You've Learned}{section.4.8}% 56
-\BOOKMARK [1][-]{section.4.9}{Projects}{chapter.4}% 57
-\BOOKMARK [2][-]{subsection.4.9.1}{Applications of the Singular Value Decomposition}{section.4.9}% 58
-\BOOKMARK [2][-]{subsection.4.9.2}{The Google Page Rank Algorithm}{section.4.9}% 59
+\BOOKMARK [1][-]{section.4.2}{Efficiently Solving Systems of Linear Equations}{chapter.4}% 46
+\BOOKMARK [2][-]{subsection.4.2.1}{Lower Triangular Systems}{section.4.2}% 47
+\BOOKMARK [2][-]{subsection.4.2.2}{Upper Triangular Systems}{section.4.2}% 48
+\BOOKMARK [2][-]{subsection.4.2.3}{The LU Factorization}{section.4.2}% 49
+\BOOKMARK [1][-]{section.4.3}{The QR Factorization}{chapter.4}% 50
+\BOOKMARK [1][-]{section.4.4}{Curve Fitting \205 The Least Squares Problem via Linear Algebra}{chapter.4}% 51
+\BOOKMARK [1][-]{section.4.5}{The Eigenvalue-Eigenvector Problem}{chapter.4}% 52
+\BOOKMARK [1][-]{section.4.6}{The Singular Value Decomposition}{chapter.4}% 53
+\BOOKMARK [1][-]{section.4.7}{Exercises}{chapter.4}% 54
+\BOOKMARK [2][-]{subsection.4.7.1}{Algorithm Summaries}{section.4.7}% 55
+\BOOKMARK [2][-]{subsection.4.7.2}{Applying What You've Learned}{section.4.7}% 56
+\BOOKMARK [1][-]{section.4.8}{Projects}{chapter.4}% 57
+\BOOKMARK [2][-]{subsection.4.8.1}{Applications of the Singular Value Decomposition}{section.4.8}% 58
+\BOOKMARK [2][-]{subsection.4.8.2}{The Google Page Rank Algorithm}{section.4.8}% 59
 \BOOKMARK [0][-]{chapter.5}{Numerical Ordinary Differential Equations}{}% 60
 \BOOKMARK [1][-]{section.5.1}{Recalling the Basics of Ordinary Differential Equations}{chapter.5}% 61
 \BOOKMARK [1][-]{section.5.2}{Euler's Method}{chapter.5}% 62
@@ -143,5 +143,6 @@
 \BOOKMARK [2][-]{subsection.D.2.1}{Vandermonde Interpolation}{section.D.2}% 143
 \BOOKMARK [2][-]{subsection.D.2.2}{Lagrange Interpolation}{section.D.2}% 144
 \BOOKMARK [2][-]{subsection.D.2.3}{Interpolation at Chebyshev Points}{section.D.2}% 145
-\BOOKMARK [1][-]{section.D.3}{Building PDE's From Conservation Laws}{appendix.D}% 146
-\BOOKMARK [0][-]{equation.D.3.17}{Bibliography}{}% 147
+\BOOKMARK [1][-]{section.D.3}{Multi-Dimensional Newton's Method}{appendix.D}% 146
+\BOOKMARK [1][-]{section.D.4}{Building PDE's From Conservation Laws}{appendix.D}% 147
+\BOOKMARK [0][-]{equation.D.4.17}{Bibliography}{}% 148

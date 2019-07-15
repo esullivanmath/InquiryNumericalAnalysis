@@ -153,7 +153,7 @@ that $p(x)$ matches this data set perfectly as seen in Figure \ref{fig:vandermon
 
 
 \begin{problem}\label{prob:vandermonde_1}
-   Write a MATLAB function that accepts a list of ordered pairs (where each $x$ value is
+   Write a \ProgLang function that accepts a list of ordered pairs (where each $x$ value is
    unique) and builds a Vandermonde interpolation polynomial.  Test your function on the
    simple example listed above and then on several larger problems.  It may be simplest to
    initially test on functions that we know.
@@ -248,7 +248,7 @@ then for Lagrange interpolation we build $p(x)$ as a linear combination of the $
 \end{example}
 
 \begin{problem}
-    Write a MATLAB function that accepts a list of list of ordered pairs (where each $x$
+    Write a \ProgLang function that accepts a list of list of ordered pairs (where each $x$
     value is unique) and builds a Lagrange interpolation polynomial.  Test your function
     on the examples that we've presented in this section.
 \end{problem}
@@ -364,7 +364,7 @@ is on the interval $[-1,1]$.
 
 \begin{problem}
     Consider the function $f(x) = \frac{1}{1+x^2}$ just as we did for the first problem in
-    this subsection.  Write MATLAB code that overlays an interpolation with linearly spaced
+    this subsection.  Write code that overlays an interpolation with linearly spaced
     points an interpolation with Chebyshev nodes.  Give plots for polynomial of order
     $n=2,3, 4, \ldots$.  Be sure to show the original function on your plots as well.
 \end{problem}
@@ -374,55 +374,251 @@ is on the interval $[-1,1]$.
     Vandermonde matrix over using linearly spaced nodes.
 \end{problem}
 
-% \subsection{Cubic Splines}
 
-% \newpage\section{Low Rank Approximations of Matrices}
+
+
+\newpage\section{Multi-Dimensional Newton's Method}\label{sec:mv_newton}
+Now that we know some linear algebra let's return to the Newton's Method root finding
+technique from earlier in the book. This time we will consider root finding problems where
+we are not just solving the equation $f(x) = 0$ as we did Chapter
+\ref{ch:numerical_algebra}.  Instead consider the function $F$ that takes a vector of
+variables in and outputs a vector.  An example of such a function is
+\[ F(x,y) = \begin{pmatrix} x\sin(y) \\ \cos(x) + \sin(y^2)
+\end{pmatrix}. \]
+It should be clear that making a picture of this type of function is a frivolous endeavor!
+In the case of the previous example, there are two inputs and two outputs so the
+``picture'' would have to be four dimensional.  Even so, we can still ask the question:
+\begin{quote}
+    {\it For what values of $x$ and $y$ does the function $F$ give the zero vector?}
+\end{quote}
+That is, what if we have $F$ defined as 
+\[ F(x,y) = \begin{pmatrix} f(x,y) \\ g(x,y) \end{pmatrix} \]
+and want to solve the system of equations
+\begin{flalign*}
+    f(x,y) &= 0 \\ 
+    g(x,y) &= 0. 
+\end{flalign*}
+In the present problem this amounts to solving the nonlinear system of equations
+\begin{flalign*}
+    x\sin(y) &= 0 \\
+    \cos(x) + \sin(y^2) &=0.
+\end{flalign*}
+In this case it should be clear that we are implicitly defining $f(x,y) = x\sin(y)$ and
+$g(x,y) = \cos(x) + \sin(y^2)$.  A moment's reflection (or perhaps some deep meditation)
+should reveal that $(\pm\pi/2,0)$ are two solutions to the system, and given the trig
+functions it stands to reason that $(\pi/2 + \pi k,\pi j)$ will be a solution for all
+integer values of $k$ and $j$.
+
+\begin{problem}
+To build a numerical solver for a nonlinear system of equations, let's just recall
+Newton's Method in one dimension and then mimic that for systems of higher dimensions.
+We'll stick to two dimensions in this problem for relative simplicity.
+\begin{enumerate}
+    \item[(a)] In Newton's Method we first found the derivative of our function.  In a
+        nonlinear system such as this one, talking about ``the derivative'' is a bit
+        nonsense since there are many first derivatives.  Instead we will define the
+        Jacobian matrix $J(x,y)$ as a matrix of the first partial derivatives of the
+        functions $f$ and $g$.
+        \[ J(x,y) = \begin{pmatrix} f_x & f_y \\ g_x & g_y \end{pmatrix}. \]
+        In the present example (fill in the rest of the blanks),
+        \[ J(x,y) = \begin{pmatrix} \sin(y) &
+                \underline{\hspace{0.5in}} \\  \underline{\hspace{0.5in}} &
+            \underline{\hspace{0.5in}} \end{pmatrix}. \]
+    \item[(b)] Now let's do some Calculus and algebra.  Your job in this part of this
+        problem is to follow all of the algebraic steps.
+        \begin{enumerate}
+            \item[(i)] In one-dimensional Newton's Method we then write the equation of a tangent
+        line at a point $(x_0, f(x_0))$
+        \[ f(x) - f(x_0) \approx f'(x_0)(x-x_0) \]
+        to give a local approximation to the function.  
+        We'll do the exact same thing here, but in place of ``$x$'' we need to have a
+        vector and in place of the derivative we need to have the Jacobian
+        \[ F(x,y) - F(x_0,y_0) \approx J(x_0, y_0) \left( \begin{pmatrix} x \\ y
+        \end{pmatrix} - \begin{pmatrix} x_0 \\ y_0 \end{pmatrix} \right). \]
+%         Write this equation in vector form for the functions $f(x,y) = x\sin(y)$ and
+%         $g(x,y) = \cos(x) + \sin(y^2)$.
+    \item[(ii)] In one-dimensional Newton's Method we then set $f(x)$ to zero since we were
+        ultimately trying to solve the equation $f(x) = 0$.  Hence we got the equation 
+        \[ 0 - f(x_0) \approx f'(x_0)(x-x_0) \]
+        and then rearranged to solve for $x$.  This gave us 
+        \[ x \approx x_0 - \frac{f(x_0)}{f'(x_0)}. \]
+        In the multi-dimensional case we have the same goal.  If we set $F(x,y)$ to the
+        zero vector and solve for the vector $\begin{pmatrix}x\\y\end{pmatrix}$ then we
+        get
+        \[ \begin{pmatrix} x\\y\end{pmatrix} \approx \begin{pmatrix}
+                x_0 \\ y_0 \end{pmatrix} -
+            \left[ J(x_0,y_0) \right]^{-1} F(x_0,y_0). \]
+        Take very careful note here that we didn't divide by the Jacobian \ldots it is a
+        matrix after all!!
+        \item[(iii)] The final step in one-dimensional Newton's Method was to turn the
+            approximation of $x$ into an iterative process by replacing $x$ with $x_{n+1}$ and
+            replacing $x_0$ with $x_{n}$ resulting in the iterative form of Newton's
+            Method
+            \[ x_{n+1} = x_{n} - \frac{f(x_n)}{f'(x_n)}. \]
+            We can do the exact same thing in the two-dimensional version of Newton's
+            Method to arrive at 
+            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
+            x_n \\ y_n \end{pmatrix} - J^{-1}(x_n,y_n) F(x_n, y_n).} \]
+        Writing this in full matrix-vector form we get
+            \[ \boxed{ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix}
+                x_n \\ y_n \end{pmatrix} - \begin{pmatrix} f_x & f_y \\ g_x & g_y
+        \end{pmatrix}^{-1} \begin{pmatrix} f(x_n,y_n) \\ g(x_n,y_n) \end{pmatrix}.} \]
+\end{enumerate}
+\item[(c)] Write down the Newton iteration formula for the system
+    \begin{flalign*}
+        x\sin(y) &= 0 \\
+        \cos(x) + \sin(y^2) &= 0.
+    \end{flalign*}
+    Do not actually compute the matrix inverse of the Jacobian.
+\item[(d)] The inverse of the Jacobian needs to be dealt with carefully.  We typically
+    don't calculate inverses directly in numerical analysis, but since we have some other
+    tools to do the work we can think of it as follows:
+    \begin{itemize}
+        \item We need the vector $\bb = J^{-1}(x_n,y_n) F(x_n,y_n)$.
+        \item The vector $\bb$ is the same as the solution to the equation $J(x_n,y_n) \bb
+            = F(x_n,y_n)$ at each iteration of Newton's Method.
+        \item Therefore we can so a relatively fast linear solve (using any technique from
+            this chapter) to find $\bb$.
+        \item The Newton iteration becomes 
+            \[ \begin{pmatrix} x_{n+1} \\ y_{n+1} \end{pmatrix} = \begin{pmatrix} x_n \\
+                y_n \end{pmatrix} - \bb. \]
+    \end{itemize}
+    Write code to solve the present nonlinear system of equations.  Implement some sort of
+    linear solver within your code and be able to defend your technique.  Be prepared to
+    share your answer and your technique with your peers.  Try to pick a starting point so
+    that you find the solution $(\pi/2,\pi)$ on your first attempt at solving this
+    problem.  Then play with the starting point to verify that you can get the other
+    solutions.
+\end{enumerate}
+\end{problem}
+
+
+
+\begin{problem}
+    Test your code from the previous problem on the system of nonlinear equations
+    \begin{flalign*}
+        1+x^2 - y^2 + e^x\cos(y) &= 0 \\
+        2xy + e^x\sin(y) &=0.
+    \end{flalign*}
+    Note here that $f(x,y) = 1+x^2 - y^2 + e^x\cos(y)$ and $g(x,y) = 2xy + e^x \sin(y)$.
+\end{problem}
+
+
+
+\begin{problem}\label{prob:mv_newton}
+    Let's generalize the process a bit so we can numerically approximate solutions to systems of nonlinear algebraic
+    equations in any number of dimensions.
+    The Newton's method that we derived in Chapter \ref{ch:numerical_algebra} is only
+    applicable to functions $f: \mathbb{R} \to \mathbb{R}$ (functions mapping a real
+    number to a real number).   In the previous problem we build a method for solving the
+    equation $F(x,y) = (0,0)$ where $F: \mathbb{R}^2 \to \mathbb{R}^2$.  What about
+    vector-valued functions in $n$ dimensions?  In particular, we
+    would like to have an analogous method for finding roots of a function $F$ where $F:
+    \mathbb{R}^k \to \mathbb{R}^k$.
+
+    Let $\bx$ be a vector in $\mathbb{R}^k$, let 
+    \[ F(\bx) = \begin{pmatrix} f_1(\bx) \\ f_2(\bx) \\ \vdots \\ f_k(\bx) \end{pmatrix} \]
+    be a vector valued function, and let $J$ be the Jacobian matrix
+    \[ J(\bx) = 
+        \begin{pmatrix} \partial f_1 / \partial x_1(\bx) & \partial f_1 / \partial
+            x_2(\bx) & \cdots
+            & \partial f_1 / \partial x_k(\bx) \\ 
+         \partial f_2 / \partial x_1(\bx) & \partial f_2 / \partial x_2(\bx) & \cdots &
+         \partial f_2 / \partial x_k(\bx) \\ 
+         \vdots & \vdots & \ddots & \vdots \\
+         \partial f_k / \partial x_1(\bx) & \partial f_k / \partial x_2(\bx) & \cdots & \partial f_k /
+     \partial x_k(\bx) \end{pmatrix} \]
+    By analogy, the multi-dimensional Newton's method is
+    \[ \bx_{n+1} = \bx_n -  J^{-1}(\bx_n)F(\bx_n) \]
+    where $J^{-1}(\bx_n)$ is the inverse of the Jacobian matrix evaluated at the point
+    $\bx_n$.
+    \begin{enumerate}
+        \item[(a)] Write code that accepts any number of functions and an initial
+            vector guess and returns an approximation to the root for the problem $F(\bx) = \bo$.
+        \item[(c)] Use Newton's method to find an approximate solution to the system of
+            equations
+            \begin{flalign*}
+                x^2 + y^2 + z^2 &= 100 \\
+                xyz &= 1 \\
+                x - y - \sin(z) &= 0
+            \end{flalign*}
+    \end{enumerate}
+\end{problem}
+% \hint{
+%     If you want to evaluate the matrix-vector multiplication $J^{-1}(\bx_n) F(\bx_n)$ then
+%     you are really looking for the solution $\bu$ to the system of equations $J(\bx_n) \bu =
+%     F(\bx_n)$ and you can use MATLAB's backslash command to get it quickly. 
 % 
-% \begin{problem}
-%     One particular use of the SVD is for data reduction.  The word ``reduction'' here
-%     really means that we are going to make approximations of data using lower dimensions,
-%     and a very visually stunning way to do this is to do data reduction on images.  The following code will read
-%     the file \mcode{TestImage.jpg} into MATLAB and convert it to a rectangular matrix of
-%     values.  It is up to the reader to supply the necessary image.
-% \begin{lstlisting}
-% A = imread('TestImage.jpg');
-% A = A(:,:,1);
-% A = im2double(A);
-% imshow(A)
-% \end{lstlisting}
-%     Once the matrix is in MATLAB do the following.  In this we assume that $A$ is an $m
-%     \times n$ matrix.
-%     \begin{enumerate}
-%         \item Find the SVD of the image (remember the semicolons!!!!!!).  This will take
-%             over a minute with our code so be patient.  Once it is done check that your
-%             SVD code does a decent approximation of the original image.
-% \begin{lstlisting}
-% [U,S,V] = MySVD(A);
-% error = norm(A - U*S*V')
-% \end{lstlisting}
-%         \item Get the singular values out of $\Sigma$ and find the largest $P$\% of the
-%             singular values. Let's say that this is $N$ values.  Create four new matrices
-%             $U_{new}$, $\Sigma_{new}$, $V_{new}$, and $A_{new}$ in the following way.
-%             \begin{enumerate}
-%                 \item $U_{new}$ is $m \times N$ and contains only the first $N$ columns of
-%                     $U$.
-%                 \item $\Sigma_{new}$ is $N \times N$ and contains only the top $P$\% of
-%                     the singular values of $A$.
-%                 \item $V_{new}$ is $n \times N$ and contains the first $N$ columns of $V$.
-%                 \item $A_{new}$ is $m \times n$ and is formed by $U_{new} \Sigma_{new}
-%                     V_{new}^T$.  
-%             \end{enumerate}
-%         \item Show the newly data-reduced image with \\
-%             \mcode{imshow(Anew)}
-%         \item The rank of the new image is equal to the number of singular values that you
-%             kept in step 2.  
-%         \item Experiment with several low rank approximations of an image starting with
-%             rank 1 and progress up to larger and larger ranks matrices.  You'll find that
-%             the rank necessary to recover the full image is much lower than than the full
-%             original rank.
-%     \end{enumerate}
-% \end{problem}
-% 
+%     For part (c) be sure to first make the right-hand side zero.
+% }
+
+\begin{technique}[Multi-Dimensional Newton's Method]
+    The iteration for Newton's Method in multiple dimensions is
+    \[ \bx_{n+1} = \bx_n - J^{-1}(\bx_n) F(\bx_n) \]
+    where $\bx_n \in \mathbb{R}^k$, $J$ is the $k$-dimensional Jacobian matrix, and
+    $F:\mathbb{R}^k \to \mathbb{R}^k$.  Take note that numerically you do not want to
+    directly compute the inverse of the Jacobian.  Instead you solve the sub-problem
+    \[ J(\bx_n) \bb = F(\bx_n) \]
+    for the vector $\bb$ using any technique from linear algebra (e.g. an LU or QR
+    decomposition) and iterate the equation
+    \[ \bx_{n+1} = \bx_n - \bb. \]
+\end{technique}
+
+
+\begin{problem}
+    When will the multi-dimensional version of Newton's Method fail?  Compare and contrast
+    this with what you found about the one-dimensional version of Newton's Method in
+    Chapter \ref{ch:numerical_algebra}.  Extend your discussion to talk about the
+    eigenvalues of the Jacobian matrix for a nonlinear system.
+\end{problem}
+
+One place that solving nonlinear systems arises naturally is when we need to find
+equilibrium points for systems of differential equations.  Remember that to find the
+equilibrium points for a first order differential equation we set the derivative term to
+zero and solve the resulting equation.  
+\begin{problem}
+    Find the equilibrium point(s) for the system of differential equations 
+    \begin{flalign*}
+        x' &= \alpha x - \beta xy \\
+        y' &= \delta y + \gamma xy
+    \end{flalign*}
+    where $\alpha = 1, \beta = 0.05, \gamma = 0.01$ and $\delta =1$.  You will play more
+    with this differential equation system later.
+\end{problem}
+
+
+
+\begin{problem}
+    Find the equilibrium point(s) for the system of differential equations
+    \begin{flalign*}
+        x' &= -0.1 xy - x \\
+        y' &= -x + 0.9y \\
+        z' &= \cos(y) - xz
+    \end{flalign*}
+    if they exist.
+\end{problem}
+
+
+
+\begin{problem}\label{prob:lawn_chair}
+    (This problem is modified from \cite{Meerschaert}) \\
+    A manufacturer of lawn furniture makes two types of lawn chairs, one with a wood
+    frame and one with a tubular aluminum frame.  The wood-frame model costs \
+    418 per unit to manufacture, and the aluminum-frame model costs \$10 per unit.  The
+    company operates in a market where the number of units that can be sold depends on the
+    price.  It is estimated that in order to sell $x$ units per day of the wood-frame
+    model and $y$ units per day of the aluminum-frame model, the selling price cannot
+    exceed 
+    \[ 10 + \frac{31}{\sqrt{x}} + \frac{1.3}{y^{0.2}} \text{ dollars per unit} \]
+    for wood-frame chairs, and 
+    \[ 5 + \frac{15}{y^{0.4}} + \frac{0.8}{x^{0.08}} \text{ dollars per unit} \]
+    for the aluminum chairs.  We want to find the optimal production levels.  Write this
+    situation as a multi-variable mathematical model, use a computer
+    algebra system (or by-hand computation) to find the gradient vector, and then use the
+    multi-variable Newton's method to find the critical points.  Classify the critical
+    points as either local maximums or local minimums.
+\end{problem}
+
 
 
 \newpage\section{Building PDE's From Conservation Laws}
