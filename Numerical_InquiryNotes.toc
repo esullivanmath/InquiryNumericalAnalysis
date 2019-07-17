@@ -98,9 +98,9 @@
 \contentsline {subsection}{\numberline {A.2.3}List Operations}{187}{subsection.A.2.3}
 \contentsline {subsection}{\numberline {A.2.4}Tuples}{189}{subsection.A.2.4}
 \contentsline {subsection}{\numberline {A.2.5}Control Flow: Loops and If Statements}{190}{subsection.A.2.5}
-\contentsline {subsubsection}{For Loops}{190}{section*.33}
-\contentsline {subsubsection}{While Loops}{192}{section*.34}
-\contentsline {subsubsection}{If Statements}{193}{section*.35}
+\contentsline {subsubsection}{For Loops}{190}{section*.34}
+\contentsline {subsubsection}{While Loops}{192}{section*.35}
+\contentsline {subsubsection}{If Statements}{193}{section*.36}
 \contentsline {subsection}{\numberline {A.2.6}Functions}{195}{subsection.A.2.6}
 \contentsline {subsection}{\numberline {A.2.7}Packages}{198}{subsection.A.2.7}
 \contentsline {section}{\numberline {A.3}Numerical Python with \texttt {numpy}}{200}{section.A.3}
@@ -115,10 +115,10 @@
 \contentsline {subsection}{\numberline {A.5.2}Symbolic Algebra}{218}{subsection.A.5.2}
 \contentsline {subsection}{\numberline {A.5.3}Symbolic Function Evaluation}{220}{subsection.A.5.3}
 \contentsline {subsection}{\numberline {A.5.4}Symbolic Calculus}{220}{subsection.A.5.4}
-\contentsline {subsubsection}{Derivatives}{221}{section*.40}
-\contentsline {subsubsection}{Integrals}{222}{section*.41}
-\contentsline {subsubsection}{Limits}{224}{section*.42}
-\contentsline {subsubsection}{Taylor Series}{225}{section*.43}
+\contentsline {subsubsection}{Derivatives}{221}{section*.41}
+\contentsline {subsubsection}{Integrals}{222}{section*.42}
+\contentsline {subsubsection}{Limits}{224}{section*.43}
+\contentsline {subsubsection}{Taylor Series}{225}{section*.44}
 \contentsline {subsection}{\numberline {A.5.5}Solving Equations Symbolically}{226}{subsection.A.5.5}
 \contentsline {subsection}{\numberline {A.5.6}Symbolic Plotting}{228}{subsection.A.5.6}
 \contentsline {chapter}{\numberline {B}Writing and Projects}{231}{appendix.B}

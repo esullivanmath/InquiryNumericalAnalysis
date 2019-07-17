@@ -1,12 +1,13 @@
 \mainmatter
-\chapter{Introductory Topics}
+\chapter{Introductory Topics}\label{ch:intro}
 
 \section{An Introduction to Numerical Analysis}
 \begin{quote}
-    ``In the 1950s and 1960s, the founding fathers of [Numerical Analysis] discovered that
+    {\it ``In the 1950s and 1960s, the founding fathers of [Numerical Analysis] discovered that
     inexact arithmetic can be a source of danger, causing errors in results that `ought'
-    to be right.'' \\
-    \\ --Oxfor Professor Lloyd N. Trefethen (2006)
+to be right.''} \\
+\\ --\href{https://en.wikipedia.org/wiki/Nick_Trefethen}{Oxford Professor Lloyd (Nick)
+Trefethen (2006)}
 \end{quote}
 
 The field of Numerical Analysis is really the study of how to take
@@ -22,15 +23,15 @@ algorithms to do the basic operations of linear algebra (e.g. Gaussian eliminati
 factorization, or eigenvalue decomposition) are highly sought after and useful when
 the matrices used for a model are very large. 
 
-In this chapter we will discuss some of the basic underlying ideas behind the scenes in
-Numerical Analysis, and the essence of the  above quote will be part of the focus of this chapter.
+In this chapter we will discuss some of the basic underlying ideas in
+Numerical Analysis, and the essence of the above quote from Nick Trefethen will be part of the focus of this chapter.
 Particularly, we need to know how a computer stores numbers and when that storage can get
 us into trouble.  On a more mathematical side, we offer a brief review of the Taylor
 Series from Calculus at the end of this chapter. The Taylor Series underpins many of our approximation methods in
 this class.  Finally, at the end of this chapter we provide several coding exercises that
 will help you to develop your programming skills.  It is expected that you know some of
 the basics of \ProgLang programming before beginning this class.  If you need to review the
-basics then Appendix \ref{app:coding}.  You'll have more
+basics then see Appendix \ref{app:coding}.  You'll have more
 than just the basics by the end.
 
 \begin{center}
@@ -434,11 +435,19 @@ this class and this book to go into all of those details here.
 
 
 \newpage\section{Polynomial Approximation and The Taylor Series}
-Now we turn our attention in this introduction to something more mathematical.  The Taylor
-Series is a mathematical tool that is widely used in approximation theory, and since a 
-computer can only make approximations we need ways to approximate functions so that a
-computer can understand them. The Taylor Series will be just the right tool for our
-purposes.
+Now we turn our attention in this introductory chapter to something more mathematical.
+The Taylor Series is a mathematical tool that is widely used in approximation theory, and
+since a computer can only make approximations we need ways to approximate functions so
+that a computer can understand them. The Taylor Series will be just the right tool for our
+purposes.  
+
+Keep the following basic idea in your mind as you work through this section: 
+\begin{quote}
+    {\it The
+        Taylor Series is a tool for expressing complicated functions as infinite polynomials.
+        Polynomials are great for computers since they only involve addition, subtraction,
+    multiplication, and powers -- all things that computers are good at.}
+\end{quote}
 
 Consider the function $f(x) = e^x$.  Euler's number
 \[ e = 2.718281828459045\cdots \]
@@ -609,8 +618,8 @@ taken note of this in problem \ref{prob:taylor_graphically2} (if you didn't then
 to problem \ref{prob:taylor_graphically2}).  The domain on which the
 Taylor series makes sense is called the {\bf domain of convergence}.  We can also talk
 about a Taylor series having a {\bf radius of convergence} where the radius is the
-distance from the center (the $a$ in Definition \ref{def:taylor}) to the first point where
-the Taylor series does not converge.  
+distance from the center (the ``$a$'' in Definition \ref{def:taylor}) to the first point where
+the Taylor Series does not converge.  
 
 
 To determine the
@@ -709,7 +718,7 @@ thorough statement of the Ratio Test as it applies to Taylor Series.
 \begin{problem}
     Consider the function $f(x) = \frac{1}{1+x^2}$.  
     \begin{enumerate}
-        \item[(a)] Build the Taylor Series for this function centered at $a=0$.
+        \item[(a)] Build the Taylor Series for this function centered at $a=0$.  
         \item[(b)] Using the previous example as a guide find the domain of convergence
             for the Taylor Series.
         \item[(c)] Modify your \ProgLang code from the previous problem to demonstrate the
@@ -722,7 +731,7 @@ thorough statement of the Ratio Test as it applies to Taylor Series.
 \section{Truncation Error with Taylor Series}
 The great thing about the Taylor Series is that it allows for the
 approximation of smooth functions as polynomials -- and polynomials are easily dealt with on
-a computer since they involve only addition, subtraction, multiplication, division, and
+a computer since they involve only addition, subtraction, multiplication, and
 integer powers. The down side is that the sum is infinite.  Hence, every time we use a Taylor
 series on a computer we are actually going to be using a truncated Taylor Series where we
 only take a finite number of terms.  

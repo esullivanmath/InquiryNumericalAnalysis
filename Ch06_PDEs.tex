@@ -1,9 +1,23 @@
 \chapter{Numerical Partial Differential Equations}
+\begin{quote}
+    {\it ``The mathematical discipline of differential equations furnishes the explanation of
+    all those elementary manifestations of nature which involve time.''} \\
+    --\href{https://en.wikipedia.org/wiki/Sophus_Lie#Legacy}{Norwegian
+    Mathematician Sophus Lie}
+\end{quote}
+
 Partial differential equations (PDEs) are differential equations involving the partial
-derivatives of an unknown multivariable function.  In many cases we are interested in
-ultimately solving PDEs in terms of our usual three spatial dimensions along with an extra
-dimension for time.  Since PDEs require a strong background in the notions of vector
-calculus we'll start there.
+derivatives of an unknown multivariable function.  The study of PDEs is highly
+motivated by physics.  In particular we will examine two classical problems from physics:
+heat transport phenomenon and wave phenomenon.  Don't think, however, that just because we're
+focusing only on these two primary examples that this is the extent of the utility of
+PDEs.  Basically every scientific field has been impacted by (or has directly impacted)
+the study of PDEs.  Any phenomenon that can be modeled via the change in multiple
+dimensions is likely governed by a PDE model.
+
+In many cases we are interested in ultimately solving PDEs in terms of our usual three
+spatial dimensions along with an extra dimension for time.  Since PDEs require a strong
+background in the notions of vector calculus we'll start there.
 
 \section{Quick Review -- Main Ideas from Vector Calculus}
 Let's start with some basic review of multivariable calculus.
@@ -685,7 +699,7 @@ section to include a forcing term.
         U_{i-1}^n \right). \label{eqn:heat_euler}
     \end{flalign}
 
-    Implement \eqref{eqn:heat_euler} in MATLAB to approximate the solution to the
+    Implement \eqref{eqn:heat_euler} in \ProgLang to approximate the solution to the
     following problem:
     \[ \text{Solve: } u_t = 0.5u_{xx} \quad \text{with} \quad x \in (0,1), \, u(0,x) =
     \sin(2 \pi x), \, u(t,0) = 0, \, \text{and} \, u(t,1) = 0. \]
@@ -752,7 +766,7 @@ instability.
     \[ -r U_{j-1}^{n+1} + (1+2r) U_{j}^{n+1} - r U_{j+1}^{n+1} = r U_{j-1}^{n} + (1-2r)
     U_{j}^{n} + r U_{j+1}^{n}. \]
     This can now be viewed as a system of equations.  Let's build this system carefully
-    and then write MATLAB code to solve the heat equation from the previous problems with
+    and then write \ProgLang code to solve the heat equation from the previous problems with
     the Crank-Nicolson method.  For this problem we will assume fixed Dirichlet boundary
     conditions on both the left- and right-hand sides of the domain.  
     \begin{enumerate}
@@ -824,6 +838,9 @@ RHS = B*Un + D;
 temp = A \ RHS; % note the \ doing the work of the inverse
 U(n+1, 2:end-1) = temp;
 \end{lstlisting}
+\ifnum\Python=1
+{\color{red} Note: Write similar Python code}
+\fi
 \item[(g)] Finally.  Write code to solve the 1D Heat Equation implementing the Crank
     Nicolson method described in this problem.  The setup of your code should be largely
     the same as for the regular heat equation.  You will need to construct the matrices
@@ -896,7 +913,7 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
    where $\alpha$ is the stiffness of the wave.  With Dirichlet boundary conditions we can
    think of this as the behaviour of a guitar string after it has been plucked.  
 
-   Let's write MATLAB code to numerically solve this problem:\\
+   Let's write \ProgLang code to numerically solve this problem:\\
    Consider $u_{tt} = 2 u_{xx}$ in $x \in (0,1)$ with $u(0,x) = x(1-x)$, $u_t(0,x) = 0$,
    and $u(t,0) = u(t,1) = 0$ and $\alpha = 5$.  We can discretize the derivatives as 
    \begin{flalign*}
@@ -1020,7 +1037,7 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
 \end{problem}
 
 \begin{problem}
-    Generalize the previous problem with a MATLAB function that solves the 1D Poisson
+    Generalize the previous problem with a \ProgLang function that solves the 1D Poisson
     boundary valued equation:
     \[ \text{Solve: } u_{xx} = - f(x) \quad \text{on} \quad x \in (x_0,x_n) \quad \text{with} \quad
     u(x_0) = \alpha \quad \text{and} \quad u(x_n) = \beta. \]
@@ -1047,7 +1064,7 @@ statement of the problem is as follows:
 function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DBC)
 \end{lstlisting}
 
-    Write a MATLAB script to solve the Neumann problem with $f(x) = 2e^{-0.1x}$, $u'(0)=0$,
+    Write a \ProgLang script to solve the Neumann problem with $f(x) = 2e^{-0.1x}$, $u'(0)=0$,
     and $u(1)=0$.
 \end{problem}
 
@@ -1149,7 +1166,7 @@ function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DB
             derivative.  Write a clear and thorough explanation for how you are doing the
             discretization as well as a discussion for the errors that are being made with
             each discretization.
-        \item[(c)] Write a MATLAB script to find an approximate solution to this problem.
+        \item[(c)] Write a \ProgLang script to find an approximate solution to this problem.
         \item[(d)] Write a clear and thorough discussion about how your will choose $\Delta x$
             and $\Delta t$ to give stable solutions to this equation.
         \item[(e)] Graphically compare your solution to this problem with a heat equation
@@ -1427,7 +1444,7 @@ look at problem 6 on page 226 of the text.  You WILL need this.}.
         along with your project and cite them accordingly.
     \item Discuss the meaning of your work with the intention that the audience for your
         paper is mathematically sophisticated.
-    \item Finally, you will need to submit a zipped file containing MATLAB codes that run
+    \item Finally, you will need to submit a zipped file containing \ProgLang codes that run
         select simulations and animations.  The main driver file that you turn in needs to
         contain enough information so that your instructor can run your code by changing
         as few things as possible.\footnote{Realistically, your instructor should just

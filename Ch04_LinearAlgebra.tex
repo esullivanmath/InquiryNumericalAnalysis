@@ -384,7 +384,7 @@ Throughout the following several problems, let $A$ and $b$ be defined as
 
 
 \begin{technique}[LU Factorization]\label{tech:lu}
-    The following MATLAB function takes a square matrix $A$ and
+    The following \ProgLang function takes a square matrix $A$ and
     outputs the matrices $L$ and $U$ such that $A = LU$.  Partial code is given below.
     Complete the code.
 
@@ -1102,14 +1102,24 @@ end
 \end{problem}
 
 \begin{problem}
-    Create a MATLAB function that accepts a matrix $A$ and outputs the three matrices for
+    Create a \ProgLang function that accepts a matrix $A$ and outputs the three matrices for
     the singular value decomposition.  Test your function on a large random rectangular
     matrix.
+    \ifnum\Python=0
 \begin{lstlisting}
 A = rand(500,300);
 [U,S,V] = MySVD(A);
 error = norm(A - U*S*V')
 \end{lstlisting}
+\else
+\begin{lstlisting}
+import numpy as np
+A = np.random.rand(500,300)
+U, S, V = MySVD(A)
+error = np.linalg.norm(A - U*S*np.transpose(V))
+print(error)
+\end{lstlisting}
+\fi
 \end{problem}
 
 
@@ -1253,8 +1263,14 @@ error = norm(A - U*S*V')
     \cos(4t) + 0.1 \varepsilon(t) \]
     at 50 equally spaced points $t$ between $0$ and $1$.  Here
     we are using $\varepsilon(t)$ as a function that outputs normally distributed random
-    white noise.  In \texttt{MATLAB} you will build $y$ as \\
+    white noise.  
+    \ifnum\Python=0
+    In \texttt{MATLAB} you will build $y$ as \\
     \mcode{y = cos(4*t) + 0.1*randn(size(t));}
+    \else
+    In Python you will build $y$ as \\
+    \mcode{y = np.cos(4*t) + 0.1*np.random.randn(t.shape);}
+    \fi
     
     Build the $t$ vector
     and the $y$ vector (these are your data).  We need to set up the least squares
@@ -1265,10 +1281,10 @@ error = norm(A - U*S*V')
         \item[(a)] Solve the normal equations $A^T A \bx = A^T \bb$ using your $LU$ code.
         \item[(b)] Solve the system $A \bx = \bb$ by first transforming $A$ to $A = QR$
             and then solving $R\bx = Q^T \bb$.
-        \item[(c)] Use \texttt{MATLAB} to find the sum of the square errors between the
+        \item[(c)] Use \ProgLang to find the sum of the square errors between the
             polynomial approximation and the function $f(t) = \cos(4t)$ for both the $QR$
             and the $LU$ approaches.  
-        \item[(d)] Build \texttt{MATLAB} code that does parts (a) - (c) several hundred
+        \item[(d)] Build \ProgLang code that does parts (a) - (c) several hundred
             times and complies results comparing which method gives the better
             approximation (smaller sum of square error).
     \end{enumerate}
@@ -1387,7 +1403,7 @@ error = norm(A - U*S*V')
 
 \begin{problem}
     Find the largest eigenvalue of the matrix $A$ WITHOUT using the built in
-    ``\mcode{eig}'' or ``\mcode{eigs}'' commands in MATLAB.
+    ``\mcode{eig}'' command in \ProgLang.
     \[ A = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 9 & 0 & 1 & 2 \\ 3 & 4 & 5 &
         6 \end{pmatrix} \]
 \end{problem}
@@ -1398,7 +1414,7 @@ error = norm(A - U*S*V')
 
 \begin{problem}
     Find a least square cubic function that best fits the following data. Solve this
-    problem with Excel and with MATLAB using the normal equations.
+    problem with Excel and with \ProgLang using the normal equations.
     \begin{center}
         \begin{tabular}{|c|c|}
             \hline
@@ -1456,19 +1472,29 @@ error = norm(A - U*S*V')
     exception that we orthogonalize at every step.  Hence, when you write your code expect
     to only change a few lines from your Power method.
 
-    Write a
-    MATLAB function \mcode{MyPower2} to find the second largest eigenvalue and
+    Write a \ProgLang function \mcode{MyPower2} to find the second largest eigenvalue and
     eigenvector pair by putting the deflation method into practice. Test your code on a
-    \underline{symmetric} matrix $A$ and compare against MATLAB's \mcode{eig} command.
+    \underline{symmetric} matrix $A$ and compare against \ProgLang's \mcode{eig} command.
     Your code needs to work on symmetric matrices of arbitrary size and you need to write
-    test code that clearly shows the error between your calculated eigenvalue and MATLAB's
-    eigenvalue as well as your calculated eigenvector and MATLAB's eigenvector.\\ To
+    test code that clearly shows the error between your calculated eigenvalue and
+    \ProgLang's
+    eigenvalue as well as your calculated eigenvector and \ProgLang's eigenvector.\\ To
     guarantee that you start with a symmetric matrix you can use the following code.
+    \ifnum\Python=0
 \begin{lstlisting}
 N = 40; % size of the matrix ... make this large-ish
 A = rand(N,N);
 A = A'*A; % this will be a random symmetric NxN matrix.
 \end{lstlisting}
+\else
+\begin{lstlisting}
+import numpy as np
+N = 40
+A = np.random.rand(N,N)
+A = np.matrix(A)
+A = np.transpose(A) * A
+\end{lstlisting}
+\fi
 \end{problem}
 \hint{
     Technically speaking you don't have to orthogonalize at every step so if you want to
@@ -1536,10 +1562,10 @@ and hence
         4/\sqrt{18} \\ 2/3 & -2/3 & -1/3 \end{pmatrix} \]
 We leave it to the reader to check that this is correct.  
 
-Obviously this is not a computation that you typically do by hand.  You should have SVD
-code handy that does this entire algorithm.  MATLAB also has a built-in svd code that is
-optimized to run faster than the one that we built in class.  You are welcome to use the
-built-in svd MATLAB routine in this project.
+Obviously this is not a computation that you typically do by hand on larger matrices.  You
+should have SVD code handy that does this entire algorithm.  \ProgLang also has a built-in
+svd code that is optimized to run faster than the one that we built in class.  You are
+welcome to use the built-in svd \ProgLang routine in this project.
 
 \subsection*{Problem Statement}
 There are many applications of the singular value decomposition.  In fact, the SVD is
@@ -1808,7 +1834,7 @@ proof to you \underline{out loud}.
 \end{problem}
 
 \begin{problem}
-    Write MATLAB code to implement the iterative process defined previously. Make a plot
+    Write \ProgLang code to implement the iterative process defined previously. Make a plot
     that shows how the rank evolves over the iterations.
 \end{problem}
 
