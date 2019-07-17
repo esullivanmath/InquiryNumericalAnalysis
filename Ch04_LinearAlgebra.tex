@@ -434,12 +434,16 @@ def MyLU(A):
     \mathbb{R}^n$.  To solve the problem $A \bx =\bb$,
     \begin{enumerate}
         \item Factor $A$ into lower and upper triangular matrices $A = LU$.\\
+            \ifnum\Python=0
             \mcode{[L, U] = MyLU(A);}
+            \else
+            \mcode{L, U = MyLU(A)}
+            \fi
         \item The system can now be written as $LU \bx = \bb$.  Substitute $U \bx = {\bf
             y}$ and solve the system $L {\bf y} = \bb$ with forward substitution. \\
-            \mcode{y = LSolve(L, b);}
+            \mcode{y = LSolve(L, b)}
         \item Finally, solve the system $U \bx = {\bf y}$ with backward substitution. \\
-            \mcode{x = USolve(U, y);}
+            \mcode{x = USolve(U, y)}
     \end{enumerate}
 \end{thm}
 
@@ -482,19 +486,33 @@ print(Error)
 \begin{problem}
     For this problem we are going to run a numerical experiment to see how the process of
     solving the equation $A \bx = \bb$ using the $LU$ factorization performs.\\ 
-    \noindent Create a loop that does the following
+    \noindent Create a loop that does the following 
+    \ifnum\Python=1
+    \\ (Note to Python Users: You will need to run the import command:\\ \mcode{from
+    numpy.random import rand}\\ to get the \mcode{rand} command.)
+    \fi
     \begin{itemize}
         \item Build a random matrix of size $n \times n$. You can do this with the code:
             \\
             \mcode{A=rand(n,n)}
         \item Build a random vector in $\mathbb{R}^{n}$. You can do this with the code: \\
             \mcode{b = rand(n,1)}
-        \item Find MATLAB's exact answer to the problem $A\bx=\bb$ using the backslash: \\
+        \item Find \ProgLang's exact answer to the problem $A\bx=\bb$ 
+            \ifnum\Python=0
+            using the backslash: \\
             \verb|Xexact = A \ b|
+            \else
+            using the \mcode{numpy.linalg.solve} command \\
+            \mcode{Xexact = numpy.linalg.solve(A,b)}
+            \fi
         \item Write code that uses your three $LU$ functions (\mcode{MyLU, Lsolve,
             Usolve}) to find a solution to the equation $A\bx=\bb$.
         \item Find the error between your answer and the exact answer using the code: \\
+            \ifnum\Python=0
             \mcode{error = norm(x - Xexact)}
+            \else
+            \mcode{error = numpy.linalg.norm(x - Xexact)}
+            \fi
         \item Make a plot that shows how the error behaves as the size of the problem
             changes. You should run this for matrices of larger and larger size but be
             warned that the loop will run for quite a long time if you go above
@@ -601,22 +619,36 @@ triangular matrix.  In this case we get the following advantages:
     \end{enumerate}
 \end{problem}
 
-\ifnum\Python=1 {\color{red} Continue altering the coding sections starting here}\fi
 
 \begin{problem}
-    Write MATLAB code that takes a matrix $A$ (not necessarily square) and outputs 
+    Write \ProgLang code that takes a matrix $A$ (not necessarily square) and outputs 
     both the $Q$ matrix and the $R$ matrix. Pseducode for this function is as follows:
     \begin{itemize}
-        \item Set up the function call:\\ \mcode{function [Q,R] = MyQR(A)}
+        \item Set up the function call:\\ 
+            \ifnum\Python=0
+            \mcode{function [Q,R] = MyQR(A)}
+            \else
+            \mcode{def MyQR(A):}
+            \fi
         \item Set up \mcode{zeros} matrices for both $Q$ and $R$.  Remember that $A$ may
             not be square so assume that the columns are in $\mathbb{R}^m$ and the rows
             are in $\mathbb{R}^n$.  Hence $Q$ will be $m \times n$ and $R$ will be $n
             \times n$.
-        \item Start a loop that counts across the columns:\\ \mcode{for j=1:n}
+        \item Start a loop that counts across the columns:\\ 
+            \ifnum\Python=0
+            \mcode{for j=1:n}
+            \else
+            \mcode{for j in range(0,n):}
+            \fi
             \begin{itemize}
                 \item define a temporary variable: $\hat{\bq} = \ba_j$
                 \item start a loop that will do all of the subtractions and build some of
-                    the $R's$:\\ \mcode{for i=1:j-1}
+                    the $R's$:\\ 
+                    \ifnum\Python=0
+                    \mcode{for i=1:j-1}
+                    \else
+                    \mcode{for i in range(0,j-2):}
+                    \fi
                     \begin{itemize}
                         \item build one of the $R's$: $R_{ij} = \ba_j \cdot \bq_i$
                         \item Do one of the subtractions: $\hat{\bq} = \hat{\bq} - R_{ij} \bq_i$
@@ -721,7 +753,7 @@ way to tell at the outset what a {\it good} sum of squares of residuals is.
 }
 
 There are MANY statistics packages out there that will do least squares regression for us.
-MATLAB has the \texttt{polyfit} command, R has the \texttt{lm} command, and Excel has the
+\ProgLang has the \texttt{polyfit} command, R has the \texttt{lm} command, and Excel has the
 data analysis toolpack.  Behind the scenes in all of these is actually linear algebra.  It
 is informative pedagogically to do the least squares problems using Excel a few times (as
 we did in Problem \ref{prob:least_squares_1}), but in reality there is some beautifully
@@ -729,7 +761,7 @@ simple linear algebra behind the scenes.
 
 \begin{problem}
     Now we'll use Linear Algebra to complete the same types of problems.  Set up a
-    \texttt{MATLAB} script the reads the linear data from the Excel sheet.  We are
+    \ProgLang script the reads the linear data from the Excel sheet.  We are
     assuming that the data are linear so for each $x$-value $x_j$ we assume that the equation 
     \[ \hat{y}_j =  \beta_0 + \beta_1 x_j \approx y_j. \]
     The values of $\beta_0$ and $\beta_1$ are the intercept and slope that best predict
@@ -742,8 +774,9 @@ simple linear algebra behind the scenes.
     when we consider all $n$ of the data points.
     We'll call the left-hand matrix $A$ and the right-hand vector $\by$.  
     \begin{enumerate}
-        \item For each data set get $A$ and $\by$ into MATLAB so we can use them.
-        \item This is not a square system. In fact, it is {\it overdetermined}.  Consider
+        \item For each data set get $A$ and $\by$ into \ProgLang so we can use them.
+        \item This is not a square system. In fact, it is {\it overdetermined} (more rows
+            than columns).  Consider
             that the column space of $A$ ($Col(A)$) is a subspace of $\mathbb{R}^n$ and
             that $\by \in \mathbb{R}^n$ is likely not in the column space of $A$.  If we
             project $\by$ onto $Col(A)$ we should be able to find the best approximation
@@ -806,18 +839,33 @@ the polynomial increases it becomes less and less desirable to solve the problem
 matrix inversion (or Gaussian Elimination).  
 
 \begin{problem}
-    Create a data set from a third or fourth order polynomial.  Then introduce some random
-    noise onto your data set.  Write a loop in MATLAB that fits polynomials of increasing
-    order to the data set (starting with linear and increasing by 1 each time).  Create
-    two plots.  In the first plot put the order of the polynomial on the horizontal axis
-    and the $R^2$ value on the vertical axis.  On the second plot put the order of the
-    polynomial on the horizontal axis and the ratio $\left| \lambda_{max} \right| / \left| \lambda_{min}
-    \right|$ on the vertical axis, where $\lambda_{max}$ and $\lambda_{min}$ are the
-    maximum and minimum eigenvalues respectively.  You'll probably want to use a \mcode{semilogy} scale
-    for the second plot.  \\
-    Note: Recall that the determinant of a matrix is the product of the eigenvalues.
-    Therefore, if the determinant is getting close to zero then the ratio given above goes
-    to infinity.  To get the eigenvalues use MATLAB's \mcode{eig} command.
+    In this problem we are going to follow up on the claim in the previous paragraph:
+    \begin{quote}
+        {\it When doing polynomial regression via the normal equations, as the order of
+            the polynomial grows the matrix $A^T A$ gets close and closer to being
+        singular.}
+    \end{quote}
+    \begin{enumerate}
+        \item[(a)] Create a data set from a third or fourth order polynomial.  Then
+            introduce some random noise onto your data set.  
+        \item[(b)] Write a loop in \ProgLang that fits polynomials of increasing order to
+            the data set (starting with linear and increasing by 1 each time).  Create two
+            plots.  In the first plot put the order of the polynomial on the horizontal
+            axis and the $R^2$ value on the vertical axis.  On the second plot put the
+            order of the polynomial on the horizontal axis and the ratio $\left|
+            \lambda_{max} \right| / \left| \lambda_{min} \right|$ on the vertical axis,
+            where $\lambda_{max}$ and $\lambda_{min}$ are the maximum and minimum
+            eigenvalues respectively.  You'll probably want to use a \mcode{semilogy}
+            scale for the second plot.  
+        \item[(c)] What do you notice about the $R^2$ value in the first plot as you
+            increase the order of the polynomial?  Is this surprising?  Discuss.
+        \item[(d)] What does the right-hand plot tell you about the matrix $A^T A$?
+        \item[(e)] Why is the ratio $\lambda_{max}/\lambda_{min}$ a measure of how close
+            to singular (non-invertible) the matrix $A^T A$ is? 
+    \end{enumerate}
+%     Note: Recall that the determinant of a matrix is the product of the eigenvalues.
+%     Therefore, if the determinant is getting close to zero then the ratio given above goes
+%     to infinity.  To get the eigenvalues use MATLAB's \mcode{eig} command.
 \end{problem}
 
 \begin{problem}
@@ -826,17 +874,16 @@ matrix inversion (or Gaussian Elimination).
 
 
 
-\newpage
 
 \newpage\section{The Eigenvalue-Eigenvector Problem}
-Recall that the eigenvectors, $\bx$, and the eigenvalues, $\lambda$ of a square matrix satisfy the
-equation $A\bx=\lambda \bx$. Geometrically, the eign-problem is the task of finding the special
-vectors $\bx$ such that multiplication by the matrix $A$ only produces a scalar multiple of
-$\bx$. Thinking about matrix multiplication, this is rather peculiar since matrix-vector
-multiplication usually results in a scaling and a rotation of the vector. Therefore, in
-some sense the eigenvectors are the only special vectors which avoid geometric rotation
-under matrix multiplication.  For a graphical exploration of this idea see:
-\href{https://www.geogebra.org/m/JP2XZpzV}{https://www.geogebra.org/m/JP2XZpzV}.
+Recall that the eigenvectors, $\bx$, and the eigenvalues, $\lambda$ of a square matrix
+satisfy the equation $A\bx=\lambda \bx$. Geometrically, the eign-problem is the task of
+finding the special vectors $\bx$ such that multiplication by the matrix $A$ only produces
+a scalar multiple of $\bx$. Thinking about matrix multiplication, this is rather peculiar
+since matrix-vector multiplication usually results in a scaling and a rotation of the
+vector. Therefore, in some sense the eigenvectors are the only special vectors which avoid
+geometric rotation under matrix multiplication.  For a graphical exploration of this idea
+see:\\ \href{https://www.geogebra.org/m/JP2XZpzV}{https://www.geogebra.org/m/JP2XZpzV}.
 
 Recall that to solve the eigen-problem for a square matrix $A$ we complete the following
 steps:
@@ -946,7 +993,7 @@ steps:
 \end{technique}
 
 \begin{problem}
-    Write a MATLAB function to implement the power method for finding the eigenvalue of
+    Write a \ProgLang function to implement the power method for finding the eigenvalue of
     largest absolute value and the associated eigenvector.  Test it on a matrix where you
     know the eigenvalue of interest.
 \end{problem}
@@ -1011,8 +1058,12 @@ They are typically denoted as $\sigma_1, \sigma_2, \dots, \sigma_n$ where $\sigm
 \end{definition}
 
 \begin{problem}
-    Use MATLAB to find the singular value decomposition of 
+    Use \ProgLang to find the singular value decomposition of 
     \[ A = \begin{pmatrix} 4 & 11 & 14 \\ 8 & 7 & -2 \end{pmatrix} \]
+
+
+\ifnum\Python=1 {\color{red} Continue altering the coding sections starting here}\fi
+
     Some practical MATLAB tips follow:
     \begin{enumerate}
         \item Define $A$
