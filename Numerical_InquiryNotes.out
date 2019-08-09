@@ -90,46 +90,59 @@
 \BOOKMARK [2][-]{subsection.6.10.1}{Hunting and Diffusion}{section.6.10}% 90
 \BOOKMARK [2][-]{subsection.6.10.2}{Heating Adobe Houses}{section.6.10}% 91
 \BOOKMARK [2][-]{subsection.6.10.3}{The River Contamination Problem}{section.6.10}% 92
-\BOOKMARK [0][-]{appendix.A}{MATLAB Basics}{}% 93
-\BOOKMARK [1][-]{section.A.1}{Vectors and Matrices}{appendix.A}% 94
-\BOOKMARK [1][-]{section.A.2}{Looping}{appendix.A}% 95
-\BOOKMARK [2][-]{subsection.A.2.1}{For Loops}{section.A.2}% 96
-\BOOKMARK [2][-]{subsection.A.2.2}{The While Loop}{section.A.2}% 97
-\BOOKMARK [1][-]{section.A.3}{Conditional Statements}{appendix.A}% 98
-\BOOKMARK [2][-]{subsection.A.3.1}{If Statements}{section.A.3}% 99
-\BOOKMARK [2][-]{subsection.A.3.2}{Case-Switch Statements}{section.A.3}% 100
-\BOOKMARK [1][-]{section.A.4}{Functions}{appendix.A}% 101
-\BOOKMARK [1][-]{section.A.5}{Plotting}{appendix.A}% 102
-\BOOKMARK [1][-]{section.A.6}{Animations}{appendix.A}% 103
-\BOOKMARK [0][-]{appendix.B}{Writing and Projects}{}% 104
-\BOOKMARK [1][-]{section.B.1}{The Paper}{appendix.B}% 105
-\BOOKMARK [1][-]{section.B.2}{Figures and Tables}{appendix.B}% 106
-\BOOKMARK [1][-]{section.B.3}{Writing Style}{appendix.B}% 107
-\BOOKMARK [1][-]{section.B.4}{Tips For Writing Clear Mathematics}{appendix.B}% 108
-\BOOKMARK [2][-]{subsection.B.4.1}{Audience}{section.B.4}% 109
-\BOOKMARK [2][-]{subsection.B.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.B.4}% 110
-\BOOKMARK [2][-]{subsection.B.4.3}{Some Writing Tips}{section.B.4}% 111
-\BOOKMARK [2][-]{subsection.B.4.4}{Mathematical Vocabulary}{section.B.4}% 112
-\BOOKMARK [1][-]{section.B.5}{Sensitivity Analysis}{appendix.B}% 113
-\BOOKMARK [1][-]{section.B.6}{Example of Sensitivity Analysis:}{appendix.B}% 114
-\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 115
-\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 116
-\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 117
-\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 118
-\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 119
-\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 120
-\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 121
-\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 122
-\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 123
-\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 124
-\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 125
-\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 126
-\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 127
-\BOOKMARK [1][-]{section.D.1}{Multivariable Numerical Optimization}{appendix.D}% 128
-\BOOKMARK [1][-]{section.D.2}{Interpolation}{appendix.D}% 129
-\BOOKMARK [2][-]{subsection.D.2.1}{Vandermonde Interpolation}{section.D.2}% 130
-\BOOKMARK [2][-]{subsection.D.2.2}{Lagrange Interpolation}{section.D.2}% 131
-\BOOKMARK [2][-]{subsection.D.2.3}{Interpolation at Chebyshev Points}{section.D.2}% 132
-\BOOKMARK [1][-]{section.D.3}{Multi-Dimensional Newton's Method}{appendix.D}% 133
-\BOOKMARK [1][-]{section.D.4}{Building PDE's From Conservation Laws}{appendix.D}% 134
-\BOOKMARK [0][-]{equation.D.4.17}{Bibliography}{}% 135
+\BOOKMARK [0][-]{appendix.A}{Python Basics}{}% 93
+\BOOKMARK [1][-]{section.A.1}{Getting Started}{appendix.A}% 94
+\BOOKMARK [1][-]{section.A.2}{Python Programming Basics}{appendix.A}% 95
+\BOOKMARK [2][-]{subsection.A.2.1}{Variables}{section.A.2}% 96
+\BOOKMARK [2][-]{subsection.A.2.2}{Indexing and Lists}{section.A.2}% 97
+\BOOKMARK [2][-]{subsection.A.2.3}{List Operations}{section.A.2}% 98
+\BOOKMARK [2][-]{subsection.A.2.4}{Tuples}{section.A.2}% 99
+\BOOKMARK [2][-]{subsection.A.2.5}{Control Flow: Loops and If Statements}{section.A.2}% 100
+\BOOKMARK [2][-]{subsection.A.2.6}{Functions}{section.A.2}% 101
+\BOOKMARK [2][-]{subsection.A.2.7}{Packages}{section.A.2}% 102
+\BOOKMARK [1][-]{section.A.3}{Numerical Python with numpy}{appendix.A}% 103
+\BOOKMARK [2][-]{subsection.A.3.1}{Numpy Arrays, Array Operations, and Matrix Operations}{section.A.3}% 104
+\BOOKMARK [2][-]{subsection.A.3.2}{arange, linspace, zeros, ones, and mgrid}{section.A.3}% 105
+\BOOKMARK [1][-]{section.A.4}{Mathematical Plotting with matplotlib}{appendix.A}% 106
+\BOOKMARK [2][-]{subsection.A.4.1}{Basics with plt.plot\(\)}{section.A.4}% 107
+\BOOKMARK [2][-]{subsection.A.4.2}{Subplots}{section.A.4}% 108
+\BOOKMARK [2][-]{subsection.A.4.3}{Logarithmic Scaling with semilogy, semilogx, and loglog}{section.A.4}% 109
+\BOOKMARK [1][-]{section.A.5}{Symbolic Algebra and Calculus with sympy}{appendix.A}% 110
+\BOOKMARK [2][-]{subsection.A.5.1}{Symbolic Variables with symbols}{section.A.5}% 111
+\BOOKMARK [2][-]{subsection.A.5.2}{Symbolic Algebra}{section.A.5}% 112
+\BOOKMARK [2][-]{subsection.A.5.3}{Symbolic Function Evaluation}{section.A.5}% 113
+\BOOKMARK [2][-]{subsection.A.5.4}{Symbolic Calculus}{section.A.5}% 114
+\BOOKMARK [2][-]{subsection.A.5.5}{Solving Equations Symbolically}{section.A.5}% 115
+\BOOKMARK [2][-]{subsection.A.5.6}{Symbolic Plotting}{section.A.5}% 116
+\BOOKMARK [0][-]{appendix.B}{Writing and Projects}{}% 117
+\BOOKMARK [1][-]{section.B.1}{The Paper}{appendix.B}% 118
+\BOOKMARK [1][-]{section.B.2}{Figures and Tables}{appendix.B}% 119
+\BOOKMARK [1][-]{section.B.3}{Writing Style}{appendix.B}% 120
+\BOOKMARK [1][-]{section.B.4}{Tips For Writing Clear Mathematics}{appendix.B}% 121
+\BOOKMARK [2][-]{subsection.B.4.1}{Audience}{section.B.4}% 122
+\BOOKMARK [2][-]{subsection.B.4.2}{How To Make Mathematics Readable \205 10 Things To Do}{section.B.4}% 123
+\BOOKMARK [2][-]{subsection.B.4.3}{Some Writing Tips}{section.B.4}% 124
+\BOOKMARK [2][-]{subsection.B.4.4}{Mathematical Vocabulary}{section.B.4}% 125
+\BOOKMARK [1][-]{section.B.5}{Sensitivity Analysis}{appendix.B}% 126
+\BOOKMARK [1][-]{section.B.6}{Example of Sensitivity Analysis:}{appendix.B}% 127
+\BOOKMARK [0][-]{appendix.C}{LaTeX}{}% 128
+\BOOKMARK [1][-]{section.C.1}{Equation Environments and Cross Referencing}{appendix.C}% 129
+\BOOKMARK [1][-]{section.C.2}{Tables, Tabular, Figures, Shortcuts, and Other Environments}{appendix.C}% 130
+\BOOKMARK [2][-]{subsection.C.2.1}{Tables and Tabular Environments}{section.C.2}% 131
+\BOOKMARK [2][-]{subsection.C.2.2}{Excel To LaTeX}{section.C.2}% 132
+\BOOKMARK [2][-]{subsection.C.2.3}{Figures}{section.C.2}% 133
+\BOOKMARK [2][-]{subsection.C.2.4}{New Commands: Shortcuts are AWESOME!}{section.C.2}% 134
+\BOOKMARK [1][-]{section.C.3}{Graphics in LaTeX}{appendix.C}% 135
+\BOOKMARK [2][-]{subsection.C.3.1}{The Tikz and PGFPlots Packages}{section.C.3}% 136
+\BOOKMARK [1][-]{section.C.4}{Bibliography Management}{appendix.C}% 137
+\BOOKMARK [2][-]{subsection.C.4.1}{Embedded Bibliography}{section.C.4}% 138
+\BOOKMARK [2][-]{subsection.C.4.2}{Bibliography Database: BibTeX}{section.C.4}% 139
+\BOOKMARK [0][-]{appendix.D}{Optional Material}{}% 140
+\BOOKMARK [1][-]{section.D.1}{Multivariable Numerical Optimization}{appendix.D}% 141
+\BOOKMARK [1][-]{section.D.2}{Interpolation}{appendix.D}% 142
+\BOOKMARK [2][-]{subsection.D.2.1}{Vandermonde Interpolation}{section.D.2}% 143
+\BOOKMARK [2][-]{subsection.D.2.2}{Lagrange Interpolation}{section.D.2}% 144
+\BOOKMARK [2][-]{subsection.D.2.3}{Interpolation at Chebyshev Points}{section.D.2}% 145
+\BOOKMARK [1][-]{section.D.3}{Multi-Dimensional Newton's Method}{appendix.D}% 146
+\BOOKMARK [1][-]{section.D.4}{Building PDE's From Conservation Laws}{appendix.D}% 147
+\BOOKMARK [0][-]{equation.D.4.17}{Bibliography}{}% 148
