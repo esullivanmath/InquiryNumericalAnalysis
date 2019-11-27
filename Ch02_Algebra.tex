@@ -358,7 +358,8 @@ def Bisection(f , a , b , tol):
 \begin{problem}
     Now use the pseudo-code as structure to complete a \ProgLang function for the Bisection
     Method.  Also write a test script that verifies that your function works properly. Be
-    sure that it can take an anonymous function handle as an input along with an initial
+    sure that it can take \ifnum\Python=0 an anonymous function
+    handle\else a Lambda Function\fi as an input along with an initial
     lower bound, an initial upper bound, and an optional error tolerance. The output
     should be only 1 single number: the root.\\
     \ifnum\Python=0 \mcode{function root=Bisection(f , a , b , tol)} 
@@ -632,8 +633,9 @@ and to iteratively zero in on the root of the function on the given interval.
 
 \begin{problem}
    Use your pseudo-code to create a \ProgLang function that implements the Regula Falsi method, and write a test script
-   that verifies that your function works properly. Your function should accept an
-    anonymous function handle as an input along with an initial lower bound, an initial
+   that verifies that your function works properly. Your function should accept 
+   \ifnum\Python=0 an anonymous function
+    handle\else a Lambda Function\fi as an input along with an initial lower bound, an initial
     upper bound, and an optional error tolerance. The output should be only 1 single number: the
     root.\\
     \ifnum\Python=0 \mcode{function root=RegulaFalsi(f , a , b , tol)}
@@ -867,8 +869,10 @@ fail.  Some of these issues can be foreseen by examining the iteration formula
 \end{problem}
 
 \begin{problem}
-    Write a \ProgLang function for Newton's method.  Your function needs to accept an
-    anonymous function handle, the derivative of $f(x)$ as an anonymous function handle,
+    Write a \ProgLang function for Newton's method.  Your function needs to accept 
+    \ifnum\Python=0 an anonymous function
+    handle\else a Lambda Function\fi, the derivative of $f(x)$ as \ifnum\Python=0 an anonymous function
+    handle\else a Lambda Function\fi,
     an initial guess, and an optional error tolerance. The only output should be the
     solution to the equation that you are solving.  Write a test script to verify that
     your Newton's method code indeed works.
@@ -988,7 +992,7 @@ of the tangent line.
     Write \ProgLang code for solving algebraic equations of the form $f(x) = 0$ with the
     Secant method.  You should ALWAYS start by writing pseudo-code as comments in your
     \ProgLang file.   Your function should accept \ifnum\Python=0 an anonymous function
-    handle\else a Python function\fi, two starting
+    handle\else a Lambda Function\fi, two starting
     points, and an optional error tolerance.  Also write a test script that clearly shows that your code is working.
     \\
     \ifnum\Python=0

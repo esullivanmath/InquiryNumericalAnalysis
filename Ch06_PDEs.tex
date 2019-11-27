@@ -1015,7 +1015,11 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
     temperatures).
 
     Since there are no external sources of heat we model the steady-state heat profile
-    with Laplace's equation \eqref{eqn:laplace}.  Write this equation in terms of
+    with Laplace's equation 
+    \begin{flalign}
+        u_{xx} = 0.
+    \end{flalign}
+    Write this equation in terms of
     1-dimensional spatial derivatives and solve for the temperature profile by hand.
 \end{problem}
 
@@ -1028,7 +1032,11 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
 \begin{problem}
     Now we will solve the steady state temperature profile problem assuming that there is
     an external source of heat.  This means that we need to solve the 1D Poisson equation
-    \eqref{eqn:poisson}.  Take $f(x) = 5\sin(2 \pi x)$, $u(0) = 2$ and $u(1) = 0.5$.
+    \begin{flalign}
+        u_{xx} = f(x).
+    \end{flalign}
+   
+    Take $f(x) = 5\sin(2 \pi x)$, $u(0) = 2$ and $u(1) = 0.5$.
     \[ \text{Solve: } \quad u_{xx} = -5\sin(2\pi x) \quad \text{on} \quad x \in (0,1)
     \quad \text{with} \quad u(0)=2 \quad \text{and} \quad u(1) = 0.5 \]
     First do so by discretizing the domain with very few points so we can write the system
@@ -1041,9 +1049,15 @@ specifically, $U^{n}_{j,k} \approx u(t_n, x_j, y_k)$.
     boundary valued equation:
     \[ \text{Solve: } u_{xx} = - f(x) \quad \text{on} \quad x \in (x_0,x_n) \quad \text{with} \quad
     u(x_0) = \alpha \quad \text{and} \quad u(x_n) = \beta. \]
+    \ifnum\Python=0
 \begin{lstlisting}
 function [x,u] = Poisson1D(f , xmin , xmax , num_interior_pts , BCleft , BCright)
 \end{lstlisting}
+\else
+\begin{lstlisting}
+def Poisson1D(f , xmin , xmax , num_interior_pts , BCleft , BCright):
+\end{lstlisting}
+\fi
     Test your code with a known function $f(x)$.
 
     Note: when we are using fixed values for the boundary conditions these are called
@@ -1060,9 +1074,15 @@ statement of the problem is as follows:
     \[ \text{Solve: } u_{xx} = - f(x) \quad \text{on} \quad x \in (x_0,x_n) \quad \text{with} \quad
     \frac{du}{dx}\Big|_{x_0} = \alpha \quad \text{and} \quad u(x_n) = \beta. \]
     Write a function to solve this problem:
+    \ifnum\Python=0
 \begin{lstlisting}
 function [x,u] = Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DBC)
 \end{lstlisting}
+\else
+\begin{lstlisting}
+def Poisson1D_Neumann(f , xmin , xmax , num_interior_pts , NBC , DBC):
+\end{lstlisting}
+\fi
 
     Write a \ProgLang script to solve the Neumann problem with $f(x) = 2e^{-0.1x}$, $u'(0)=0$,
     and $u(1)=0$.

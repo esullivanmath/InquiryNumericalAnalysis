@@ -1,12 +1,19 @@
 \chapter{Python Basics}\label{app:coding}
 
-Note to the reader: In future versions of this book we will exclusively be using Python
-for the programming language of choice.  This appendix will eventually be rolled into
-Chapter 1 as ``Introductory'' material that is optional for students with prior
-programming experience.
+% Note to the reader: In future versions of this book we will exclusively be using Python
+% for the programming language of choice.  This appendix will eventually be rolled into
+% Chapter 1 as ``Introductory'' material that is optional for students with prior
+% programming experience.
 
-In this optional Chapter we will walk through some of the basics of using Python3 - the powerful general-purpose programming language that we'll use throughout this class.  I'm assuming throughout this Chapter that you're familiar with other programming languages such as R, Java, C, or MATLAB.  Hence, I'm assuming that you know the basics about what a programming langue "is" and "does".  There are a lot of similarities between several of these languages, and in fact they borrow heavily from each other in syntax, ideas, and implementation.
+In this optional Chapter we will walk through some of the basics of using Python3 - the
+powerful general-purpose programming language that we'll use throughout this class.  I'm
+assuming throughout this Chapter that you're familiar with other programming languages
+such as R, Java, C, or MATLAB.  Hence, I'm assuming that you know the basics about what a
+programming langue ``is'' and ``does''.  There are a lot of similarities between several
+of these languages, and in fact they borrow heavily from each other in syntax, ideas, and
+implementation.
 
+\subsubsection*{Why Python?}
 We are going to be using Python in this class since
 
 \begin{itemize}
@@ -17,9 +24,17 @@ We are going to be using Python in this class since
     \item and Python is quite powerful.
 \end{itemize}
 
-It is important to keep in mind that Python is a general purpose language that we will be using for Scientific Computing.  The purpose of Scientific Computing is **not** to build apps, build software, manage databases, or develope user interfaces.  Instead, Scientific Computing is the use of a computer programming language (like Python) along with mathematics to solve scientific and mathematical problems.  For this reason it is definitely not our purpose to write an all-encompassing guide for how to use Python.  We'll only cover what is necessary for our computing needs.  You'll learn more as the course progresses so use this chapter as a reference just to get going with the language.
+It is important to keep in mind that Python is a general purpose language that we will be
+using for Scientific Computing.  The purpose of Scientific Computing is {\it not} to build
+apps, build software, manage databases, or develope user interfaces.  Instead, Scientific
+Computing is the use of a computer programming language (like Python) along with
+mathematics to solve scientific and mathematical problems.  For this reason it is
+definitely not our purpose to write an all-encompassing guide for how to use Python.
+We'll only cover what is necessary for our computing needs.  You'll learn more as the
+course progresses so use this chapter as a reference just to get going with the language.
 
-There is a wealth of information available about Python and the suite of tools that we will frequently use.
+There is an overwhelming abundance of information available about Python and the suite of
+tools that we will frequently use.
 \begin{itemize}
     \item Python \href{https://www.python.org/}{https://www.python.org/},
     \item NumPy (numerical python) \href{https://www.numpy.org/}{https://www.numpy.org/},
@@ -32,12 +47,21 @@ These tools together provide all of the computational power that will need.  And
 \section{Getting Started}
 Every computer is its own unique flower with its own unique requirements.  Hence, we will
 not spend time here giving you all of the ways that you can install Python and all of the
-associated packages necessary for this course.  We highly recommend that you go to \\
-\href{https://www.python.org/downloads/}{https://www.python.org/downloads/} and follow the
-appropriate links.  The environment in which you code is largely up to personal preference
+associated packages necessary for this course.  We highly recommend that you start with
+the Anaconda downloader
+\href{https://www.anaconda.com/distribution/}{https://www.anaconda.com/distribution/}
+since it includes the most up-to-date version of Python as well as some of the common
+tools for writing Python code. 
+
+The environment in which you code is largely up to personal preference
 (or perhaps instructor preference).  Jupyter Notebooks seem to be a good modern choice for
 coding environments.  For more information and for installation of Jupyter see
-\href{https://jupyter.org/}{https://jupyter.org/}.
+\href{https://jupyter.org/}{https://jupyter.org/}.  The beauty of Jupyter Notebooks is
+that you can mix your code and your writing together in a nice and seamless way.  A
+slightly modern touch on Jupyter Notebooks is an interface called a Jupyter Lab.  This is
+the exact same as a Jupyter Notebook, but it also gives you an interface for selecting
+files, changing directories, building new files, and other such basic functions.  From now
+on, we'll use the terms ``Jupyter Notebook'' and ``Jupyter Lab'' as synonyms.
 
 In the rest of this chapter we will assume that you have a working version of Python along
 with (most likely) a working version of Jupyter Notebooks to work in.  Throughout this
@@ -53,6 +77,8 @@ the mathematical goals of the book.  There is definitely more to say about Pytho
 don't intend to cover it all here.
 
 
+\section{Hello, World!}
+
 As is tradition for a new programming language, we should create code that prints the
 words ``Hello, world!'' to the screen.  The code below does just that.  
 
@@ -65,6 +91,11 @@ print("Hello, world!")
 Hello, world!
 \end{lstlisting}
 
+In a Jupyter Notebook you will write your code in a code block, and when you're ready to
+run it you can press Shift+Enter and you'll see your output.
+\begin{problem}
+    In a Jupyter Notebook have Python print \texttt{Hello, world!} to the screen.
+\end{problem}
 
 \begin{problem}
     Write code to print your name to the screen.
@@ -77,6 +108,16 @@ programming from another math class that required some coding, possibly from an
 introductory computer science class, or from some other exposure to coding.  If not then
 don't fret -- not all hope is lost.  A good place to start is to ask your instructor for
 additional programming materials.  
+
+We also recommend that you now spend a bit of time poking around in Jupyter Notebooks.
+Figure out how to 
+\begin{itemize}
+    \item save a file
+    \item load a new iPython Notebook (Jupyter Notebook) file from your computer's hard drive
+    \item change the working directory for a Jupyter Notebook.
+    \item write text in a Jupyter Notebook
+    \item use the keyboard to switch between writing text and writing code.
+\end{itemize}
 
 \section{Python Programming Basics}
 \subsection{Variables}
@@ -510,8 +551,8 @@ of examples.
 
 \begin{example}
     In the following code we write a for loop that outputs a list of the first 10
-    iterations of the sequence  $x_{n+1}=−0.5x_n+1$ starting with  $x_0=3$. Notice that
-    we're using \texttt{x.append} instead of $x[n+1]$ to append the new term to the list.
+    iterations of the sequence  $x_{n+1}=-0.5x_n+1$ starting with  $x_0=3$. Notice that
+    we're using the command \texttt{x.append} instead of $x[n+1]$ to append the new term to the list.
     This allows us to grow the length of the list dynamically as the loop progresses.
 
     \bcode
@@ -569,7 +610,7 @@ for n in range(0,9):
 \end{problem}
 
 \begin{problem}
-    Write a for loop that builds the first 20 terms of the sequence  $x_{n+1}=1−x^2$ with
+    Write a for loop that builds the first 20 terms of the sequence  $x_{n+1}=1-x^2$ with
     $x_0=0.1$ Pre-allocate enough memory in your list and then fill it with the terms of
     the sequence. Only print the list after all of the computations have been completed.
 \end{problem}
@@ -767,7 +808,7 @@ Take careful note of several things in the previous example:
 \end{itemize}
 
 
-\begin{problem}
+\begin{problem}\label{prob_python:prime_gen}
     Define the function $g(n) = n^2 + n + 41$ as a Python function.  Write a loop that
     gives the output for this function for integers from $n=0$ to $n=39$.  It is curious
     to note that each of these outputs is a prime number (check this on your own).  Will
@@ -868,7 +909,7 @@ approximation 		 exact 		 abs error
 \end{lstlisting}
 \end{example}
 
-\begin{problem}
+\begin{problem}\label{prob_python:babylonian_sqrt}
     The previous example is a special case of the Babylonian Algorithm for calculating square roots.  If you want the square root of $S$ then iterate the sequence
 $$x_{n+1} = \frac{1}{2} \left( x_n + \frac{S}{x_n} \right)$$
 until you are within an appropriate tolerance.
@@ -876,6 +917,105 @@ until you are within an appropriate tolerance.
 Modify the code given in the previous example to give a list of approximations of the square roots of the natural numbers 2 through 20, each to within $10^{-8}$.  This problem will require that you build a function, write a `for` loop (for the integers 2-20), and write a `while` loop inside your `for` loop to do the iterations.
 \end{problem}
 
+
+\subsection{Lambda Functions}
+Using \texttt{def} to define a function as in the previous subsection is really nice when
+you have a function that is complicated or requires some bit of code to evaluate.
+However, in the case of mathematical functions we have a convenient alternative: Lambda
+Functions.  
+
+The basic idea of a Lambda Function is that we just want to state what the variable is and
+what the rule is for evaluating the function.  This is the most like the way that we write
+mathematical functions.  For example, let's define the mathematical function $f(x) = \sin(x^2)+3$ in two
+different ways.  
+
+\begin{itemize}
+    \item As a Python function with \texttt{def}:
+\begin{lstlisting}
+def f(x):
+    return(np.sin(x**2)+3)
+\end{lstlisting}
+    \item As a Lambda Function:
+\begin{lstlisting}
+f = lambda x: np.sin(x**2)+3
+\end{lstlisting}
+\end{itemize}
+
+You can see that in the Lambda Function we are explicitly stating the name of the variable
+immediately after the word \texttt{lambda}, then we put a colon, and then the function
+definition.  
+
+Now if we want to evaluate the function at a point, say $x=1.5$, then we can write code
+just like we would mathematically: $f(1.5)$
+\begin{lstlisting}
+f(1.5) # evaluate the function at x=1.5
+\end{lstlisting}
+where the result is exactly the floating point number we were interested in:
+$f(1.5 \approx 3.778073196887921$.
+
+The distinct mathematical advantange for using Lambda Functions is that the code for
+setting up a Lambda Function is about as close as we're going to get to a mathematically
+defined function, but the code for evaluating a Lambda Function is {\it exactly} what we
+would write mathematically.  Additionally, there is less coding overhead than for defining
+function with the \mcode{def} command.
+
+We can also define Lambda Functions of several variables.  For example, if we want to
+define the mathematical function $f(x,y) = x^2 + y\cos(xy)$ we could write the code
+\begin{lstlisting}
+f = lambda x, y: x**2 + y * np.cos(x*y)
+\end{lstlisting}
+If we wanted the value $f(2,\pi)$ we could now write the code
+
+\bcode
+\begin{lstlisting}
+f(2,np.pi)
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+7.141592653589793   
+\end{lstlisting}
+
+
+\begin{example}
+    You may recall Euler's Method from your differential equations training.  Euler's
+    Method will give a list of approximate values of the solution to a first order
+    differential equation at given times. 
+
+    Consider the differential equation $y' = -0.25y + 2$ with the initial condition $y(0)
+    = 1.1$.  We can define the right-hand side of the differential equation as a Lambda
+    Function in our code so that we can call on it over and over again in our Euler's
+    Method solution.  We'll take 10 Euler steps starting at the proper initial condition.
+    Pay particular attention to how we use the Lambda Function.
+
+\bcode
+\begin{lstlisting}
+RightSide = lambda y: -0.25*y + 2 # define the right-hand side
+dt = 0.125 # define the delta t in Euler's method
+t = [0] # initial time
+y = [1.1] # initial condition
+for n in range(0,10):
+    t.append(t[n] + dt) # increment the time
+    y.append(y[n] + dt*RightSide(y[n])) # find approx soln at next pt
+print(t) # print the times
+print(np.round(y,4)) # round the approx y values to 4 decimal places
+\end{lstlisting}
+\boutput
+\begin{lstlisting}
+[0,   0.125,  0.25,   0.375,  0.5,    0.625]
+[1.1, 1.3156, 1.5245, 1.7269, 1.9229, 2.1128]
+\end{lstlisting}
+\end{example}
+
+
+\begin{problem}
+    Go back to Problem \ref{prob_python:prime_gen} and repeat this exercise using a Lambda Function
+    instead of a Python function.
+\end{problem}
+
+\begin{problem}
+    Go back tp problem \ref{prob_python:babylonian_sqrt} and repeat this exercise using a Lambda Function
+    instead of a Python function.
+\end{problem}
 
 
 \subsection{Packages}

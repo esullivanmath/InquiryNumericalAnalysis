@@ -1286,7 +1286,7 @@ accounts = np.floor(100*accounts)/100;
 }
 
 \begin{problem}
-    Create a \ProgLang function that accepts an anonymous function handle $f(x)$ and an
+    Create a \ProgLang function that accepts an Lambda Function $f(x)$ and an
     integer $N$ and gives as an output an animation of successive Taylor approximations of
     the function up to the $N^{th}$ term.  \\
 %     \mcode{function TaylorAnimation(f , N)} \\
@@ -1302,8 +1302,7 @@ TaylorAnimation(f,N)
 \else
 \begin{lstlisting}
 import numpy as np
-def f(x):
-    return(np.sin(x))
+f = lambda x: np.sin(x)
 N = 50;
 TaylorAnimation(f,N)
 \end{lstlisting}
