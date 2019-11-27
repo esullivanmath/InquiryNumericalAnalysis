@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.12.11)  9 AUG 2019 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.12.11)  25 NOV 2019 14:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2040,11 +2040,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-
-Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
-ick labels; missing features). Consider writing \pgfplotsset{compat=1.16} into 
-your preamble.
- on input line 215.
+Package pgfplots notification 'compat/show suggested version=true': you might b
+enefit from \pgfplotsset{compat=1.16} (current compat level: 1.13).
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -3043,6 +3040,19 @@ File: CreativeCommons.png Graphic file (type png)
 Package pdftex.def Info: CreativeCommons.png  used on input line 1072.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [40]
+Package pgfplots info on input line 1085: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1085: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
+Package pgfplots info on input line 1100: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1100: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
+Package pgfplots info on input line 1124: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1124: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
+
 Overfull \hbox (1.27528pt too wide) in paragraph at lines 1142--1145
 []\OT1/jkp/m/n/12 Write code and cre-ate plots to demon-strate that the Bi-sec-
 tion Method
@@ -3055,7 +3065,7 @@ Package pdftex.def Info: CreativeCommons.png  used on input line 1148.
 [41]
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
-Package pdftex.def Info: CreativeCommons.png  used on input line 1221.
+Package pdftex.def Info: CreativeCommons.png  used on input line 1216.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [42]
 File: CreativeCommons.png Graphic file (type png)
@@ -3230,6 +3240,10 @@ File: CreativeCommons.png Graphic file (type png)
 Package pdftex.def Info: CreativeCommons.png  used on input line 1096.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [66]
+Package pgfplots info on input line 1102: Using 'lua backend=false' for axis: x
+mode=log unsupported (yet).
+Package pgfplots info on input line 1102: Using 'lua backend=false' for axis: y
+mode=log unsupported (yet).
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png  used on input line 1142.
@@ -5081,6 +5095,8 @@ File: CreativeCommons.png Graphic file (type png)
 Package pdftex.def Info: CreativeCommons.png  used on input line 527.
 (pdftex.def)             Requested size: 42.67912pt x 15.03485pt.
  [251]
+Package pgfplots info on input line 544: Using 'lua backend=false' for axis: x 
+coord trafo unsupported.
 File: CreativeCommons.png Graphic file (type png)
 <use CreativeCommons.png>
 Package pdftex.def Info: CreativeCommons.png  used on input line 570.
@@ -5234,13 +5250,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 287.
  ) 
 Here is how much of TeX's memory you used:
- 49814 strings out of 492639
- 1067176 string characters out of 6129301
- 1406685 words of memory out of 5000000
- 50689 multiletter control sequences out of 15000+600000
+ 49770 strings out of 492639
+ 1065951 string characters out of 6129301
+ 1412873 words of memory out of 5000000
+ 50645 multiletter control sequences out of 15000+600000
  619011 words of font info for 236 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,20n,100p,982b,2446s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,20n,103p,982b,2485s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2018/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}</usr/local/t
 exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
@@ -5263,7 +5279,7 @@ sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
 sr/local/texlive/2018/texmf-dist/fonts/type1/public/wasy2-ps/wasy10.pfb>
-Output written on Numerical_InquiryNotes.pdf (284 pages, 1232219 bytes).
+Output written on Numerical_InquiryNotes.pdf (284 pages, 1231840 bytes).
 PDF statistics:
  4677 PDF objects out of 5155 (max. 8388607)
  4305 compressed objects within 44 object streams
