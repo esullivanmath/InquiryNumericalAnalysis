@@ -1,11 +1,112 @@
 \chapter{Numerical Calculus}
-In this chapter we discuss techniques for approximating the two primary computations
-in calculus: taking derivatives and evaluating definite integrals. Throughout this chapter
-we will make heavy use of Taylor's Theorem to build these approximations. At the end of
+
+
+
+In this chapter we build some of the common techniques for approximating the two primary
+computations in calculus: taking derivatives and evaluating definite integrals. 
+
+\section{Why Do Calculus Numerically?}
+Recall the typical tools of differential calculus:
+\begin{itemize}
+    \item the power rule, 
+    \item the chain rule, 
+    \item the product
+rule, 
+\item the quotient rule, 
+\item the differentiation rules for exponentials, inverses, and
+trig functions,
+\item implicit differentiation,
+\item etc.
+\end{itemize}
+With these rules, and enough time and patience, we can find a derivative of any
+algebraically defined function.  The truth of the matter is that not all functions are
+given to us algebraically, and even the ones that are given algebraically are sometimes
+really cumbersome.
+\begin{problem}
+    A water quality engineering team wants to find the rate at which the volume of waste
+    water is changing in their containment pond throughout the year.  They presently only
+    have data on the specific geometric shape of the containment pond as well as the depth
+    of the waste water each day for the past year.  Propose several methods for
+    approximating the first derivative of the volume of the waste water pond.
+\end{problem}
+
+\begin{problem}
+    When a police officer fires a radar gun at a moving car it uses a laser to measure
+    the distance from the officer to the car:
+    \begin{itemize}
+        \item The speed of light is constant.
+        \item The time between when the laser is fired and when the light reflected off of
+            the car is received can be measured very accurately.  
+        \item Using the formula $\text{distance} = \text{rate} \cdot \text{time}$, the
+            time for the laser pulse to be sent and received can then be converted to a
+            distance.
+    \end{itemize}
+    How does the radar gun then use that information to calculate the speed of the moving
+    car?
+\end{problem}
+
+Integration, on the other hand, is a more difficult situation.  You may recall some of the
+techniques of integral calculus such as the power rule, $u$-substitution, and integration
+by parts.  However, these tools are not enough to find an antiderviative for any given
+function.  Furthermore, not every function can be written algebraically.
+
+\begin{problem}
+    In statistical function known as {\it the normal distribution} (the bell curve) is
+    defined as 
+    \[ N(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}. \]
+    One of the primary computations of introductory statistics is to find the area under a
+    portion of this curve since this area gives the probability of some event
+    \[ P(a < x < b) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-x^2/2} dx. \]
+    The
+    trouble is that there is no known antiderivative of this function.  Propose a method
+    for approximating this area.
+\end{problem}
+
+\begin{problem}
+    Give a list of five functions for which an exact algebraic derivative is relatively
+    easy but an exact antiderivative is either very hard or maybe impossible.  Be prepared
+    to compare with your peers.
+\end{problem}
+
+\begin{problem}
+    A dam operator has control of the rate at which water is flowing out of a
+    hydroelectric dam.  He has records for the approximate flow rate through the dam over
+    the course of a day.  Propose a way for the operator to use his data to determine the
+    total amount of water that has passed through the dam during that day.
+\end{problem}
+
+What you've seen here are just a few examples of why you might need to use numerical
+calculus instead of the classical routines that you learned earlier in your mathematical
+career.  Another typical need for numerical derivatives and integrals arises when we
+approximate the solutions to differential equations in the later chapters of this book.  
+
+Throughout this chapter
+we will make heavy use of Taylor's Theorem to build approximations of derivatives and
+integrals.  If you find yourself still a bit shaky on Taylor's Theorem it would probably
+be wise to go back to Section \ref{sec:Taylor} and do a quick review.  At the end of
 the chapter we'll examine a numerical technique for solving optimization problems without
-explicitly finding derivatives. 
+explicitly finding derivatives.  Then we'll look at a common use of numerical calculus for
+fitting curves to data.
+
+
+
 
 \section{Differentiation}
+\begin{problem}
+    Recall from your first-semester Calculus class that the derivative of a function
+    $f(x)$ is defined as 
+    \[ f'(x) = \lim_{\Delta x \to 0} \frac{f(x+\Delta x) - f(x)}{\Delta x} \]
+    A Calculus student proposes that it would just be much easier if we dropped the limit
+    and instead just always choose $\Delta x$ to be some small number, like $0.001$.
+    Discuss the following questions:
+    \begin{enumerate}
+        \item[(a)] When might the Calculus student's proposal actually work pretty well in
+            place of calculating an actual derivative?
+        \item[(b)] When might the Calculus student's proposal fail?
+    \end{enumerate}  
+\end{problem}
+
+
 In this section we'll build several approximation of first and second derivatives.  The
 idea for each of these approximation is:
 \begin{itemize}
@@ -130,7 +231,7 @@ have the following definition.
 
 
 \begin{problem}\label{prob:deriv_error_analysis_ex}
-   Consider the function $f(x) = \sin(x) - x\sin(x)$.  The goal of this problem is to make
+   Consider the function $f(x) = \sin(x) (1- x)$.  The goal of this problem is to make
    sense of the discussion of the ``order'' of the derivative approximation.  You may want
    to pause first and reread the previous couple of pages.
    \begin{enumerate}
@@ -139,14 +240,19 @@ have the following definition.
            -0.8414709848$.  
        \item[(c)] To approximate the first derivative at $x=1$ numerically we calculate 
            \[ f'(1) \approx \frac{f(1+h) - f(1)}{h}. \]
-           Fill in the table below with the derivative approximation and the absolute
-           error associated with each given $h$.  You may want to use a spreadsheet to
-           organize your data (be sure that you're working in radians!).
+           We want to see how the error in the approximation behaves as $h$ is made
+           smaller and smaller.  Fill in the table below with the derivative approximation
+           and the absolute error associated with each given $h$.  You may want to use a
+           spreadsheet to organize your data (be sure that you're working in radians!).
            \begin{center}
                \begin{tabular}{|c|c|c|c|}
                    \hline 
                    $h$ & Approx. of $f'(1)$ & Exact value of $f'(1)$ & Abs.
                    \% Error \\ \hline \hline
+                   $2^{-1} = 0.5$ & $\frac{f(1+0.5)-f(1)}{0.5} \approx -0.99749$ &
+                   $-\sin(1) \approx -0.841471$ & $18.54181\%$ \\ \hline
+                   $2^{-2} = 0.25$ & $\frac{f(1+0.25)-f(1)}{0.25} \approx -0.94898$ &
+                   $-\sin(1) \approx -0.841471$ & $12.77687\%$ \\ \hline
                    $2^{-3} = 0.125$ & & $-\sin(1)$ & \\ \hline
                    $2^{-4}=0.0625$ & & $-\sin(1)$ & \\ \hline
                    $2^{-5}$ & & $-\sin(1)$ & \\ \hline
@@ -154,15 +260,20 @@ have the following definition.
                    $2^{-7}$ & & $-\sin(1)$ & \\ \hline
                    $2^{-8}$ & & $-\sin(1)$ & \\ \hline
                    $2^{-9}$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-10}$ & & $-\sin(1)$ & \\ \hline
                \end{tabular}
            \end{center}
        \item[(d)] There was nothing really special in part (c) about powers of 2.  Use
            your spreadsheet to build similar tables for the following sequences of $h$:
        \begin{flalign*}
-           h &= 3^{-1}, \, 3^{-2}, \, 3^{-3}, \, \ldots \\
-           h &= 5^{-1}, \, 5^{-2}, \, 5^{-3}, \, \ldots \\
-           h &= 10^{-1}, \, 10^{-2}, \, 10^{-3}, \, \ldots \\
-           h &= \pi^{-1}, \, \pi^{-2}, \, \pi^{-3}, \, \ldots \\
+           h &= 3^{-1}, \, 3^{-2}, \, 3^{-3}, \, \ldots \text{ (start with $h=1/3$ and
+           divide $h$ by 3 for each new approx.)}  \\
+           h &= 5^{-1}, \, 5^{-2}, \, 5^{-3}, \, \ldots \text{ (start with $h=1/5$ and
+           divide $h$ by 5 for each new approx.)} \\
+           h &= 10^{-1}, \, 10^{-2}, \, 10^{-3}, \, \ldots \text{ (start with $h=1/10$ and
+           divide $h$ by 10 for each new approx.)} \\
+           h &= \pi^{-1}, \, \pi^{-2}, \, \pi^{-3}, \, \ldots \text{ (start with $h=1/\pi$ and
+           divide $h$ by $\pi$ for each new approx.)} \\
         \end{flalign*}
        \item[(e)] Observation: If you calculate a numerical derivative with a forward
            difference and then calculate the absolute percent error with a fixed value of
@@ -191,6 +302,18 @@ have the following definition.
     \end{center}
 \end{problem}
 
+\begin{problem}
+    Explain the phrase:
+    \begin{quote}
+        {\it The first derivative approximation}
+        \[ f'(x) \approx \frac{f(x+h)-f(x)}{h}\]
+        {\it is first order.}
+    \end{quote}
+\end{problem}
+
+Now that we have a handle on how the technique of approximating the first derivative
+works, let's build some code that will take in a function and output the approximate first
+derivative at a collection of points.
 \begin{problem}
     Write \ProgLang code that takes a function and a domain $(xmin,xmax)$ and
     returns a numerical approximation to the derivative on the interval
@@ -270,9 +393,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 %matplotlib inline # for use in Jupyter Notebooks
 
-def f(x): # define the function of interest
-    import numpy as np
-    return(np.sin(x))
+f = lambda x: np.sin(x) # define the function of interest
 xmin = 0
 xmax = 2*np.pi
 numpts = 100
@@ -351,9 +472,8 @@ def FirstDerivFirstOrder(f,xmin,xmax,num_interior_pts):
 import matplotlib.pyplot as plt
 import numpy as np
 %matplotlib inline
-def f(x):
-    import numpy as np
-    return(np.sin(x) - x * np.sin(x))
+
+f = lambda x: np.sin(x) - x*np.sin(x)
 xmin = 0
 xmax = 15
 numpts = 1000
@@ -377,8 +497,7 @@ plot(new_x, abs( df(new_x) - dfdx ) , 'k--')
 \end{lstlisting}
 \else
 \begin{lstlisting}
-def df(x):
-    # write a function for the exact derivative
+df = lambda x:  # write a function for the exact derivative
 dy = df(newx)
 ax[1].semilogy(newx,abs(dy - yprime))
 ax[1].grid()
@@ -425,7 +544,7 @@ error approximation.
 
 
 \begin{problem}
-    Let's return to the function $f(x) = \sin(x) - x\sin(x)$ but this time we will
+    Let's return to the function $f(x) = \sin(x)(1- x)$ but this time we will
     approximate the first derivative at $x=1$ using the formula
     \[ f'(1) \approx \frac{f(1+h) - f(1-h)}{2h}. \]
     You should already have the first derivative and the exact answer from Problem
@@ -439,6 +558,8 @@ error approximation.
                    \hline 
                    $h$ & Approx. of $f'(1)$ & Exact value of $f'(1)$ & Abs.
                    \% Error \\ \hline \hline
+                   $2^{-3} = 0.5$ & & $-\sin(1)$ & \\ \hline
+                   $2^{-3} = 0.25$ & & $-\sin(1)$ & \\ \hline
                    $2^{-3} = 0.125$ & & $-\sin(1)$ & \\ \hline
                    $2^{-4}=0.0625$ & & $-\sin(1)$ & \\ \hline
                    $2^{-5}$ & & $-\sin(1)$ & \\ \hline
@@ -496,7 +617,7 @@ error approximation.
     \mcode{function [new_x,dfdx]=FirstDerivSecondOrder(f,xmin,xmax,num_interior_pts)}
     \else
     \mcode{def FirstDerivSecondOrder(f,xmin,xmax,num_interior_pts):}
-    \fi
+    \fi \\
     You should try to write this code without using any \mcode{for} loops.
 \end{problem}
 
@@ -533,7 +654,7 @@ computations.
 \end{problem}
 
 \begin{problem}
-    Again consider the function $f(x) = \sin(x) - x\sin(x)$. 
+    Again consider the function $f(x) = \sin(x)(1 - x)$. 
     \begin{enumerate}
         \item[(a)] Calculate the \underline{second} derivative of this function and
             calculate the exact value of $f''(1)$.
@@ -950,30 +1071,47 @@ potentially better approach would be to get an integral that evaluates quadratic
 exactly. In order to do this we need to evaluate the function at three points (not two
 like the trapezoidal rule). Let's integrate a function $f(x)$ on the interval
 $[a,b]$ by using the three points $(a,f(a))$, $(m,f(m))$, and
-$(b,f(b))$ where $m=\frac{a+b}{2}$ is the midpoint of the two boundary points. We want to
-find constants $A1$, $A2$, and $A3$ such that the integral
-\[ \int_a^b f(x) dx = A_1 f(a) + A_2 f\left( \frac{a+b}{2} \right) + A_3 f(b) \]
-is exact for all constant, linear, and quadratic functions. This would guarantee that we
-have an exact method for all polynomials of order 2 or less but should serve as a decent
-approximation if the function is not quadratic.
+$(b,f(b))$ where $m=\frac{a+b}{2}$ is the midpoint of the two boundary points.
 
-To find the constants $A_1, A_2$, and $A_3$ we can write the following system of three
-equations
-\begin{flalign*}
-    \int_a^b 1 dx &= b-a = A_1 + A_2 + A_3 \\
-    \int_a^b x dx &= \frac{b^2 - a^2}{2} = A_1 a + A_2 \left( \frac{a+b}{2} \right) + A_3
-    b \\
-    \int_a^b x^2 dx &= \frac{b^3 - a^3}{3} = A_1 a^2 + A_2 \left( \frac{a+b}{2} \right)^2
-    + A_3 b^2.
-\end{flalign*}
-Solving the linear system gives
-\[ A_1 = \frac{b-a}{6}, \quad A_2 = \frac{4(b-a)}{6}, \quad \text{and} \quad
-A_3 = \frac{b-a}{6}. \]
-At this point we can see that the integral can be approximated as
+\begin{problem}
+    We want to
+find constants $A1$, $A2$, and $A3$ such that the integral $\int_a^b f(x) dx$
+can be written as a linear combination of $f(a)$, $f(m)$, and $f(b)$.  Specifically, we
+want constants $A_1$, $A_2$, and $A_3$ such that 
+\[ \int_a^b f(x) dx = A_1 f(a) + A_2 f\left( \frac{a+b}{2} \right) + A_3 f(b) \]
+is \underline{exact} for all constant, linear, and quadratic functions. This would
+guarantee that we have an exact integration method for all polynomials of order 2 or less
+but should serve as a decent approximation if the function is not quadratic.
+
+Follow these steps to find $A_1$, $A_2$, and $A_3$.
+% To find the constants $A_1, A_2$, and $A_3$ we can write the following system of three
+% equations
+\begin{enumerate}
+    \item[(a)] Prove that 
+        \[ \int_a^b 1 dx = b-a = A_1 + A_2 + A_3. \]
+    \item[(b)] Prove that 
+        \[ \int_a^b x dx = \frac{b^2 - a^2}{2} = A_1 a + A_2 \left( \frac{a+b}{2} \right) + A_3
+        b. \]
+    \item[(c)] Prove that 
+        \[ \int_a^b x^2 dx = \frac{b^3 - a^3}{3} = A_1 a^2 + A_2 \left( \frac{a+b}{2} \right)^2
+        + A_3 b^2. \]
+    \item[(d)] Now solve the linear system of equations to prove that 
+        \[ A_1 = \frac{b-a}{6}, \quad A_2 = \frac{4(b-a)}{6}, \quad \text{and} \quad
+        A_3 = \frac{b-a}{6}. \]
+\end{enumerate}
+\end{problem}
+
+At this point we can see that an integral can be approximated as
 \[ \int_a^b f(x) dx \approx \left( \frac{b-a}{6} \right) \left( f(a) + 4f\left(
-    \frac{a+b}{2}
-\right) + f(b) \right) \]
+\frac{a+b}{2} \right) + f(b) \right) \]
 and the technique will give an exact answer for any polynomial of order 2 or below.  
+
+\begin{problem}
+    Verify the previous sentence by integrating $f(x) = 1$, $f(x) = x$ and $f(x) = x^2$
+    by hand on the interval $[0,1]$ and using the approximation formula 
+\[ \int_a^b f(x) dx \approx \left( \frac{b-a}{6} \right) \left( f(a) + 4f\left(
+\frac{a+b}{2} \right) + f(b) \right). \]
+\end{problem}
 
 \begin{problem}
     \begin{enumerate}
@@ -999,7 +1137,7 @@ and the technique will give an exact answer for any polynomial of order 2 or bel
     \end{center}
 \end{problem}
 
-To make the punchline of the previous problem a bit more clear, using the formula 
+To make the punchline of the previous problems a bit more clear, using the formula 
 \[ \int_a^b f(x) dx \approx \left( \frac{a-b}{6} \right) \left( f(a) + 4 f(m) + f(b)
 \right) \]
 is the same as fitting a parabola to the three points $(a,f(a))$, $(m,f(m))$, and
